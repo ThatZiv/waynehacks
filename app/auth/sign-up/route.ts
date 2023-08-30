@@ -20,8 +20,10 @@ export async function POST(request: Request) {
   })
 
   if (error) {
+    console.log(error.message)
+    let err = error.message === "INCORRECT_DOMAIN" ? "Please use your University email address ending with '.edu'" : "Could not authenticate user. Please try again later..."
     return NextResponse.redirect(
-      `${requestUrl.origin}/login?error=Could not authenticate user`,
+      `${requestUrl.origin}/login?error=${err}`,
       {
         // a 301 status is required to redirect from a POST to a GET route
         status: 301,

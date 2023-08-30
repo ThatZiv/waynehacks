@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+    },
     extend: {
       colors: {
         background: 'hsl(var(--background))',

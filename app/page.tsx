@@ -1,99 +1,137 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import Link from 'next/link'
-import LogoutButton from '../components/LogoutButton'
-import SupabaseLogo from '../components/SupabaseLogo'
-import NextJsLogo from '../components/NextJsLogo'
-
-export const dynamic = 'force-dynamic'
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import Link from "next/link";
+import LogoutButton from "../components/LogoutButton";
+import SupabaseLogo from "../components/SupabaseLogo";
+import NextJsLogo from "../components/NextJsLogo";
+import Image from "next/image";
+import wsuLogo from "./public/wsu.png";
+import scdLogo from "./public/scd.png";
+import "./flicker.css";
+import Footer from "@/components/Footer";
+import Nav from "@/components/Nav";
+export const dynamic = "force-dynamic";
 
 const resources = [
   {
-    title: 'Cookie-based Auth and the Next.js App Router',
+    title: "Cookie-based Auth and the Next.js App Router",
     subtitle:
-      'This free course by Jon Meyers, shows you how to configure Supabase Auth to use cookies, and steps through some common patterns.',
-    url: 'https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF',
-    icon: 'M7 4V20M17 4V20M3 8H7M17 8H21M3 12H21M3 16H7M17 16H21M4 20H20C20.5523 20 21 19.5523 21 19V5C21 4.44772 20.5523 4 20 4H4C3.44772 4 3 4.44772 3 5V19C3 19.5523 3.44772 20 4 20Z',
+      "This free course by Jon Meyers, shows you how to configure Supabase Auth to use cookies, and steps through some common patterns.",
+    url: "https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF",
+    icon: "M7 4V20M17 4V20M3 8H7M17 8H21M3 12H21M3 16H7M17 16H21M4 20H20C20.5523 20 21 19.5523 21 19V5C21 4.44772 20.5523 4 20 4H4C3.44772 4 3 4.44772 3 5V19C3 19.5523 3.44772 20 4 20Z",
   },
   {
-    title: 'Supabase Next.js App Router Example',
+    title: "Supabase Next.js App Router Example",
     subtitle:
-      'Want to see a code example containing some common patterns with Next.js and Supabase? Check out this repo!',
-    url: 'https://github.com/supabase/supabase/tree/master/examples/auth/nextjs',
-    icon: 'M10 20L14 4M18 8L22 12L18 16M6 16L2 12L6 8',
+      "Want to see a code example containing some common patterns with Next.js and Supabase? Check out this repo!",
+    url: "https://github.com/supabase/supabase/tree/master/examples/auth/nextjs",
+    icon: "M10 20L14 4M18 8L22 12L18 16M6 16L2 12L6 8",
   },
   {
-    title: 'Supabase Auth Helpers Docs',
+    title: "Supabase Auth Helpers Docs",
     subtitle:
-      'This template has configured Supabase Auth to use cookies for you, but the docs are a great place to learn more.',
-    url: 'https://supabase.com/docs/guides/auth/auth-helpers/nextjs',
-    icon: 'M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528',
+      "This template has configured Supabase Auth to use cookies for you, but the docs are a great place to learn more.",
+    url: "https://supabase.com/docs/guides/auth/auth-helpers/nextjs",
+    icon: "M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528",
   },
-]
+];
 
 const examples = [
-  { type: 'Client Components', src: 'app/_examples/client-component/page.tsx' },
-  { type: 'Server Components', src: 'app/_examples/server-component/page.tsx' },
-  { type: 'Server Actions', src: 'app/_examples/server-action/page.tsx' },
-  { type: 'Route Handlers', src: 'app/_examples/route-handler.ts' },
-]
+  { type: "Client Components", src: "app/_examples/client-component/page.tsx" },
+  { type: "Server Components", src: "app/_examples/server-component/page.tsx" },
+  { type: "Server Actions", src: "app/_examples/server-action/page.tsx" },
+  { type: "Route Handlers", src: "app/_examples/route-handler.ts" },
+];
 
 export default async function Index() {
-  const supabase = createServerComponentClient({ cookies })
+  const supabase = createServerComponentClient({ cookies });
 
   const {
     data: { user },
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   return (
     <div className="w-full flex flex-col items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
-          <div />
-          <div>
-            {user ? (
-              <div className="flex items-center gap-4">
-                Hey, {user.email}!
-                <LogoutButton />
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-              >
-                Login
-              </Link>
-            )}
-          </div>
-        </div>
-      </nav>
-
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <div className="flex flex-col items-center mb-4 lg:mb-12">
           <div className="flex gap-8 justify-center items-center">
-            <Link href="https://supabase.com/" target="_blank">
-              <SupabaseLogo />
-            </Link>
-            <span className="border-l rotate-45 h-6" />
-            <NextJsLogo />
+            {/* make a span with content of "2" appear when it is hovered */}
+            <h1 className="lg:text-8xl md:text-7xl text-5xl text-center mr-14 font-extrabold font-['consolas']">
+              WayneHacks
+              <span data-heading="2" className="flicker ml-2">
+                2
+              </span>
+            </h1>
           </div>
-          <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-12">
-            The fastest way to start building apps with{' '}
-            <strong>Supabase</strong> and <strong>Next.js</strong>
+          <h1 className="sr-only">WayneHacks</h1>
+          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
+            Wayne State's first ever{" "}
+            <strong className="underline">in-person</strong> Hackathon.
           </p>
-          <div className="bg-foreground py-3 px-6 rounded-lg font-mono text-sm text-background">
-            Get started by editing <strong>app/page.tsx</strong>
-          </div>
+          <Link
+            href="/application"
+            className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
+          >
+            Register
+          </Link>
         </div>
 
         <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
 
         <div className="flex flex-col gap-8 text-foreground">
-          <h2 className="text-lg font-bold text-center">
-            Everything you need to get started
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <h2 className="text-lg font-bold text-center">What is WayneHacks?</h2>
+          <p className="text-md text-center">
+            WayneHacks is a 24-hour in-person Hackathon at Wayne State
+            University. All majors and skill levels are welcome with teams up to
+            four people. Prizes will be awarded to the best projects, so be
+            ready!
+          </p>
+          <div className="grid grid-cols-12 justify-items-center justify-items-start">
+            <h2 className="inline-flex col-span-12 md:col-span-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+                />
+              </svg>
+              &nbsp; <strong>October 14-15</strong>
+            </h2>
+            <h2 className="inline-flex col-span-12 md:col-span-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
+              &nbsp;{" "}
+              <strong>
+                Wayne State University{" "}
+                <i className="text-sm">(Building TBD...)</i>
+              </strong>
+            </h2>
+          </div>
+          {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {resources.map(({ title, subtitle, url, icon }) => (
               <a
                 key={title}
@@ -145,7 +183,6 @@ export default async function Index() {
             ))}
           </div>
         </div>
-
         <div className="flex flex-col gap-8 text-foreground">
           <div className="grid gap-2 justify-center mx-auto text-center">
             <h2 className="text-lg font-bold text-center">Examples</h2>
@@ -173,7 +210,7 @@ export default async function Index() {
 
         <div className="flex justify-center text-center text-xs">
           <p>
-            Powered by{' '}
+            Powered by{" "}
             <Link
               href="https://supabase.com/"
               target="_blank"
@@ -181,9 +218,9 @@ export default async function Index() {
             >
               Supabase
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
-  )
+  );
 }
