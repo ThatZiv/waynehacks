@@ -43,7 +43,7 @@ export default function Login() {
         {token && (
           <>
             <button
-              className="bg-green-700 rounded px-4 py-2 text-white mb-2"
+              className="bg-green-900 rounded px-4 py-2 text-white mb-2"
               disabled={isLoading || !token}
             >
               Sign In

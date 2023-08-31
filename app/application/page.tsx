@@ -17,6 +17,7 @@ import { majors } from "@/types/majors";
 export const dynamic = "force-cache"; // these don't work because of the server component client
 export const revalidate = 600; // revalidate 10 minutes
 export default async function Application() {
+  "use server";
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
@@ -37,16 +38,26 @@ export default async function Application() {
   });
   const register = async (formData: FormData) => {
     "use server";
-    const title = formData.get("title");
-
-    if (title) {
-      // Create a Supabase client configured to use cookies
-      // const supabase = createServerActionClient({ cookies });
-      // This assumes you have a `todos` table in Supabase. Check out
-      // the `Create Table and seed with data` section of the README 👇
-      // https://github.com/vercel/next.js/blob/canary/examples/with-supabase/README.md
-      // await supabase.from("todos").insert({ title });
-      // revalidatePath("/server-action-example");
+    const fields = [
+      "full_name",
+      "graduation_year",
+      "university",
+      "major",
+      "phone_number",
+      "diet",
+      "student_id",
+    ];
+    try {
+      const form = {} as any;
+      for (const field of fields) {
+        form[field] = formData.get(field);
+      }
+      console.log(form);
+      await supabase.from("applications").insert(form);
+      revalidatePath("/application");
+    } catch (err: any) {
+      console.log(err);
+      return redirect(`/application?error=${err.message}`);
     }
   };
   if (!user) redirect("/login?message=You must be logged in to register.");
@@ -60,6 +71,7 @@ export default async function Application() {
         <WayneHacksLogo />
         <hr />
         <h2 className="lg:text-5xl md:text-4xl text-3xl text-center font-extrabold font-['Roboto']">
+          {/* TODO: fixed roboto font now showing up */}
           {application ? "Your application" : "Register for the event"}
         </h2>
         {application ? (
@@ -114,7 +126,7 @@ export default async function Application() {
                 Select your university
               </option>
               {universities.map((uni: any) => (
-                <option value={uni.name}>
+                <option key={uni.name} value={uni.name}>
                   {uni.name} ({uni?.domains.join(", ")})
                 </option>
               ))}
@@ -132,9 +144,46 @@ export default async function Application() {
                 Select your major
               </option>
               {majors.map((major: string) => (
-                <option value={major}>{major}</option>
+                <option key={major} value={major}>
+                  {major}
+                </option>
               ))}
             </select>
+            <label className="text-md" htmlFor="phone_number">
+              Phone number
+            </label>
+            <input
+              name="phone_number"
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              placeholder="2485243477"
+              required
+            />
+            <label className="text-md" htmlFor="diet">
+              Dietary restrictions
+            </label>
+            <input
+              name="diet"
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              placeholder="Vegan, Kosher, Halal, etc."
+            />
+            <label className="text-md" htmlFor="student_id">
+              Student ID{" "}
+              <span className="text-xs italic text-gray-400">
+                (If you don't have one, please enter your school email)
+              </span>
+            </label>
+            <input
+              name="diet"
+              className="rounded-md px-4 py-2 bg-inherit border mb-6"
+              placeholder="hh3509"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-green-900 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
+            >
+              Submit
+            </button>
           </form>
         )}
       </div>
