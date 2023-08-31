@@ -92,7 +92,8 @@ export default async function Application() {
           </div>
         ) : (
           <form
-            action={register}
+            action="/application/register"
+            method="post"
             className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
           >
             <label className="text-md" htmlFor="full_name">
@@ -173,7 +174,7 @@ export default async function Application() {
               </span>
             </label>
             <input
-              name="diet"
+              name="student_id"
               className="rounded-md px-4 py-2 bg-inherit border mb-6"
               placeholder="hh3509"
               required
