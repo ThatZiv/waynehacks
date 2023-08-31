@@ -21,11 +21,12 @@ export default async function Application() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const getUniversities = cache(async (uni: string) => {
-    return await fetch(
-      `http://universities.hipolabs.com/search?name=${uni}&country=united%20states`,
+  const getUniversities = cache(async () => {
+    const data = (await fetch(
+      `http://universities.hipolabs.com/search?country=united%20states`,
       { cache: "force-cache" }
-    ).then((res) => res.json());
+    ).then((res) => res.json())) as any[];
+    return data.sort((a, b) => a.name.localeCompare(b.name));
   });
   const getApps = cache(async () => {
     const data = await supabase
@@ -51,7 +52,7 @@ export default async function Application() {
   if (!user) redirect("/login?message=You must be logged in to register.");
   //@ts-expect-error we handle if its null
   const application = (await getApps()).data[0] as Application | undefined;
-  const universities = await getUniversities("");
+  const universities = await getUniversities();
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
