@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import Messages from "./login/messages";
 export const metadata = {
   title: "WayneHacks",
   description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
@@ -19,6 +20,7 @@ export default function RootLayout({
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center">
           <Nav />
+          <Messages />
           {children}
           <Footer />
         </main>

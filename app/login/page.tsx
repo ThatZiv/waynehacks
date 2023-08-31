@@ -3,6 +3,7 @@ import Link from "next/link";
 import Messages from "./messages";
 import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
+import WayneHacksLogo from "@/components/WayneHacksLogo";
 export default function Login() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   return (
@@ -14,6 +15,9 @@ export default function Login() {
         action="/auth/sign-in"
         method="post"
       >
+        <div className="mb-12">
+          <WayneHacksLogo />
+        </div>
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -33,24 +37,31 @@ export default function Login() {
           placeholder="••••••••"
           required
         />
-        <button className="bg-green-700 rounded px-4 py-2 text-white mb-2">
-          Sign In
-        </button>
         <div className="flex flex-col w-full items-center">
-          <HCaptcha />
+          {!token && <HCaptcha />}
         </div>
-        <button
-          formAction="/auth/sign-up"
-          className="border border-gray-700 rounded px-4 py-2 mb-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setToken(null);
-          }}
-          disabled={isLoading || !token}
-        >
-          Sign Up
-        </button>
-        <Messages />
+        {token && (
+          <>
+            <button
+              className="bg-green-700 rounded px-4 py-2 text-white mb-2"
+              disabled={isLoading || !token}
+            >
+              Sign In
+            </button>
+            <input type="hidden" name="captcha" value={token ?? ""} />
+            <button
+              formAction="/auth/sign-up"
+              className="border border-gray-700 rounded px-4 py-2 mb-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                setToken(null);
+              }}
+              disabled={isLoading || !token}
+            >
+              Sign Up
+            </button>
+          </>
+        )}
       </form>
     </div>
   );

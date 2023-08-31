@@ -7,9 +7,9 @@ import NextJsLogo from "../components/NextJsLogo";
 import Image from "next/image";
 import wsuLogo from "./public/wsu.png";
 import scdLogo from "./public/scd.png";
-import "./flicker.css";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
+import WayneHacksLogo from "@/components/WayneHacksLogo";
 export const dynamic = "force-dynamic";
 
 const resources = [
@@ -44,25 +44,17 @@ const examples = [
 ];
 
 export default async function Index() {
-  const supabase = createServerComponentClient({ cookies });
+  // const supabase = createServerComponentClient({ cookies });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // const {
+  //   data: { user },
+  // } = await supabase.auth.getUser();
 
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <div className="flex flex-col items-center mb-4 lg:mb-12">
-          <div className="flex gap-8 justify-center items-center">
-            {/* make a span with content of "2" appear when it is hovered */}
-            <h1 className="lg:text-8xl md:text-7xl text-5xl text-center mr-14 font-extrabold font-['consolas']">
-              WayneHacks
-              <span data-heading="2" className="flicker ml-2">
-                2
-              </span>
-            </h1>
-          </div>
+          <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
             Wayne State's first ever{" "}

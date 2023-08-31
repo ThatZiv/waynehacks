@@ -9,19 +9,27 @@ export async function POST(request: Request) {
   const formData = await request.formData()
   const email = String(formData.get('email'))
   const password = String(formData.get('password'))
+  const captcha = String(formData.get('captcha'))
   const supabase = createRouteHandlerClient({ cookies })
+  try {
+    if (!email || !password) throw new Error('Email and password are required')
+    if (!email.endsWith(".edu"))
+      throw new Error('Please use your University email address ending in `.edu`')
+    if (await supabase.from('users').select('email').eq('email', email)) {
+      throw new Error('Email is already being used by someone else')
+    }
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${requestUrl.origin}/auth/callback`,
+        captchaToken: captcha,
+      },
+    })
+    if (error) throw error
 
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      emailRedirectTo: `${requestUrl.origin}/auth/callback`,
-    },
-  })
-
-  if (error) {
-    console.log(error.message)
-    let err = error.message === "INCORRECT_DOMAIN" ? "Please use your University email address ending with '.edu'" : "Could not authenticate user. Please try again later..."
+  } catch (error: any) {
+    let err = error.message
     return NextResponse.redirect(
       `${requestUrl.origin}/login?error=${err}`,
       {
