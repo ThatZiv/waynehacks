@@ -13,7 +13,7 @@ async function Nav() {
   } = await supabase.auth.getUser();
   return (
     <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm text-foreground">
+      <div className="w-full max-w-4xl flex justify-between items-center p-6 text-sm text-foreground">
         <div className="flex items-center gap-4">
           <Link href="https://scd.cs.wayne.edu/" target="_blank">
             <span className="flex items-center gap-2 hover:bg-[#fc0] hover:rounded-md transition-all">
@@ -29,8 +29,8 @@ async function Nav() {
         <div />
         <div>
           {user ? (
-            <div className="flex items-center gap-4">
-              Hey, {user.email}!
+            <div className="flex items-center gap-4 w-fit">
+              <span className="text-[9px] sm:text-sm">Hey, {user.email}!</span>
               <LogoutButton />
             </div>
           ) : (

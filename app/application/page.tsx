@@ -9,20 +9,21 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import Messages from "../login/messages";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
-export const dynamic = "force-dynamic";
-
+export const dynamic = "force-cache";
+export const revalidate = 600; // revalidate 10 minutes
 export default async function Application() {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const getApps = async () => {
+  const getApps = cache(async () => {
     const data = await supabase.from("applications").select("applicant_id");
     console.log(data, user?.id);
     return data;
-  };
+  });
   const addTodo = async (formData: FormData) => {
     "use server";
     const title = formData.get("title");
