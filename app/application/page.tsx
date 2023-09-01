@@ -14,6 +14,11 @@ import { Application } from "@/types/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/types/majors";
 
+export const metadata = {
+  title: "WayneHacks Application",
+  description: "Register for WayneHacks 2",
+};
+
 export const dynamic = "force-cache"; // these don't work because of the server component client
 export const revalidate = 600; // revalidate 10 minutes
 export default async function Application() {

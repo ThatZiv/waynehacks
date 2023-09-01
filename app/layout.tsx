@@ -9,6 +9,26 @@ export const metadata = {
   University. All majors and skill levels are welcome with teams up to
   four people. Prizes will be awarded to the best projects, so be
   ready!`,
+  openGraph: {
+    title: "WayneHacks",
+    description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
+    University. All majors and skill levels are welcome with teams up to
+    four people. Prizes will be awarded to the best projects, so be
+    ready!`,
+    url: "https://hack.wayne.edu/",
+    type: "website",
+    locale: "en_US",
+    siteName: "WayneHacks",
+    images: [
+      {
+        url: "/whacks_logo.png",
+        width: 1080,
+        height: 1080,
+        alt: "WayneHacks Logo",
+      },
+    ],
+  },
+  themeColor: "#000000",
 };
 
 const openSans = Open_Sans({
@@ -35,6 +55,9 @@ export default function RootLayout({
       lang="en"
       className={`${openSans.variable} ${robotoMono.variable} font-sans`}
     >
+      <head>
+        <link rel="icon" href="/favicon.png" sizes="any" />
+      </head>
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center">
           <Nav />

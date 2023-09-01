@@ -8,9 +8,10 @@ export interface Application {
     phone_number?: string;
     diet: string;
     student_id: string;
+    email: string;
     status?: status // this is an relation expansion
 }
-interface status {
+export interface status {
     applicant_id: string;
     status: "applied" | "accepted" | "rejected" | "waitlisted" | "cancelled";
     note: string

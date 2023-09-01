@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     } = await supabase.auth.getUser(); // get user id
     const { error: applicationErr } = await supabase
       .from("applications")
-      .insert({ applicant_id: user?.id, ...form });
+      .insert({ applicant_id: user?.id, email: user?.email, ...form });
     if (applicationErr) throw applicationErr;
 
     // const { error: statusError } = await supabase
