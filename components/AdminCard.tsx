@@ -94,7 +94,7 @@ export default async function AdminCard({
             <div>
               <div className="transition-all ease-in-out duration-300">
                 <div className="relative overflow-x-auto">
-                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-fixed">
+                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto lg:table-fixed">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                       <tr>
                         {applicationColumns.map((column) => (
@@ -111,7 +111,12 @@ export default async function AdminCard({
                     <tbody>
                       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         {applicationRows.map((row) => (
-                          <td className="px-6 py-4">{row}</td>
+                          <td
+                            key={row + data.applicant_id}
+                            className="px-6 py-4"
+                          >
+                            {row}
+                          </td>
                         ))}
                       </tr>
                     </tbody>

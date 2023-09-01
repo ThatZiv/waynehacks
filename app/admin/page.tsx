@@ -58,7 +58,7 @@ export default async function Admin() {
 
   if (applicationsError) return <div>Failed to load applications...</div>;
   return (
-    <div className="w-full lg:w-4/5">
+    <div className="w-full xl:w-[90%]">
       <h2 className="text-white">All applications</h2>
       {applications?.map((data: { applications: Application } & status) => (
         <AdminCard data={data} onSubmit={onSubmit} />
