@@ -19,7 +19,7 @@ export const metadata = {
   description: "Register for WayneHacks 2",
 };
 
-export const dynamic = "force-cache"; // these don't work because of the server component client
+export const dynamic = "force-dynamic";
 export const revalidate = 600; // revalidate 10 minutes
 export default async function Application() {
   "use server";
