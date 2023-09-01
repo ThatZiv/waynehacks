@@ -14,4 +14,6 @@ interface status {
     applicant_id: string;
     status: "applied" | "accepted" | "rejected" | "waitlisted" | "cancelled";
     note: string
+    created_at: string | Date;
+    modified_at: string | Date;
 }

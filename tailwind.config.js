@@ -2,10 +2,14 @@
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
-    },
+    // fontFamily: {
+    //   sans: ['Roboto', 'sans-serif'],
+    // },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-opensans)"],
+        mono: ["var(--font-roboto-mono)"],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

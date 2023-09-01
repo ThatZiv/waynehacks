@@ -7,7 +7,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import Messages from "../login/messages";
+import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 import { Application } from "@/types/application";
@@ -32,34 +32,10 @@ export default async function Application() {
   const getApps = cache(async () => {
     const data = await supabase
       .from("applications")
-      .select("*, status(applicant_id, status, note)")
+      .select("*, status(*)")
       .limit(1);
     return data;
   });
-  const register = async (formData: FormData) => {
-    "use server";
-    const fields = [
-      "full_name",
-      "graduation_year",
-      "university",
-      "major",
-      "phone_number",
-      "diet",
-      "student_id",
-    ];
-    try {
-      const form = {} as any;
-      for (const field of fields) {
-        form[field] = formData.get(field);
-      }
-      console.log(form);
-      await supabase.from("applications").insert(form);
-      revalidatePath("/application");
-    } catch (err: any) {
-      console.log(err);
-      return redirect(`/application?error=${err.message}`);
-    }
-  };
   if (!user) redirect("/login?message=You must be logged in to register.");
   //@ts-expect-error we handle if its null
   const application = (await getApps()).data[0] as Application | undefined;
@@ -69,8 +45,8 @@ export default async function Application() {
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
         <Back />
         <WayneHacksLogo />
-        <hr />
-        <h2 className="lg:text-5xl md:text-4xl text-3xl text-center font-extrabold font-['Roboto']">
+
+        <h2 className="lg:text-4xl md:text-3xl text-2xl text-center">
           {/* TODO: fixed roboto font now showing up */}
           {application ? "Your application" : "Register for the event"}
         </h2>
@@ -84,6 +60,7 @@ export default async function Application() {
               <Card
                 title={application?.status!.status.toUpperCase()}
                 subtitle={application?.status!.note || "No note provided."}
+                date={new Date(application?.status!.modified_at)}
                 icon={
                   "M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
                 }
@@ -192,7 +169,12 @@ export default async function Application() {
   );
 }
 
-function Card(props: { title: string; subtitle: string; icon: string }) {
+function Card(props: {
+  title: string;
+  subtitle: string;
+  icon: string;
+  date: Date;
+}) {
   return (
     <div className="relative flex flex-col group shadow-lg rounded-lg border p-5 hover:border-foreground">
       <span className="flex items-center space-x-3 mb-4">
@@ -212,10 +194,12 @@ function Card(props: { title: string; subtitle: string; icon: string }) {
             strokeLinejoin="round"
           />
         </svg>
-        <h3 className="font-bold ">{props.title}</h3>
+        <h3 className="font-bold">{props.title}</h3>
       </span>
+
       <div className="flex flex-col grow gap-4 justify-between">
-        <p className="text-sm opacity-70">{props.subtitle}</p>
+        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+        <p className="opacity-70">{props.subtitle}</p>
         <div className="flex justify-between items-center">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -231,6 +215,9 @@ function Card(props: { title: string; subtitle: string; icon: string }) {
           >
             <polyline points="9 18 15 12 9 6" />
           </svg> */}
+          <p className="text-gray-400 text-xs">
+            Last updated <i>{props.date.toLocaleString()}</i>
+          </p>
         </div>
       </div>
     </div>

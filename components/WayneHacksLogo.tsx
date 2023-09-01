@@ -9,6 +9,7 @@ export default function WayneHacksLogo() {
         <span data-heading="2" className="flicker ml-2">
           2
         </span>
+        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       </h1>
     </div>
   );

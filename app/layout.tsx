@@ -1,7 +1,8 @@
 import Nav from "@/components/Nav";
 import "./globals.css";
+import { Open_Sans, Roboto_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
-import Messages from "./login/messages";
+import Messages from "../components/messages";
 export const metadata = {
   title: "WayneHacks",
   description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
@@ -10,13 +11,30 @@ export const metadata = {
   ready!`,
 };
 
+const openSans = Open_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  //👇 Add variable to our object
+  variable: "--font-opensans",
+});
+
+//👇 Configure the object for our second font
+const robotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${openSans.variable} ${robotoMono.variable} font-sans`}
+    >
       <body>
         <main className="min-h-screen bg-background flex flex-col items-center">
           <Nav />

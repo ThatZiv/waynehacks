@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Messages from "./messages";
+import Messages from "../../components/messages";
 import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
@@ -18,6 +18,7 @@ export default function Login() {
         <div className="mb-12">
           <WayneHacksLogo />
         </div>
+
         <label className="text-md" htmlFor="email">
           Email
         </label>
