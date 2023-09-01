@@ -10,7 +10,8 @@ import scdLogo from "./public/scd.png";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
-export const dynamic = "force-dynamic";
+
+export const dynamic = "force-static";
 
 export default async function Index() {
   // const supabase = createServerComponentClient({ cookies });

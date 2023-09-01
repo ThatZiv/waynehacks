@@ -1,4 +1,5 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -9,11 +10,9 @@ export async function POST(request: Request) {
   const supabase = createRouteHandlerClient({ cookies });
 
   await supabase.auth.signOut();
-
+  revalidateTag("user")
   return NextResponse.redirect(
-    `${
-      process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-    }/?message=You have logged out successfully`,
+    `${requestUrl.origin}/?message=You have logged out successfully`,
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,

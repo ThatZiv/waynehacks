@@ -20,7 +20,15 @@ export default async function AdminCard({
     "cancelled",
   ].map((status) => status.toUpperCase());
   return (
-    <div className="relative animate-in flex flex-col group shadow-lg rounded-lg border p-5 hover:border-foreground text-foreground">
+    <div
+      className={`relative animate-in flex flex-col group shadow-lg rounded-lg bg-${
+        data.status === "accepted"
+          ? "green-900"
+          : data.status === "rejected"
+          ? "red-900"
+          : "background"
+      } border p-5 hover:border-foreground mb-4 text-foreground`}
+    >
       <form action={onSubmit}>
         <input type="hidden" name="applicant_id" value={data.applicant_id} />
         <span className="flex items-center space-x-3 mb-4">
@@ -83,7 +91,6 @@ export default async function AdminCard({
             </button>
           </div>
           <div className="grid grid-flow-row auto-rows-max">
-            <button className="bg-[#1E1E1E] text-foreground rounded-lg px-3 py-3 text-xs font-bold transition-all hover:bg-foreground hover:text-background"></button>
             <div>
               <div className="transition-all ease-in-out duration-300">
                 <div className="relative overflow-x-auto">
@@ -93,7 +100,7 @@ export default async function AdminCard({
                         {applicationColumns.map((column) => (
                           <th
                             scope="col"
-                            key={column}
+                            key={column + data.applicant_id}
                             className="px-6 py-3 font-medium tracking-wider"
                           >
                             {column}

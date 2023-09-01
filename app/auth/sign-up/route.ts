@@ -24,9 +24,7 @@ export async function POST(request: Request) {
       email,
       password,
       options: {
-        emailRedirectTo: `${
-          process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-        }/auth/callback`,
+        emailRedirectTo: `${requestUrl.origin}/auth/callback`,
         captchaToken: captcha,
       },
     });
@@ -34,9 +32,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     let err = error.message;
     return NextResponse.redirect(
-      `${
-        process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-      }/login?error=${err}`,
+      `${requestUrl.origin}/login?error=${err}`,
       {
         // a 301 status is required to redirect from a POST to a GET route
         status: 301,
@@ -45,9 +41,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${
-      process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-    }/login?message=Check email to continue sign in process`,
+    `${requestUrl.origin}/login?message=Check email to continue sign in process`,
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,

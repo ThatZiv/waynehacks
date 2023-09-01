@@ -54,8 +54,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-    }/application?message=Your information has been submitted`,
+    `${requestUrl.origin}/application?message=Your information has been submitted`,
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,

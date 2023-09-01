@@ -38,7 +38,11 @@ export default async function Admin() {
       const supabase = createServerComponentClient({ cookies });
       await supabase
         .from("status")
-        .update({ status: e.get("status"), note: e.get("note") })
+        .update({
+          status: e.get("status"),
+          note: e.get("note"),
+          modified_at: new Date(),
+        })
         .eq("applicant_id", e.get("applicant_id"));
     } catch (err: any) {
       console.error(err);

@@ -22,9 +22,7 @@ export async function POST(request: Request) {
 
   if (error) {
     return NextResponse.redirect(
-      `${
-        process.env.NODE_ENV === "development" ? requestUrl.origin : ""
-      }/login?error=Failed to authenticate`,
+      `${requestUrl.origin}/login?error=Failed to authenticate`,
       {
         // a 301 status is required to redirect from a POST to a GET route
         status: 301,
@@ -33,7 +31,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    process.env.NODE_ENV === "development" ? requestUrl.origin : "/",
+    requestUrl.origin,
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,

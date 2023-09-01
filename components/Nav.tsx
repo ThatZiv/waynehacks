@@ -1,16 +1,33 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+"use client";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import scdLogo from "../app/public/scd.png";
 import wsuLogo from "../app/public/wsu.png";
 import LogoutButton from "./LogoutButton";
-async function Nav() {
-  ("use client");
-  const supabase = createServerComponentClient({ cookies });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+import React from "react";
+import Spinner from "./Spinner";
+
+function Nav() {
+  // const supabase = createClientComponentClient();
+  const [user, setUser] = React.useState<any>();
+  const [status, setStatus] = React.useState<"loading" | "done" | "error">(
+    "loading"
+  );
+  React.useEffect(() => {
+    setTimeout(() => status === "loading" && setStatus("error"), 5000);
+    const getUser = async () => {
+      const res = await fetch("/auth/user", {
+        next: { tags: ["user"] },
+      });
+      const user = await res.json();
+      setStatus("done");
+      setUser(user);
+    };
+
+    getUser();
+  }, []);
   return (
     <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
       <div className="w-full max-w-4xl flex justify-between items-center p-6 text-sm text-foreground">
@@ -28,7 +45,9 @@ async function Nav() {
         </div>
         <div />
         <div>
-          {user ? (
+          {status === "loading" ? (
+            <Spinner />
+          ) : user ? (
             <div className="flex items-center gap-4 w-fit">
               <span className="text-[9px] sm:text-sm">Hey, {user.email}!</span>
               <LogoutButton />

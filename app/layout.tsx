@@ -3,6 +3,8 @@ import "./globals.css";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
 import Messages from "../components/messages";
+import React from "react";
+
 export const metadata = {
   title: "WayneHacks",
   description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
@@ -45,7 +47,7 @@ const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
