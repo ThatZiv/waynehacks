@@ -33,29 +33,6 @@ export default async function Admin() {
   } catch (e: any) {
     redirect(`/?error=${e.message}`);
   }
-  const onSubmit = async (e: FormData) => {
-    "use server";
-    try {
-      const supabase = createServerComponentClient({ cookies });
-      await supabase
-        .from("status")
-        .update({
-          status: e.get("status"),
-          note: e.get("note"),
-          modified_at: new Date(),
-        })
-        .eq("applicant_id", e.get("applicant_id"));
-    } catch (err: any) {
-      console.error(err);
-      redirect("/admin?error=" + err.message);
-    }
-    // revalidatePath("/admin");
-    redirect(
-      `/admin?tick=${Math.random()}&message=Successfully updated application for: ${e.get(
-        "applicant_id"
-      )}`
-    );
-  };
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
     .select("*, applications(*)")

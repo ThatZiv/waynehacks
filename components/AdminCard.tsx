@@ -17,7 +17,6 @@ export default async function AdminCard({
     "waitlisted",
     "cancelled",
   ].map((status) => status.toUpperCase());
-  console.log(data.applicant_id, data.note);
   return (
     <div
       className={`relative animate-in flex flex-col group shadow-lg rounded-lg bg-${
