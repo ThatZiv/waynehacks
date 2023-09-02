@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { Application, status } from "@/types/application";
 import React from "react";
 import AdminCard from "@/components/AdminCard";
+import { RedirectType } from "next/dist/client/components/redirect";
 export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
@@ -48,8 +49,12 @@ export default async function Admin() {
       console.error(err);
       redirect("/admin?error=" + err.message);
     }
-    revalidatePath("/admin");
-    redirect("/admin?message=Successfully updated application.");
+    // revalidatePath("/admin");
+    redirect(
+      `/admin?tick=${Math.random()}&message=Successfully updated application for: ${e.get(
+        "applicant_id"
+      )}`
+    );
   };
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
@@ -61,7 +66,7 @@ export default async function Admin() {
     <div className="w-full xl:w-[90%]">
       <h2 className="text-white">All applications</h2>
       {applications?.map((data: { applications: Application } & status) => (
-        <AdminCard data={data} onSubmit={onSubmit} />
+        <AdminCard data={data} />
       ))}
     </div>
   );

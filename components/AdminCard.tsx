@@ -4,10 +4,8 @@ import Link from "next/link";
 
 export default async function AdminCard({
   data,
-  onSubmit,
 }: {
   data: { applications: Application } & status;
-  onSubmit: string | ((formData: FormData) => void) | undefined;
 }) {
   "use server";
   const applicationColumns = Object.keys(data.applications);
@@ -19,6 +17,7 @@ export default async function AdminCard({
     "waitlisted",
     "cancelled",
   ].map((status) => status.toUpperCase());
+  console.log(data.applicant_id, data.note);
   return (
     <div
       className={`relative animate-in flex flex-col group shadow-lg rounded-lg bg-${
@@ -29,7 +28,7 @@ export default async function AdminCard({
           : "background"
       } border p-5 hover:border-foreground mb-4 text-foreground`}
     >
-      <form action={onSubmit}>
+      <form action="/admin/edit" method="post">
         <input type="hidden" name="applicant_id" value={data.applicant_id} />
         <span className="flex items-center space-x-3 mb-4">
           <svg
