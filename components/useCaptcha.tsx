@@ -12,14 +12,14 @@ function useCaptcha() {
     // execute function on it. you can use other functions as
     // documented here:
     // https://docs.hcaptcha.com/configuration#jsapi
-    captchaRef?.current?.execute();
+    // captchaRef?.current?.execute();
   };
   return {
     HCaptcha: () => (
       <HCaptcha
         sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITEKEY as string}
         onLoad={onLoad}
-        onError={(err) => redirect(`${pathname}?error=hcaptcha`)}
+        onError={(err) => redirect(`${pathname}?error=${err}`)}
         ref={captchaRef}
         onVerify={setToken}
       />
