@@ -1,0 +1,18 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: waynehacks
+    src: ./
+    engine: next
+    primary: true
+    presets:
+      env:
+        - name: NEXT_PUBLIC_SUPABASE_URL
+          description: Supabase URL
+          default: ""
+        - name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+          description: Supabase Anon Key
+          default: ""
+        - name: NEXT_PUBLIC_HCAPTCHA_SITEKEY
+          description: hCaptcha Site Key
+          default: ""
