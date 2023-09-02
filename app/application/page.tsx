@@ -20,7 +20,7 @@ export const metadata = {
 };
 
 export const dynamic = "force-dynamic";
-export const revalidate = 600; // revalidate 10 minutes
+export const revalidate = 0;
 export default async function Application() {
   "use server";
   const supabase = createServerComponentClient({ cookies });

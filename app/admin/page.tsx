@@ -9,20 +9,22 @@ import { redirect } from "next/navigation";
 import { Application, status } from "@/types/application";
 import React from "react";
 import AdminCard from "@/components/AdminCard";
-import { RedirectType } from "next/dist/client/components/redirect";
 export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function Admin() {
   "use server";
   const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const uid = user?.id;
+  console.log(user);
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    const uid = user?.id;
     if (!uid) throw new Error("You must be logged in to view this page.");
     let { data: isAdmin, error: isAdminError } = await supabase.rpc(
       "is_admin",
