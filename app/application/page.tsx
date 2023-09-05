@@ -73,101 +73,7 @@ export default async function Application() {
             </div>
           </div>
         ) : (
-          <form
-            action="/application/register"
-            method="post"
-            className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-          >
-            <label className="text-md" htmlFor="full_name">
-              Full name
-            </label>
-            <input
-              name="full_name"
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              placeholder="John Doe"
-              required
-            />
-            <label className="text-md" htmlFor="graduation_year">
-              Graduation year
-            </label>
-            <input
-              name="graduation_year"
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              placeholder="2025"
-              required
-            />
-            <label className="text-md" htmlFor="university">
-              College/University
-            </label>
-            {/* TODO: check if this works */}
-            <select
-              name="university"
-              required
-              className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
-            >
-              <option value="" disabled selected>
-                Select your university
-              </option>
-              {universities.map((uni: any) => (
-                <option key={uni.name} value={uni.name}>
-                  {uni.name} ({uni?.domains.join(", ")})
-                </option>
-              ))}
-            </select>
-
-            <label className="text-md" htmlFor="major">
-              Major
-            </label>
-            <select
-              name="major"
-              required
-              className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
-            >
-              <option value="" disabled selected>
-                Select your major
-              </option>
-              {majors.map((major: string) => (
-                <option key={major} value={major}>
-                  {major}
-                </option>
-              ))}
-            </select>
-            <label className="text-md" htmlFor="phone_number">
-              Phone number
-            </label>
-            <input
-              name="phone_number"
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              placeholder="2485243477"
-              required
-            />
-            <label className="text-md" htmlFor="diet">
-              Dietary restrictions
-            </label>
-            <input
-              name="diet"
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              placeholder="Vegan, Kosher, Halal, etc."
-            />
-            <label className="text-md" htmlFor="student_id">
-              Student ID{" "}
-              <span className="text-xs italic text-gray-400">
-                (If you don't have one, please enter your school email)
-              </span>
-            </label>
-            <input
-              name="student_id"
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              placeholder="hh3509"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-green-900 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
-            >
-              Submit
-            </button>
-          </form>
+          <RegisterForm universities={universities} majors={majors} />
         )}
       </div>
     </div>
@@ -226,5 +132,109 @@ function Card(props: {
         </div>
       </div>
     </div>
+  );
+}
+
+interface RegisterFormProps {
+  universities: any[];
+  majors: string[];
+}
+function RegisterForm({ universities, majors }: RegisterFormProps) {
+  return (
+    <form
+      action="/application/register"
+      method="post"
+      className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+    >
+      <label className="text-md" htmlFor="full_name">
+        Full name
+      </label>
+      <input
+        name="full_name"
+        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        placeholder="John Doe"
+        required
+      />
+      <label className="text-md" htmlFor="graduation_year">
+        Graduation year
+      </label>
+      <input
+        name="graduation_year"
+        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        placeholder="2025"
+        required
+      />
+      <label className="text-md" htmlFor="university">
+        College/University
+      </label>
+      {/* TODO: check if this works */}
+      <select
+        name="university"
+        required
+        className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
+      >
+        <option value="" disabled selected>
+          Select your university
+        </option>
+        {universities.map((uni: any) => (
+          <option key={uni.name} value={uni.name}>
+            {uni.name} ({uni?.domains.join(", ")})
+          </option>
+        ))}
+      </select>
+
+      <label className="text-md" htmlFor="major">
+        Major
+      </label>
+      <select
+        name="major"
+        required
+        className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
+      >
+        <option value="" disabled selected>
+          Select your major
+        </option>
+        {majors.map((major: string) => (
+          <option key={major} value={major}>
+            {major}
+          </option>
+        ))}
+      </select>
+      <label className="text-md" htmlFor="phone_number">
+        Phone number
+      </label>
+      <input
+        name="phone_number"
+        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        placeholder="2485243477"
+        required
+      />
+      <label className="text-md" htmlFor="diet">
+        Dietary restrictions
+      </label>
+      <input
+        name="diet"
+        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        placeholder="Vegan, Kosher, Halal, etc."
+      />
+      <label className="text-md" htmlFor="student_id">
+        Student ID{" "}
+        <span className="text-xs italic text-gray-400">
+          (If you don't have one, please enter your school email)
+        </span>
+      </label>
+      <input
+        name="student_id"
+        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        placeholder="hh3509"
+        required
+      />
+      <button
+        type="submit"
+        className="bg-green-900 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
+      >
+        Submit
+      </button>
+    </form>
   );
 }
