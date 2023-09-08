@@ -7,6 +7,11 @@
   src: url("/SIFONN_BASIC.otf") format("opentype");
 }
 
+@font-face {
+  font-family: consolas;
+  src: url("/CONSOLA.TTF") format("truetype");
+}
+
 @layer base {
   :root {
     --background: 200 20% 98%;
