@@ -1,4 +1,5 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -32,10 +33,7 @@ export async function POST(request: Request) {
     } = await supabase.auth.getUser(); // get user id
     const { error: applicationErr } = await supabase
       .from("applications")
-      .upsert(
-        { applicant_id: user?.id, email: user?.email, ...form },
-        { onConflict: "phone_number" }
-      );
+      .upsert({ applicant_id: user?.id, email: user?.email, ...form });
     if (applicationErr) throw applicationErr;
 
     // NOTE:
@@ -59,7 +57,7 @@ export async function POST(request: Request) {
       }
     );
   }
-
+  revalidatePath("/admin");
   return NextResponse.redirect(
     `${requestUrl.origin}/application?message=Your information has been submitted`,
     {
