@@ -22,6 +22,6 @@ export async function middleware(req: NextRequest) {
       process.env.NEXT_PUBLIC_SUPABASE_URL as string
     ).host.split(".")[0];
     res.cookies.delete(`sb-${projectKey}-auth-token`);
-    return ["error", res];
   }
+  return res;
 }

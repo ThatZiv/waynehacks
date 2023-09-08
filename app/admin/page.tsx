@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { Application, status } from "@/types/application";
 import React from "react";
 import AdminCard from "@/components/AdminCard";
+import Back from "@/components/Back";
 export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
@@ -23,7 +24,6 @@ export default async function Admin() {
     data: { user },
   } = await supabase.auth.getUser();
   const uid = user?.id;
-  console.log(user);
   try {
     if (!uid) throw new Error("You must be logged in to view this page.");
     let { data: isAdmin, error: isAdminError } = await supabase.rpc(
@@ -43,7 +43,11 @@ export default async function Admin() {
   if (applicationsError) return <div>Failed to load applications...</div>;
   return (
     <div className="w-full xl:w-[90%]">
-      <h2 className="text-white">All applications</h2>
+      <Back />
+      <h1 className="text-white text-center md:text-left text-xl m-5">
+        All applications
+      </h1>
+      <hr />
       {applications?.map((data: { applications: Application } & status) => (
         <AdminCard data={data} />
       ))}

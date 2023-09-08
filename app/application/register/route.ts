@@ -32,14 +32,22 @@ export async function POST(request: Request) {
     } = await supabase.auth.getUser(); // get user id
     const { error: applicationErr } = await supabase
       .from("applications")
-      .insert({ applicant_id: user?.id, email: user?.email, ...form });
+      .upsert(
+        { applicant_id: user?.id, email: user?.email, ...form },
+        { onConflict: "phone_number" }
+      );
     if (applicationErr) throw applicationErr;
+
+    // NOTE:
+    // The current supabase policy for status will only allow update IF:
+    // - The prior status IS NOT 'rejected'
+    // OR
+    // - The user is an admin
 
     // const { error: statusError } = await supabase
     //   .from("applications")
     //   .insert({ applicant_id: user?.id, ...form });
-
-
+    // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
   } catch (error: any) {
     let err = error.message;
     console.log(error);

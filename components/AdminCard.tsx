@@ -19,13 +19,17 @@ export default async function AdminCard({
   ].map((status) => status.toUpperCase());
   return (
     <div
-      className={`relative animate-in flex flex-col group shadow-lg rounded-lg bg-${
-        data.status === "accepted"
-          ? "green-900"
-          : data.status === "rejected"
-          ? "red-900"
-          : "background"
-      } border p-5 hover:border-foreground mb-4 text-foreground`}
+      style={{
+        backgroundColor:
+          data.status === "accepted"
+            ? "#365314"
+            : data.status === "rejected"
+            ? "#7f1d1d"
+            : data.status === "cancelled"
+            ? "#854d0e"
+            : "black",
+      }}
+      className={`relative animate-in flex flex-col group shadow-lg rounded-lg border p-5 hover:border-foreground mb-4 text-foreground`}
     >
       <form action="/admin/edit" method="post">
         <input type="hidden" name="applicant_id" value={data.applicant_id} />
@@ -88,45 +92,40 @@ export default async function AdminCard({
               Save
             </button>
           </div>
-          <div className="grid grid-flow-row auto-rows-max">
-            <div>
-              <div className="transition-all ease-in-out duration-300">
-                <div className="relative overflow-x-auto">
-                  <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-auto lg:table-fixed">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                      <tr>
-                        {applicationColumns.map((column) => (
-                          <th
-                            scope="col"
-                            key={column + data.applicant_id}
-                            className="px-6 py-3 font-medium tracking-wider"
-                          >
-                            {column}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        {applicationRows.map((row) => (
-                          <td
-                            key={row + data.applicant_id}
-                            className="px-6 py-4"
-                          >
-                            {row}
-                          </td>
-                        ))}
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+          <div>
+            <div className="transition-all ease-in-out duration-300">
+              <div className="overflow-x-auto">
+                <table className="text-sm min-w-full text-left text-gray-500 dark:text-gray-400 table-auto">
+                  <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      {applicationColumns.map((column) => (
+                        <th
+                          scope="col"
+                          key={column + data.applicant_id}
+                          className="px-6 py-3 font-medium tracking-wider"
+                        >
+                          {column}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      {applicationRows.map((row) => (
+                        <td key={row + data.applicant_id} className="px-6 py-4">
+                          {row}
+                        </td>
+                      ))}
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-            <p className="text-gray-400 text-xs mt-6">
-              {data.applications.university} • Last updated{" "}
-              <i>{new Date(data.modified_at).toLocaleString()}</i>
-            </p>
           </div>
+          <p className="text-gray-400 text-xs mt-6">
+            {data.applications.university} • Last updated{" "}
+            <i>{new Date(data.modified_at).toLocaleString()}</i>
+          </p>
         </div>
       </form>
     </div>

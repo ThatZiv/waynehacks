@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
-import { cache } from "react";
+import React, { cache } from "react";
 import { Application } from "@/types/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/types/majors";
@@ -38,6 +38,7 @@ export default async function Application() {
     const data = await supabase
       .from("applications")
       .select("*, status(*)")
+      .eq("applicant_id", user?.id)
       .limit(1);
     return data;
   });
@@ -56,22 +57,27 @@ export default async function Application() {
           {application ? "Your application" : "Register for the event"}
         </h2>
         {application ? (
-          <div className="flex flex-col gap-2">
-            {/* <h3 className="text-2xl font-bold">
+          <>
+            <div className="flex flex-col gap-2">
+              {/* <h3 className="text-2xl font-bold">
               Status: <code>{application?.status!.status}</code>
               Note: <code></code>
             </h3> */}
-            <div className="grid grid-cols-1 gap-4">
-              <Card
-                title={application?.status!.status.toUpperCase()}
-                subtitle={application?.status!.note || "No note provided."}
-                date={new Date(application?.status!.modified_at)}
-                icon={
-                  "M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                }
-              />
+              <div className="grid grid-cols-1 gap-4">
+                <Card
+                  title={application?.status!.status.toUpperCase()}
+                  subtitle={application?.status!.note || "No note provided."}
+                  date={new Date(application?.status!.modified_at)}
+                  icon={
+                    "M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                  }
+                />
+              </div>
+              {application.status?.status === "cancelled" && (
+                <RegisterForm universities={universities} majors={majors} />
+              )}
             </div>
-          </div>
+          </>
         ) : (
           <RegisterForm universities={universities} majors={majors} />
         )}
@@ -177,7 +183,11 @@ function RegisterForm({ universities, majors }: RegisterFormProps) {
           Select your university
         </option>
         {universities.map((uni: any) => (
-          <option key={uni.name} value={uni.name}>
+          <option
+            key={uni.name}
+            value={uni.name}
+            className="text-black bg-white"
+          >
             {uni.name} ({uni?.domains.join(", ")})
           </option>
         ))}
@@ -195,7 +205,7 @@ function RegisterForm({ universities, majors }: RegisterFormProps) {
           Select your major
         </option>
         {majors.map((major: string) => (
-          <option key={major} value={major}>
+          <option key={major} value={major} className="text-black bg-white">
             {major}
           </option>
         ))}
