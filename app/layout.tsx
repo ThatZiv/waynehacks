@@ -7,23 +7,19 @@ import React from "react";
 
 export const metadata = {
   title: "WayneHacks",
-  description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
-  University. All majors and skill levels are welcome with teams up to
-  four people. Prizes will be awarded to the best projects, so be
-  ready!`,
+  description:
+    "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
   openGraph: {
     title: "WayneHacks",
-    description: `WayneHacks is a 24-hour in-person Hackathon at Wayne State
-    University. All majors and skill levels are welcome with teams up to
-    four people. Prizes will be awarded to the best projects, so be
-    ready!`,
-    url: "https://hack.wayne.edu/",
+    description:
+      "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
+    url: "https://waynehacks.com/",
     type: "website",
     locale: "en_US",
     siteName: "WayneHacks",
     images: [
       {
-        url: "/whacks_logo.png",
+        url: "/favicon.png",
         width: 1080,
         height: 1080,
         alt: "WayneHacks Logo",
