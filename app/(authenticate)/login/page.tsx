@@ -1,11 +1,10 @@
 "use client";
 import Link from "next/link";
-import Messages from "../../components/messages";
+import Messages from "../../../components/messages";
 import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
-import { resetPassword } from "@/actions/forgetPassword";
 
 export default function Login() {
   const [showForgetPassword, setForgetPassword] =
@@ -57,7 +56,8 @@ export default function Login() {
             <>
               <button
                 className="bg-green-900 rounded px-4 py-2 text-white mb-2"
-                formAction={resetPassword}
+                formAction="/auth/reset-password"
+                formMethod="post"
               >
                 Send recovery to email
               </button>
