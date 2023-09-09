@@ -5,6 +5,10 @@
     letter-spacing: 2rem;
 }
 
+.flicker:hover:before {
+    color: rgb(78, 31, 8);
+}
+
 .flicker:before {
     content: attr(data-heading);
     position: absolute;
