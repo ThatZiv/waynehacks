@@ -14,7 +14,7 @@ export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
 };
-
+// TODO: prefilled email button
 export const dynamic = "force-dynamic";
 
 export default async function Admin() {
@@ -49,7 +49,7 @@ export default async function Admin() {
       </h1>
       <hr />
       {applications?.map((data: { applications: Application } & status) => (
-        <AdminCard data={data} />
+        <AdminCard key={data.applicant_id} data={data} />
       ))}
     </div>
   );
