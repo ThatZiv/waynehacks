@@ -18,7 +18,7 @@ export async function GET(request: Request) {
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(next || requestUrl.origin);
+  return NextResponse.redirect(requestUrl.origin + (next || ""));
 }
 
 export async function POST(request: Request) {
@@ -35,5 +35,5 @@ export async function POST(request: Request) {
   }
 
   // URL to redirect to after sign in process completes
-  return NextResponse.redirect(next || requestUrl.origin);
+  return NextResponse.redirect(requestUrl.origin + (next || ""));
 }
