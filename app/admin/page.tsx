@@ -14,7 +14,6 @@ export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
 };
-// TODO: prefilled email button
 export const dynamic = "force-dynamic";
 
 export default async function Admin() {

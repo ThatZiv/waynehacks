@@ -13,24 +13,26 @@ export default async function Forgot() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login?message=You must be logged in to proceed.");
-  const changePassword = async (e: FormData) => {
-    "use server";
-    const password = String(e.get("password"));
-    const confirm_password = String(e.get("confirm_password"));
-    if (password !== confirm_password)
-      return redirect("/reset-password?error=Password mismatch");
-    const supabase = createServerActionClient({ cookies });
+  // const changePassword = async (e: FormData) => {
+  // @deprecated this is now a method in /auth/change-password
+  //   "use server";
+  //   const password = String(e.get("password"));
+  //   const confirm_password = String(e.get("confirm_password"));
+  //   if (password !== confirm_password)
+  //     return redirect("/reset-password?error=Password mismatch");
+  //   const supabase = createServerActionClient({ cookies });
 
-    const { data, error } = await supabase.auth.updateUser({ password }); // make forget password page
-    if (error) return redirect("/reset-password?error=" + error.message);
+  //   const { data, error } = await supabase.auth.updateUser({ password }); // make forget password page
+  //   if (error) return redirect("/reset-password?error=" + error.message);
 
-    redirect("/?message=Successfully changed password");
-  };
+  //   redirect("/?message=Successfully changed password");
+  // };
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <form
         className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-        action={changePassword}
+        method="post"
+        action="/auth/change-password"
       >
         <div className="mb-12">
           <WayneHacksLogo />

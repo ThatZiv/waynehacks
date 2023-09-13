@@ -12,8 +12,7 @@ export async function POST(req: Request) {
   const captcha = String(e.get("captcha"));
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo:
-      (process.env.NEXT_PUBLIC_BASE_URL || "https://waynehacks.com") +
-      "/auth/callback?next=/reset-password",
+      "https://waynehacks.com" + "/auth/callback?next=/reset-password",
     captchaToken: captcha,
   });
   if (error)
