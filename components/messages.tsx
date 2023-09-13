@@ -13,7 +13,6 @@ export default function Messages() {
     () => new URLSearchParams(isMounted ? window.location.hash : ""), // FIXME: this doesnt work
     [isMounted]
   ); // bc supabase sends urls in hash because of "security"
-  console.log(hashParams.getAll("error"));
   const error = searchParams.get("error") || hashParams.get("error");
   const errorDesc = hashParams.get("error_description"); // usually from auth callback from supabase
 

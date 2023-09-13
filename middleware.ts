@@ -17,7 +17,6 @@ export async function middleware(req: NextRequest) {
     error,
   } = await supabase.auth.getSession();
   if (error) {
-    console.log(error);
     const projectKey = new URL(
       process.env.NEXT_PUBLIC_SUPABASE_URL as string
     ).host.split(".")[0];

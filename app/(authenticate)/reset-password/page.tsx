@@ -60,6 +60,12 @@ export default async function Forgot() {
           placeholder="••••••••"
           required
         />
+        <button
+          className="bg-green-900 rounded px-4 py-2 text-white mb-2"
+          type="submit"
+        >
+          Change password
+        </button>
       </form>
     </div>
   );

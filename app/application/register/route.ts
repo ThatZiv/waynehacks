@@ -48,7 +48,6 @@ export async function POST(request: Request) {
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
   } catch (error: any) {
     let err = error.message;
-    console.log(error);
     return NextResponse.redirect(
       `${requestUrl.origin}/application?error=${err}`,
       {
