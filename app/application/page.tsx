@@ -173,7 +173,6 @@ function RegisterForm({ universities, majors }: RegisterFormProps) {
       <label className="text-md" htmlFor="university">
         College/University
       </label>
-      {/* TODO: check if this works */}
       <select
         name="university"
         required
