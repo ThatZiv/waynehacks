@@ -1,11 +1,18 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-
+import React from "react";
 export default function Messages() {
+  const [isMounted, setMounted] = React.useState<boolean>(false);
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-  const errorDesc = searchParams.get("error_description"); // usually from auth callback from supabase
+  const hashParams = new URLSearchParams(isMounted ? window.location.hash : ""); // bc supabase sends urls in hash because of "security"
+  const error = searchParams.get("error") || hashParams.get("error");
+  const errorDesc = hashParams.get("error_description"); // usually from auth callback from supabase
+
   const message = searchParams.get("message");
   return (
     <>
