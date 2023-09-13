@@ -5,7 +5,7 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-
+export const dynamic = "force-dynamic";
 export default async function Forgot() {
   "use server";
   const supabase = createServerComponentClient({ cookies });
