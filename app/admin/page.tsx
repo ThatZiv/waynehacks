@@ -14,6 +14,7 @@ export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
 };
+
 export const dynamic = "force-dynamic";
 
 export default async function Admin() {
@@ -48,7 +49,7 @@ export default async function Admin() {
       </h1>
       <hr />
       {applications?.map((data: { applications: Application } & status) => (
-        <AdminCard key={data.applicant_id} data={data} />
+        <AdminCard data={data} />
       ))}
     </div>
   );
