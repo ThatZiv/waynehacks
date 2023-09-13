@@ -2,20 +2,6 @@ import { Application, status } from "@/types/application";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 
-function createEmailURI(obj: {
-  email: string;
-  status: string;
-  note: string;
-  full_name: string;
-}) {
-  let status = obj.status.toUpperCase();
-  let body = encodeURIComponent(
-    `Hey ${obj.full_name}, your application has been ${status}.\n\n${obj.note}\n\nBest,\nWayneHacks Team`
-  );
-  let subject = encodeURIComponent(`WayneHacks Application ${status}`);
-  return `mailto:${obj.email}?subject=${subject}&cc=waynestatescd@gmail.com&body=${body}`;
-}
-
 export default async function AdminCard({
   data,
 }: {
@@ -31,13 +17,6 @@ export default async function AdminCard({
     "waitlisted",
     "cancelled",
   ].map((status) => status.toUpperCase());
-  // example: mailto:jsmith@example.com?subject=A%20Test&body=My%20idea%20is%3A%20%0A
-  const emailURI = createEmailURI({
-    email: data.applications.email,
-    status: data.status,
-    note: data.note,
-    full_name: data.applications.full_name,
-  });
   return (
     <div
       style={{
@@ -101,7 +80,7 @@ export default async function AdminCard({
           <div className="grid grid-cols-8 gap-1">
             <input
               name="note"
-              className="rounded-md px-2 py-2 bg-inherit border col-span-6"
+              className="rounded-md px-2 py-2 bg-inherit border col-span-7"
               placeholder="Please enter a note for the applicant to see."
               defaultValue={data.note}
               required
@@ -112,13 +91,6 @@ export default async function AdminCard({
             >
               Save
             </button>
-            <Link
-              className="bg-[#2d3160] text-foreground rounded-lg px-3 py-3 col-span-1 text-xs font-bold transition-all text-center hover:bg-foreground hover:text-background"
-              target="_blank"
-              href={emailURI}
-            >
-              Email
-            </Link>
           </div>
           <div>
             <div className="transition-all ease-in-out duration-300">

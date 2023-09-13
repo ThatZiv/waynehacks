@@ -17,13 +17,8 @@ export async function POST(request: Request) {
       throw new Error(
         "Please use your University email address ending in `.edu`"
       );
-    // console.log(
-    //   await supabase.from("users").select("email").eq("email", email)
-    // );
-    // if (await supabase.from("users").select("email").eq("email", email)) {
-    //   throw new Error("Email is already being used by someone else");
-    // }
-    const { data, error } = await supabase.auth.signUp({
+
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {

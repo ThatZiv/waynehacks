@@ -92,17 +92,6 @@ export default function Login() {
       >
         Forgot password?
       </p>
-      {token && (
-        <div className="text-center text-xs text-foreground mt-2 w-full">
-          Didn't receive an email from us? Check your junk/spam folder or{" "}
-          <a
-            href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
-            className="text-green-400 hover:underline"
-          >
-            contact us
-          </a>
-        </div>
-      )}
     </div>
   );
 }
