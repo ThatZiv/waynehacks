@@ -17,13 +17,10 @@ export async function POST(request: Request) {
       throw new Error(
         "Please use your University email address ending in `.edu`"
       );
-    // console.log(
-    //   await supabase.from("users").select("email").eq("email", email)
-    // );
-    // if (await supabase.from("users").select("email").eq("email", email)) {
-    //   throw new Error("Email is already being used by someone else");
-    // }
-    const { data, error } = await supabase.auth.signUp({
+    if (await supabase.from("users").select("email").eq("email", email)) {
+      throw new Error("Email is already being used by someone else");
+    }
+    const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -34,10 +31,13 @@ export async function POST(request: Request) {
     if (error) throw error;
   } catch (error: any) {
     let err = error.message;
-    return NextResponse.redirect(`${requestUrl.origin}/login?error=${err}`, {
-      // a 301 status is required to redirect from a POST to a GET route
-      status: 301,
-    });
+    return NextResponse.redirect(
+      `${requestUrl.origin}/login?error=${err}`,
+      {
+        // a 301 status is required to redirect from a POST to a GET route
+        status: 301,
+      }
+    );
   }
 
   return NextResponse.redirect(

@@ -1,3 +1,5 @@
+// TODO: Duplicate or move this file outside the `_examples` folder to make it a route
+
 import Back from "@/components/Back";
 import {
   createServerActionClient,
@@ -171,6 +173,7 @@ function RegisterForm({ universities, majors }: RegisterFormProps) {
       <label className="text-md" htmlFor="university">
         College/University
       </label>
+      {/* TODO: check if this works */}
       <select
         name="university"
         required
