@@ -101,6 +101,7 @@ export default function Login() {
           >
             contact us
           </a>
+          .
         </div>
       )}
     </div>
