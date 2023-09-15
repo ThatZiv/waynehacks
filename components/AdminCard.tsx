@@ -1,6 +1,7 @@
 import { Application, status } from "@/types/application";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import Splitter from "./Splitter";
 
 function createEmailURI(obj: {
   email: string;
@@ -97,7 +98,7 @@ export default async function AdminCard({
         </span>
 
         <div className="flex flex-col grow gap-4 justify-between">
-          <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+          <Splitter />
           <div className="grid grid-cols-8 gap-1">
             <input
               name="note"

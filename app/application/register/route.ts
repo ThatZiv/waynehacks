@@ -1,5 +1,5 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -57,6 +57,7 @@ export async function POST(request: Request) {
     );
   }
   revalidatePath("/admin");
+  revalidateTag("count_applicants") // recalculate num applicants on home page
   return NextResponse.redirect(
     `${requestUrl.origin}/application?message=Your information has been submitted`,
     {

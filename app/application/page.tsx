@@ -13,6 +13,7 @@ import React, { cache } from "react";
 import { Application } from "@/types/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/types/majors";
+import Splitter from "@/components/Splitter";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -115,7 +116,7 @@ function Card(props: {
       </span>
 
       <div className="flex flex-col grow gap-4 justify-between">
-        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+        <Splitter />
         <p className="opacity-70">{props.subtitle}</p>
         <div className="flex justify-between items-center">
           {/* <svg
