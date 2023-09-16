@@ -3,6 +3,10 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Roboto&display=swap');
 
+html {
+  scroll-behavior: smooth;
+}
+
 @font-face {
   font-family: SIFONN;
   src: url("/SIFONN_BASIC.otf") format("opentype");

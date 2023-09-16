@@ -10,9 +10,9 @@ import { cookies } from "next/headers";
 import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
 import React, { cache } from "react";
-import { Application } from "@/types/application";
+import { Application } from "@/misc/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
-import { majors } from "@/types/majors";
+import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
 
 export const metadata = {
