@@ -1,3 +1,5 @@
+import { createEmailURI } from "@/components/AdminCard";
+import DiscordWebhook from "@/misc/discord";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -19,9 +21,20 @@ export async function POST(request: Request) {
     if (error) throw error;
     revalidatePath("/admin");
     revalidatePath("/application"); // revalidate EVERYONE's application
+    // requestUrl.origin + "/admin/redirect?url=" + createEmailURI({
+    //   email: String(e.get("email")),
+    //   status: String(e.get("status")),
+    //   note: String(e.get("note")),
+    //   full_name: String(e.get("full_name")),
+    // })
+    new DiscordWebhook()
+      .send('Application update (click here to view application)',
+        `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get("note")}\``,
+        requestUrl.origin + "/admin/application/" + e.get("applicant_id")
+      )
+      .catch(console.error);
     return NextResponse.redirect(
-      `${
-        requestUrl.origin
+      `${requestUrl.origin
       }/admin?tick=${Math.random()}&message=Successfully updated application for: ${e.get(
         "applicant_id"
       )}`,
