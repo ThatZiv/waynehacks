@@ -35,7 +35,6 @@ export async function middleware(req: NextRequest) {
       } = await supabase.auth.getUser();
       const uid = user?.id;
       if (!uid) {
-        console.log(user)
         throw new Error("You must be logged in to view this page");
       }
       let { data: isAdmin, error: isAdminError } = await supabase.rpc(

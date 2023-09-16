@@ -8,7 +8,7 @@ export default async function Registered() {
   const supabase = createServerComponentClient({ cookies });
   const getApplicants = unstable_cache(
     async () => {
-      console.log("fetching applicants" + new Date().toLocaleTimeString());
+      console.log("fetching applicants " + new Date().toLocaleTimeString());
       const { data: applicants, error } = await supabase.rpc(
         "count_applicants"
       );
