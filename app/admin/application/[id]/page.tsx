@@ -4,12 +4,13 @@ import AdminCard from "@/components/AdminCard";
 import { Application, status } from "@/misc/application";
 import Back from "@/components/Back";
 
+export const dynamic = "force-dynamic";
+
 export default async function Application({
   params,
 }: {
   params: { id: string };
 }) {
-  "use server";
   const applicant_id = params.id;
   const supabase = createServerComponentClient({ cookies });
 

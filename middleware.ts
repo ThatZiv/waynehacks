@@ -27,7 +27,6 @@ export async function middleware(req: NextRequest) {
   // ** CAVEAT TO THIS: https://github.com/vercel/next.js/discussions/43675#discussioncomment-6998182 **
   // ** for some god forsaken reason, next13 caches these middleware so behavior is rly weird.. **
   if (req.nextUrl.pathname.startsWith("/admin")) {
-
     try {
       // If the user is not logged in, redirect to /login
       const {

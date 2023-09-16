@@ -5,7 +5,7 @@ import Splitter from "@/components/Splitter";
 import FAQ, { FAQProps } from "@/components/FAQ";
 
 export const revalidate = 60 * 2; // revalidate every hour
-export const dynamic = "auto"; // force static (this wont work)
+export const dynamic = "force-dynamic"; // force static (this wont work)
 
 const FAQList = {
   "What is a Hackathon?":
