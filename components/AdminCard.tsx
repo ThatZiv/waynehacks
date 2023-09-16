@@ -14,7 +14,7 @@ export function createEmailURI(obj: {
     `Hey ${obj.full_name}, your application has been ${status}.\n\n${obj.note}\n\nBest,\nWayneHacks Team`
   );
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
-  return `mailto://${obj.email}?subject=${subject}&cc=waynestatescd@gmail.com&body=${body}`;
+  return `mailto:${obj.email}?subject=${subject}&cc=waynestatescd@gmail.com&body=${body}`;
 }
 
 export default async function AdminCard({
@@ -83,7 +83,7 @@ export default async function AdminCard({
           <span className="font-bold text-xl">
             <Link
               className="text-blue-500"
-              href={`mailto://${data.applications.email}`}
+              href={`mailto:${data.applications.email}`}
             >
               {data.applications.full_name}
             </Link>{" "}
