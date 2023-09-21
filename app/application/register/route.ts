@@ -1,5 +1,6 @@
+import DiscordWebhook from "@/misc/discord";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -22,8 +23,10 @@ export async function POST(request: Request) {
   const nonRequiredFields = ["diet"];
   try {
     const form = {} as any;
+    let toDiscord = ''
     for (const field of fields) {
       let val = formData.get(field);
+      toDiscord += `${field}: ||${val}||\n`
       if (!nonRequiredFields.includes(field) && !val)
         throw new Error(`Missing required field '${field}'`);
       form[field] = formData.get(field);
@@ -31,6 +34,7 @@ export async function POST(request: Request) {
     const {
       data: { user },
     } = await supabase.auth.getUser(); // get user id
+    toDiscord = `${user?.email} - ` + toDiscord
     const { error: applicationErr } = await supabase
       .from("applications")
       .upsert({ applicant_id: user?.id, email: user?.email, ...form });
@@ -46,9 +50,11 @@ export async function POST(request: Request) {
     //   .from("applications")
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
+    new DiscordWebhook()
+      .send('New application', toDiscord, `mailto:${user?.email}`)
+      .catch(console.error);
   } catch (error: any) {
     let err = error.message;
-    console.log(error);
     return NextResponse.redirect(
       `${requestUrl.origin}/application?error=${err}`,
       {
@@ -58,6 +64,8 @@ export async function POST(request: Request) {
     );
   }
   revalidatePath("/admin");
+  revalidateTag("count_applicants") // recalculate num applicants on home page
+
   return NextResponse.redirect(
     `${requestUrl.origin}/application?message=Your information has been submitted`,
     {

@@ -6,7 +6,7 @@ import {
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-import { Application, status } from "@/types/application";
+import { Application, status } from "@/misc/application";
 import React from "react";
 import AdminCard from "@/components/AdminCard";
 import Back from "@/components/Back";
@@ -22,24 +22,13 @@ export default async function Admin() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const uid = user?.id;
-  try {
-    if (!uid) throw new Error("You must be logged in to view this page.");
-    let { data: isAdmin, error: isAdminError } = await supabase.rpc(
-      "is_admin",
-      { uid }
-    );
-    if (isAdminError) throw isAdminError;
-    if (!isAdmin) throw new Error("You must be an admin to view this page.");
-  } catch (e: any) {
-    redirect(`/?error=${e.message}`);
-  }
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
     .select("*, applications(*)")
     .order("modified_at", { ascending: false });
 
-  if (applicationsError) return <div>Failed to load applications...</div>;
+  if (applicationsError)
+    return <div className="text-white">Failed to load applications...</div>;
   return (
     <div className="w-full xl:w-[90%]">
       <Back />

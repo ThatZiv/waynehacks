@@ -1,8 +1,9 @@
-import { Application, status } from "@/types/application";
+import { Application, status } from "@/misc/application";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
+import Splitter from "./Splitter";
 
-function createEmailURI(obj: {
+export function createEmailURI(obj: {
   email: string;
   status: string;
   note: string;
@@ -54,6 +55,12 @@ export default async function AdminCard({
     >
       <form action="/admin/edit" method="post">
         <input type="hidden" name="applicant_id" value={data.applicant_id} />
+        <input type="hidden" name="email" value={data.applications.email} />
+        <input
+          type="hidden"
+          name="full_name"
+          value={data.applications.full_name}
+        />
         <span className="flex items-center space-x-3 mb-4">
           <svg
             width="24"
@@ -76,15 +83,15 @@ export default async function AdminCard({
           <span className="font-bold text-xl">
             <Link
               className="text-blue-500"
-              href={`mailto://${data.applications.email}`}
+              href={`mailto:${data.applications.email}`}
             >
               {data.applications.full_name}
             </Link>{" "}
             •{" "}
-            <select name="status" className="bg-transparent">
+            <select name="status" className="bg-transparent font-mono">
               {statuses.map((status) => (
                 <option
-                  className="bg-[#1E1E1E] text-white"
+                  className="bg-[#1E1E1E] text-white font-sans"
                   key={status + data.applicant_id}
                   value={status.toLowerCase()}
                   selected={data.status.toUpperCase() == status}
@@ -97,23 +104,23 @@ export default async function AdminCard({
         </span>
 
         <div className="flex flex-col grow gap-4 justify-between">
-          <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
+          <Splitter />
           <div className="grid grid-cols-8 gap-1">
             <input
               name="note"
-              className="rounded-md px-2 py-2 bg-inherit border col-span-6"
+              className="rounded-md px-2 py-2 bg-inherit border col-span-8 md:col-span-6"
               placeholder="Please enter a note for the applicant to see."
               defaultValue={data.note}
               required
             />
             <button
-              className="bg-[#1E1E1E] text-foreground rounded-lg px-3 py-3 col-span-1 text-xs font-bold transition-all hover:bg-foreground hover:text-background"
+              className="bg-[#1E1E1E] text-foreground rounded-lg px-3 py-3 col-span-4 md:col-span-1 text-xs font-bold transition-all hover:bg-foreground hover:text-background"
               type="submit"
             >
               Save
             </button>
             <Link
-              className="bg-[#2d3160] text-foreground rounded-lg px-3 py-3 col-span-1 text-xs font-bold transition-all text-center hover:bg-foreground hover:text-background"
+              className="bg-[#2d3160] text-foreground rounded-lg px-3 py-3 col-span-4 md:col-span-1 text-xs font-bold transition-all text-center hover:bg-foreground hover:text-background"
               target="_blank"
               href={emailURI}
             >
@@ -151,7 +158,7 @@ export default async function AdminCard({
             </div>
           </div>
           <p className="text-gray-400 text-xs mt-6">
-            {data.applications.university} • Last updated{" "}
+            {data.applicant_id} • {data.applications.university} • Last updated{" "}
             <i>{new Date(data.modified_at).toLocaleString()}</i>
           </p>
         </div>

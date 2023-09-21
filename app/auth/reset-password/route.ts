@@ -11,7 +11,7 @@ export async function POST(req: Request) {
   const email = String(e.get("email"));
   const captcha = String(e.get("captcha"));
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: "https://waynehacks.com/auth/callback?next=/reset-password",
+    redirectTo: "https://www.waynehacks.com/auth/callback?next=/reset-password/",
     captchaToken: captcha,
   });
   if (error)
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     );
   return NextResponse.redirect(
     requestUrl.origin +
-      "/?message=Please check your email for resetting your password",
+    "/?message=Please check your email for resetting your password",
     {
       status: 301,
     }

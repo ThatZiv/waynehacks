@@ -15,16 +15,19 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+    <div className="dark:text-white flex h-screen text-black text-center">
+      <div className="m-auto">
+        <h1 className="text-xl">Something went wrong :(</h1>
+        <button
+          className="py-2 px-4 rounded-md mt-5 bg-[#1E1E1E] text-foreground"
+          onClick={
+            // Attempt to recover by trying to re-render the segment
+            () => reset()
+          }
+        >
+          Try again
+        </button>
+      </div>
     </div>
   );
 }
