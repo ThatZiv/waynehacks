@@ -1,4 +1,4 @@
-import DiscordWebhook from "@/misc/discord";
+import { DiscordWebhook, SupabaseFunctions } from "@/misc/functions";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     let toDiscord = ''
     for (const field of fields) {
       let val = formData.get(field);
-      toDiscord += `${field}: ||${val}||\n`
+      toDiscord += `${field}: ||${val}|| \n`
       if (!nonRequiredFields.includes(field) && !val)
         throw new Error(`Missing required field '${field}'`);
       form[field] = formData.get(field);
@@ -34,7 +34,10 @@ export async function POST(request: Request) {
     const {
       data: { user },
     } = await supabase.auth.getUser(); // get user id
-    toDiscord = `${user?.email} - ` + toDiscord
+    const whacks = new SupabaseFunctions(supabase);
+    const canRegister = await whacks.getConfigValue("canRegister");
+    if (!canRegister) throw new Error("Applications are currently closed")
+    toDiscord = `${user?.email} \n` + toDiscord
     const { error: applicationErr } = await supabase
       .from("applications")
       .upsert({ applicant_id: user?.id, email: user?.email, ...form });
@@ -51,7 +54,7 @@ export async function POST(request: Request) {
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
     new DiscordWebhook()
-      .send('New application', toDiscord, `mailto:${user?.email}`)
+      .send(`New application`, toDiscord, `${requestUrl.origin}/admin/application/${user?.id}`)
       .catch(console.error);
   } catch (error: any) {
     let err = error.message;

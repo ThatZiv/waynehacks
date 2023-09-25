@@ -2,27 +2,11 @@ import Link from "next/link";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
-import FAQ, { FAQProps } from "@/components/FAQ";
+import FAQ from "@/components/FAQ";
+import Announcement from "@/components/Announcement";
 
 export const revalidate = 60 * 2; // revalidate every hour
 export const dynamic = "force-dynamic"; // force static (this wont work)
-
-const FAQList = {
-  "What is a Hackathon?":
-    "A hackathon is an event where programmers get together for a short period of time to collaborate and create a project." +
-    "Attending these events and participating is a great resume booster!",
-
-  "I am a beginner and don't know how to code, can I still participate?": `Anyone can participate! We welcome all beginners to experts in development.
-    Hackathons are a perfect place to learn new skills and find out what it takes to build an application!`,
-
-  "Can I work alone or in a team?":
-    "Teams can consist of 1-4 members. Don't worry if you do not have a team! We will have an event to find team members.",
-
-  "Where do I sign up!": `You must create an account by hitting 'login' at the top of the page and using your school email.
-    Then you can register for the event by hitting 'register' at the home page.`,
-  "I signed up...now what?":
-    "We will send you an email with more information as the event gets closer.",
-};
 
 export default async function Index() {
   // const supabase = createServerComponentClient({ cookies });
@@ -43,18 +27,14 @@ export default async function Index() {
           <h2 className="inline-flex col-span-12 md:col-span-12">
             <Registered />
           </h2>
-          <Link
-            href="/application"
-            className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
-          >
-            Register
-          </Link>
         </div>
 
         <Splitter />
 
-        <div className="flex flex-col gap-8 text-foreground">
-          <h2 className="text-lg font-bold text-center">What is WayneHacks?</h2>
+        <div className="flex flex-col gap-8">
+          <h2 className="text-3xl font-semibold text-center">
+            What is WayneHacks?
+          </h2>
           <p className="text-md text-center">
             WayneHacks is a 24-hour in-person Hackathon at Wayne State
             University. All majors and skill levels are welcome with teams up to
@@ -77,7 +57,12 @@ export default async function Index() {
                   d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
                 />
               </svg>
-              &nbsp; <strong>Date TBD...</strong>
+              &nbsp;{" "}
+              <strong>
+                <a href="/events.ics" className="hover:text-yellow-500">
+                  January 13-14, 2024
+                </a>
+              </strong>
             </h2>
             <h2 className="inline-flex col-span-12 md:col-span-4">
               <svg
@@ -101,8 +86,16 @@ export default async function Index() {
               </svg>
               &nbsp;{" "}
               <strong>
-                Wayne State University{" "}
-                <i className="text-sm">(Building TBD...)</i>
+                <a
+                  href="https://maps.app.goo.gl/REau4tD9HgfXnDQH7"
+                  target={"_blank"}
+                  className="hover:text-yellow-500"
+                >
+                  Wayne State University
+                </a>
+                {/* <p className="text-xs invisible md:visible">
+                  5105 Anthony Wayne Dr, Detroit, MI 48202
+                </p> */}
               </strong>
             </h2>
             <h2 className="inline-flex col-span-12 md:col-span-4">
@@ -128,11 +121,14 @@ export default async function Index() {
           <div className="text-lg font-bold text-center w-full flex flex-col">
             FAQ
             <div className="inline-flex col-span-12 md:col-span-12">
-              <FAQ list={FAQList} />
+              <FAQ />
             </div>
           </div>
         </div>
       </div>
+      <footer className="bottom-0 sticky">
+        <Announcement />
+      </footer>
     </div>
   );
 }

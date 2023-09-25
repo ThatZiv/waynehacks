@@ -5,10 +5,15 @@ import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Login() {
+  const searchParams = useSearchParams();
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
+  const [isSignup, setSignup] = React.useState<boolean>(
+    searchParams.get("signup") === "true"
+  );
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
 
   return (
@@ -30,6 +35,7 @@ export default function Login() {
         <input
           className="rounded-md px-4 py-2 bg-inherit border mb-6"
           name="email"
+          type="email"
           placeholder="you@example.com"
           required
         />
@@ -45,50 +51,85 @@ export default function Login() {
               placeholder="••••••••"
               required
             />
+            {isSignup && (
+              <>
+                <label className="text-md" htmlFor="confirm-password">
+                  Confirm Password
+                </label>
+                <input
+                  className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                  type="password"
+                  name="confirm-password"
+                  placeholder="••••••••"
+                  required
+                />
+              </>
+            )}
           </>
         )}
 
         <div className="flex flex-col w-full items-center">
+          {!showForgetPassword && (
+            <div className="flex items-center mb-7 p-4 border w-full rounded">
+              <input
+                id="checked-checkbox"
+                type="checkbox"
+                checked={isSignup}
+                onChange={() => setSignup((s) => !s)}
+                className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label
+                htmlFor="checked-checkbox"
+                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                Sign Up?
+              </label>
+            </div>
+          )}
           {!token && <HCaptcha />}
         </div>
         {token &&
           (showForgetPassword ? (
             <>
               <button
-                className="bg-green-900 rounded px-4 py-2 text-white mb-2"
+                className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
                 formAction="/auth/reset-password"
                 formMethod="post"
               >
-                Send recovery to email
+                Send recovery email
               </button>
-              <input type="hidden" name="captcha" value={token ?? ""} />
             </>
           ) : (
             <>
-              <button
-                className="bg-green-900 rounded px-4 py-2 text-white mb-2"
-                disabled={isLoading || !token}
-              >
-                Sign In
-              </button>
-              <input type="hidden" name="captcha" value={token ?? ""} />
-              <button
-                formAction="/auth/sign-up"
-                className="border border-gray-700 rounded px-4 py-2 mb-2"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setToken(null);
-                }}
-                disabled={isLoading || !token}
-              >
-                Sign Up
-              </button>
+              {isSignup ? (
+                <>
+                  <p className="text-sm text-center  w-full">
+                    By signing up, <strong>you will be notified</strong> to your
+                    email when applications will be open.
+                  </p>
+                  <button
+                    formAction="/auth/sign-up"
+                    className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
+                    disabled={isLoading || !token}
+                  >
+                    Sign Up
+                  </button>
+                </>
+              ) : (
+                <button
+                  className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
+                  disabled={isLoading || !token}
+                >
+                  Log In
+                </button>
+              )}
             </>
           ))}
+        <input type="hidden" name="captcha" value={token ?? ""} />
       </form>
       <p
         onClick={() => setForgetPassword((s) => !s)}
-        className="text-center text-green-800 hover:underline cursor-pointer"
+        className="text-center text-yellow-400 hover:underline cursor-pointer"
       >
         Forgot password?
       </p>
@@ -97,10 +138,11 @@ export default function Login() {
           Didn't receive an email from us? Check your junk/spam folder or{" "}
           <a
             href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
-            className="text-green-400 hover:underline"
+            className="text-yellow-400 hover:underline"
           >
             contact us
           </a>
+          .
         </div>
       )}
     </div>

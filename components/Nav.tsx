@@ -1,6 +1,5 @@
 "use client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import scdLogo from "../public/scd.png";
@@ -29,7 +28,10 @@ function Nav() {
     getUser();
   }, []);
   return (
-    <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
+    <nav
+      style={{ backdropFilter: "blur(10px)" }}
+      className="w-full flex justify-center border-b border-b-foreground/10 h-16"
+    >
       <div className="w-full max-w-4xl flex justify-between items-center p-6 text-sm text-foreground">
         <div className="flex items-center gap-4">
           <Link href="https://scd.cs.wayne.edu/" target="_blank">
