@@ -18,9 +18,6 @@ export default async function Registered() {
     >
       Sign up
     </Link>;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
   const applicants = await whacks.getApplicants();
   return (
     <div>
@@ -57,7 +54,7 @@ export default async function Registered() {
         href="/application"
         className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
       >
-        {user ? "Create/View Application" : "Register"}
+        Apply
       </Link>
     </div>
   );
