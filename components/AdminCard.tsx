@@ -93,7 +93,7 @@ export default async function AdminCard({
                 <option
                   className="bg-[#1E1E1E] text-white font-sans"
                   key={status + data.applicant_id}
-                  value={status.toLowerCase()}
+                  defaultValue={status.toLowerCase()}
                   selected={data.status.toUpperCase() == status}
                 >
                   {status}

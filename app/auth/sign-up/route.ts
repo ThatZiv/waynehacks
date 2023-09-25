@@ -9,10 +9,12 @@ export async function POST(request: Request) {
   const formData = await request.formData();
   const email = String(formData.get("email"));
   const password = String(formData.get("password"));
+  const confirmPassword = String(formData.get("confirm-password"));
   const captcha = String(formData.get("captcha"));
   const supabase = createRouteHandlerClient({ cookies });
   try {
-    if (!email || !password) throw new Error("Email and password are required");
+    if (!email || !password || !confirmPassword) throw new Error("Email and password are required");
+    if (password !== confirmPassword) throw new Error("Passwords do not match");
     if (!email.endsWith(".edu"))
       throw new Error(
         "Please use your University email address ending in `.edu`"

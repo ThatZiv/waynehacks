@@ -1,5 +1,5 @@
 import { createEmailURI } from "@/components/AdminCard";
-import DiscordWebhook from "@/misc/discord";
+import { DiscordWebhook } from "@/misc/functions";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const { error } = await supabase
       .from("status")
       .update({
-        status: e.get("status"),
+        status: String(e.get("status")).toLowerCase(),
         note: e.get("note"),
         modified_at: new Date(),
       })

@@ -14,6 +14,7 @@ import { Application } from "@/misc/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
+import { SupabaseFunctions } from "@/misc/functions";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -28,14 +29,8 @@ export default async function Application() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const getUniversities = cache(async () => {
-    const data = (await fetch(
-      `http://universities.hipolabs.com/search?country=united%20states`,
-      { cache: "force-cache" }
-    ).then((res) => res.json())) as any[];
-    return data.sort((a, b) => a.name.localeCompare(b.name));
-  });
-  const getApps = cache(async () => {
+
+  const getApplication = cache(async () => {
     const data = await supabase
       .from("applications")
       .select("*, status(*)")
@@ -44,26 +39,27 @@ export default async function Application() {
     return data;
   });
   if (!user) redirect("/login?message=You must be logged in to register.");
+  const whacks = new SupabaseFunctions(supabase);
+  const canRegister = await whacks.getConfigValue("canRegister");
+  if (!canRegister) redirect("/?message=Applications are currently closed.");
   //@ts-expect-error we handle if its null
-  const application = (await getApps()).data[0] as Application | undefined;
-  const universities = await getUniversities();
+  const application = (await getApplication()).data[0] as
+    | Application
+    | undefined;
+
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-foreground">
         <Back />
         <WayneHacksLogo />
 
-        <h2 className="lg:text-4xl md:text-3xl text-2xl text-center">
+        <h2 className="lg:text-4xl md:text-3xl text-2xl text-center font-sans">
           {/* TODO: fixed roboto font now showing up */}
           {application ? "Your application" : "Register for the event"}
         </h2>
         {application ? (
           <>
             <div className="flex flex-col gap-2">
-              {/* <h3 className="text-2xl font-bold">
-              Status: <code>{application?.status!.status}</code>
-              Note: <code></code>
-            </h3> */}
               <div className="grid grid-cols-1 gap-4">
                 <Card
                   title={application?.status!.status.toUpperCase()}
@@ -74,13 +70,23 @@ export default async function Application() {
                   }
                 />
               </div>
-              {application.status?.status === "cancelled" && (
-                <RegisterForm universities={universities} majors={majors} />
-              )}
+              {application.status?.status === "cancelled" && <RegisterForm />}
+              <p className="text-xs text-center">
+                If you believe there is anything wrong or have questions
+                regarding your application, feel free to{" "}
+                <a
+                  className="text-yellow-400 hover:underline"
+                  target="_blank"
+                  href="mailto:waynestatescd@gmail.com"
+                >
+                  reach out
+                </a>{" "}
+                to us.
+              </p>
             </div>
           </>
         ) : (
-          <RegisterForm universities={universities} majors={majors} />
+          <RegisterForm />
         )}
       </div>
     </div>
@@ -142,11 +148,15 @@ function Card(props: {
   );
 }
 
-interface RegisterFormProps {
-  universities: any[];
-  majors: string[];
-}
-function RegisterForm({ universities, majors }: RegisterFormProps) {
+async function RegisterForm() {
+  const getUniversities = cache(async () => {
+    const data = (await fetch(
+      `http://universities.hipolabs.com/search?country=united%20states`,
+      { cache: "force-cache" }
+    ).then((res) => res.json())) as any[];
+    return data.sort((a, b) => a.name.localeCompare(b.name));
+  });
+  const universities = await getUniversities();
   return (
     <form
       action="/application/register"
@@ -241,7 +251,7 @@ function RegisterForm({ universities, majors }: RegisterFormProps) {
       />
       <button
         type="submit"
-        className="bg-green-900 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
+        className="bg-yellow-400 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
       >
         Submit
       </button>
