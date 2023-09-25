@@ -26,7 +26,7 @@ export class DiscordWebhook {
                 },
             ],
         };
-        return process.env.NODE_ENV === "development" ? fetch(process.env.DISCORD_WEBHOOK_URL as string, {
+        return process.env.NODE_ENV === "production" ? fetch(process.env.DISCORD_WEBHOOK_URL as string, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
