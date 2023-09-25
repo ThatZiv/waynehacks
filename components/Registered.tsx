@@ -11,27 +11,16 @@ export default async function Registered() {
   const supabase = createServerComponentClient({ cookies });
   const whacks = new SupabaseFunctions(supabase);
   const canRegister = await whacks.getConfigValue("canRegister");
+  if (!canRegister)
+    <Link
+      href="/login?signup=true"
+      className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
+    >
+      Sign up
+    </Link>;
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!canRegister)
-    return user ? (
-      <Link
-        href="/application"
-        className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
-      >
-        View Application
-      </Link>
-    ) : (
-      <>
-        <Link
-          href="/login?signup=true"
-          className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
-        >
-          Sign up
-        </Link>
-      </>
-    );
   const applicants = await whacks.getApplicants();
   return (
     <div>
@@ -68,7 +57,7 @@ export default async function Registered() {
         href="/application"
         className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
       >
-        Register
+        {user ? "Create/View Application" : "Register"}
       </Link>
     </div>
   );
