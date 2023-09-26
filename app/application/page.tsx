@@ -38,7 +38,10 @@ export default async function Application() {
       .limit(1);
     return data;
   });
-  if (!user) redirect("/login?message=You must be logged in to register.");
+  if (!user)
+    redirect(
+      "/login?message=You must be logged in to register.&next=/application"
+    );
   const whacks = new SupabaseFunctions(supabase);
   const canRegister = await whacks.getConfigValue("canRegister");
   if (!canRegister) redirect("/?message=Applications are currently closed.");

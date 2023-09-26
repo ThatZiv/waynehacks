@@ -6,8 +6,10 @@ import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
 import { useSearchParams } from "next/navigation";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
 
 export default function Login() {
+  const { pending } = useFormStatus();
   const searchParams = useSearchParams();
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
@@ -22,7 +24,9 @@ export default function Login() {
 
       <form
         className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-        action="/auth/sign-in"
+        action={`auth/sign-in?next=${encodeURIComponent(
+          String(searchParams.get("next") || "")
+        )}`}
         method="post"
       >
         <div className="mb-12">
@@ -92,8 +96,9 @@ export default function Login() {
           (showForgetPassword ? (
             <>
               <button
-                className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
+                className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
                 formAction="/auth/reset-password"
+                disabled={pending}
                 formMethod="post"
               >
                 Send recovery email
@@ -109,16 +114,17 @@ export default function Login() {
                   </p>
                   <button
                     formAction="/auth/sign-up"
-                    className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
-                    disabled={isLoading || !token}
+                    formMethod="post"
+                    className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
+                    disabled={isLoading || !token || pending}
                   >
                     Sign Up
                   </button>
                 </>
               ) : (
                 <button
-                  className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
-                  disabled={isLoading || !token}
+                  className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
+                  disabled={isLoading || !token || pending}
                 >
                   Log In
                 </button>

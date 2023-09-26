@@ -4,10 +4,12 @@ import Spinner from "@/components/Spinner";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import useCaptcha from "@/components/useCaptcha";
 import { useSearchParams } from "next/navigation";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import React from "react";
 
 function ConfirmAccount() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
+  const { pending } = useFormStatus();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const email = searchParams.get("email");
@@ -47,7 +49,8 @@ function ConfirmAccount() {
           <div className="flex flex-col w-full items-center">
             {token ? (
               <button
-                className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
+                className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-not-allowed font-bold mb-2"
+                disabled={pending}
                 type="submit"
               >
                 Confirm account

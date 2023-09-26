@@ -16,3 +16,12 @@ micros:
         - name: NEXT_PUBLIC_HCAPTCHA_SITEKEY
           description: hCaptcha Site Key
           default: ""
+        - name: NEXT_PUBLIC_BASE_URL
+          description: Base URL
+          default: ""
+        - name: HCAPTCHA_SECRET_KEY
+          description: hCaptcha Secret
+          default: ""
+        - name: DISCORD_WEBHOOK_URL
+          description: Discord Webhook URL
+          default: ""

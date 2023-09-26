@@ -1,0 +1,17 @@
+/** @type {import('next').NextConfig} */
+const env = require("./env.js");
+const nextConfig = {
+  // rewrites: async () => [
+  //   {
+  //     source: "/:path*",
+  //     destination: "http://workstation.zav:3001/:path*",
+  //   },
+  // ],
+  output: "standalone",
+  experimental: {
+    serverActions: true,
+  },
+  env
+};
+
+module.exports = nextConfig;
