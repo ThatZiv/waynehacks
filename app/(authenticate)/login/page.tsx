@@ -7,10 +7,42 @@ import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import Spinner from "@/components/Spinner";
+
+const FormContext = React.createContext({
+  pending: false,
+  setPending: (s: boolean) => {},
+});
+
+function Submit({
+  children,
+  route,
+}: {
+  children: React.ReactNode;
+  route?: string;
+}) {
+  const { pending, setPending } = React.useContext(FormContext);
+  return (
+    <button
+      className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+      disabled={pending}
+      aria-disabled={pending}
+      formAction={route}
+      formMethod="post"
+      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+        setPending(true);
+        e.currentTarget.form?.submit(); // continue default
+      }}
+      type="submit"
+    >
+      {pending ? <Spinner /> : children}
+    </button>
+  );
+}
 
 export default function Login() {
-  const { pending } = useFormStatus();
   const searchParams = useSearchParams();
+  const [pending, setPending] = React.useState<boolean>(false);
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
   const [isSignup, setSignup] = React.useState<boolean>(
@@ -21,118 +53,98 @@ export default function Login() {
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Back />
+      <FormContext.Provider value={{ pending, setPending }}>
+        <form
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          action={`auth/sign-in?next=${encodeURIComponent(
+            String(searchParams.get("next") || "")
+          )}`}
+          method="post"
+        >
+          <div className="mb-12">
+            <WayneHacksLogo />
+          </div>
 
-      <form
-        className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-        action={`auth/sign-in?next=${encodeURIComponent(
-          String(searchParams.get("next") || "")
-        )}`}
-        method="post"
-      >
-        <div className="mb-12">
-          <WayneHacksLogo />
-        </div>
-
-        <label className="text-md" htmlFor="email">
-          Email
-        </label>
-        <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
-          name="email"
-          type="email"
-          placeholder="you@example.com"
-          required
-        />
-        {!showForgetPassword && (
-          <>
-            <label className="text-md" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="rounded-md px-4 py-2 bg-inherit border mb-6"
-              type="password"
-              name="password"
-              placeholder="••••••••"
-              required
-            />
-            {isSignup && (
-              <>
-                <label className="text-md" htmlFor="confirm-password">
-                  Confirm Password
-                </label>
-                <input
-                  className="rounded-md px-4 py-2 bg-inherit border mb-6"
-                  type="password"
-                  name="confirm-password"
-                  placeholder="••••••••"
-                  required
-                />
-              </>
-            )}
-          </>
-        )}
-
-        <div className="flex flex-col w-full items-center">
+          <label className="text-md" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            required
+          />
           {!showForgetPassword && (
-            <div className="flex items-center mb-7 p-4 border w-full rounded">
-              <input
-                id="checked-checkbox"
-                type="checkbox"
-                checked={isSignup}
-                onChange={() => setSignup((s) => !s)}
-                className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label
-                htmlFor="checked-checkbox"
-                className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >
-                Sign Up?
+            <>
+              <label className="text-md" htmlFor="password">
+                Password
               </label>
-            </div>
-          )}
-          {!token && <HCaptcha />}
-        </div>
-        {token &&
-          (showForgetPassword ? (
-            <>
-              <button
-                className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
-                formAction="/auth/reset-password"
-                disabled={pending}
-                formMethod="post"
-              >
-                Send recovery email
-              </button>
-            </>
-          ) : (
-            <>
-              {isSignup ? (
+              <input
+                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                required
+              />
+              {isSignup && (
                 <>
-                  <p className="text-sm text-center  w-full">
-                    By signing up, <strong>you will be notified</strong> to your
-                    email when applications will be open.
-                  </p>
-                  <button
-                    formAction="/auth/sign-up"
-                    formMethod="post"
-                    className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
-                    disabled={isLoading || !token || pending}
-                  >
-                    Sign Up
-                  </button>
+                  <label className="text-md" htmlFor="confirm-password">
+                    Confirm Password
+                  </label>
+                  <input
+                    className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                    type="password"
+                    name="confirm-password"
+                    placeholder="••••••••"
+                    required
+                  />
                 </>
-              ) : (
-                <button
-                  className="bg-yellow-400 rounded px-4 py-2 disabled:cursor-not-allowed text-black font-bold mb-2"
-                  disabled={isLoading || !token || pending}
-                >
-                  Log In
-                </button>
               )}
             </>
-          ))}
-        <input type="hidden" name="captcha" value={token ?? ""} />
-      </form>
+          )}
+
+          <div className="flex flex-col w-full items-center">
+            {!showForgetPassword && (
+              <div className="flex items-center mb-7 p-4 border w-full rounded">
+                <input
+                  id="checked-checkbox"
+                  type="checkbox"
+                  checked={isSignup}
+                  onChange={() => setSignup((s) => !s)}
+                  className="w-4 h-4 text-blue-500 bg-gray-700 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label
+                  htmlFor="checked-checkbox"
+                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                >
+                  Sign Up?
+                </label>
+              </div>
+            )}
+            {!token && <HCaptcha />}
+          </div>
+          {token &&
+            (showForgetPassword ? (
+              <Submit route="/auth/reset-password">Send recovery email</Submit>
+            ) : (
+              <>
+                {isSignup ? (
+                  <>
+                    <p className="text-sm text-center  w-full">
+                      By signing up, <strong>you will be notified</strong> to
+                      your email when applications will be open.
+                    </p>
+                    <Submit route="/auth/sign-up">Sign Up</Submit>
+                  </>
+                ) : (
+                  <Submit route="/auth/sign-in">Log In</Submit>
+                )}
+              </>
+            ))}
+          <input type="hidden" name="captcha" value={token ?? ""} />
+        </form>
+      </FormContext.Provider>
       <p
         onClick={() => setForgetPassword((s) => !s)}
         className="text-center text-yellow-400 hover:underline cursor-pointer"
