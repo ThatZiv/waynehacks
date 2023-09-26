@@ -3,12 +3,15 @@ import WayneHacksLogo from "@/components/WayneHacksLogo";
 
 import { redirect, useSearchParams } from "next/navigation";
 import useCaptcha from "@/components/useCaptcha";
+import React from "react";
+import Spinner from "@/components/Spinner";
 export const dynamic = "force-dynamic";
 export default async function Forgot() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const email = searchParams.get("email");
+  const [pending, setPending] = React.useState<boolean>(false);
 
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center items-center gap-2">
@@ -69,10 +72,14 @@ export default async function Forgot() {
         <div className="flex flex-col w-full items-center">
           {token ? (
             <button
-              className="bg-yellow-400 rounded px-4 py-2 text-black font-bold mb-2"
+              className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                setPending(true);
+                e.currentTarget.form?.submit(); // continue default
+              }}
               type="submit"
             >
-              Change password
+              {pending ? <Spinner /> : "Change password"}
             </button>
           ) : (
             <HCaptcha />

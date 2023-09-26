@@ -7,9 +7,22 @@ import { useSearchParams } from "next/navigation";
 import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import React from "react";
 
+function ConfirmButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+      disabled={pending}
+      aria-disabled={pending}
+      type="submit"
+    >
+      {pending ? <Spinner /> : "Confirm account"}
+    </button>
+  );
+}
+
 function ConfirmAccount() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
-  const { pending } = useFormStatus();
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const email = searchParams.get("email");
@@ -47,17 +60,7 @@ function ConfirmAccount() {
           />
           <input type="hidden" name="captcha" value={token ?? ""} />
           <div className="flex flex-col w-full items-center">
-            {token ? (
-              <button
-                className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-not-allowed font-bold mb-2"
-                disabled={pending}
-                type="submit"
-              >
-                Confirm account
-              </button>
-            ) : (
-              <HCaptcha />
-            )}
+            {token ? <ConfirmButton /> : <HCaptcha />}
           </div>
         </form>
       ) : (
