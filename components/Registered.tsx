@@ -63,6 +63,6 @@ export default async function Registered() {
     );
   } catch (error: any) {
     console.error(error.message);
-    return <div>{error.message}</div>;
+    return <></>;
   }
 }
