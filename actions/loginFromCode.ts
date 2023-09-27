@@ -1,6 +1,6 @@
 "use server"
 
-import { hcaptchaCheck } from "@/misc/functions";
+import { DiscordWebhook, hcaptchaCheck } from "@/misc/functions";
 import {
     createServerActionClient,
     createServerComponentClient,
@@ -33,5 +33,6 @@ export default async function loginFromCode(e: FormData) {
     } finally {
         revalidatePath("/confirm-account")
     }
+    await new DiscordWebhook().send(`User confirmed`, `||${String(email)}|| has confirmed their account.`)
     return redirect("/?message=Account confirmed")
 }
