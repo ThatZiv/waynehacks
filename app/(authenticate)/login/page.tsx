@@ -11,7 +11,9 @@ import Spinner from "@/components/Spinner";
 
 const FormContext = React.createContext({
   pending: false,
-  setPending: (s: boolean) => {},
+  setPending: (pending: boolean): void => {},
+  action: "",
+  setAction: (action: string): void => {},
 });
 
 function Submit({
@@ -19,21 +21,29 @@ function Submit({
   route,
 }: {
   children: React.ReactNode;
-  route?: string;
+  route: string;
 }) {
-  const { pending, setPending } = React.useContext(FormContext);
+  const { pending, setPending, setAction } = React.useContext(FormContext);
+  const searchParams = useSearchParams();
   return (
     <button
       className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
       disabled={pending}
       aria-disabled={pending}
       formAction={route}
-      formMethod="post"
-      onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+      onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         setPending(true);
-        e.currentTarget.form?.submit(); // continue default
+        setAction(
+          `${route}?next=${encodeURIComponent(
+            String(searchParams.get("next") || "")
+          )}`
+        );
+
+        e.currentTarget.form?.setAttribute("action", route); // not sure if this is needed
+        e.currentTarget.form?.submit();
       }}
-      type="submit"
+      formMethod="post"
     >
       {pending ? <Spinner /> : children}
     </button>
@@ -43,6 +53,11 @@ function Submit({
 export default function Login() {
   const searchParams = useSearchParams();
   const [pending, setPending] = React.useState<boolean>(false);
+  const [action, setAction] = React.useState<string>(
+    `/auth/sign-in?next=${encodeURIComponent(
+      String(searchParams.get("next") || "")
+    )}`
+  );
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
   const [isSignup, setSignup] = React.useState<boolean>(
@@ -53,12 +68,10 @@ export default function Login() {
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Back />
-      <FormContext.Provider value={{ pending, setPending }}>
+      <FormContext.Provider value={{ pending, setPending, action, setAction }}>
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
-          action={`auth/sign-in?next=${encodeURIComponent(
-            String(searchParams.get("next") || "")
-          )}`}
+          action={action}
           method="post"
         >
           <div className="mb-12">

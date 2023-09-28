@@ -22,7 +22,8 @@ export class DiscordWebhook {
                     title,
                     description: this.truncate(content),
                     color: 0x277222,
-                    url: url || process.env.NEXT_PUBLIC_BASE_URL
+                    url: url || process.env.NEXT_PUBLIC_BASE_URL,
+                    timestamp: new Date().toISOString(),
                 },
             ],
         };
