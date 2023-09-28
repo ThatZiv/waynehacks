@@ -10,6 +10,7 @@ import { Application, status } from "@/misc/application";
 import React from "react";
 import AdminCard from "@/components/AdminCard";
 import Back from "@/components/Back";
+import Link from "next/link";
 export const metadata = {
   title: "WayneHacks Admin",
   description: "You shouldn't be here...",
@@ -32,9 +33,15 @@ export default async function Admin() {
   return (
     <div className="w-full xl:w-[90%]">
       <Back />
-      <h1 className="text-white text-center md:text-left text-xl m-5">
+      <h1 className="text-white text-center md:text-left text-xl mx-5 my-2">
         All applications
       </h1>
+      <Link
+        className="text-blue-500 hover:underline mx-5"
+        href="/admin/applicants.csv"
+      >
+        Export as CSV
+      </Link>
       <hr />
       {applications?.map((data: { applications: Application } & status) => (
         <AdminCard key={data.applicant_id} data={data} />
