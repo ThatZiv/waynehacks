@@ -118,8 +118,8 @@ export default async function Index() {
             </h2>
           </div>
           <Splitter />
-          <div className="text-2xl font-semibold text-center w-full flex flex-col">
-            FAQ
+          <div className="text-lg font-bold text-center w-full flex flex-col">
+            <h2 className="text-2xl font-semibold">FAQ</h2>
             <div className="inline-flex col-span-12 md:col-span-12">
               <FAQ />
             </div>
