@@ -1,7 +1,6 @@
 // https://github.com/WSU-Society-of-Computer-Developers/summer-project/blob/main/server/docker/pb/hooks/discord.js
 
 import { SupabaseClient } from "@supabase/supabase-js";
-import { unstable_cache } from "next/cache";
 
 export class DiscordWebhook {
     private username: string;
@@ -50,32 +49,33 @@ export class SupabaseFunctions {
         this.supabase = sb;
     }
     async getApplicants() {
-        return unstable_cache(async () => {
+        try {
             console.log("fetching applicants " + new Date().toLocaleTimeString());
             const { data: applicants, error } = await this.supabase.rpc(
                 "count_applicants"
             );
-            if (error) return ">50"; // if it errors for some reason, we'll just LIE
+            if (error) throw error
             return applicants;
-        }, ["count_applicants"],
-            {
-                revalidate: 30 * 60,
-                tags: ["count_applicants"],
-            })();
+        } catch (e) {
+            console.error(e);
+            return ">50";
+        }
     }
 
-    getConfigValue(key: string) {
-        return unstable_cache(async () => {
+    async getConfigValue(key: string) {
+        try {
+
             const { data: value, error } = await this.supabase.from(
                 "kv"
             ).select("value").eq("key", key).limit(1).single();
-            if (error) {
-                console.error(error);
-                return;
-            };
+            console.log("fetching config value " + new Date().toLocaleTimeString());
+            if (error) throw error
+
             return value.value!.data;
-        }, [`config_value_${key}`],
-            { revalidate: 60 * 5, tags: [`config_value_${key}`] })()
+        } catch (e) {
+            console.error(e);
+            return null;
+        }
     }
 }
 
