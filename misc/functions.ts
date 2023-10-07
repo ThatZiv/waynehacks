@@ -1,6 +1,7 @@
 // https://github.com/WSU-Society-of-Computer-Developers/summer-project/blob/main/server/docker/pb/hooks/discord.js
 
 import { SupabaseClient } from "@supabase/supabase-js";
+import { unstable_cache } from "next/cache";
 
 export class DiscordWebhook {
     private username: string;
@@ -49,33 +50,41 @@ export class SupabaseFunctions {
         this.supabase = sb;
     }
     async getApplicants() {
-        try {
-            console.log("fetching applicants " + new Date().toLocaleTimeString());
-            const { data: applicants, error } = await this.supabase.rpc(
-                "count_applicants"
-            );
-            if (error) throw error
-            return applicants;
-        } catch (e) {
-            console.error(e);
-            return ">50";
-        }
+        return unstable_cache(async () => {
+            try {
+                console.log("fetching applicants " + new Date().toLocaleTimeString());
+                const { data: applicants, error } = await this.supabase.rpc(
+                    "count_applicants"
+                );
+                if (error) throw error
+                return applicants;
+            } catch (e) {
+                console.error(e);
+                return ">50";
+            }
+        }, ["count_applicants"],
+            {
+                revalidate: 30 * 60,
+                tags: ["count_applicants"],
+            })();
     }
 
     async getConfigValue(key: string) {
-        try {
+        return unstable_cache(async () => {
+            try {
 
-            const { data: value, error } = await this.supabase.from(
-                "kv"
-            ).select("value").eq("key", key).limit(1).single();
-            console.log("fetching config value " + new Date().toLocaleTimeString());
-            if (error) throw error
-
-            return value.value!.data;
-        } catch (e) {
-            console.error(e);
-            return null;
-        }
+                const { data: value, error } = await this.supabase.from(
+                    "kv"
+                ).select("value").eq("key", key).limit(1).single();
+                console.log("fetching config value " + key + " " + new Date().toLocaleTimeString());
+                if (error) throw error
+                return value.value?.data;
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
+        }, [`config_value_${key}`],
+            { revalidate: 60 * 5, tags: [`config_value_${key}`] })()
     }
 }
 

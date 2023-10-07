@@ -5,7 +5,7 @@ import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
 
-export const revalidate = 2 * 60; // revalidate every hour
+export const revalidate = 5 * 60; // revalidate every 5 min
 export const dynamic = "force-static"; // force static (this wont work)
 
 export default async function Index() {
