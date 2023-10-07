@@ -51,12 +51,17 @@ export class SupabaseFunctions {
     }
     async getApplicants() {
         return unstable_cache(async () => {
-            console.log("fetching applicants " + new Date().toLocaleTimeString());
-            const { data: applicants, error } = await this.supabase.rpc(
-                "count_applicants"
-            );
-            if (error) return ">50"; // if it errors for some reason, we'll just LIE
-            return applicants;
+            try {
+                console.log("fetching applicants " + new Date().toLocaleTimeString());
+                const { data: applicants, error } = await this.supabase.rpc(
+                    "count_applicants"
+                );
+                if (error) throw error
+                return applicants;
+            } catch (e) {
+                console.error(e);
+                return ">50";
+            }
         }, ["count_applicants"],
             {
                 revalidate: 30 * 60,
@@ -64,16 +69,20 @@ export class SupabaseFunctions {
             })();
     }
 
-    getConfigValue(key: string) {
+    async getConfigValue(key: string) {
         return unstable_cache(async () => {
-            const { data: value, error } = await this.supabase.from(
-                "kv"
-            ).select("value").eq("key", key).limit(1).single();
-            if (error) {
-                console.error(error);
-                return;
-            };
-            return value.value!.data;
+            try {
+
+                const { data: value, error } = await this.supabase.from(
+                    "kv"
+                ).select("value").eq("key", key).limit(1).single();
+                console.log("fetching config value " + key + " " + new Date().toLocaleTimeString());
+                if (error) throw error
+                return value.value?.data;
+            } catch (e) {
+                console.error(e);
+                return null;
+            }
         }, [`config_value_${key}`],
             { revalidate: 60 * 5, tags: [`config_value_${key}`] })()
     }

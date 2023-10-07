@@ -17,7 +17,7 @@ export default function Error({
   return (
     <div className="dark:text-white flex h-screen text-black text-center">
       <div className="m-auto">
-        <h1 className="text-xl">Something went wrong :(</h1>
+        <h1 className="text-xl">Something went wrong...</h1>
         <button
           className="py-2 px-4 rounded-md mt-5 bg-[#1E1E1E] text-foreground"
           onClick={
@@ -27,6 +27,16 @@ export default function Error({
         >
           Try again
         </button>
+        <span>
+          {" "}
+          or
+          <a
+            href="mailto:waynestatescd@gmail.com."
+            className="text-yellow-400 hover:underline"
+          >
+            contact us
+          </a>
+        </span>
       </div>
     </div>
   );
