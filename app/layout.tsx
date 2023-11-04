@@ -58,7 +58,7 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.png" sizes="any" />
       </head>
       <body>
-        <main className="min-h-screen bg-white dark:bg-opacity-0 flex flex-col items-center">
+        <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
           <Nav />
           <Messages />
           {children}

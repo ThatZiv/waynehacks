@@ -15,6 +15,7 @@ import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
 import { SupabaseFunctions } from "@/misc/functions";
+import constants from "@/misc/constants";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -52,7 +53,7 @@ export default async function Application() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-white">
         <Back />
         <WayneHacksLogo />
 
@@ -80,7 +81,7 @@ export default async function Application() {
                 <a
                   className="wh-link"
                   target="_blank"
-                  href="mailto:waynestatescd@gmail.com"
+                  href={`mailto:${constants.supportEmail}`}
                 >
                   reach out
                 </a>{" "}
@@ -103,7 +104,7 @@ function Card(props: {
   date: Date;
 }) {
   return (
-    <div className="relative flex flex-col group shadow-lg rounded-lg border p-5 hover:border-foreground">
+    <div className="relative flex flex-col group shadow-lg rounded-lg border border-gray-700 p-5 hover:border-foreground">
       <span className="flex items-center space-x-3 mb-4">
         <svg
           width="24"
@@ -166,31 +167,31 @@ async function RegisterForm() {
       method="post"
       className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
     >
-      <label className="text-md" htmlFor="full_name">
+      <label className="text-md text-white" htmlFor="full_name">
         Full name
       </label>
       <input
         name="full_name"
-        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="John Doe"
         required
       />
-      <label className="text-md" htmlFor="graduation_year">
+      <label className="text-md text-white" htmlFor="graduation_year">
         Graduation year
       </label>
       <input
         name="graduation_year"
-        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="2025"
         required
       />
-      <label className="text-md" htmlFor="university">
+      <label className="text-md text-white" htmlFor="university">
         College/University
       </label>
       <select
         name="university"
         required
-        className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
+        className="block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
       >
         <option value="" disabled selected>
           Select your university
@@ -206,13 +207,13 @@ async function RegisterForm() {
         ))}
       </select>
 
-      <label className="text-md" htmlFor="major">
+      <label className="text-md text-white" htmlFor="major">
         Major
       </label>
       <select
         name="major"
         required
-        className="block py-2.5 px-0 w-full text-black bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
+        className="block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
       >
         <option value="" disabled selected>
           Select your major
@@ -223,24 +224,24 @@ async function RegisterForm() {
           </option>
         ))}
       </select>
-      <label className="text-md" htmlFor="phone_number">
+      <label className="text-md text-white" htmlFor="phone_number">
         Phone number
       </label>
       <input
         name="phone_number"
-        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="2485243477"
         required
       />
-      <label className="text-md" htmlFor="diet">
+      <label className="text-md text-white" htmlFor="diet">
         Dietary restrictions
       </label>
       <input
         name="diet"
-        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="Vegan, Kosher, Halal, etc."
       />
-      <label className="text-md" htmlFor="student_id">
+      <label className="text-md text-white" htmlFor="student_id">
         Student ID{" "}
         <span className="text-xs italic text-gray-400">
           (If you don&apos;t have one, please enter your school email)
@@ -248,14 +249,11 @@ async function RegisterForm() {
       </label>
       <input
         name="student_id"
-        className="rounded-md px-4 py-2 bg-inherit border mb-6"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="hh3509"
         required
       />
-      <button
-        type="submit"
-        className="bg-yellow-400 rounded px-4 py-2 hover:px-8 transition-all text-white mb-2"
-      >
+      <button type="submit" className="wh-btn">
         Submit
       </button>
     </form>

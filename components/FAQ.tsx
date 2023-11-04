@@ -37,7 +37,7 @@ function FAQ() {
       "We will also not be providing any overnight sleeping accommodations as the building will close at around 11 PM and reopen in the morning.",
 
     "Will we have a place to work?":
-      "Yes, we have an entire building to ourselves! However, due to building and security restrictions beyond our control, " +
+      "Yes, we'll have an entire building to ourselves! However, due to building and security restrictions beyond our control, " +
       "the building will close at around 11 PM and reopen in the morning.",
 
     "What if I have more questions?": `Please reach out to us at [${constants.showcaseEmail}](mailto:${constants.supportEmail}).`,
@@ -49,9 +49,9 @@ function FAQ() {
         {Object.entries(list).map(([question, answer]) => (
           <details
             key={question + answer}
-            className="w-full dark:bg-black bg-white border border-neutral-800 cursor-pointer hover:border-yellow-600 mb-3 shadow-xl"
+            className="w-full dark:bg-black bg-white text-black dark:text-white border border-neutral-800 cursor-pointer hover:border-yellow-600 mb-3 shadow-xl"
           >
-            <summary className="w-full dark:bg-black bg-white text-dark flex justify-between px-4 py-3 after:content-['+']">
+            <summary className="w-full dark:bg-black bg-white flex justify-between px-4 py-3 after:content-['+']">
               {question}
             </summary>
             <div

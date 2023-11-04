@@ -6,7 +6,7 @@ const markdown = new Marked({
 })
 
 markdown.Renderer.prototype.link = function (href, title, text) {
-    return `<a class="wLink" target="_blank" href="${href}" title="${title}">${text}</a>`;
+    return `<a class="wh-link" target="_blank" href="${href}" title="${title}">${text}</a>`;
 }
 
 export default markdown; 

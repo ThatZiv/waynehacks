@@ -55,7 +55,7 @@ export default async function Registered() {
         </div>
         <Link
           href="/application"
-          className="bg-foreground py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-16"
+          className="bg-foreground py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black hover:bg-[#fc0] hover:px-16"
         >
           Apply
         </Link>

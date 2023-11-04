@@ -17,7 +17,7 @@ export default async function Index() {
   // } = await supabase.auth.getUser();
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-white">
         <div className="flex flex-col items-center mb-2 lg:mb-12">
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
