@@ -4,6 +4,7 @@ import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
+import constants from "@/misc/constants";
 
 export const revalidate = 15 * 60; // revalidate every 15 min
 export const dynamic = "force-static"; // force static (this wont work)
@@ -86,7 +87,7 @@ export default async function Index() {
               &nbsp;{" "}
               <strong>
                 <a
-                  href="https://maps.app.goo.gl/REau4tD9HgfXnDQH7"
+                  href={constants.addressURL}
                   target={"_blank"}
                   className="hover:text-yellow-500"
                 >

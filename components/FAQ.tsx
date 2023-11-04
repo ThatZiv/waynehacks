@@ -36,7 +36,9 @@ function FAQ() {
       "While the event itself is completely free, unfortunately you will have to pay for your own parking and food during the span of the event.<br/>\n" +
       "We will also not be providing any overnight sleeping accommodations as the building will close at around 11 PM and reopen in the morning.",
 
-    "Will there be workspaces?": "Yes! ",
+    "Will we have a place to work?":
+      "Yes, we have an entire building to ourselves! However, due to building and security restrictions beyond our control, " +
+      "the building will close at around 11 PM and reopen in the morning.",
 
     "What if I have more questions?": `Please reach out to us at [${constants.showcaseEmail}](mailto:${constants.supportEmail}).`,
   };
