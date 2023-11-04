@@ -1,4 +1,4 @@
-export default {
+const constants = {
     /** 
      * Email for labelling internally 
      */
@@ -8,3 +8,5 @@ export default {
      */
     showcaseEmail: "waynestatescd@gmail.com"
 }
+
+export default constants;

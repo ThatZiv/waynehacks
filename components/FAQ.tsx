@@ -36,6 +36,8 @@ function FAQ() {
       "While the event itself is completely free, unfortunately you will have to pay for your own parking and food during the span of the event.<br/>\n" +
       "We will also not be providing any overnight sleeping accommodations as the building will close at around 11 PM and reopen in the morning.",
 
+    "Will there be workspaces?": "Yes! ",
+
     "What if I have more questions?": `Please reach out to us at [${constants.showcaseEmail}](mailto:${constants.supportEmail}).`,
   };
 
@@ -43,7 +45,10 @@ function FAQ() {
     <div className="flex items-center justify-center w-[100%]">
       <div className="w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-xl text-left">
         {Object.entries(list).map(([question, answer]) => (
-          <details className="w-full dark:bg-black bg-white border border-neutral-800 cursor-pointer hover:border-yellow-600 mb-3 shadow-xl">
+          <details
+            key={question + answer}
+            className="w-full dark:bg-black bg-white border border-neutral-800 cursor-pointer hover:border-yellow-600 mb-3 shadow-xl"
+          >
             <summary className="w-full dark:bg-black bg-white text-dark flex justify-between px-4 py-3 after:content-['+']">
               {question}
             </summary>

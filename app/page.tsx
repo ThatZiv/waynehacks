@@ -21,7 +21,7 @@ export default async function Index() {
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
-            Wayne State's first ever{" "}
+            Wayne State&apos;s first ever{" "}
             <strong className="underline">in-person</strong> Hackathon.
           </p>
           <h2 className="inline-flex col-span-12 md:col-span-12">

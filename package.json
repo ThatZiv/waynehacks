@@ -4,7 +4,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "supabase": "supabase"
+    "supabase": "supabase",
+    "lint": "next lint"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.8.1",
@@ -24,6 +25,8 @@
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "encoding": "^0.1.13",
+    "eslint": "8.53.0",
+    "eslint-config-next": "14.0.1",
     "supabase": "^1.93.0"
   }
 }

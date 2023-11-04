@@ -1,0 +1,25 @@
+name: lint
+
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install dependencies"
+        run: npm install --force
+      - name: "Lint"
+        run: npm run lint

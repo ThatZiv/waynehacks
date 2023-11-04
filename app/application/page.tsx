@@ -243,7 +243,7 @@ async function RegisterForm() {
       <label className="text-md" htmlFor="student_id">
         Student ID{" "}
         <span className="text-xs italic text-gray-400">
-          (If you don't have one, please enter your school email)
+          (If you don&apos;t have one, please enter your school email)
         </span>
       </label>
       <input
