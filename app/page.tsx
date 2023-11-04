@@ -28,7 +28,6 @@ export default async function Index() {
             <Registered />
           </h2>
         </div>
-
         <Splitter />
 
         <div className="flex flex-col gap-8">
@@ -114,7 +113,7 @@ export default async function Index() {
                   d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
                 />
               </svg>
-              &nbsp; <strong>Prizes TBD...</strong>
+              &nbsp; <strong>Prizes</strong>
             </h2>
           </div>
           <Splitter />

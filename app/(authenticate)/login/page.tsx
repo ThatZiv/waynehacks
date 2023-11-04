@@ -27,7 +27,7 @@ function Submit({
   const searchParams = useSearchParams();
   return (
     <button
-      className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+      className="wh-btn"
       disabled={pending}
       aria-disabled={pending}
       formAction={route}
@@ -160,7 +160,7 @@ export default function Login() {
       </FormContext.Provider>
       <p
         onClick={() => setForgetPassword((s) => !s)}
-        className="text-center text-yellow-400 hover:underline cursor-pointer"
+        className="wh-link text-center"
       >
         Forgot password?
       </p>
@@ -169,7 +169,7 @@ export default function Login() {
           Didn't receive an email from us? Check your junk/spam folder or{" "}
           <a
             href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
-            className="text-yellow-400 hover:underline"
+            className="wh-link"
           >
             contact us
           </a>

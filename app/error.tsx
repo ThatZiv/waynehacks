@@ -1,5 +1,6 @@
 "use client"; // Error components must be Client Components
 
+import constants from "@/misc/constants";
 import { useEffect } from "react";
 
 export default function Error({
@@ -30,10 +31,7 @@ export default function Error({
         <span>
           {" "}
           or
-          <a
-            href="mailto:waynestatescd@gmail.com."
-            className="text-yellow-400 hover:underline"
-          >
+          <a href={`mailto:${constants.supportEmail}`} className="wh-link">
             contact us
           </a>
         </span>

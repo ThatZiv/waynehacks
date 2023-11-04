@@ -52,6 +52,28 @@ body {
   }
 }
 
+
+@layer components {
+  .wh-link {
+    @apply text-yellow-400;
+    @apply hover:underline;
+    @apply hover:cursor-pointer
+  }
+
+  .wh-btn {
+    @apply bg-yellow-400;
+    @apply rounded;
+    @apply px-4;
+    @apply py-2;
+    @apply text-black;
+    @apply font-bold;
+    @apply mb-2;
+    @apply hover:bg-yellow-300;
+    @apply disabled:cursor-wait;
+    @apply transition-all;
+  }
+}
+
 .animate-in {
   animation: animateIn 0.3s ease 0.15s both;
 }

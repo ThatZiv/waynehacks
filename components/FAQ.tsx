@@ -1,8 +1,13 @@
+import constants from "@/misc/constants";
+import markdown from "@/misc/markdown";
 import React from "react";
 
+/**
+ * this is markdown supported
+ */
+type Answer = string;
 interface FAQList {
-  // make a attribute that is structured like {"question": "answer"}
-  [question: string]: string;
+  [question: string]: Answer;
 }
 
 function FAQ() {
@@ -25,7 +30,13 @@ function FAQ() {
     // Then you can register for the event by hitting 'register' at the home page.`,
 
     "I signed up...now what?":
-      "We will send you an email with more information as the event gets closer.",
+      "We will send you an email with more information as the event gets closer. You can also periodically check this website for updates.",
+
+    "How much does it cost?":
+      "While the event itself is completely free, unfortunately you will have to pay for your own parking and food during the span of the event.<br/>\n" +
+      "We will also not be providing any overnight sleeping accommodations as the building will close at around 11 PM and reopen in the morning.",
+
+    "What if I have more questions?": `Please reach out to us at [${constants.showcaseEmail}](mailto:${constants.supportEmail}).`,
   };
 
   return (
@@ -36,7 +47,10 @@ function FAQ() {
             <summary className="w-full dark:bg-black bg-white text-dark flex justify-between px-4 py-3 after:content-['+']">
               {question}
             </summary>
-            <p className="px-4 py-3 font-light">{answer}</p>
+            <div
+              className="px-4 py-3 font-light"
+              dangerouslySetInnerHTML={{ __html: markdown.parse(answer) }}
+            ></div>
           </details>
         ))}
       </div>

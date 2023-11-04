@@ -78,7 +78,7 @@ export default async function Application() {
                 If you believe there is anything wrong or have questions
                 regarding your application, feel free to{" "}
                 <a
-                  className="text-yellow-400 hover:underline"
+                  className="wh-link"
                   target="_blank"
                   href="mailto:waynestatescd@gmail.com"
                 >
