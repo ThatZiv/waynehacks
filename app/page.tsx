@@ -4,6 +4,7 @@ import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
+import constants from "@/misc/constants";
 
 export const revalidate = 15 * 60; // revalidate every 15 min
 export const dynamic = "force-static"; // force static (this wont work)
@@ -16,19 +17,18 @@ export default async function Index() {
   // } = await supabase.auth.getUser();
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-foreground">
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-white">
         <div className="flex flex-col items-center mb-2 lg:mb-12">
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
-            Wayne State's first ever{" "}
+            Wayne State&apos;s first ever{" "}
             <strong className="underline">in-person</strong> Hackathon.
           </p>
           <h2 className="inline-flex col-span-12 md:col-span-12">
             <Registered />
           </h2>
         </div>
-
         <Splitter />
 
         <div className="flex flex-col gap-8">
@@ -87,7 +87,7 @@ export default async function Index() {
               &nbsp;{" "}
               <strong>
                 <a
-                  href="https://maps.app.goo.gl/REau4tD9HgfXnDQH7"
+                  href={constants.addressURL}
                   target={"_blank"}
                   className="hover:text-yellow-500"
                 >
@@ -114,7 +114,7 @@ export default async function Index() {
                   d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"
                 />
               </svg>
-              &nbsp; <strong>Prizes TBD...</strong>
+              &nbsp; <strong>Prizes</strong>
             </h2>
           </div>
           <Splitter />

@@ -72,7 +72,7 @@ export default function Forgot() {
         <div className="flex flex-col w-full items-center">
           {token ? (
             <button
-              className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+              className="wh-btn"
               onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 setPending(true);
                 e.currentTarget.form?.submit(); // continue default

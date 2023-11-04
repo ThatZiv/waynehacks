@@ -6,7 +6,7 @@ import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import Spinner from "@/components/Spinner";
 
 const FormContext = React.createContext({
@@ -27,7 +27,7 @@ function Submit({
   const searchParams = useSearchParams();
   return (
     <button
-      className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+      className="wh-btn"
       disabled={pending}
       aria-disabled={pending}
       formAction={route}
@@ -70,7 +70,7 @@ export default function Login() {
       <Back />
       <FormContext.Provider value={{ pending, setPending, action, setAction }}>
         <form
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-white"
           action={action}
           method="post"
         >
@@ -82,7 +82,7 @@ export default function Login() {
             Email
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
             name="email"
             type="email"
             placeholder="you@example.com"
@@ -94,7 +94,7 @@ export default function Login() {
                 Password
               </label>
               <input
-                className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
                 type="password"
                 name="password"
                 placeholder="••••••••"
@@ -106,7 +106,7 @@ export default function Login() {
                     Confirm Password
                   </label>
                   <input
-                    className="rounded-md px-4 py-2 bg-inherit border mb-6"
+                    className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
                     type="password"
                     name="confirm-password"
                     placeholder="••••••••"
@@ -119,7 +119,7 @@ export default function Login() {
 
           <div className="flex flex-col w-full items-center">
             {!showForgetPassword && (
-              <div className="flex items-center mb-7 p-4 border w-full rounded">
+              <div className="flex items-center mb-7 p-4 border border-gray-700 w-full rounded">
                 <input
                   id="checked-checkbox"
                   type="checkbox"
@@ -129,7 +129,7 @@ export default function Login() {
                 />
                 <label
                   htmlFor="checked-checkbox"
-                  className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  className="ml-2 text-sm font-medium text-white dark:text-gray-300"
                 >
                   Sign Up?
                 </label>
@@ -160,16 +160,16 @@ export default function Login() {
       </FormContext.Provider>
       <p
         onClick={() => setForgetPassword((s) => !s)}
-        className="text-center text-yellow-400 hover:underline cursor-pointer"
+        className="wh-link text-center"
       >
         Forgot password?
       </p>
       {token && (
-        <div className="text-center text-xs text-foreground mt-2 w-full">
-          Didn't receive an email from us? Check your junk/spam folder or{" "}
+        <div className="text-center text-xs text-white mt-2 w-full">
+          Didn&apos;t receive an email from us? Check your junk/spam folder or{" "}
           <a
             href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
-            className="text-yellow-400 hover:underline"
+            className="wh-link"
           >
             contact us
           </a>

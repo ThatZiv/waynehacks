@@ -2,6 +2,29 @@
 import { useSearchParams } from "next/navigation";
 import React from "react";
 export default function Messages() {
+  if (typeof window === "object") {
+    console.log(`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`
+\`\`\`\`\`\`\`\`\`\` Welcome \`\`\`\`\`\`\`\`\`\`\`
+\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`
+\`\`                          \`\`
+\`\`                          \`\`
+\`\`         \`\`\`\`\`\`\`\`\`\`       \`\`
+\`\`        \`      \`\`\`        \`\`
+\`\`             \`\`\`          \`\`
+\`\`            \`\`\`           \`\`
+\`\`                          \`\`
+\`\`         \`\`\`              \`\`
+\`\`        \`\`\`      \`        \`\`
+\`\`       \`\`\`\`\`\`\`\`\`\`         \`\`
+\`\`                          \`\`
+\`\`                          \`\`
+\`\`                          \`\`
+\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`
+\`\`https://github.com/thatziv \`
+\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`\`
+`);
+  }
+
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
   const errorDesc = searchParams.get("error_description"); // bc supabase sends urls in hash because of "security"

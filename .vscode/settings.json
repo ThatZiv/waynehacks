@@ -1,0 +1,17 @@
+{
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "package.json",
+        "node_modules/**",
+        "vscode-extension",
+        ".git/objects",
+        ".vscode",
+        ".vscode-insiders"
+    ],
+    "cSpell.words": [
+        "hackathon",
+        "Hackathon+",
+        "Hackathons",
+        "supabase"
+    ]
+}

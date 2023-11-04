@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
@@ -26,7 +27,9 @@ export const metadata = {
       },
     ],
   },
-  themeColor: "#000000",
+  visualViewport: {
+    themeColor: "#000000",
+  },
 };
 
 const openSans = Open_Sans({
@@ -57,11 +60,12 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.png" sizes="any" />
       </head>
       <body>
-        <main className="min-h-screen bg-white dark:bg-opacity-0 flex flex-col items-center">
+        <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
           <Nav />
           <Messages />
           {children}
           <Footer />
+          <Analytics />
         </main>
       </body>
     </html>

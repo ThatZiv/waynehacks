@@ -3,7 +3,7 @@ import WSULogo from "./WSULogo";
 
 function Footer() {
   return (
-    <footer className="mt-auto bottom-0 left-0 z-20 w-full p-4 bg-white border-gray-800 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-black dark:border-gray-800">
+    <footer className="mt-auto bottom-0 left-0 z-20 w-full p-4 shadow md:flex md:items-center md:justify-between md:p-6 bg-black border-gray-800">
       <span className="text-sm text-gray-200 sm:text-center dark:text-gray-400">
         <p>
           &copy; {new Date().getFullYear()}{" "}

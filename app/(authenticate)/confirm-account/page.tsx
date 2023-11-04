@@ -4,14 +4,14 @@ import Spinner from "@/components/Spinner";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import useCaptcha from "@/components/useCaptcha";
 import { useSearchParams } from "next/navigation";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import React from "react";
 
 function ConfirmButton() {
   const { pending } = useFormStatus();
   return (
     <button
-      className="bg-yellow-400 rounded px-4 py-2 text-black disabled:cursor-wait font-bold mb-2"
+      className="wh-btn"
       disabled={pending}
       aria-disabled={pending}
       type="submit"

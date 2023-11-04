@@ -26,7 +26,7 @@ function Nav() {
     };
 
     getUser();
-  }, []);
+  });
   return (
     <nav
       style={{ backdropFilter: "blur(10px)" }}

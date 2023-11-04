@@ -1,4 +1,59 @@
-# Supabase Starter
+# WayneHacks CMS
+
+<img width=200 height=200 src="https://www.waynehacks.com/favicon.png"/>
+
+This is the waynehacks.com website repo. 
+
+## Features
+
+The site features:
+
+* Login/sign account up
+* Support up to 10,000 MAU
+* User administration settings
+* Application submissions dashboard
+* Dynamic configuration of site settings on Supabase (check the `kv` table)
+* Discord webhook integration
+  * User sign up
+  * Application submission
+  * Application status updates
+* Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
+* __**Costs 0 freakin dollars to run**__
+
+## Technicalities
+
+The website is built w/ [Next.js](https://nextjs.org) v14. For styling, we're using tailwindcss and for the backend, we're using [Supabase](https://supabase.com) BaaS (firebase alternative). The next configuration we're running is serverless since Vercel - the place where this app is deployed - automatically handles it for us. With that, we almost fully have a SSR application with custom-protected middleware routing. The user will never directly interact with our supabase instance - it all goes through our server first.
+
+## Setup
+
+> [!NOTE]
+> To start developing, you will need to install [Node.js](https://nodejs.org)
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/thatziv/waynehacks
+cd waynehacks
+```
+
+2. Install dependencies
+
+```sh
+npm i
+```
+
+3. Create a `.env.local` file in the project's root. Reach out to @ThatZiv for the contents of this file.
+
+4. Run in dev mode
+
+```sh
+npm run dev
+```
+___
+
+🔽 Boilerplate stuff below 🔽
+
+## Supabase Starter
 
 This starter configures Supabase Auth to use cookies, making the user's session available throughout the entire Next.js app - Client Components, Server Components, Route Handlers, Server Actions and Middleware.
 
@@ -6,9 +61,9 @@ This starter configures Supabase Auth to use cookies, making the user's session 
 
 The Vercel deployment will guide you through creating a Supabase account and project. After installation of the Supabase integration, all relevant environment variables will be set up so that the project is usable immediately after deployment 🚀
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&integration-ids=oac_jUduyjQgOyzev1fjrW83NYOv)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/thatziv/waynehacks&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&integration-ids=oac_jUduyjQgOyzev1fjrW83NYOv)
 
-## How to use
+## Create from boilderplate
 
 1. Create a [new Supabase project](https://database.new)
 1. Run `npx create-next-app -e with-supabase` to create a Next.js app using the Supabase Starter template
