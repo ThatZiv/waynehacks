@@ -4,7 +4,7 @@ import Spinner from "@/components/Spinner";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import useCaptcha from "@/components/useCaptcha";
 import { useSearchParams } from "next/navigation";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import React from "react";
 
 function ConfirmButton() {

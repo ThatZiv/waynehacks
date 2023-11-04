@@ -6,7 +6,7 @@ import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import Spinner from "@/components/Spinner";
 
 const FormContext = React.createContext({
