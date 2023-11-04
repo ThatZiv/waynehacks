@@ -1,4 +1,5 @@
 import Nav from "@/components/Nav";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
@@ -62,6 +63,7 @@ export default async function RootLayout({
           <Messages />
           {children}
           <Footer />
+          <Analytics />
         </main>
       </body>
     </html>
