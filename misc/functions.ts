@@ -36,7 +36,7 @@ export class DiscordWebhook {
         }) : new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(payload);
-            }, 1000);
+            }, 10);
         }); // don't send in dev
     }
     truncate(str: string, n = 1300) {
@@ -77,9 +77,9 @@ export class SupabaseFunctions {
                 ).select("value").eq("key", key).limit(1).single();
                 console.log("fetching config value " + key + " " + new Date().toLocaleTimeString());
                 if (error) throw error
-                if (process.env.NODE_ENV == "development") {
-                    if (key == "canRegister") return true;
-                }
+                // if (process.env.NODE_ENV == "development") {
+                //     if (key == "canRegister") return true;
+                // }
                 return value.value?.data;
             } catch (e) {
                 console.error(e);

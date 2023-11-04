@@ -27,7 +27,9 @@ export const metadata = {
       },
     ],
   },
-  themeColor: "#000000",
+  visualViewport: {
+    themeColor: "#000000",
+  },
 };
 
 const openSans = Open_Sans({
