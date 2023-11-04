@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: 18
           cache: "npm"
+          cache-dependency-path: |
+            node_modules
+            */*/node_modules
       - name: "Checkout"
         uses: actions/checkout@v2
       - name: "Install dependencies"
