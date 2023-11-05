@@ -26,7 +26,8 @@ function Nav() {
     };
 
     getUser();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <nav
       style={{ backdropFilter: "blur(10px)" }}
