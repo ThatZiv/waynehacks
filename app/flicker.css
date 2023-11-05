@@ -12,7 +12,7 @@
 .flicker:before {
     content: attr(data-heading);
     position: absolute;
-    overflow: hidden;
+    overflow: visible;
     color: #fc0;
     width: 100%;
     z-index: 5;
