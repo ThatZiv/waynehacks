@@ -42,7 +42,7 @@ function Submit({
           )}`
         );
 
-        e.currentTarget.form?.setAttribute("action", action); // not sure if this is needed
+        e.currentTarget.form?.setAttribute("action", action);
         e.currentTarget.form?.submit();
       }}
       formMethod="post"
