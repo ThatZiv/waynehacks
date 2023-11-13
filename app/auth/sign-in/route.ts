@@ -11,7 +11,6 @@ export async function POST(request: Request) {
   const password = String(formData.get("password"));
   const captcha = String(formData.get("captcha"));
   const next = requestUrl.searchParams.get("next");
-  console.log(next);
   const supabase = createRouteHandlerClient({ cookies });
 
   if (!email || !password || !captcha) {
