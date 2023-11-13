@@ -13,6 +13,15 @@ export async function POST(request: Request) {
   const next = requestUrl.searchParams.get("next");
   const supabase = createRouteHandlerClient({ cookies });
 
+  if (!email || !password || !captcha) {
+    return NextResponse.redirect(
+      `${requestUrl.origin}/login?error=Email and password are required`,
+      {
+        status: 301,
+      }
+    );
+  }
+
   const { error } = await supabase.auth.signInWithPassword({
     email,
     password,
