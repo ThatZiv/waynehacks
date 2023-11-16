@@ -21,8 +21,8 @@ export const metadata = {
     images: [
       {
         url: "/favicon.png",
-        width: 1080,
-        height: 1080,
+        width: 1000,
+        height: 1000,
         alt: "WayneHacks Logo",
       },
     ],
@@ -57,7 +57,24 @@ export default async function RootLayout({
       className={`${openSans.variable} ${robotoMono.variable} font-sans`}
     >
       <head>
-        <link rel="icon" href="/favicon.png" sizes="any" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body>
         <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
