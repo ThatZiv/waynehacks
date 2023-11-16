@@ -35,6 +35,16 @@ function Submit({
       formAction={route}
       onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (
+          action.startsWith("/auth/sign-in") ||
+          action.startsWith("/auth/sign-up")
+        ) {
+          const form = e.currentTarget.form;
+          if (!form?.email.value || !form?.password.value) {
+            alert("Please provide an email and password.");
+            return;
+          }
+        }
         setPending(true);
         setAction(
           `${route}?next=${encodeURIComponent(
