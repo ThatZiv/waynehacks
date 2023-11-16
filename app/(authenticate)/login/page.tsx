@@ -14,6 +14,7 @@ const FormContext = React.createContext({
   setPending: (pending: boolean): void => {},
   action: "",
   setAction: (action: string): void => {},
+  params: new URLSearchParams(),
 });
 
 function Submit({
@@ -23,8 +24,9 @@ function Submit({
   children: React.ReactNode;
   route: string;
 }) {
-  const { pending, setPending, setAction } = React.useContext(FormContext);
-  const searchParams = useSearchParams();
+  const { pending, setPending, setAction, action, params } =
+    React.useContext(FormContext);
+
   return (
     <button
       className="wh-btn"
@@ -33,14 +35,24 @@ function Submit({
       formAction={route}
       onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        if (
+          action.startsWith("/auth/sign-in") ||
+          action.startsWith("/auth/sign-up")
+        ) {
+          const form = e.currentTarget.form;
+          if (!form?.email.value || !form?.password.value) {
+            alert("Please provide an email and password.");
+            return;
+          }
+        }
         setPending(true);
         setAction(
           `${route}?next=${encodeURIComponent(
-            String(searchParams.get("next") || "")
+            String(params.get("next") || "")
           )}`
         );
 
-        e.currentTarget.form?.setAttribute("action", route); // not sure if this is needed
+        e.currentTarget.form?.setAttribute("action", action);
         e.currentTarget.form?.submit();
       }}
       formMethod="post"
@@ -51,24 +63,24 @@ function Submit({
 }
 
 export default function Login() {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
   const [pending, setPending] = React.useState<boolean>(false);
   const [action, setAction] = React.useState<string>(
-    `/auth/sign-in?next=${encodeURIComponent(
-      String(searchParams.get("next") || "")
-    )}`
+    `/auth/sign-in?next=${encodeURIComponent(String(params.get("next") || ""))}`
   );
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
   const [isSignup, setSignup] = React.useState<boolean>(
-    searchParams.get("signup") === "true"
+    params.get("signup") === "true"
   );
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
 
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Back />
-      <FormContext.Provider value={{ pending, setPending, action, setAction }}>
+      <FormContext.Provider
+        value={{ pending, setPending, action, setAction, params }}
+      >
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-white"
           action={action}
@@ -85,7 +97,7 @@ export default function Login() {
             className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
             name="email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="you@example.edu"
             required
           />
           {!showForgetPassword && (

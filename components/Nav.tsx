@@ -7,9 +7,10 @@ import wsuLogo from "../public/wsu.png";
 import LogoutButton from "./LogoutButton";
 import React from "react";
 import Spinner from "./Spinner";
+import { usePathname } from "next/navigation";
 
 function Nav() {
-  // const supabase = createClientComponentClient();
+  const pathname = usePathname();
   const [user, setUser] = React.useState<any>();
   const [status, setStatus] = React.useState<"loading" | "done" | "error">(
     "loading"
@@ -56,12 +57,14 @@ function Nav() {
               <LogoutButton />
             </div>
           ) : (
-            <Link
-              href="/login"
-              className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
-            >
-              Login
-            </Link>
+            pathname !== "/login" && (
+              <Link
+                href="/login"
+                className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
+              >
+                Login
+              </Link>
+            )
           )}
         </div>
       </div>
