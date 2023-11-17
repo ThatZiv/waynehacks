@@ -84,10 +84,10 @@ export default async function RootLayout({
         <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
           <React.Suspense fallback={<GenericFallback />}>
             <Nav />
+            <Messages />
+            {children}
             <Analytics />
           </React.Suspense>
-          <Messages />
-          {children}
           <Footer />
         </main>
       </body>
