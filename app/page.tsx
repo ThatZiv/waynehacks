@@ -5,6 +5,7 @@ import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
+import Image from "next/image";
 
 export const revalidate = 15 * 60; // revalidate every 15 min
 export const dynamic = "force-static"; // force static (this wont work)
@@ -32,9 +33,14 @@ export default async function Index() {
         <Splitter />
 
         <div className="flex flex-col gap-8">
-          <h2 className="text-3xl font-semibold text-center">
-            What is WayneHacks?
-          </h2>
+          <h2 className="wh-subheading">What is WayneHacks?</h2>
+          <Image
+            width={250}
+            height={250}
+            className="mx-auto my-[-80px] text-center transition-all duration-500 ease-in-out transform hover:scale-110"
+            alt="Wayne Hacks 2 Logo"
+            src="/whacks2-trans.png"
+          />
           <p className="text-md text-center">
             WayneHacks is a 24-hour in-person Hackathon at Wayne State
             University. All majors and skill levels are welcome with teams up to
@@ -119,7 +125,7 @@ export default async function Index() {
           </div>
           <Splitter />
           <div className="text-lg font-bold text-center w-full flex flex-col">
-            <h2 className="text-2xl font-semibold">FAQ</h2>
+            <h2 className="wh-subheading">FAQ</h2>
             <div className="inline-flex col-span-12 md:col-span-12">
               <FAQ />
             </div>

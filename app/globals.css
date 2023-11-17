@@ -76,6 +76,7 @@ body {
     @apply text-2xl;
     @apply lg:text-4xl;
     @apply md:text-3xl;
+    @apply font-thin;
     @apply text-center;
     @apply font-sans;
   }
