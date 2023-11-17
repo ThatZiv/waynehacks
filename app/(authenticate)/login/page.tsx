@@ -90,6 +90,9 @@ export default function Login() {
         >
           <div className="mb-12">
             <WayneHacksLogo />
+            <h2 className="text-2xl text-center mt-5 font-sans font-thin">
+              {isSignup ? "Create an account" : "Log in to an existing account"}
+            </h2>
           </div>
 
           <label className="text-md" htmlFor="email">
