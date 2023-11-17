@@ -39,8 +39,8 @@ function Submit({
         )}`;
         let newAction = route + newSearchParams;
         if (
-          action.startsWith("/auth/sign-in") ||
-          action.startsWith("/auth/sign-up")
+          route.startsWith("/auth/sign-in") ||
+          route.startsWith("/auth/sign-up")
         ) {
           const form = e.currentTarget.form;
           if (!form?.email.value || !form?.password.value) {
