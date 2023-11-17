@@ -1,11 +1,9 @@
 "use client";
-import Link from "next/link";
-import Messages from "../../../components/messages";
 import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import Spinner from "@/components/Spinner";
 
@@ -26,7 +24,7 @@ function Submit({
 }) {
   const { pending, setPending, setAction, action, params } =
     React.useContext(FormContext);
-
+  const router = useRouter();
   return (
     <button
       className="wh-btn"
@@ -35,24 +33,28 @@ function Submit({
       formAction={route}
       onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        let newSearchParams = `?next=${encodeURIComponent(
+          String(params.get("next") || "")
+        )}`;
+        let newAction = route + newSearchParams;
         if (
           action.startsWith("/auth/sign-in") ||
           action.startsWith("/auth/sign-up")
         ) {
           const form = e.currentTarget.form;
           if (!form?.email.value || !form?.password.value) {
-            alert("Please provide an email and password.");
+            // redirect to login with same query params but add next and message=missing params
+            router.push(
+              window.location.pathname +
+                newSearchParams +
+                "&error=Please enter an email and password."
+            );
             return;
           }
         }
         setPending(true);
-        setAction(
-          `${route}?next=${encodeURIComponent(
-            String(params.get("next") || "")
-          )}`
-        );
-
-        e.currentTarget.form?.setAttribute("action", action);
+        setAction(newAction);
+        e.currentTarget.form?.setAttribute("action", newAction);
         e.currentTarget.form?.submit();
       }}
       formMethod="post"
@@ -88,6 +90,9 @@ export default function Login() {
         >
           <div className="mb-12">
             <WayneHacksLogo />
+            <h2 className="wh-subheading mt-5">
+              {isSignup ? "Create an account" : "Log in"}
+            </h2>
           </div>
 
           <label className="text-md" htmlFor="email">
