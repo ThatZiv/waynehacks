@@ -46,6 +46,10 @@ const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
 });
 
+function NavFallback() {
+  return <>loading...</>;
+}
+
 export default async function RootLayout({
   children,
 }: {
@@ -78,7 +82,9 @@ export default async function RootLayout({
       </head>
       <body>
         <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
-          <Nav />
+          <React.Suspense fallback={<NavFallback />}>
+            <Nav />
+          </React.Suspense>
           <Messages />
           {children}
           <Footer />
