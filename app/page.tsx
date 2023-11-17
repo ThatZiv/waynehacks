@@ -7,8 +7,8 @@ import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
 
-export const revalidate = 15 * 60; // revalidate every 15 min
-export const dynamic = "force-static"; // force static (this wont work)
+export const revalidate = 30 * 60; // revalidate every 30 min
+export const dynamic = "force-static"; // force static caching
 
 export default async function Index() {
   // const supabase = createServerComponentClient({ cookies });
