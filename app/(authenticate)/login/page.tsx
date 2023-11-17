@@ -90,8 +90,8 @@ export default function Login() {
         >
           <div className="mb-12">
             <WayneHacksLogo />
-            <h2 className="text-2xl text-center mt-5 font-sans font-thin">
-              {isSignup ? "Create an account" : "Log in to an existing account"}
+            <h2 className="wh-subheading mt-5">
+              {isSignup ? "Create an account" : "Log in"}
             </h2>
           </div>
 

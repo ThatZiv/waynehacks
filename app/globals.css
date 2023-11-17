@@ -71,6 +71,14 @@ body {
     @apply disabled:cursor-wait;
     @apply transition-all;
   }
+
+  .wh-subheading {
+    @apply text-2xl;
+    @apply lg:text-4xl;
+    @apply md:text-3xl;
+    @apply text-center;
+    @apply font-sans;
+  }
 }
 
 .animate-in {
