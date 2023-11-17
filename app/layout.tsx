@@ -5,6 +5,7 @@ import { Open_Sans, Roboto_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
 import Messages from "../components/messages";
 import React from "react";
+import Spinner from "@/components/Spinner";
 
 export const metadata = {
   title: "WayneHacks",
@@ -47,7 +48,11 @@ const robotoMono = Roboto_Mono({
 });
 
 function GenericFallback() {
-  return <>loading...</>;
+  return (
+    <>
+      <Spinner />
+    </>
+  );
 }
 
 export default async function RootLayout({
