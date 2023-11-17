@@ -6,6 +6,7 @@ import React from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import Spinner from "@/components/Spinner";
+import constants from "@/misc/constants";
 
 const FormContext = React.createContext({
   pending: false,
@@ -185,7 +186,7 @@ export default function Login() {
         <div className="text-center text-xs text-white mt-2 w-full">
           Didn&apos;t receive an email from us? Check your junk/spam folder or{" "}
           <a
-            href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
+            href={`mailto:${constants.supportEmail}?subject=WayneHacks Email Failure&body=I did not receive an email from you.`}
             className="wh-link"
           >
             contact us
