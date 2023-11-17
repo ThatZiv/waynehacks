@@ -2,6 +2,7 @@ import { Application, status } from "@/misc/application";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import Splitter from "./Splitter";
+import constants from "@/misc/constants";
 
 export function createEmailURI(obj: {
   email: string;
@@ -14,7 +15,7 @@ export function createEmailURI(obj: {
     `Hey ${obj.full_name}, your application has been ${status}.\n\n${obj.note}\n\nBest,\nWayneHacks Team`
   );
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
-  return `mailto:${obj.email}?subject=${subject}&cc=waynestatescd@gmail.com&body=${body}`;
+  return `mailto:${obj.email}?subject=${subject}&cc=${constants.supportEmail}&body=${body}`;
 }
 
 export default async function AdminCard({

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import WSULogo from "./WSULogo";
+import constants from "@/misc/constants";
 
 function Footer() {
   return (
@@ -37,7 +38,7 @@ function Footer() {
         </li>
         <li>
           <Link
-            href="mailto:waynestatescd@gmail.com?subject=WayneHacks Sponsorship"
+            href={`mailto:${constants.supportEmail}?subject=WayneHacks Sponsorship`}
             className="mr-4 hover:underline md:mr-6"
           >
             Sponsor Us
@@ -45,7 +46,7 @@ function Footer() {
         </li>
         <li>
           <Link
-            href="mailto:waynestatescd@gmail.com"
+            href={`mailto:${constants.supportEmail}?subject=WayneHacks Support`}
             className="hover:underline"
           >
             Contact
