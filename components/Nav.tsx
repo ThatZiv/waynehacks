@@ -37,7 +37,7 @@ function Nav() {
         <div className="flex items-center gap-4">
           <Link href="https://scd.cs.wayne.edu/" target="_blank">
             <span className="flex items-center gap-2 hover:bg-[#fc0] hover:rounded-md transition-all">
-              <Image width={40} alt="WSU Logo" src={scdLogo} />
+              <Image width={40} alt="SCD Logo" src={scdLogo} />
             </span>
           </Link>
           <Link href="https://wayne.edu/" target="_blank">
@@ -46,7 +46,6 @@ function Nav() {
             </span>
           </Link>
         </div>
-        <div />
         <div>
           {status === "loading" ? (
             <Spinner />
