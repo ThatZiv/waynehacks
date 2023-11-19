@@ -28,9 +28,10 @@ export default function Error({
         >
           Try again
         </button>
-        <span>
+        <br />
+        <span className="text-xs">
           {" "}
-          or
+          or{" "}
           <a href={`mailto:${constants.supportEmail}`} className="wh-link">
             contact us
           </a>

@@ -16,6 +16,7 @@ import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
 import { SupabaseFunctions } from "@/misc/functions";
 import constants from "@/misc/constants";
+import markdown from "@/misc/markdown";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -41,7 +42,7 @@ export default async function Application() {
   });
   if (!user)
     redirect(
-      "/login?message=You must be logged in to register.&next=/application"
+      "/login?message=You must be logged in to apply.&next=/application"
     );
   const whacks = new SupabaseFunctions(supabase);
   const canRegister = await whacks.getConfigValue("canRegister");
@@ -57,7 +58,7 @@ export default async function Application() {
         <Back />
         <WayneHacksLogo />
 
-        <h2 className="lg:text-4xl md:text-3xl text-2xl text-center font-sans">
+        <h2 className="wh-subheading">
           {/* TODO: fixed roboto font now showing up */}
           {application ? "Your application" : "Register for the event"}
         </h2>
@@ -127,7 +128,10 @@ function Card(props: {
 
       <div className="flex flex-col grow gap-4 justify-between">
         <Splitter />
-        <p className="opacity-70">{props.subtitle}</p>
+        <div
+          className="opacity-70"
+          dangerouslySetInnerHTML={{ __html: markdown.parse(props.subtitle) }}
+        />
         <div className="flex justify-between items-center">
           {/* <svg
             xmlns="http://www.w3.org/2000/svg"

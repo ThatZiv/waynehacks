@@ -36,9 +36,7 @@ function ConfirmAccount() {
           <div className="mb-12">
             <WayneHacksLogo />
           </div>
-          <h2 className="lg:text-4xl md:text-3xl text-2xl text-center">
-            Confirm your account
-          </h2>
+          <h2 className="wh-subheading mb-1">Confirm your account</h2>
           <label htmlFor="email">Email</label>
           <input
             className="rounded-md px-4 py-2 bg-inherit border mb-6"

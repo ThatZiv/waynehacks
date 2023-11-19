@@ -17,6 +17,16 @@ export async function POST(request: Request) {
     const email = String(e.get("email"));
     const confirm_password = String(e.get("confirm_password"));
     const loginCode = String(e.get("code"));
+
+    if (!email || !password || !confirm_password || !loginCode) {
+        return NextResponse.redirect(
+            `${requestUrl.origin}/reset-password?error=Email, password, and code are required`,
+            {
+                status: 301,
+            }
+        );
+    }
+
     if (password !== confirm_password) {
         return NextResponse.redirect(
             `${requestUrl.origin}/reset-password?error=Password mismatch`,

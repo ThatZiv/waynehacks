@@ -50,12 +50,12 @@ export default async function Registered() {
             ) : (
               <Spinner />
             )}
-            <p className="text-sm mb-1">registered</p>
+            <p className="text-sm mb-1">applied</p>
           </div>
         </div>
         <Link
           href="/application"
-          className="bg-foreground py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black hover:bg-[#fc0] hover:px-16"
+          className="py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black bg-[#fc0] hover:bg-foreground hover:px-16"
         >
           Apply
         </Link>

@@ -2,9 +2,9 @@
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx,mdx}', './components/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
-    // fontFamily: {
-    //   sans: ['Roboto', 'sans-serif'],
-    // },
+    fontFamily: {
+      sans: ['Open Sans', 'Roboto', 'sans-serif'],
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-opensans)"],

@@ -1,19 +1,19 @@
 "use client";
-import Link from "next/link";
-import Messages from "../../../components/messages";
 import Back from "@/components/Back";
 import useCaptcha from "@/components/useCaptcha";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import React from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useFormStatus } from "react-dom";
 import Spinner from "@/components/Spinner";
+import constants from "@/misc/constants";
 
 const FormContext = React.createContext({
   pending: false,
   setPending: (pending: boolean): void => {},
   action: "",
   setAction: (action: string): void => {},
+  params: new URLSearchParams(),
 });
 
 function Submit({
@@ -23,8 +23,9 @@ function Submit({
   children: React.ReactNode;
   route: string;
 }) {
-  const { pending, setPending, setAction } = React.useContext(FormContext);
-  const searchParams = useSearchParams();
+  const { pending, setPending, setAction, action, params } =
+    React.useContext(FormContext);
+  const router = useRouter();
   return (
     <button
       className="wh-btn"
@@ -33,14 +34,28 @@ function Submit({
       formAction={route}
       onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        let newSearchParams = `?next=${encodeURIComponent(
+          String(params.get("next") || "")
+        )}`;
+        let newAction = route + newSearchParams;
+        if (
+          route.startsWith("/auth/sign-in") ||
+          route.startsWith("/auth/sign-up")
+        ) {
+          const form = e.currentTarget.form;
+          if (!form?.email.value || !form?.password.value) {
+            // redirect to login with same query params but add next and message=missing params
+            router.push(
+              window.location.pathname +
+                newSearchParams +
+                "&error=Please enter an email and password."
+            );
+            return;
+          }
+        }
         setPending(true);
-        setAction(
-          `${route}?next=${encodeURIComponent(
-            String(searchParams.get("next") || "")
-          )}`
-        );
-
-        e.currentTarget.form?.setAttribute("action", route); // not sure if this is needed
+        setAction(newAction);
+        e.currentTarget.form?.setAttribute("action", newAction);
         e.currentTarget.form?.submit();
       }}
       formMethod="post"
@@ -51,24 +66,24 @@ function Submit({
 }
 
 export default function Login() {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
   const [pending, setPending] = React.useState<boolean>(false);
   const [action, setAction] = React.useState<string>(
-    `/auth/sign-in?next=${encodeURIComponent(
-      String(searchParams.get("next") || "")
-    )}`
+    `/auth/sign-in?next=${encodeURIComponent(String(params.get("next") || ""))}`
   );
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
   const [isSignup, setSignup] = React.useState<boolean>(
-    searchParams.get("signup") === "true"
+    params.get("signup") === "true"
   );
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
 
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
       <Back />
-      <FormContext.Provider value={{ pending, setPending, action, setAction }}>
+      <FormContext.Provider
+        value={{ pending, setPending, action, setAction, params }}
+      >
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-white"
           action={action}
@@ -76,6 +91,9 @@ export default function Login() {
         >
           <div className="mb-12">
             <WayneHacksLogo />
+            <h2 className="wh-subheading mt-5">
+              {isSignup ? "Create an account" : "Log in"}
+            </h2>
           </div>
 
           <label className="text-md" htmlFor="email">
@@ -85,7 +103,7 @@ export default function Login() {
             className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
             name="email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="you@example.edu"
             required
           />
           {!showForgetPassword && (
@@ -168,7 +186,7 @@ export default function Login() {
         <div className="text-center text-xs text-white mt-2 w-full">
           Didn&apos;t receive an email from us? Check your junk/spam folder or{" "}
           <a
-            href="mailto:waynestatescd@gmail.com?subject=WayneHacks Email Failure&body=I did not receive an email from you."
+            href={`mailto:${constants.supportEmail}?subject=WayneHacks Email Failure&body=I did not receive an email from you.`}
             className="wh-link"
           >
             contact us
