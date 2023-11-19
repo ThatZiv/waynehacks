@@ -1,8 +1,5 @@
 import Image from "next/image";
 
-export const revalidate = 15 * 60; // revalidate every 15 min
-export const dynamic = "force-static"; // force static (this won't work)
-
 const colClass = "w-48 h-72"
 const imageContainerClass = "h-64 w-48 border-8 p-2 mr-20"
 const imageClass = "h-full w-full object-cover"
@@ -15,7 +12,7 @@ export default async function Index() {
   // } = await supabase.auth.getUser();
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-white">
+      <div className="animate-in gap-5 opacity-0 max-w-4xl px-3 py-8 text-white">
         <h1 className="text-center text-3xl pb-5">About Us</h1>
         <p className="text-center  text-2px">
           Established in Fall 2021 as Wayne State&apos;s only Computer Science organization, SCD is focused on creating opportunities
@@ -24,7 +21,7 @@ export default async function Index() {
           WayneHacks is one of those efforts, while past events have been hosted online, this is our first step in transitioning
           to an in-person event.
         </p>
-        <h2 className="text-center text-2xl pb-5 pt-2">Our Team</h2>
+        <h2 className="text-center text-2xl pb-5 pt-4">Our Team</h2>
         <div className="w-auto"/>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
           <div className={colClass}><div className={imageContainerClass}><Image src="/res/Zavaar_Shah.jpg" width={248} height={248} alt="Headshot of Zavaar Shah" className={imageClass}/><span className="items-center w-48 ">Zavaar Shah</span></div></div>

@@ -4,6 +4,7 @@ import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
+import AboutUs from "@/components/aboutUs"
 import constants from "@/misc/constants";
 import Image from "next/image";
 
@@ -123,6 +124,8 @@ export default async function Index() {
               &nbsp; <strong>Prizes</strong>
             </h2>
           </div>
+          <Splitter />
+          <AboutUs />
           <Splitter />
           <div className="text-lg font-bold text-center w-full flex flex-col">
             <h2 className="wh-subheading">FAQ</h2>
