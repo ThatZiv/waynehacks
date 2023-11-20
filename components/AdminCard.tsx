@@ -1,4 +1,4 @@
-import { Application, status } from "@/misc/application";
+import { Application, status, statusEnum } from "@/misc/application";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import Splitter from "./Splitter";
@@ -44,11 +44,11 @@ export default async function AdminCard({
     <div
       style={{
         backgroundColor:
-          data.status === "accepted"
+          data.status === statusEnum.ACCEPTED
             ? "#365314"
-            : data.status === "rejected"
+            : data.status === statusEnum.REJECTED
             ? "#7f1d1d"
-            : data.status === "cancelled"
+            : data.status === statusEnum.CANCELLED
             ? "#854d0e"
             : "black",
       }}

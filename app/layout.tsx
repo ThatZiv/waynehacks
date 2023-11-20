@@ -9,6 +9,9 @@ import Spinner from "@/components/Spinner";
 
 export const metadata = {
   title: "WayneHacks",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+  ),
   description:
     "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
   openGraph: {

@@ -13,8 +13,16 @@ export interface Application {
 }
 export interface status {
     applicant_id: string;
-    status: "applied" | "accepted" | "rejected" | "waitlisted" | "cancelled";
+    status: statusEnum;
     note: string
     created_at: string | Date;
     modified_at: string | Date;
+}
+
+export enum statusEnum {
+    APPLIED = "applied",
+    ACCEPTED = "accepted",
+    REJECTED = "rejected",
+    WAITLISTED = "waitlisted",
+    CANCELLED = "cancelled"
 }

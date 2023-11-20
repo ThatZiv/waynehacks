@@ -1,51 +1,56 @@
+import { statusEnum } from "@/misc/application";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import {
-  createServerActionClient,
-  createServerComponentClient,
-} from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-
-import { Application, status } from "@/misc/application";
-import React from "react";
-import AdminCard from "@/components/AdminCard";
-import Back from "@/components/Back";
 import Link from "next/link";
-export const metadata = {
-  title: "WayneHacks Admin",
-  description: "You shouldn't be here...",
-};
-export const dynamic = "force-dynamic";
 
-export default async function Admin() {
+export default async function AdminDash() {
   "use server";
   const supabase = createServerComponentClient({ cookies });
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // count the number of applicants
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
-    .select("*, applications(*)")
-    .order("modified_at", { ascending: false });
+    .select("*, applications(*)");
+  // .order("status", { ascending: true });
 
-  if (applicationsError)
-    return <div className="text-white">Failed to load applications...</div>;
   return (
     <div className="w-full xl:w-[90%]">
-      <Back />
-      <h1 className="text-white text-center md:text-left text-xl mx-5 my-2">
-        All applications
+      <h1 className="wh-subheading text-white text-center md:text-left mx-5 my-2">
+        Admin Dashboard
       </h1>
-      <Link
-        className="text-blue-500 hover:underline mx-5"
-        href="/admin/applicants.csv"
-      >
-        Export as CSV
-      </Link>
       <hr />
-      {applications?.map((data: { applications: Application } & status) => (
-        <AdminCard key={data.applicant_id} data={data} />
-      ))}
+      <div className="text-center justify-center">
+        <div className="">
+          <div className="p-5 m-2">
+            <h2 className="text-white text-center text-3xl font-light">
+              <strong>{applications?.length}</strong> application
+              {applications?.length == 1 ? "" : "s"}
+            </h2>
+            <h2 className="text-orange-400">
+              {
+                applications?.filter(
+                  (data) => data.status == statusEnum.APPLIED
+                ).length
+              }{" "}
+              applications need{" "}
+              <Link className="wh-link" href="/admin/applications">
+                action
+              </Link>
+            </h2>
+          </div>
+        </div>
+        <Link
+          className="bg-[#1c1c1c] text-white hover:bg-black cursor-pointer rounded-lg shadow-lg p-5 m-2"
+          href="/admin/applications"
+        >
+          View applications
+        </Link>
+        <Link
+          href="#"
+          className="bg-[#1c1c1c] text-white hover:bg-black cursor-pointer rounded-lg shadow-lg p-5 m-2"
+        >
+          Check in
+        </Link>
+      </div>
     </div>
   );
 }
