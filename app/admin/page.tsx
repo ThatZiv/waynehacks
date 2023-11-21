@@ -6,6 +6,7 @@ import {
   status,
   statusEnum,
 } from "@/misc/application";
+import { SupabaseFunctions } from "@/misc/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";
@@ -33,6 +34,8 @@ export default async function AdminDash() {
     },
     {}
   );
+  const whacks = new SupabaseFunctions(supabase);
+  const numUsers = await whacks.getTotalUsers();
   return (
     <div className="w-full xl:w-[90%]">
       <h1 className="wh-subheading text-white text-center md:text-left mx-5 my-2">
@@ -43,6 +46,7 @@ export default async function AdminDash() {
         <div className="">
           <div className="p-5 m-2">
             <h2 className="text-white text-center text-3xl font-light">
+              <strong>{numUsers}</strong> users -{" "}
               <strong>{applications?.length}</strong> application
               {applications?.length == 1 ? "" : "s"}
             </h2>
