@@ -9,7 +9,9 @@ import {
 import { SupabaseFunctions } from "@/misc/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import Image from "next/image";
 import Link from "next/link";
+import whacks2 from "@/public/whacks2-trans.png";
 
 export default async function AdminDash() {
   "use server";
@@ -38,9 +40,6 @@ export default async function AdminDash() {
   const numUsers = await whacks.getTotalUsers();
   return (
     <div className="w-full xl:w-[90%]">
-      <h1 className="wh-subheading text-white text-center md:text-left mx-5 my-2">
-        Admin Dashboard
-      </h1>
       <hr />
       <div className="text-center justify-center">
         <div className="">
