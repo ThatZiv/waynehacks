@@ -18,9 +18,10 @@ export async function POST(request: Request) {
         modified_at: new Date(),
       })
       .eq("applicant_id", e.get("applicant_id"));
+    const { data: { user } } = await supabase.auth.getUser();
     if (error) throw error;
-    revalidatePath("/admin");
-    revalidatePath("/application"); // revalidate EVERYONE's application
+    revalidatePath("/admin/applications");
+    revalidatePath("/admin/application"); // revalidate EVERYONE's application
     // requestUrl.origin + "/admin/redirect?url=" + createEmailURI({
     //   email: String(e.get("email")),
     //   status: String(e.get("status")),
@@ -28,7 +29,7 @@ export async function POST(request: Request) {
     //   full_name: String(e.get("full_name")),
     // })
     new DiscordWebhook()
-      .send('Application update (click here to view application)',
+      .send(`Application update by ${user?.email}`,
         `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get("note")}\``,
         requestUrl.origin + "/admin/application/" + e.get("applicant_id")
       )
