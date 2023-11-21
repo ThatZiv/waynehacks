@@ -22,12 +22,12 @@ function FAQ() {
     "Can I work alone or in a team?":
       "Teams can consist of 1-4 members. Don't worry if you do not have a team! We will have an event to find team members.",
 
-    "Where do I sign up!": `You must create an account by hitting 'login' at the top of the page and using your school email.
-      Once signed up, we will send you an email when registrations are available.`,
+    // "Where do I sign up!": `You must create an account by hitting 'login' at the top of the page and using your school email.
+    //   Once signed up, we will send you an email when registrations are available.`,
 
     // DO THIS WHEN YOU CAN REGISTER
-    // "Where do I sign up!": `You must create an account by hitting 'login' at the top of the page and using your school email.
-    // Then you can register for the event by hitting 'register' at the home page.`,
+    "Where do I sign up!": `You must create an account by hitting 'login' at the top of the page and using your school email.
+    Then you can apply for the event by hitting the 'Apply' at the home page.`,
 
     "I signed up...now what?":
       "We will send you an email with more information as the event gets closer. You can also periodically check this website for updates.",

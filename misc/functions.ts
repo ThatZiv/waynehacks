@@ -49,6 +49,20 @@ export class SupabaseFunctions {
     constructor(sb: SupabaseClient) {
         this.supabase = sb;
     }
+    async getTotalUsers() {
+        try {
+            const { data: users, error } = await this.supabase.rpc(
+                "count_users"
+            );
+            if (error) throw error
+            return users;
+        } catch (e) {
+            console.error(e);
+            return "-";
+        }
+
+    }
+    // TODO: get rid of unstable_cache (it's not needed anymore)
     async getApplicants() {
         return unstable_cache(async () => {
             try {

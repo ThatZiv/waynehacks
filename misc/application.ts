@@ -1,3 +1,5 @@
+type Modify<T, R> = Omit<T, keyof R> & R;
+
 export interface Application {
     applicant_id: string;
     created_at: string | Date;
@@ -13,8 +15,21 @@ export interface Application {
 }
 export interface status {
     applicant_id: string;
-    status: "applied" | "accepted" | "rejected" | "waitlisted" | "cancelled";
+    status: statusEnum;
     note: string
     created_at: string | Date;
     modified_at: string | Date;
+}
+
+export type ApplicationWithStatus = Modify<Application, {
+    status: statusEnum
+    applications: Application
+}>
+
+export enum statusEnum {
+    APPLIED = "applied",
+    ACCEPTED = "accepted",
+    REJECTED = "rejected",
+    WAITLISTED = "waitlisted",
+    CANCELLED = "cancelled"
 }

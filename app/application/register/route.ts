@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     let toDiscord = ''
     for (const field of fields) {
       let val = formData.get(field);
-      toDiscord += `${field}: ||${val}|| \n`
+      toDiscord += `${field}: ||${val || "none"}|| \n`
       if (!nonRequiredFields.includes(field) && !val)
         throw new Error(`Missing required field '${field}'`);
       form[field] = formData.get(field);
