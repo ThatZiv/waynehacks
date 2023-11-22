@@ -2,27 +2,35 @@
 
 <img width=200 height=200 src="https://www.waynehacks.com/favicon.png"/>
 
-This is the waynehacks.com website repo. 
+This is the waynehacks.com website repo.
 
 ## Features
 
 The site features:
 
-* Login/sign account up
-* Support up to 10,000 MAU
-* User administration settings
-* Application submissions dashboard
-* Dynamic configuration of site settings on Supabase (check the `kv` table)
-* Discord webhook integration
-  * User sign up
-  * Application submission
-  * Application status updates
-* Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
-* __**Costs 0 freakin dollars to run**__
+- Login/sign account up
+- Support up to 10,000 MAU
+- User administration settings
+- Application submissions dashboard
+- Dynamic configuration of site settings on Supabase (check the `kv` table)
+- Discord webhook integration
+  - User sign up
+  - Application submission
+  - Application status updates
+- Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
+- \***\*Costs 0 freakin dollars to run\*\***
 
 ## Technicalities
 
 The website is built w/ [Next.js](https://nextjs.org) v14. For styling, we're using tailwindcss and for the backend, we're using [Supabase](https://supabase.com) BaaS (firebase alternative). The next configuration we're running is serverless since Vercel - the place where this app is deployed - automatically handles it for us. With that, we almost fully have a SSR application with custom-protected middleware routing. The user will never directly interact with our supabase instance - it all goes through our server first.
+
+### Database (public) [Schema](/supabase/migrations/20231122005059_remote_commit.sql)
+
+![public-schema](/.github/img/public-schema.png)
+
+### Architecture Diagram
+
+![diagram](/.github/img/diagram.png)
 
 ## Setup
 
@@ -49,7 +57,8 @@ npm i
 ```sh
 npm run dev
 ```
-___
+
+---
 
 🔽 Boilerplate stuff below 🔽
 
