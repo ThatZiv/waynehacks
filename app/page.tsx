@@ -6,9 +6,23 @@ import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
+import { SupabaseFunctions } from "@/misc/functions";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 export const revalidate = 30 * 60; // revalidate every 30 min
 export const dynamic = "force-static"; // force static caching
+
+export async function generateMetadata() {
+  // get number people registered
+  const supabase = createServerComponentClient({ cookies });
+  const whacks = new SupabaseFunctions(supabase);
+  const applicants = await whacks.getApplicants();
+  return {
+    description: `WayneHacks is a 24-hour in-person or hybrid Hackathon at Wayne State University. 
+There are currently ${applicants} who have applied. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so register today!`,
+  };
+}
 
 export default async function Index() {
   // const supabase = createServerComponentClient({ cookies });
@@ -24,6 +38,9 @@ export default async function Index() {
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
             Wayne State&apos;s first ever{" "}
+            {/* <span className="line-through decoration-4 hover:decoration-red-200">
+              in-person
+            </span>{" "} */}
             <strong className="underline">in-person</strong> Hackathon.
           </p>
           <h2 className="inline-flex col-span-12 md:col-span-12">
@@ -42,10 +59,10 @@ export default async function Index() {
             src="/whacks2-trans.png"
           />
           <p className="text-md text-center">
-            WayneHacks is a 24-hour in-person Hackathon at Wayne State
-            University. All majors and skill levels are welcome with teams up to
-            four people. Prizes will be awarded to the best projects, so be
-            ready!
+            WayneHacks is a 24-hour in-person <strong>or</strong> hybrid
+            Hackathon at Wayne State University. All majors and skill levels are
+            welcome with teams up to four people. Prizes will be awarded to the
+            best projects, so be ready!
           </p>
           <div className="grid grid-cols-12 justify-items-center">
             <h2 className="inline-flex col-span-12 md:col-span-4">

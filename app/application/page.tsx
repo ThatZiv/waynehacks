@@ -59,7 +59,6 @@ export default async function Application() {
         <WayneHacksLogo />
 
         <h2 className="wh-subheading">
-          {/* TODO: fixed roboto font now showing up */}
           {application ? "Your application" : "Register for the event"}
         </h2>
         {application ? (
@@ -257,6 +256,30 @@ async function RegisterForm() {
         placeholder="hh3509"
         required
       />
+      {/* tailwind blockquote disclaimer for submitted */}
+      <blockquote className="rounded-md text-xs bg-btn-background border border-gray-700 p-5 mb-6">
+        By submitting this form, you agree to the{" "}
+        <a
+          className="wh-link"
+          target="_blank"
+          href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+        >
+          MLH Code of Conduct
+        </a>{" "}
+        with the exception of both <i>Reporting Procedures</i> and{" "}
+        <i>Special Incidents</i> being directed to{" "}
+        <a
+          className="wh-link"
+          target="_blank"
+          href={`mailto:${constants.supportEmail}`}
+        >
+          us
+        </a>{" "}
+        instead. By submitting, you also acknowledge that WayneHacks will{" "}
+        <strong>not</strong> be responsible for providing any sort of
+        reimbursement, parking, food, and sleeping accommodations due to
+        limitations beyond our control.
+      </blockquote>
       <button type="submit" className="wh-btn">
         Submit
       </button>

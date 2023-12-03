@@ -1,11 +1,13 @@
-// @deprecated - use `@/actions/getUser` instead
+"use server";
+
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 import React from "react";
-export async function GET(request: Request) {
+
+export default async function getUser() {
   const supabase = createServerComponentClient({ cookies });
-  const getUser = React.cache(async () => {
+  const getUserCached = React.cache(async () => {
     const {
       data: { session },
       error,
@@ -15,6 +17,6 @@ export async function GET(request: Request) {
   });
   const {
     data: { user },
-  } = await getUser();
-  return NextResponse.json(user);
+  } = await getUserCached();
+  return JSON.stringify(user);
 }
