@@ -7,6 +7,7 @@ import LogoutButton from "./LogoutButton";
 import React from "react";
 import Spinner from "./Spinner";
 import { usePathname } from "next/navigation";
+import getUser from "@/actions/getUser";
 
 function Nav() {
   const pathname = usePathname();
@@ -16,16 +17,17 @@ function Nav() {
   );
   React.useEffect(() => {
     setTimeout(() => status === "loading" && setStatus("error"), 5000);
-    const getUser = async () => {
-      const res = await fetch("/auth/user", {
-        next: { tags: ["user"] },
-      });
-      const user = await res.json();
-      setStatus("done");
-      setUser(user);
+    const triggerGetUser = async () => {
+      try {
+        const user = await getUser();
+        setUser(JSON.parse(user));
+        setStatus("done");
+      } catch (e: any) {
+        setStatus("error");
+      }
     };
 
-    getUser();
+    triggerGetUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

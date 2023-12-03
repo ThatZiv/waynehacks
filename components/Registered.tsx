@@ -6,7 +6,11 @@ import { SupabaseFunctions } from "@/misc/functions";
 import Link from "next/link";
 export const revalidate = 60 * 30; // cache expires every 30 mins
 
-export default async function Registered() {
+interface RegisteredProps {
+  nonInteractive?: boolean;
+}
+
+export default async function Registered({ nonInteractive }: RegisteredProps) {
   "use server";
   try {
     const supabase = createServerComponentClient({ cookies });
@@ -53,12 +57,14 @@ export default async function Registered() {
             <p className="text-sm mb-1">applied</p>
           </div>
         </div>
-        <Link
-          href="/application"
-          className="py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black bg-[#fc0] hover:bg-foreground hover:px-16"
-        >
-          Apply
-        </Link>
+        {!nonInteractive && (
+          <Link
+            href="/application"
+            className="py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black bg-[#fc0] hover:bg-foreground hover:px-16"
+          >
+            Apply
+          </Link>
+        )}
       </div>
     );
   } catch (error: any) {

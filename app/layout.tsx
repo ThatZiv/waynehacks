@@ -13,7 +13,7 @@ export const metadata = {
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
   description:
-    "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
+    "WayneHacks is a 24-hour in-person or hybrid Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
   openGraph: {
     title: "WayneHacks",
     description:
