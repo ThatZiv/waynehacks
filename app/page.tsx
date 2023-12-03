@@ -13,16 +13,16 @@ import { cookies } from "next/headers";
 export const revalidate = 30 * 60; // revalidate every 30 min
 export const dynamic = "force-static"; // force static caching
 
-export async function generateMetadata() {
-  // get number people registered
-  const supabase = createServerComponentClient({ cookies });
-  const whacks = new SupabaseFunctions(supabase);
-  const applicants = await whacks.getApplicants();
-  return {
-    description: `WayneHacks is a 24-hour in-person or hybrid Hackathon at Wayne State University. 
-There are currently ${applicants} who have applied. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so register today!`,
-  };
-}
+// export async function generateMetadata() {
+//   // get number people registered
+//   const supabase = createServerComponentClient({ cookies });
+//   const whacks = new SupabaseFunctions(supabase);
+//   const applicants = await whacks.getApplicants();
+//   return {
+//     description: `WayneHacks is a 24-hour in-person or hybrid Hackathon at Wayne State University.
+// There are currently ${applicants} who have applied. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so register today!`,
+//   };
+// }
 
 export default async function Index() {
   // const supabase = createServerComponentClient({ cookies });
