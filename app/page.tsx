@@ -9,6 +9,7 @@ import Image from "next/image";
 import { SupabaseFunctions } from "@/misc/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import { Countdown } from "@/components/Countdown";
 
 export const revalidate = 30 * 60; // revalidate every 30 min
 export const dynamic = "force-static"; // force static caching
@@ -25,25 +26,21 @@ export const dynamic = "force-static"; // force static caching
 // }
 
 export default async function Index() {
-  // const supabase = createServerComponentClient({ cookies });
-
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser();
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-white">
         <div className="flex flex-col items-center mb-2 lg:mb-12">
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
-          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center my-10">
+          <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center mt-8">
             Wayne State&apos;s first ever{" "}
             {/* <span className="line-through decoration-4 hover:decoration-red-200">
               in-person
             </span>{" "} */}
             <strong className="underline">in-person</strong> Hackathon.
           </p>
-          <h2 className="inline-flex col-span-12 md:col-span-12">
+          <div className="inline-flex col-span-12 md:col-span-12 mb-6"></div>
+          <h2 className="inline-flex col-span-12 md:col-span-12 mb-6">
             <Registered />
           </h2>
         </div>
@@ -64,6 +61,9 @@ export default async function Index() {
             welcome with teams up to four people. Prizes will be awarded to the
             best projects, so be ready!
           </p>
+          <div>
+            <Countdown />
+          </div>
           <div className="grid grid-cols-12 justify-items-center">
             <h2 className="inline-flex col-span-12 md:col-span-4">
               <svg
