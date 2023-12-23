@@ -10,6 +10,7 @@ import { SupabaseFunctions } from "@/misc/functions";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Countdown } from "@/components/Countdown";
+import { Sponsors } from "@/components/Sponsors";
 
 export const revalidate = 30 * 60; // revalidate every 30 min
 export const dynamic = "force-static"; // force static caching
@@ -139,6 +140,15 @@ export default async function Index() {
               </svg>
               &nbsp; <strong>Prizes</strong>
             </h2>
+          </div>
+          <Splitter />
+          <div className="text-lg  text-center w-full flex flex-col">
+            <div className="items-center">
+              <h2 className="wh-subheading">Our Sponsors</h2>
+              <div className="inline-flex col-span-12 md:col-span-12">
+                <Sponsors />
+              </div>
+            </div>
           </div>
           <Splitter />
           <div className="text-lg font-bold text-center w-full flex flex-col">
