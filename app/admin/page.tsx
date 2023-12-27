@@ -2,8 +2,8 @@ import Chart from "@/components/Chart";
 import Splitter from "@/components/Splitter";
 import {
   Application,
-  ApplicationWithStatus,
-  status,
+  StatusApplication,
+  Status,
   statusEnum,
 } from "@/misc/application";
 import { SupabaseFunctions } from "@/misc/functions";
@@ -23,8 +23,8 @@ export default async function AdminDash() {
   if (applicationsError)
     return <div className="text-white">Failed to load applications...</div>;
   const universities = applications
-    .filter((app: ApplicationWithStatus) => app.status !== statusEnum.REJECTED)
-    .map((obj: ApplicationWithStatus) => obj.applications.university);
+    .filter((app: StatusApplication) => app.status !== statusEnum.REJECTED)
+    .map((obj: StatusApplication) => obj.applications.university);
   // get number of applicants per unique university for graph data
   type University = string;
   type Count = number;
