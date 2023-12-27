@@ -1,7 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AdminCard from "@/components/AdminCard";
-import { Application, status } from "@/misc/application";
 import Back from "@/components/Back";
 
 export const dynamic = "force-dynamic";
@@ -23,14 +22,18 @@ export default async function Application({
 
   if (applicationsError)
     return (
-      <h1 className="text-white">
-        Failed to load application for <code>{applicant_id}</code>...
+      <h1 className="text-xs text-white">
+        Failed to load application for <code>{applicant_id}</code>
       </h1>
     );
   return (
-    <div className="w-full xl:w-[90%]">
-      <Back />
-      <h1 className="text-white text-center md:text-left text-xl m-5">
+    <div className="w-full xl:w-[90%] text-white">
+      <Back href="/admin/applications" />
+      <p className="text-slate-300 text-xs">
+        NOTE: this page is <b>not</b> live. Changes will <b>not</b> be reflected
+        in realtime.
+      </p>
+      <h1 className="text-white text-center md:text-left text-xl my-5">
         {application.applications.full_name} from{" "}
         {application.applications.university}
       </h1>

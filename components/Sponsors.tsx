@@ -30,7 +30,7 @@ export const Sponsors = () => {
           link.searchParams.set("utm_campaign", "winter2024");
           return (
             <div key={sponsor.name} className="flex-shrink-0">
-              <Link href={link} target="_blank">
+              <Link href={link.toString()} target="_blank">
                 <Image
                   src={sponsor.logo}
                   className="grayscale invert rounded-md transition-all duration-500 ease-in-out transform hover:scale-110"

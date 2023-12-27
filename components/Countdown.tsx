@@ -1,30 +1,14 @@
 "use client";
 
+import { events } from "@/misc/constants";
+import { Event } from "@/misc/events";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-
-interface Event {
-  date: number;
-  name: string;
-}
 
 export const Countdown = () => {
   const eventData = useMemo<Event[]>(
     // TODO: make this dynamic OR put in our real schedule here
-    () => [
-      {
-        date: new Date("January 13, 2024 9:00:00").getTime(),
-        name: "Check-in",
-      },
-      {
-        date: new Date("January 13, 2024 12:00:00").getTime(),
-        name: "Hacking begins",
-      },
-      {
-        date: new Date("January 14, 2024 12:00:00").getTime(),
-        name: "Hacking ends",
-      },
-    ],
+    () => events,
     []
   );
 

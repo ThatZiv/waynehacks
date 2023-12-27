@@ -17,6 +17,7 @@ import Splitter from "@/components/Splitter";
 import { SupabaseFunctions } from "@/misc/functions";
 import constants from "@/misc/constants";
 import markdown from "@/misc/markdown";
+import Link from "next/link";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -86,6 +87,26 @@ export default async function Application() {
                   reach out
                 </a>{" "}
                 to us.
+                <br />
+                Please consider viewing our{" "}
+                <Link
+                  href={constants.infoPacket}
+                  target="_blank"
+                  className="wh-link"
+                >
+                  information packet
+                </Link>{" "}
+                for more important details regarding the event.
+                <br />
+                Join our{" "}
+                <Link
+                  className="wh-link"
+                  href={constants.discord}
+                  target="_blank"
+                >
+                  Discord
+                </Link>{" "}
+                for more updates.
               </p>
             </div>
           </>
@@ -259,26 +280,24 @@ async function RegisterForm() {
       {/* tailwind blockquote disclaimer for submitted */}
       <blockquote className="rounded-md text-xs bg-btn-background border border-gray-700 p-5 mb-6">
         By submitting this form, you agree to the{" "}
-        <a
+        <Link
           className="wh-link"
           target="_blank"
-          href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+          href={constants.infoPacket + "#heading=h.xohd6a1b7b23"}
         >
-          MLH Code of Conduct
-        </a>{" "}
-        with the exception of both <i>Reporting Procedures</i> and{" "}
-        <i>Special Incidents</i> being directed to{" "}
-        <a
-          className="wh-link"
-          target="_blank"
-          href={`mailto:${constants.supportEmail}`}
-        >
-          us
-        </a>{" "}
-        instead. By submitting, you also acknowledge that WayneHacks will{" "}
+          WayneHacks Hackathon Rules
+        </Link>
+        . By submitting, you also acknowledge that WayneHacks will{" "}
         <strong>not</strong> be responsible for providing any sort of
         reimbursement, parking, food, and sleeping accommodations due to
         limitations beyond our control.
+        <br />
+        <br />
+        Please consider viewing our{" "}
+        <Link href={constants.infoPacket} target="_blank" className="wh-link">
+          information packet
+        </Link>{" "}
+        for more important details regarding the event.
       </blockquote>
       <button type="submit" className="wh-btn">
         Submit
