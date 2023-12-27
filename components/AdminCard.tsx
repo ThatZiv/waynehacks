@@ -41,6 +41,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
   const [formData, setFormData] = useState({
     note: data.note,
     status: data.status,
+    checked_in: data.checked_in,
   });
 
   // TODO: refactor the next 3 defs into a custom hook
@@ -62,10 +63,32 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
     setIsModified(true);
   };
 
+  const handleCheckboxChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, checked } = e.target;
+      if (
+        checked &&
+        prompt(
+          `Are you sure you want to check this person in? By typing 'y' you acknowledged and confirmed ${data.applications.full_name}'s identity (y/n)`
+        ) !== "y"
+      ) {
+        e.preventDefault();
+        return;
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
+      setIsModified(true);
+    },
+    [data]
+  );
+
   const resetForm = () => {
     setFormData({
       note: data.note,
       status: data.status,
+      checked_in: data.checked_in,
     });
     setIsModified(false);
   };
@@ -90,6 +113,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
     setFormData({
       note: data.note,
       status: data.status,
+      checked_in: data.checked_in,
     });
     setIsModified(false);
   }, [data]);
@@ -277,6 +301,20 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
                 </p>
               )}
             </div>
+          </div>
+          <div>
+            {/* check in checkbox */}
+            <label className="flex items-center space-x-3">
+              <span className="font-bold text-lg">Checked in? </span>
+              <input
+                type="checkbox"
+                name="checked_in"
+                checked={formData.checked_in}
+                onChange={handleCheckboxChange}
+                className="rounded-md px-2 py-2 bg-inherit border col-span-8 md:col-span-6"
+                defaultChecked={data.checked_in}
+              />
+            </label>
           </div>
           <p className="text-gray-400 text-xs mt-6">
             {data.applicant_id} • {data.applications.university} • Last updated{" "}

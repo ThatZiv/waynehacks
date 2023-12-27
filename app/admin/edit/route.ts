@@ -15,6 +15,7 @@ export async function POST(request: Request) {
       .update({
         status: String(e.get("status")).toLowerCase(),
         note: e.get("note"),
+        checked_in: Boolean(e.get("checked_in")),
         modified_at: new Date(),
       })
       .eq("applicant_id", e.get("applicant_id"));
