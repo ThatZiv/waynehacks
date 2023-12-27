@@ -22,8 +22,8 @@ export default async function Application({
 
   if (applicationsError)
     return (
-      <h1 className="text-xs">
-        Failed to load application for <code>{applicant_id}</code>...
+      <h1 className="text-xs text-white">
+        Failed to load application for <code>{applicant_id}</code>
       </h1>
     );
   return (

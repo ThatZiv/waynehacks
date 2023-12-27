@@ -24,8 +24,11 @@ function Footer() {
           </Link>
         </li>
         <li>
-          <Link href="/login" className="mr-4 hover:underline md:mr-6">
-            Login
+          <Link
+            href={constants.infoPacket}
+            className="mr-4 hover:underline md:mr-6"
+          >
+            Information Packet
           </Link>
         </li>
         <li>
