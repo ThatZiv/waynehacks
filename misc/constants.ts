@@ -1,3 +1,19 @@
+export const events = [
+  {
+    date: new Date("January 13, 2024 9:00:00").getTime(),
+    end: new Date("January 13, 2024 10:30:00").getTime(),
+    name: "Check-in",
+  },
+  {
+    date: new Date("January 13, 2024 12:00:00").getTime(),
+    name: "Hacking begins",
+  },
+  {
+    date: new Date("January 14, 2024 12:00:00").getTime(),
+    name: "Hacking ends",
+  },
+];
+
 const constants = {
   /**
    * Email for labelling internally
