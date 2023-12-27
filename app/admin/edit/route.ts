@@ -10,12 +10,13 @@ export async function POST(request: Request) {
   try {
     const e = await request.formData();
     const supabase = createRouteHandlerClient({ cookies });
+    let checked_in = e.get("checked_in") === "on" ? true : false; // this is a checkbox
     const { error } = await supabase
       .from("status")
       .update({
         status: String(e.get("status")).toLowerCase(),
         note: e.get("note"),
-        checked_in: Boolean(e.get("checked_in")),
+        checked_in,
         modified_at: new Date(),
       })
       .eq("applicant_id", e.get("applicant_id"));
@@ -36,7 +37,7 @@ export async function POST(request: Request) {
         `Application update by ${user?.email}`,
         `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get(
           "note"
-        )}\` \nChecked In: ${new Boolean(e.get("checked_in")) ? "✔" : "❌"}`,
+        )}\` \nChecked In: ${checked_in ? "✔" : "❌"}`,
         requestUrl.origin + "/admin/application/" + e.get("applicant_id")
       )
       .catch(console.error);
