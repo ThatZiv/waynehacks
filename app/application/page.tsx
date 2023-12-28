@@ -87,27 +87,50 @@ export default async function Application() {
                   reach out
                 </a>{" "}
                 to us.
-                <br />
-                Please consider viewing our{" "}
-                <Link
-                  href={constants.infoPacket}
-                  target="_blank"
-                  className="wh-link"
-                >
-                  information packet
-                </Link>{" "}
-                for more important details regarding the event.
-                <br />
-                Join our{" "}
-                <Link
-                  className="wh-link"
-                  href={constants.discord}
-                  target="_blank"
-                >
-                  Discord
-                </Link>{" "}
-                for more updates.
               </p>
+
+              <br />
+              <div className="mx-5 border rounded-lg p-5">
+                <h2 className="wh-subheading md:text-left text-center mt-3 mb-4">
+                  Next Steps
+                </h2>
+                <Splitter />
+                <ol className="list-decimal font-thin mx-4 mt-3">
+                  <li>
+                    Please consider viewing our{" "}
+                    <Link
+                      href={constants.infoPacket}
+                      target="_blank"
+                      className="wh-link"
+                    >
+                      information packet
+                    </Link>{" "}
+                    for more important details regarding the event.
+                  </li>
+                  <li>
+                    Join our{" "}
+                    <Link
+                      className="wh-link"
+                      href={constants.discord}
+                      target="_blank"
+                    >
+                      Discord
+                    </Link>{" "}
+                    for more updates.
+                  </li>
+                  <li>
+                    Join our hackathon on{" "}
+                    <Link
+                      href={constants.devpost}
+                      className="wh-link"
+                      target="_blank"
+                    >
+                      DevPost
+                    </Link>
+                    . This is where you will submit your project.
+                  </li>
+                </ol>
+              </div>
             </div>
           </>
         ) : (

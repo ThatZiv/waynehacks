@@ -28,6 +28,7 @@ const constants = {
   infoPacket:
     "https://docs.google.com/document/d/1qKmBH7MM_muJbYMIXYA0UeWu_Sgb8ZFEf2xtRh9VlQA/edit?usp=sharing",
   discord: "https://discord.gg/ET6MMTFgay",
+  devpost: "https://waynehacks-2.devpost.com/",
 };
 
 export default constants;
