@@ -27,19 +27,19 @@ export class DiscordWebhook {
         },
       ],
     };
-    return process.env.NODE_ENV === "production"
-      ? fetch(process.env.DISCORD_WEBHOOK_URL as string, {
-          method: "post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        })
-      : new Promise((resolve, reject) => {
-          setTimeout(() => {
-            resolve(payload);
-          }, 10);
-        }); // don't send in dev
+    // return process.env.NEXT_PUBLIC_VERCEL_ENV !== "development" ?
+    return fetch(process.env.DISCORD_WEBHOOK_URL as string, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    // : new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //       resolve(payload);
+    //     }, 10);
+    //   }); // don't send in dev
   }
   truncate(str: string, n = 1300) {
     return str.length > n ? str.slice(0, n - 1) + "..." : str;
@@ -102,7 +102,7 @@ export class SupabaseFunctions {
               new Date().toLocaleTimeString()
           );
           if (error) throw error;
-          // if (process.env.NODE_ENV == "development") {
+          // if (process.env.VERCEL_ENV == "development") {
           //     if (key == "canRegister") return true;
           // }
           return value.value?.data;
