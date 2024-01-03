@@ -5,9 +5,9 @@
     "build": "next build",
     "start": "next start",
     "supabase": "supabase",
-    "supabase:db-pull": "supabase db pull",
+    "supabase:db-pull": "supabase db pull --debug",
     "supabase:db-dump": "supabase db dump --data-only > supabase/dump.sql",
-    "supabase:db-schema": "supabase db remote commit",
+    "supabase:db-schema-apply": "supabase db remote commit",
     "lint": "next lint"
   },
   "dependencies": {

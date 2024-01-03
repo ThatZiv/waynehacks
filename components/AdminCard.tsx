@@ -12,9 +12,11 @@ export function createEmailURI(obj: {
   full_name: string;
 }) {
   let status = obj.status.toUpperCase();
-  let body = encodeURIComponent(
-    `Hey ${obj.full_name}, your application has been ${status}.\n\n${obj.note}\n\nBest,\nWayneHacks Team`
-  );
+  const nextSteps = `Next Steps: \n\t- View information packet: ${process.env.NEXT_PUBLIC_BASE_URL}/packet
+\t- Join Discord: ${process.env.NEXT_PUBLIC_BASE_URL}/discord
+\t- Join DevPost: ${process.env.NEXT_PUBLIC_BASE_URL}/devpost`;
+  let body = encodeURIComponent(`Hey ${obj.full_name}, 
+Your application has been ${status}.\n\n${obj.note}\n\n${nextSteps}\n\nBest,\nWayneHacks Team`);
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
   return `mailto:${obj.email}?subject=${subject}&cc=${constants.supportEmail}&body=${body}`;
 }
