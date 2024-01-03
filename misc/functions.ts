@@ -27,7 +27,7 @@ export class DiscordWebhook {
         },
       ],
     };
-    return process.env.NODE_ENV === "production"
+    return process.env.NEXT_PUBLIC_VERCEL_ENV !== "development"
       ? fetch(process.env.DISCORD_WEBHOOK_URL as string, {
           method: "post",
           headers: {
@@ -102,7 +102,7 @@ export class SupabaseFunctions {
               new Date().toLocaleTimeString()
           );
           if (error) throw error;
-          // if (process.env.NODE_ENV == "development") {
+          // if (process.env.VERCEL_ENV == "development") {
           //     if (key == "canRegister") return true;
           // }
           return value.value?.data;

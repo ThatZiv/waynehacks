@@ -3,7 +3,7 @@ import { Application, StatusApplication, statusEnum } from "@/misc/application";
 import Link from "next/link";
 import Splitter from "./Splitter";
 import constants from "@/misc/constants";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export function createEmailURI(obj: {
   email: string;
@@ -136,7 +136,8 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
     } catch (e: any) {
       alert(`Failed to update ${formData.get("applicant_id")}. ` + e.message);
       // refresh page if the changes didn't go through
-      if (process.env.NODE_ENV !== "development") window.location.reload();
+      if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "development")
+        window.location.reload();
       console.error(e);
     }
   };
