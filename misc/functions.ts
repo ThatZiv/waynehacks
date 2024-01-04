@@ -27,7 +27,7 @@ export class DiscordWebhook {
         },
       ],
     };
-    return process.env.NEXT_PUBLIC_VERCEL_ENV !== "development"
+    return process.env.NODE_ENV !== "development"
       ? fetch(process.env.DISCORD_WEBHOOK_URL as string, {
           method: "post",
           headers: {
