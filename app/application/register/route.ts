@@ -23,10 +23,10 @@ export async function POST(request: Request) {
   const nonRequiredFields = ["diet"];
   try {
     const form = {} as any;
-    let toDiscord = ''
+    let toDiscord = "";
     for (const field of fields) {
       let val = formData.get(field);
-      toDiscord += `${field}: ||${val || "none"}|| \n`
+      toDiscord += `${field}: ||${val || "none"}|| \n`;
       if (!nonRequiredFields.includes(field) && !val)
         throw new Error(`Missing required field '${field}'`);
       form[field] = formData.get(field);
@@ -36,8 +36,8 @@ export async function POST(request: Request) {
     } = await supabase.auth.getUser(); // get user id
     const whacks = new SupabaseFunctions(supabase);
     const canRegister = await whacks.getConfigValue("canRegister");
-    if (!canRegister) throw new Error("Applications are currently closed")
-    toDiscord = `${user?.email} \n` + toDiscord
+    if (!canRegister) throw new Error("Applications are currently closed");
+    toDiscord = `${user?.email} \n` + toDiscord;
     const { error: applicationErr } = await supabase
       .from("applications")
       .upsert({ applicant_id: user?.id, email: user?.email, ...form });
@@ -54,7 +54,12 @@ export async function POST(request: Request) {
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
     new DiscordWebhook()
-      .send(`New application`, toDiscord, `${requestUrl.origin}/admin/application/${user?.id}`)
+      .send(
+        `New application`,
+        toDiscord,
+        `${requestUrl.origin}/admin/application/${user?.id}`
+      )
+      .then(() => {})
       .catch(console.error);
   } catch (error: any) {
     let err = error.message;
@@ -67,7 +72,7 @@ export async function POST(request: Request) {
     );
   }
   revalidatePath("/admin");
-  revalidateTag("count_applicants") // recalculate num applicants on home page
+  revalidateTag("count_applicants"); // recalculate num applicants on home page
 
   return NextResponse.redirect(
     `${requestUrl.origin}/application?message=Your information has been submitted`,
