@@ -14,7 +14,8 @@ export async function POST(request: Request) {
   const captcha = String(formData.get("captcha"));
   const supabase = createRouteHandlerClient({ cookies });
   try {
-    if (!email || !password || !confirmPassword) throw new Error("Email and password are required");
+    if (!email || !password || !confirmPassword)
+      throw new Error("Email and password are required");
     if (password !== confirmPassword) throw new Error("Passwords do not match");
     if (!email.endsWith(".edu"))
       throw new Error(
@@ -30,7 +31,10 @@ export async function POST(request: Request) {
       },
     });
     if (error) throw error;
-    await new DiscordWebhook().send(`New sign up`, `||${email}|| has signed up.`)
+    new DiscordWebhook()
+      .send(`New sign up`, `||${email}|| has signed up.`)
+      .then(() => {})
+      .catch(console.error);
   } catch (error: any) {
     let err = error.message;
     return NextResponse.redirect(`${requestUrl.origin}/login?error=${err}`, {

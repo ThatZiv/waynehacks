@@ -40,6 +40,7 @@ export async function POST(request: Request) {
         )}\` \nChecked In: ${checked_in ? "✔" : "❌"}`,
         requestUrl.origin + "/admin/application/" + e.get("applicant_id")
       )
+      .then(() => {})
       .catch(console.error);
     // return NextResponse.redirect(
     //   `${
