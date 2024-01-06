@@ -9,6 +9,11 @@ interface Sponsor {
 
 const sponsors: Sponsor[] = [
   {
+    name: "Wayne State University - College of Engineering",
+    link: "https://engineering.wayne.edu/",
+    logo: "/wsu_engin.png",
+  },
+  {
     name: "KLA",
     link: "https://www.kla.com/",
     logo: "/kla.png",
@@ -25,8 +30,8 @@ export const Sponsors = () => {
         {sponsors.map((sponsor) => {
           let link = new URL(sponsor.link);
           // add utm
-          link.searchParams.set("utm_source", "waynehacks-website");
-          link.searchParams.set("utm_medium", "waynehacks.com");
+          link.searchParams.set("utm_source", "waynehacks.com");
+          link.searchParams.set("utm_medium", "waynehacks-sponsor-card");
           link.searchParams.set("utm_campaign", "winter2024");
           return (
             <div key={sponsor.name} className="flex-shrink-0">
@@ -34,8 +39,8 @@ export const Sponsors = () => {
                 <Image
                   src={sponsor.logo}
                   className="grayscale invert rounded-md transition-all duration-500 ease-in-out transform hover:scale-110"
-                  width={200}
-                  height={200}
+                  width={225}
+                  height={225}
                   alt={sponsor.name}
                 />
               </Link>
