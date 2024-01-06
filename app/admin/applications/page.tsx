@@ -54,7 +54,7 @@ export default function Applications() {
   useEffect(() => {
     // subscribe to changes
     const channel = supabase
-      .channel("application_status_changes")
+      .channel(process.env.NEXT_PUBLIC_SUPABASE_REALTIME_CHANNEL as string)
       .on(
         "postgres_changes",
         {
