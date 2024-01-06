@@ -28,7 +28,7 @@ export class DiscordWebhook {
       ],
     };
     return new Promise((resolve, reject) => {
-      if (process.env.NODE_ENV !== "production") {
+      if (process.env.NODE_ENV !== "development") {
         fetch(process.env.DISCORD_WEBHOOK_URL as string, {
           method: "post",
           headers: {
