@@ -53,20 +53,20 @@ export async function POST(request: Request) {
     //   .from("applications")
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
-    new DiscordWebhook()
-      .send(
+    try {
+      await new DiscordWebhook().send(
         `New application`,
         toDiscord,
         `${requestUrl.origin}/admin/application/${user?.id}`
-      )
-      .then(() => {})
-      .catch(console.error);
+      );
+    } catch (e) {
+      console.error(e); // the user doesnt need to see these errors, but we do...
+    }
   } catch (error: any) {
     let err = error.message;
     return NextResponse.redirect(
       `${requestUrl.origin}/application?error=${err}`,
       {
-        // a 301 status is required to redirect from a POST to a GET route
         status: 301,
       }
     );

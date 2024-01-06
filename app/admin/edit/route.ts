@@ -32,16 +32,13 @@ export async function POST(request: Request) {
     //   note: String(e.get("note")),
     //   full_name: String(e.get("full_name")),
     // })
-    new DiscordWebhook()
-      .send(
-        `Application update by ${user?.email}`,
-        `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get(
-          "note"
-        )}\` \nChecked In: ${checked_in ? "✔" : "❌"}`,
-        requestUrl.origin + "/admin/application/" + e.get("applicant_id")
-      )
-      .then(() => {})
-      .catch(console.error);
+    await new DiscordWebhook().send(
+      `Application update by ${user?.email}`,
+      `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get(
+        "note"
+      )}\` \nChecked In: ${checked_in ? "✔" : "❌"}`,
+      requestUrl.origin + "/admin/application/" + e.get("applicant_id")
+    );
     // return NextResponse.redirect(
     //   `${
     //     requestUrl.origin

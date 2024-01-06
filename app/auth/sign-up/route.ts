@@ -31,10 +31,10 @@ export async function POST(request: Request) {
       },
     });
     if (error) throw error;
-    new DiscordWebhook()
-      .send(`New sign up`, `||${email}|| has signed up.`)
-      .then(() => {})
-      .catch(console.error);
+    await new DiscordWebhook().send(
+      `New sign up`,
+      `||${email}|| has signed up.`
+    );
   } catch (error: any) {
     let err = error.message;
     return NextResponse.redirect(`${requestUrl.origin}/login?error=${err}`, {
