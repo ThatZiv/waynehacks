@@ -11,21 +11,25 @@ export const generateICS = (eventData: Event[]) => {
     eventData.map((event) => {
       let s = new Date(event.date);
       let e = new Date(event.end || event.date); // if no end, assume it's the same as start
+
+      // Convert dates from UTC-5 (EST) to UTC
+      s.setMinutes(s.getMinutes() + s.getTimezoneOffset() - 300);
+      e.setMinutes(e.getMinutes() + e.getTimezoneOffset() - 300);
       return {
         title: "WayneHacks 2: " + event.name,
         start: [
-          s.getFullYear(),
-          s.getMonth() + 1,
-          s.getDate(),
-          s.getHours(),
-          s.getMinutes(),
+          s.getUTCFullYear(),
+          s.getUTCMonth() + 1,
+          s.getUTCDate(),
+          s.getUTCHours(),
+          s.getUTCMinutes(),
         ],
         end: [
-          e.getFullYear(),
-          e.getMonth() + 1,
-          e.getDate(),
-          e.getHours(),
-          e.getMinutes(),
+          e.getUTCFullYear(),
+          e.getUTCMonth() + 1,
+          e.getUTCDate(),
+          e.getUTCHours(),
+          e.getUTCMinutes(),
         ],
         description: event.name,
         location: constants.address,
