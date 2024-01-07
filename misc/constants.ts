@@ -2,16 +2,7 @@ import { Event } from "./events";
 
 // this function will force the date to be in EST
 export const _ = (dateString: string) => {
-  const [, month, day, year, time] =
-    dateString.match(/(\w+) (\d+), (\d+) (.+)/) || [];
-
-  const localDate = new Date(`${month} ${day}, ${year} ${time}`);
-  const estOffset = -5 * 60; // EST is UTC-5
-
-  // Calculate the UTC time using the local date and the EST offset
-  const utcTime = localDate.getTime() + localDate.getTimezoneOffset() * 60000;
-  const estTime = utcTime + estOffset * 60000;
-  return new Date(estTime).getTime();
+  return new Date(dateString + " EST").getTime();
 };
 
 /**
