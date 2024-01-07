@@ -1,6 +1,6 @@
 import { Event } from "./events";
 
-// will convert date string into an EST date timestamp
+// will convert EST date string into a UTC date timestamp
 export const _ = (date: string) => {
   let d = new Date(date);
   d.setMinutes(d.getMinutes() + d.getTimezoneOffset() - 300);

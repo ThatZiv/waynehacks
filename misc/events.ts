@@ -12,9 +12,9 @@ export const generateICS = (eventData: Event[]) => {
       let s = new Date(event.date);
       let e = new Date(event.end || event.date); // if no end, assume it's the same as start
 
-      // Convert dates from UTC-5 (EST) to UTC
-      s.setMinutes(s.getMinutes() + s.getTimezoneOffset() - 300);
-      e.setMinutes(e.getMinutes() + e.getTimezoneOffset() - 300);
+      // Convert dates from UTC to UTC-5 (EST)
+      s.setUTCMinutes(s.getUTCMinutes() - 300);
+      e.setUTCMinutes(e.getUTCMinutes() - 300);
       return {
         title: "WayneHacks 2: " + event.name,
         start: [
