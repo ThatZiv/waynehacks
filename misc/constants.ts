@@ -1,7 +1,9 @@
+import { Event } from "./events";
+
 /**
  * Order matters
  */
-export const events = [
+export const events: Event[] = [
   {
     date: new Date("January 13, 2024 9:00:00").getTime(),
     end: new Date("January 13, 2024 11:00:00").getTime(),
@@ -14,6 +16,10 @@ export const events = [
   },
   {
     date: new Date("January 13, 2024 12:00:00").getTime(),
+    name: "Hacking Begins",
+  },
+  {
+    date: new Date("January 13, 2024 12:10:00").getTime(),
     end: new Date("January 13, 2024 13:00:00").getTime(),
     name: "Team Matchmaking",
   },
@@ -37,7 +43,6 @@ export const events = [
   },
   {
     date: new Date("January 14, 2024 12:00:00").getTime(),
-    end: new Date("January 14, 2024 12:30:00").getTime(),
     name: "Hacking Ends",
   },
   {
