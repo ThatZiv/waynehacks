@@ -31,7 +31,13 @@ export const generateICS = (eventData: Event[]) => {
         location: constants.address,
         url: process.env.NEXT_PUBLIC_BASE_URL,
         organizer: { name: "WayneHacks Team", email: constants.supportEmail },
-        alarms: [{ action: "display", trigger: { minutes: 15, before: true } }],
+        alarms: [
+          {
+            action: "display",
+            description: "Reminder",
+            trigger: { minutes: 15, before: true },
+          },
+        ],
       };
     })
   );
