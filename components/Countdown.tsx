@@ -5,6 +5,8 @@ import { Event } from "@/misc/events";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
+const defaultEvent = "Loading...";
+
 export const Countdown = () => {
   const eventData = useMemo<Event[]>(
     // TODO: make this dynamic OR put in our real schedule here
@@ -24,7 +26,8 @@ export const Countdown = () => {
     });
   }, []);
 
-  const [currentEvent, setCurrentEvent] = useState("Loading...");
+  const [currentEvent, setCurrentEvent] = useState(defaultEvent);
+  const [occurringEvent, setOccurringEvent] = useState<String>(defaultEvent);
   const [time, setTime] = useState({
     days: 0,
     hours: 0,
@@ -36,8 +39,15 @@ export const Countdown = () => {
     const tick = () => {
       const now = new Date().getTime();
       const upcomingEvents = eventData.filter((event) => event.date > now);
-
+      const ongoingEvent = eventData.find(
+        (event) => event.date <= now && (event.end ? event.end >= now : false)
+      );
       if (upcomingEvents.length > 0) {
+        if (ongoingEvent && ongoingEvent.name !== occurringEvent) {
+          setOccurringEvent(ongoingEvent.name);
+        } else {
+          setOccurringEvent(defaultEvent);
+        }
         const nextEvent = upcomingEvents[0];
         const distance = nextEvent.date - now;
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -58,6 +68,7 @@ export const Countdown = () => {
     tick();
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [eventData]);
 
   const isComplete =
@@ -65,6 +76,7 @@ export const Countdown = () => {
     time.hours === 0 &&
     time.minutes === 0 &&
     time.seconds === 0;
+  // FIXME: at the end of every event, it will indicate that the event has ended
   if (!eventData) return null;
   if (currentEvent === "Loading...") return null;
   return (
@@ -92,8 +104,7 @@ export const Countdown = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center">
-              {/* add a line splitter */}
+            <div className="flex flex-col items-center text-center">
               <hr className="w-full border-gray-500 border-1 my-2" />
 
               <div className="text-xs text-gray-500 ">
@@ -105,13 +116,31 @@ export const Countdown = () => {
                     }
                   ).date || ""
                 )}`}
+                {occurringEvent !== defaultEvent && (
+                  <>
+                    <hr className="w-full border-gray-500 border-1 my-2" />
+                    <span className="animate-pulse">
+                      In Progress •{" "}
+                      <span className="font-extrabold ">{occurringEvent}</span>
+                    </span>
+                    {` until ${getHumanReadableDate(
+                      (
+                        eventData.find(
+                          (event) => event.name === occurringEvent
+                        ) || {
+                          end: new Date().getTime(),
+                        }
+                      ).end || ""
+                    )}`}
+                  </>
+                )}
               </div>
             </div>
           </>
         ) : (
           <>
             <div className="flex flex-col justify-center gap-2">
-              <div className="flex flex-row gap-12 justify-between items-center md:justify-center ">
+              <div className="flex flex-row gap-12 items-center justify-center">
                 <h2>This event has ended.</h2>
               </div>
             </div>

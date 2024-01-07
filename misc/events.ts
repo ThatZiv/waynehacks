@@ -9,7 +9,7 @@ export const generateICS = (eventData: Event[]) => {
   const { error, value } = createEvents(
     eventData.map((event) => {
       let s = new Date(event.date);
-      let e = new Date(event.end || event.date + 60 * 60 * 30);
+      let e = new Date(event.end || event.date + 60 * 60 * 15);
       return {
         title: "WayneHacks2: " + event.name,
         start: [
