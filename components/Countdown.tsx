@@ -80,7 +80,7 @@ export const Countdown = () => {
   if (!eventData) return null;
   if (currentEvent === "Loading...") return null;
   return (
-    <Link href="events.ics">
+    <Link href="/events.ics">
       <div className="flex transition-all animate-in flex-col countdown">
         {!isComplete ? (
           <>
