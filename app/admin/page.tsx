@@ -11,7 +11,6 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import whacks2 from "@/public/whacks2-trans.png";
 
 export default async function AdminDash() {
   "use server";

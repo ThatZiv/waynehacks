@@ -52,7 +52,7 @@ export default async function Index() {
           <Image
             width={250}
             height={250}
-            className="mx-auto my-[-80px] text-center transition-all duration-500 ease-in-out transform hover:scale-110"
+            className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
             alt="Wayne Hacks 2 Logo"
             src="/whacks2-trans.png"
           />
