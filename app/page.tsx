@@ -50,8 +50,8 @@ export default async function Index() {
         <div className="flex flex-col gap-8">
           <h2 className="wh-subheading">What is WayneHacks?</h2>
           <Image
-            width={250}
-            height={250}
+            width={200}
+            height={200}
             className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
             alt="Wayne Hacks 2 Logo"
             src="/whacks2-trans.png"
@@ -170,8 +170,8 @@ export default async function Index() {
               <FAQ />
             </div>
           </div>
-          <div className="flex flex-col items-center">
-            <Link href="/events.ics">
+          <div className="flex flex-col items-center gap-4">
+            <Link href="/events.ics" target="_blank">
               <button className="bg-yellow-400 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +188,22 @@ export default async function Index() {
                   />
                 </svg>
                 &nbsp; Add to calendar
+              </button>
+            </Link>
+            <Link href={constants.infoPacket} target="_blank">
+              <button className="bg-green-700 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  color="#000000"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"></path>
+                </svg>
+                &nbsp; Info Packet
               </button>
             </Link>
           </div>
