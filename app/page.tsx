@@ -50,9 +50,9 @@ export default async function Index() {
         <div className="flex flex-col gap-8">
           <h2 className="wh-subheading">What is WayneHacks?</h2>
           <Image
-            width={250}
-            height={250}
-            className="mx-auto my-[-80px] text-center transition-all duration-500 ease-in-out transform hover:scale-110"
+            width={200}
+            height={200}
+            className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
             alt="Wayne Hacks 2 Logo"
             src="/whacks2-trans.png"
           />
@@ -141,6 +141,19 @@ export default async function Index() {
               &nbsp; <strong>Prizes</strong>
             </h2>
           </div>
+          <div className="w-full flex flex-col justify-center h-full">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1042.4215331729667!2d-83.07299140727143!3d42.355029612278685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824d2a41779eb09%3A0xee199848d652faba!2sSaint%20Andrew&#39;s%20Memorial%20Episcopal%20Church!5e0!3m2!1sen!2sus!4v1704741253913!5m2!1sen!2sus"
+              style={{
+                border: 0,
+                maxWidth: "100%",
+                minHeight: 350,
+                borderRadius: 10,
+              }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
           <Splitter />
           <div className="text-lg  text-center w-full flex flex-col">
             <div className="items-center">
@@ -157,8 +170,8 @@ export default async function Index() {
               <FAQ />
             </div>
           </div>
-          <div className="flex flex-col items-center">
-            <Link href="/events.ics">
+          <div className="flex flex-col items-center gap-4">
+            <Link href="/events.ics" target="_blank">
               <button className="bg-yellow-400 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -175,6 +188,22 @@ export default async function Index() {
                   />
                 </svg>
                 &nbsp; Add to calendar
+              </button>
+            </Link>
+            <Link href={constants.infoPacket} target="_blank">
+              <button className="bg-green-700 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="24"
+                  height="24"
+                  color="#000000"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"></path>
+                </svg>
+                &nbsp; Info Packet
               </button>
             </Link>
           </div>

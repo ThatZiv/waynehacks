@@ -13,15 +13,14 @@ export default async function RootLayout({
 }) {
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex content-center">
         <Image
           src={whacks2}
-          width={150}
-          height={100}
+          width={120}
           alt="whacks logo"
-          className="m-[-40px] mb-[-25px]"
+          className="my-6 mx-2"
         />{" "}
-        <h2 className="wh-subheading text-white p-6">Admin Dashboard</h2>
+        <h2 className="wh-subheading text-white my-9">Admin Dashboard</h2>
       </div>
       {children}
     </>

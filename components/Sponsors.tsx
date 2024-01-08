@@ -5,6 +5,7 @@ interface Sponsor {
   name: string;
   link: string;
   logo: string;
+  invertLogo?: boolean;
 }
 
 const sponsors: Sponsor[] = [
@@ -12,11 +13,18 @@ const sponsors: Sponsor[] = [
     name: "Wayne State University - College of Engineering",
     link: "https://engineering.wayne.edu/",
     logo: "/wsu_engin.png",
+    invertLogo: true,
+  },
+  {
+    name: "Wayne State University - Career Services",
+    link: "https://careerservices.wayne.edu/",
+    logo: "/wsu_career.png",
   },
   {
     name: "KLA",
     link: "https://www.kla.com/",
     logo: "/kla.png",
+    invertLogo: true,
   },
 ];
 
@@ -38,7 +46,9 @@ export const Sponsors = () => {
               <Link href={link.toString()} target="_blank">
                 <Image
                   src={sponsor.logo}
-                  className="grayscale invert rounded-md transition-all duration-500 ease-in-out transform hover:scale-110"
+                  className={`grayscale ${
+                    sponsor.invertLogo ? "invert" : ""
+                  } rounded-md transition-all duration-500 ease-in-out transform hover:scale-110`}
                   width={225}
                   height={225}
                   alt={sponsor.name}

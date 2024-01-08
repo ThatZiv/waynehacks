@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
 import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
 import React, { cache } from "react";
-import { Application } from "@/misc/application";
+import { Application, statusEnum } from "@/misc/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
@@ -75,7 +75,9 @@ export default async function Application() {
                   }
                 />
               </div>
-              {application.status?.status === "cancelled" && <RegisterForm />}
+              {application.status?.status === statusEnum.CANCELLED && (
+                <RegisterForm />
+              )}
               <p className="text-xs text-center">
                 If you believe there is anything wrong or have questions
                 regarding your application, feel free to{" "}
@@ -90,47 +92,50 @@ export default async function Application() {
               </p>
 
               <br />
-              <div className="mx-5 border rounded-lg p-5">
-                <h2 className="wh-subheading md:text-left text-center mt-3 mb-4">
-                  Next Steps
-                </h2>
-                <Splitter />
-                <ol className="list-decimal font-thin mx-4 mt-3">
-                  <li>
-                    Please consider viewing our{" "}
-                    <Link
-                      href={constants.infoPacket}
-                      target="_blank"
-                      className="wh-link"
-                    >
-                      information packet
-                    </Link>{" "}
-                    for more important details regarding the event.
-                  </li>
-                  <li>
-                    Join our{" "}
-                    <Link
-                      className="wh-link"
-                      href={constants.discord}
-                      target="_blank"
-                    >
-                      Discord
-                    </Link>{" "}
-                    for more updates.
-                  </li>
-                  <li>
-                    Join our hackathon on{" "}
-                    <Link
-                      href={constants.devpost}
-                      className="wh-link"
-                      target="_blank"
-                    >
-                      DevPost
-                    </Link>
-                    . This is where you will submit your project.
-                  </li>
-                </ol>
-              </div>
+              {application.status?.status === statusEnum.ACCEPTED && (
+                <div className="mx-5 border rounded-lg p-5">
+                  <h2 className="wh-subheading md:text-left text-center mt-3 mb-4">
+                    Congrats! 🥳🎉
+                  </h2>
+                  <p>Here are next steps to be ready...</p>
+                  <Splitter />
+                  <ol className="list-decimal font-thin mx-4 mt-3">
+                    <li>
+                      Join our{" "}
+                      <Link
+                        className="wh-link"
+                        href={constants.discord}
+                        target="_blank"
+                      >
+                        Discord
+                      </Link>{" "}
+                      for more updates.
+                    </li>
+                    <li>
+                      Join our hackathon on{" "}
+                      <Link
+                        href={constants.devpost}
+                        className="wh-link"
+                        target="_blank"
+                      >
+                        DevPost
+                      </Link>
+                      . This is where you will submit your project.
+                    </li>
+                    <li>
+                      Please consider viewing our{" "}
+                      <Link
+                        href={constants.infoPacket}
+                        target="_blank"
+                        className="wh-link"
+                      >
+                        information packet
+                      </Link>{" "}
+                      for more important details regarding the event.
+                    </li>
+                  </ol>
+                </div>
+              )}
             </div>
           </>
         ) : (
