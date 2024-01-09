@@ -4,6 +4,7 @@ import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
 import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
+import AboutUs from "@/components/aboutUs"
 import constants from "@/misc/constants";
 import Image from "next/image";
 import { SupabaseFunctions } from "@/misc/functions";
@@ -163,6 +164,8 @@ export default async function Index() {
               </div>
             </div>
           </div>
+          <Splitter />
+          <AboutUs />
           <Splitter />
           <div className="text-lg font-bold text-center w-full flex flex-col">
             <h2 className="wh-subheading">FAQ</h2>
