@@ -58,6 +58,17 @@ export default async function AdminDash() {
                 applications need action
               </Link>
             </h2>
+            {/* shows number of check-in */}
+            <h2 className="text-white text-2xl font-light">
+              <strong>
+                {
+                  applications?.filter(
+                    (data: StatusApplication) => data.checked_in === true
+                  ).length
+                }
+              </strong>{" "}
+              checked in
+            </h2>
           </div>
         </div>
         <Link
