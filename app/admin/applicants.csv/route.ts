@@ -42,6 +42,8 @@ export async function GET(request: Request) {
     Object.keys(statuses[0]).join(",") +
     "\n";
 
+  let numApps = 0;
+
   applications.map((application) => {
     const statusEntry = statuses.find(
       (e) => e.applicant_id === application.applicant_id
@@ -67,7 +69,15 @@ export async function GET(request: Request) {
         })
         .join(",") +
       "\n";
+    numApps++;
   });
+  final += `\n\nApplications,Time\n${numApps}/${
+    applications.length
+  },${new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+  })}\n\nThis report was generated at ${
+    process.env.NEXT_PUBLIC_BASE_URL
+  }}/admin/applicants.csv`;
   let res = new Response(final, { status: 200 });
   res.headers.set("Content-Type", "text/csv");
   return res;
