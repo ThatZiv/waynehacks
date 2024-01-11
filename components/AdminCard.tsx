@@ -17,7 +17,9 @@ export function createEmailURI(obj: {
 \t- Join DevPost: ${process.env.NEXT_PUBLIC_BASE_URL}/devpost
 \nTo withdraw your application, visit ${process.env.NEXT_PUBLIC_BASE_URL}/application and click "Withdraw Application"`;
   let body = encodeURIComponent(`Hey ${obj.full_name}, 
-Your application has been ${status}.\n\n${obj.note}\n\n${nextSteps}\n\nBest,\nWayneHacks Team`);
+Your application has been ${status}.\n\n${obj.note}\n\n${
+    status === statusEnum.ACCEPTED ? nextSteps : ""
+  }\n\nBest,\nWayneHacks Team`);
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
   return `mailto:${obj.email}?subject=${subject}&cc=${constants.supportEmail}&body=${body}`;
 }
