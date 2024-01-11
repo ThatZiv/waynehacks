@@ -63,6 +63,7 @@ export async function GET(request: Request) {
           return csvFix(e);
         })
         .join(",") +
+      "," +
       Object.values(statusEntry)
         .map((e) => {
           return csvFix(e);
@@ -75,7 +76,7 @@ export async function GET(request: Request) {
     applications.length
   },${new Date().toLocaleString("en-US", {
     timeZone: "America/New_York",
-  })}\n\nThis report was generated at ${process.env.NEXT_PUBLIC_BASE_URL}}/${
+  })}\n\nThis report was generated at ${process.env.NEXT_PUBLIC_BASE_URL}${
     url.pathname
   }${url.search}`;
   let res = new Response(final, { status: 200 });
