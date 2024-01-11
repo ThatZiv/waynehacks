@@ -14,7 +14,8 @@ export function createEmailURI(obj: {
   let status = obj.status.toUpperCase();
   const nextSteps = `Next Steps: \n\t- View information packet: ${process.env.NEXT_PUBLIC_BASE_URL}/packet
 \t- Join Discord: ${process.env.NEXT_PUBLIC_BASE_URL}/discord
-\t- Join DevPost: ${process.env.NEXT_PUBLIC_BASE_URL}/devpost`;
+\t- Join DevPost: ${process.env.NEXT_PUBLIC_BASE_URL}/devpost
+\nTo withdraw your application, visit ${process.env.NEXT_PUBLIC_BASE_URL}/application and click "Withdraw Application"`;
   let body = encodeURIComponent(`Hey ${obj.full_name}, 
 Your application has been ${status}.\n\n${obj.note}\n\n${nextSteps}\n\nBest,\nWayneHacks Team`);
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
