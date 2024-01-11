@@ -21,9 +21,11 @@ export const cancelApplication = async (e: FormData) => {
     return redirect("/application?error=" + error.message);
   }
   revalidatePath("/application");
+  let adminUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/admin/application/${applicant_id}`;
   await new DiscordWebhook().send(
     "Application Cancelled",
-    `[${applicant_id}](${process.env.NEXT_PUBLIC_BASE_URL}/admin/application/${applicant_id}) has withdrawn their application`
+    `[${applicant_id}](${adminUrl}) has withdrawn their application`,
+    adminUrl
   );
   return redirect(
     "/application?message=Your application has been withdrawn (cancelled)"
