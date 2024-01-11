@@ -29,6 +29,11 @@ export const events: Event[] = [
     name: "Team Matchmaking (Find a Team)",
   },
   {
+    date: _("January 13, 2024 13:00:00"),
+    end: _("January 13, 2024 14:00:00"),
+    name: "Lunch",
+  },
+  {
     date: _("January 13, 2024 15:00:00"),
     end: _("January 13, 2024 16:00:00"),
     name: "Networking Event",
