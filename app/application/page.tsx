@@ -18,6 +18,7 @@ import { SupabaseFunctions } from "@/misc/functions";
 import constants from "@/misc/constants";
 import markdown from "@/misc/markdown";
 import Link from "next/link";
+import { cancelApplication } from "@/actions/cancelApplication";
 
 export const metadata = {
   title: "WayneHacks Application",
@@ -97,7 +98,7 @@ export default async function Application() {
                   <h2 className="wh-subheading md:text-left text-center mt-3 mb-4">
                     Congrats! 🥳🎉
                   </h2>
-                  <p>Here are next steps to be ready...</p>
+                  <p>Here are your next steps...</p>
                   <Splitter />
                   <ol className="list-decimal font-thin mx-4 mt-3">
                     <li>
@@ -137,6 +138,24 @@ export default async function Application() {
                 </div>
               )}
             </div>
+            {application.status?.status === statusEnum.APPLIED && (
+              // TODO: add a confirmation
+              <div className="flex justify-center">
+                <form
+                  action={cancelApplication}
+                  className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-white hover:animate-pulse text-center"
+                >
+                  <input
+                    type="hidden"
+                    name="applicant_id"
+                    value={application.applicant_id}
+                  />
+                  <button className="w-full h-full text-center">
+                    Withdraw application
+                  </button>
+                </form>
+              </div>
+            )}
           </>
         ) : (
           <RegisterForm />
