@@ -18,7 +18,8 @@ The site features:
   - Application submission
   - Application status updates
 - Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
-- \***\*Costs 0 freakin dollars to run\*\***
+- Administrator Live [(realtime)](https://supabase.com/docs/guides/realtime) application dashboard for [admins](https://waynehacks.com/admin/applications)
+- **Costs 0 freakin dollars to run**
 
 ## Technicalities
 
