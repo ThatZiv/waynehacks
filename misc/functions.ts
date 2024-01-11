@@ -131,3 +131,30 @@ export const hcaptchaCheck = async (token: string) => {
   const verifyJson = await verifyResp.json();
   return verifyJson.success;
 };
+
+/**
+ * Capitalizes the first letter of each word in a string
+ * @param {string} str
+ * @returns {string}
+ */
+export const capitalize = (str: string) =>
+  str
+    .split(" ")
+    .map((word) => {
+      const dontCapitalize = [
+        "of",
+        "a",
+        "the",
+        "or",
+        "for",
+        "nor",
+        "but",
+        "yet",
+        "and",
+      ];
+      if (dontCapitalize.includes(word.toLowerCase())) {
+        return word.toLowerCase();
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(" ");
