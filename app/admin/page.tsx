@@ -17,7 +17,8 @@ export default async function AdminDash() {
   const supabase = createServerComponentClient({ cookies });
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
-    .select("*, applications(*)");
+    .select("*, applications(*)")
+    .returns<StatusApplication[]>();
   // .order("status", { ascending: true });
   if (applicationsError)
     return <div className="text-white">Failed to load applications...</div>;
@@ -57,6 +58,16 @@ export default async function AdminDash() {
                 }{" "}
                 applications need action
               </Link>
+            </h2>
+            {/* shows number of check-in */}
+            <h2 className="text-white text-2xl font-light">
+              <strong>
+                {
+                  applications?.filter((data) => data.checked_in === true)
+                    .length
+                }
+              </strong>{" "}
+              checked in
             </h2>
           </div>
         </div>

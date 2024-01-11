@@ -26,6 +26,12 @@ const sponsors: Sponsor[] = [
     logo: "/kla.png",
     invertLogo: true,
   },
+  {
+    name: "Google Cloud",
+    link: "https://cloud.google.com/",
+    invertLogo: true,
+    logo: "/gc.png",
+  },
 ];
 
 export const Sponsors = () => {
