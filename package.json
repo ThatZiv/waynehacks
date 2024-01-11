@@ -21,7 +21,7 @@
     "chart.js": "^4.4.0",
     "ics": "^3.7.2",
     "marked": "^9.1.5",
-    "next": "^14.0.1",
+    "next": "^14.0.4",
     "postcss": "8.4.24",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
@@ -35,7 +35,7 @@
     "@types/react-dom": "^18.2.14",
     "encoding": "^0.1.13",
     "eslint": "8.53.0",
-    "eslint-config-next": "^14.0.1",
+    "eslint-config-next": "^14.0.4",
     "supabase": "^1.93.0"
   }
 }
