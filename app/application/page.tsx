@@ -138,24 +138,25 @@ export default async function Application() {
                 </div>
               )}
             </div>
-            {application.status?.status === statusEnum.APPLIED && (
-              // TODO: add a confirmation
-              <div className="flex justify-center">
-                <form
-                  action={cancelApplication}
-                  className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-white hover:animate-pulse text-center"
-                >
-                  <input
-                    type="hidden"
-                    name="applicant_id"
-                    value={application.applicant_id}
-                  />
-                  <button className="w-full h-full text-center">
-                    Withdraw application
-                  </button>
-                </form>
-              </div>
-            )}
+            {application.status?.status !== statusEnum.CANCELLED &&
+              application.status?.status !== statusEnum.REJECTED && (
+                // TODO: add a confirmation
+                <div className="flex justify-center">
+                  <form
+                    action={cancelApplication}
+                    className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-white hover:animate-pulse text-center"
+                  >
+                    <input
+                      type="hidden"
+                      name="applicant_id"
+                      value={application.applicant_id}
+                    />
+                    <button className="w-full h-full text-center">
+                      Withdraw application
+                    </button>
+                  </form>
+                </div>
+              )}
           </>
         ) : (
           <RegisterForm />
