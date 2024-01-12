@@ -48,12 +48,13 @@ export default async function Application() {
     );
   const whacks = new SupabaseFunctions(supabase);
   const canRegister = await whacks.getConfigValue("canRegister");
-  if (!canRegister) redirect("/?message=Applications are currently closed.");
   //@ts-expect-error we handle if its null
   const application = (await getApplication()).data[0] as
     | Application
     | undefined;
 
+  if (!canRegister && !application)
+    redirect("/?message=Applications are currently closed.");
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-white">
@@ -76,9 +77,8 @@ export default async function Application() {
                   }
                 />
               </div>
-              {application.status?.status === statusEnum.CANCELLED && (
-                <RegisterForm />
-              )}
+              {application.status?.status === statusEnum.CANCELLED &&
+                canRegister && <RegisterForm />}
               <p className="text-xs text-center">
                 If you believe there is anything wrong or have questions
                 regarding your application, feel free to{" "}
