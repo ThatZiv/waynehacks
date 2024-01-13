@@ -19,7 +19,7 @@ export function createEmailURI(obj: {
   let body = encodeURIComponent(`Hey ${obj.full_name}, 
 Your application has been ${status}.\n\n${obj.note}\n\n${
     status.toLowerCase() === statusEnum.ACCEPTED ? nextSteps : ""
-  }\n\nBest,\nWayneHacks Team`);
+  }Best,\nWayneHacks Team`);
   let subject = encodeURIComponent(`WayneHacks Application ${status}`);
   return `mailto:${obj.email}?subject=${subject}&cc=${constants.supportEmail}&body=${body}`;
 }
