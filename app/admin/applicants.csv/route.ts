@@ -37,8 +37,11 @@ export async function GET(request: Request) {
     console.error(error, statusError);
     return failedRes;
   }
-  let final = Object.keys(applications[0]).join(",") + ",";
-  Object.keys(statuses[0]).join(",") + "\n";
+  let final =
+    Object.keys(applications[0]).join(",") +
+    "," +
+    Object.keys(statuses[0]).join(",") +
+    "\n";
 
   let numApps = 0;
 
