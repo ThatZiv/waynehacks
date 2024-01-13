@@ -1,5 +1,4 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { unstable_cache } from "next/cache";
 import { cookies } from "next/headers";
 import Spinner from "./Spinner";
 import { SupabaseFunctions } from "@/misc/functions";
@@ -16,15 +15,15 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
     const supabase = createServerComponentClient({ cookies });
     const whacks = new SupabaseFunctions(supabase);
     const canRegister = await whacks.getConfigValue("canRegister");
-    if (!canRegister)
-      return (
-        <Link
-          href="/login?signup=true"
-          className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
-        >
-          Sign Up
-        </Link>
-      );
+    // if (!canRegister)
+    //   return (
+    //     <Link
+    //       href="/login?signup=true"
+    //       className="bg-foreground py-3 px-6 rounded-lg font-mono text-xlg font-bold text-background transition-all hover:bg-[#fc0] hover:px-12"
+    //     >
+    //       Sign Up
+    //     </Link>
+    //   );
     const applicants = await whacks.getApplicants();
     return (
       <div>
@@ -59,8 +58,9 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
         </div>
         {!nonInteractive && (
           <Link
+            aria-disabled={!canRegister}
             href="/application"
-            className="py-3 px-11 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black bg-[#fc0] hover:bg-foreground hover:px-16"
+            className={`py-3 px-11 disabled:opacity-50 rounded-lg font-mono text-xlg font-bold text-background transition-all dark:hover:text-black bg-[#fc0] hover:bg-foreground hover:px-16`}
           >
             Apply
           </Link>
