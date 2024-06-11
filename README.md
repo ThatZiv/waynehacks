@@ -1,4 +1,4 @@
-# WayneHacks CMS
+# WayneHacks Management Platform
 
 <img width=200 height=200 src="https://www.waynehacks.com/favicon.png"/>
 
@@ -17,7 +17,7 @@ The site features:
   - User sign up
   - Application submission
   - Application status updates
-- Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
+- Administrator dashboard for [admins](https://waynehacks.com/admin)
 - Administrator Live [(realtime)](https://supabase.com/docs/guides/realtime) application dashboard for [admins](https://waynehacks.com/admin/applications)
 - **Costs 0 freakin dollars to run**
 
