@@ -4,7 +4,7 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { DiscordWebhook } from "@/misc/functions";
+import { Notifier } from "@/misc/webhook/WebhookService";
 
 export const cancelApplication = async (e: FormData) => {
   const applicant_id = e.get("applicant_id");
@@ -22,7 +22,7 @@ export const cancelApplication = async (e: FormData) => {
   }
   revalidatePath("/application");
   let adminUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/admin/application/${applicant_id}`;
-  await new DiscordWebhook().send(
+  await Notifier.send(
     "Application Cancelled",
     `[${applicant_id}](${adminUrl}) has withdrawn their application`,
     adminUrl

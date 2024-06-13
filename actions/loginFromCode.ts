@@ -1,6 +1,7 @@
 "use server";
 
-import { DiscordWebhook, hcaptchaCheck } from "@/misc/functions";
+import { hcaptchaCheck } from "@/misc/functions";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -29,7 +30,7 @@ export default async function loginFromCode(e: FormData) {
   } finally {
     revalidatePath("/confirm-account");
   }
-  await new DiscordWebhook().send(
+  await Notifier.send(
     `User confirmed`,
     `||${String(email)}|| has confirmed their account.`
   );

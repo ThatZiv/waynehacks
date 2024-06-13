@@ -1,5 +1,5 @@
 import { SupabaseFunctions } from "@/misc/functions";
-import { DiscordWebhook } from "@/misc/webhook/DiscordWebhook";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
     try {
-      await new DiscordWebhook().send(
+      await Notifier.send(
         `New application`,
         toDiscord,
         `${requestUrl.origin}/admin/application/${user?.id}`
