@@ -1,4 +1,5 @@
-import { DiscordWebhook, SupabaseFunctions } from "@/misc/functions";
+import { SupabaseFunctions } from "@/misc/functions";
+import { DiscordWebhook } from "@/misc/webhook/DiscordWebhook";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";

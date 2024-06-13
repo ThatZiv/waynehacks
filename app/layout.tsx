@@ -97,10 +97,7 @@ export default async function RootLayout({
           <React.Suspense fallback={<GenericFallback />}>
             <Nav />
             <Messages />
-            <span className="drop-shadow-md backdrop-filter backdrop-blur-md hover:backdrop-blur-lg">
-              {/* FIXME: blur doesn't match waynehackshacks logo comps */}
-              {children}
-            </span>
+            {children}
             <Analytics />
           </React.Suspense>
           <Footer />
