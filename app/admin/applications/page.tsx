@@ -133,13 +133,13 @@ export default function Applications() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   if (pageStatus === "error")
-    return <div className="text-white">Failed to load applications...</div>;
+    return <div className="text-dark">Failed to load applications...</div>;
   return pageStatus == "loading" ? (
     <Spinner />
   ) : (
     <div className="w-full xl:w-[90%]">
       <Back href="/admin" />
-      <h1 className="text-white text-center md:text-left text-xl mx-5 my-2">
+      <h1 className="text-dark text-center md:text-left text-xl mx-5 my-2">
         All applications
       </h1>
       <Link
@@ -148,7 +148,7 @@ export default function Applications() {
       >
         Export as CSV
       </Link>
-      <span className="text-xs text-slate-300 ">
+      <span className="text-xs text-gray-600 ">
         NOTE:{" "}
         <span className="animate-pulse">
           This page is <b>live</b>. Changes to data will be reflected in

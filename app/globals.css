@@ -7,14 +7,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* stack multiple svg backgrounds on top so as the user scrolls down a page, they have multiple backgrounds */
 body {
-  background-repeat: repeat;
+  font-size: larger;
+  background-repeat: no-repeat;
   --webkit-background-size: auto;
   --moz-background-size: auto;
   --o-background-size: auto;
-  background-size: auto;
-  /* background: rgb(18, 31, 18); */
-  background: radial-gradient(circle, rgba(18, 31, 18, 1) 0%, rgba(9, 9, 9, 1) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #edf4ed;
+  background: url('/background.svg');
+  background-size: cover;
 }
 
 @font-face {
@@ -54,20 +58,20 @@ body {
 
 @layer components {
   .wh-link {
-    @apply text-yellow-400;
+    @apply text-rose-500;
     @apply hover:underline;
     @apply hover:cursor-pointer
   }
 
   .wh-btn {
-    @apply bg-yellow-400;
+    @apply bg-rose-600;
     @apply rounded;
     @apply px-4;
     @apply py-2;
-    @apply text-black;
+    @apply text-white;
     @apply font-bold;
     @apply mb-2;
-    @apply hover:bg-yellow-300;
+    @apply hover:bg-rose-500;
     @apply disabled:cursor-wait;
     @apply transition-all;
   }
@@ -104,7 +108,7 @@ details summary::-webkit-details-marker {
 
 
 details[open] summary {
-  background: theme('colors.green.900');
+  background: theme('colors.rose.800');
   color: white
 }
 
@@ -159,7 +163,7 @@ details[open] summary p {
   border-radius: 10px;
   transition: all 0.1s ease-in;
   cursor: pointer;
-  border: 1px solid theme('colors.yellow.600');
+  border: 1px solid theme('colors.rose.600');
 }
 
 .countdown {

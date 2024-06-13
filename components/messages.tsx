@@ -30,15 +30,17 @@ export default function Messages() {
   const errorDesc = searchParams.get("error_description"); // bc supabase sends urls in hash because of "security"
 
   const message = searchParams.get("message");
+  if (!error && !errorDesc && !message) return;
+
   return (
     <>
       {(errorDesc || error) && (
-        <p className="my-4 p-4 rounded-md animate-pulse bg-red-900 text-neutral-200 text-center">
+        <p className="p-4 w-full animate-pulse bg-red-900 text-neutral-200 text-center">
           {errorDesc || error}
         </p>
       )}
       {message && (
-        <p className="my-4 p-4 rounded-md text-black font-semibold bg-neutral-200 text-center">
+        <p className="p-4 w-full text-black font-semibold bg-neutral-200 text-center">
           {message}
         </p>
       )}

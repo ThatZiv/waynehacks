@@ -1,4 +1,4 @@
-import { DiscordWebhook } from "@/misc/functions";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -31,10 +31,7 @@ export async function POST(request: Request) {
       },
     });
     if (error) throw error;
-    await new DiscordWebhook().send(
-      `New sign up`,
-      `||${email}|| has signed up.`
-    );
+    await Notifier.send(`New sign up`, `||${email}|| has signed up.`);
   } catch (error: any) {
     let err = error.message;
     return NextResponse.redirect(`${requestUrl.origin}/login?error=${err}`, {

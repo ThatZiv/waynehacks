@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Messages from "../components/messages";
 import React from "react";
@@ -13,7 +14,7 @@ export const metadata = {
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
   description:
-    "WayneHacks is a 24-hour in-person or hybrid Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
+    "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
   openGraph: {
     title: "WayneHacks",
     description:
@@ -35,6 +36,12 @@ export const metadata = {
     themeColor: "#000000",
   },
 };
+
+const stratum = localFont({
+  src: "/fonts/stratum2-regular.ttf",
+  display: "swap",
+  weight: "900",
+});
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -66,7 +73,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${robotoMono.variable} font-sans`}
+      className={`${stratum.className} ${robotoMono.variable} font-sans`}
     >
       <head>
         <link

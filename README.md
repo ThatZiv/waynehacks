@@ -1,4 +1,4 @@
-# WayneHacks CMS
+# WayneHacks Management Platform
 
 <img width=200 height=200 src="https://www.waynehacks.com/favicon.png"/>
 
@@ -17,7 +17,7 @@ The site features:
   - User sign up
   - Application submission
   - Application status updates
-- Administrator CMS dashboard for [admins](https://waynehacks.com/admin)
+- Administrator dashboard for [admins](https://waynehacks.com/admin)
 - Administrator Live [(realtime)](https://supabase.com/docs/guides/realtime) application dashboard for [admins](https://waynehacks.com/admin/applications)
 - **Costs 0 freakin dollars to run**
 
@@ -61,12 +61,15 @@ npm run dev
 
 ## Branding
 
+<details>
+<summary>WayneHacks 2</summary>
+
 ### Colors
 
-- ![#FACC15](https://via.placeholder.com/15/FACC15/000000?text=+) `#FACC15` - Gold
-- ![#14532d](https://via.placeholder.com/15/14532d/000000?text=+) `#14532d` - Dark Green
-- ![#000000](https://via.placeholder.com/15/000000/000000?text=+) `#000000` - Black
-- ![#FFFFFF](https://via.placeholder.com/15/FFFFFF/000000?text=+) `#FFFFFF` - White
+- ![#FACC15](https://placehold.co/15x15/FACC15/FACC15.png) `#FACC15` - Gold
+- ![#14532d](https://placehold.co/15x15/14532d/14532d.png) `#14532d` - Dark Green
+- ![#000000](https://placehold.co/15x15/000000/000000.png) `#000000` - Black
+- ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `#FFFFFF` - White
 
 ### Fonts
 
@@ -79,5 +82,47 @@ npm run dev
   Primary Transparent Logo (PNG)
 - ![WayneHacks Logo](public/android-chrome-512x512.png) Logo with background
 - ![Banner](https://i.imgur.com/l4TRXB4.png) Banner with background
+
+</details>
+
+<details>
+<summary>WayneHacks 3</summary>
+
+### Colors
+
+- ![#df0046](https://placehold.co/15x15/df0046/df0046.png) `#df0046` - Rose
+- ![#e5888c](https://placehold.co/15x15/e5888c/e5888c.png) `#e5888c` - Light[er] rose (accent)
+- ![#353535](https://placehold.co/15x15/353535/353535.png) `#353535` - Gray
+- ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `#FFFFFF` - White
+
+### Fonts
+
+- [Stratum](https://fonts.adobe.com/fonts/stratum) - Primary Font
+- [Blinker](https://fonts.google.com/specimen/Blinker) - Secondary Font
+
+## Graphics
+
+- ![WayneHacks Logo](public/whacks3_trans.png)
+  Primary Transparent Logo (PNG)
+- ![Banner](https://i.imgur.com/raO795F.png) Banner with background
+- ![Banner-transparent](https://i.imgur.com/ya6yuCM.png) Transparent banner
+
+## Setup (Backend)
+
+1. Follow the instructions for [self-hosting](https://supabase.com/docs/guides/self-hosting/docker) Supabase to setup the local dev environment.
+
+2. Follow the migration [guide](https://supabase.com/docs/guides/cli/local-development).
+
+3. Create a `.env` file in the project's root. Reach out to @ThatZiv for the contents of this file.
+
+4. Run the following command to start the backend server:
+
+```sh
+npx supabase start
+```
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are welcome.
 
 ---

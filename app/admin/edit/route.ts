@@ -1,5 +1,5 @@
 import { createEmailURI } from "@/components/AdminCard";
-import { DiscordWebhook } from "@/misc/functions";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
     //   note: String(e.get("note")),
     //   full_name: String(e.get("full_name")),
     // })
-    await new DiscordWebhook().send(
+    await Notifier.send(
       `Application update by ${user?.email}`,
       `${e.get("email")} status is now **${e.get("status")}** \n\`${e.get(
         "note"

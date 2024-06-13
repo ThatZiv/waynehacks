@@ -7,10 +7,9 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
 import React, { cache } from "react";
-import { Application, statusEnum } from "@/misc/application";
+import { type Application, statusEnum } from "@/misc/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
@@ -57,7 +56,7 @@ export default async function Application() {
     redirect("/?message=Applications are currently closed.");
   return (
     <div className="w-full flex flex-col items-center">
-      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-white">
+      <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 text-dark">
         <Back />
         <WayneHacksLogo />
 
@@ -144,14 +143,14 @@ export default async function Application() {
                 <div className="flex justify-center">
                   <form
                     action={cancelApplication}
-                    className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-white hover:animate-pulse text-center"
+                    className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-dark hover:animate-pulse text-center"
                   >
                     <input
                       type="hidden"
                       name="applicant_id"
                       value={application.applicant_id}
                     />
-                    <button className="w-full h-full text-center">
+                    <button className="w-full text-white h-full text-center">
                       Withdraw application
                     </button>
                   </form>
@@ -173,7 +172,7 @@ function Card(props: {
   date: Date;
 }) {
   return (
-    <div className="relative flex flex-col group shadow-lg rounded-lg border border-gray-700 p-5 hover:border-foreground">
+    <div className="relative flex flex-col group shadow-md rounded-lg border transition-all border-gray-700 p-5 hover:shadow-xl">
       <span className="flex items-center space-x-3 mb-4">
         <svg
           width="24"
@@ -215,7 +214,7 @@ function Card(props: {
           >
             <polyline points="9 18 15 12 9 6" />
           </svg> */}
-          <p className="text-gray-400 text-xs">
+          <p className="text-gray-600 text-xs">
             Last updated <i>{props.date.toLocaleString()}</i>
           </p>
         </div>
@@ -239,7 +238,7 @@ async function RegisterForm() {
       method="post"
       className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
     >
-      <label className="text-md text-white" htmlFor="full_name">
+      <label className="text-md text-dark" htmlFor="full_name">
         Full name
       </label>
       <input
@@ -248,7 +247,7 @@ async function RegisterForm() {
         placeholder="John Doe"
         required
       />
-      <label className="text-md text-white" htmlFor="graduation_year">
+      <label className="text-md text-dark" htmlFor="graduation_year">
         Graduation year
       </label>
       <input
@@ -257,7 +256,7 @@ async function RegisterForm() {
         placeholder="2025"
         required
       />
-      <label className="text-md text-white" htmlFor="university">
+      <label className="text-md text-dark" htmlFor="university">
         College/University
       </label>
       <select
@@ -279,7 +278,7 @@ async function RegisterForm() {
         ))}
       </select>
 
-      <label className="text-md text-white" htmlFor="major">
+      <label className="text-md text-dark" htmlFor="major">
         Major
       </label>
       <select
@@ -296,7 +295,7 @@ async function RegisterForm() {
           </option>
         ))}
       </select>
-      <label className="text-md text-white" htmlFor="phone_number">
+      <label className="text-md text-dark" htmlFor="phone_number">
         Phone number
       </label>
       <input
@@ -305,7 +304,7 @@ async function RegisterForm() {
         placeholder="2485243477"
         required
       />
-      <label className="text-md text-white" htmlFor="diet">
+      <label className="text-md text-dark" htmlFor="diet">
         Dietary restrictions
       </label>
       <input
@@ -313,7 +312,7 @@ async function RegisterForm() {
         className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
         placeholder="Vegan, Kosher, Halal, etc."
       />
-      <label className="text-md text-white" htmlFor="student_id">
+      <label className="text-md text-dark" htmlFor="student_id">
         Student ID{" "}
         <span className="text-xs italic text-gray-400">
           (If you don&apos;t have one, please enter your school email)

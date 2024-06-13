@@ -2,3 +2,4 @@
 .branches
 .temp
 dump.sql
+seed.sql
