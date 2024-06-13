@@ -80,4 +80,22 @@ npm run dev
 - ![WayneHacks Logo](public/android-chrome-512x512.png) Logo with background
 - ![Banner](https://i.imgur.com/l4TRXB4.png) Banner with background
 
+## Setup (Backend)
+
+1. Follow the instructions for [self-hosting](https://supabase.com/docs/guides/self-hosting/docker) Supabase to setup the local dev environment.
+
+2. Follow the migration [guide](https://supabase.com/docs/guides/cli/local-development).
+
+3. Create a `.env` file in the project's root. Reach out to @ThatZiv for the contents of this file.
+
+4. Run the following command to start the backend server:
+
+```sh
+npx supabase start
+```
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are welcome.
+
 ---

@@ -85,7 +85,7 @@ export default function Login() {
         value={{ pending, setPending, action, setAction, params }}
       >
         <form
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-white"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
           action={action}
           method="post"
         >
@@ -147,7 +147,7 @@ export default function Login() {
                 />
                 <label
                   htmlFor="checked-checkbox"
-                  className="ml-2 text-sm font-medium text-white dark:text-gray-300"
+                  className="ml-2 text-sm font-medium text-black dark:text-gray-700"
                 >
                   Sign Up?
                 </label>
@@ -183,7 +183,7 @@ export default function Login() {
         Forgot password?
       </p>
       {token && (
-        <div className="text-center text-xs text-white mt-2 w-full">
+        <div className="text-center text-xs text-black mt-2 w-full">
           Didn&apos;t receive an email from us? Check your junk/spam folder or{" "}
           <a
             href={`mailto:${constants.supportEmail}?subject=WayneHacks Email Failure&body=I did not receive an email from you.`}

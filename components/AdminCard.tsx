@@ -149,7 +149,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
   if (data.applications.email === "none") {
     // they will need to refresh
     return (
-      <div className="text-white p-5 border rounded-lg">
+      <div className="text-dark p-5 border rounded-lg">
         Please refresh to view this record for id:{" "}
         <Link
           className="wh-link"
@@ -216,7 +216,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
             >
               {statuses.map((status) => (
                 <option
-                  className="bg-[#1E1E1E] text-white font-sans"
+                  className="bg-[#1E1E1E] text-dark font-sans"
                   key={status + data.applicant_id}
                   defaultValue={status.toLowerCase()}
                   selected={formData.status.toUpperCase() == status}
@@ -302,7 +302,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
                   </table>
                 </div>
               ) : (
-                <p className="text-white">
+                <p className="text-dark">
                   Please refresh to view this record...
                 </p>
               )}

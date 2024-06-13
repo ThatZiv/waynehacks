@@ -20,7 +20,7 @@ export default async function AdminDash({
     .returns<StatusApplication[]>();
   // .order("status", { ascending: true });
   if (applicationsError)
-    return <div className="text-white">Failed to load applications...</div>;
+    return <div className="text-dark">Failed to load applications...</div>;
   // get metric to get from query params for graph visual
   const availableMetrics = ["university", "major", "graduation_year", "diet"];
   const metricToGet = searchParams["metric"] || "";
@@ -58,7 +58,7 @@ export default async function AdminDash({
       <div className="text-center justify-center">
         <div className="">
           <div className="p-5 m-2">
-            <h2 className="text-white text-center text-3xl font-light">
+            <h2 className="text-dark text-center text-3xl font-light">
               <strong>{numUsers}</strong> users -{" "}
               <strong>{applications?.length}</strong> application
               {applications?.length == 1 ? "" : "s"}
@@ -74,7 +74,7 @@ export default async function AdminDash({
               </Link>
             </h2>
             {/* shows number of check-in */}
-            <h2 className="text-white text-2xl font-light">
+            <h2 className="text-dark text-2xl font-light">
               <strong>
                 {
                   applications?.filter((data) => data.checked_in === true)
@@ -126,7 +126,7 @@ export default async function AdminDash({
               {/* metric dropdown input for application fields */}
               <select
                 name="metric"
-                className="bg-[#1c1c1c] text-white hover:bg-black cursor-pointer rounded-lg shadow-lg p-5 m-2"
+                className="bg-[#1c1c1c] text-white cursor-pointer rounded-lg shadow-lg p-5 m-2"
               >
                 {availableMetrics.map((_metric) => (
                   <option

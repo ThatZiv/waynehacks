@@ -16,7 +16,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="dark:text-white flex h-screen text-black text-center">
+    <div className="dark:text-dark flex h-screen text-black text-center">
       <div className="m-auto">
         <h1 className="text-xl">Something went wrong...</h1>
         <button

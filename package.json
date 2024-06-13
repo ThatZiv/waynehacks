@@ -7,7 +7,7 @@
     "supabase": "supabase",
     "supabase:link": "supabase link --project-ref oigkwzgmkrdakqwaaedi --debug",
     "supabase:db-pull": "supabase db pull",
-    "supabase:db-dump": "supabase db dump --data-only > supabase/dump.sql",
+    "supabase:db-dump": "supabase db dump --data-only > supabase/seed.sql",
     "supabase:db-schema-apply": "supabase db remote commit",
     "lint": "next lint"
   },
