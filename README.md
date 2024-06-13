@@ -103,7 +103,8 @@ npm run dev
 
 - ![WayneHacks Logo](public/whacks3_trans.png)
   Primary Transparent Logo (PNG)
-- ![Banner]() Banner with background
+- ![Banner](https://i.imgur.com/raO795F.png) Banner with background
+- ![Banner-transparent](https://i.imgur.com/ya6yuCM.png) Transparent banner
 
 ## Setup (Backend)
 
