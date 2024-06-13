@@ -91,6 +91,7 @@ npm run dev
 ### Colors
 
 - ![#df0046](https://placehold.co/15x15/df0046/df0046.png) `#df0046` - Rose
+- ![#e5888c](https://placehold.co/15x15/e5888c/e5888c.png) `#e5888c` - Light[er] rose (accent)
 - ![#353535](https://placehold.co/15x15/353535/353535.png) `#353535` - Gray
 - ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `#FFFFFF` - White
 

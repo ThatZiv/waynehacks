@@ -79,7 +79,7 @@ export default function Login() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
 
   return (
-    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
+    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <Back />
       <FormContext.Provider
         value={{ pending, setPending, action, setAction, params }}
