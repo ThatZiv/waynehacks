@@ -77,7 +77,10 @@ export default function Login() {
     params.get("signup") === "true"
   );
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
-
+  const title = React.useMemo(() => {
+    if (showForgetPassword) return "Forget password";
+    return isSignup ? "Create an account" : "Log in";
+  }, [isSignup, showForgetPassword]);
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <Back />
@@ -91,9 +94,7 @@ export default function Login() {
         >
           <div className="mb-12">
             <WayneHacksLogo />
-            <h2 className="wh-subheading mt-5">
-              {isSignup ? "Create an account" : "Log in"}
-            </h2>
+            <h2 className="wh-subheading mt-5">{title}</h2>
           </div>
 
           <label className="text-md" htmlFor="email">
@@ -180,7 +181,7 @@ export default function Login() {
         onClick={() => setForgetPassword((s) => !s)}
         className="wh-link text-center"
       >
-        Forgot password?
+        {showForgetPassword ? "Log In" : "Forgot password?"}
       </p>
       {token && (
         <div className="text-center text-xs text-black mt-2 w-full">
