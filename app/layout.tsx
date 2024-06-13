@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { Open_Sans, Roboto_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Messages from "../components/messages";
 import React from "react";
@@ -36,6 +37,12 @@ export const metadata = {
   },
 };
 
+const stratum = localFont({
+  src: "/fonts/stratum2-regular.ttf",
+  display: "swap",
+  weight: "900",
+});
+
 const openSans = Open_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -66,7 +73,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${robotoMono.variable} font-sans`}
+      className={`${stratum.className} ${robotoMono.variable} font-sans`}
     >
       <head>
         <link

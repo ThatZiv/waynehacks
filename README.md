@@ -61,12 +61,15 @@ npm run dev
 
 ## Branding
 
+<details>
+<summary>WayneHacks 2</summary>
+
 ### Colors
 
-- ![#FACC15](https://via.placeholder.com/15/FACC15/000000?text=+) `#FACC15` - Gold
-- ![#14532d](https://via.placeholder.com/15/14532d/000000?text=+) `#14532d` - Dark Green
-- ![#000000](https://via.placeholder.com/15/000000/000000?text=+) `#000000` - Black
-- ![#FFFFFF](https://via.placeholder.com/15/FFFFFF/000000?text=+) `#FFFFFF` - White
+- ![#FACC15](https://placehold.co/15x15/FACC15/FACC15.png) `#FACC15` - Gold
+- ![#14532d](https://placehold.co/15x15/14532d/14532d.png) `#14532d` - Dark Green
+- ![#000000](https://placehold.co/15x15/000000/000000.png) `#000000` - Black
+- ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `#FFFFFF` - White
 
 ### Fonts
 
@@ -79,6 +82,28 @@ npm run dev
   Primary Transparent Logo (PNG)
 - ![WayneHacks Logo](public/android-chrome-512x512.png) Logo with background
 - ![Banner](https://i.imgur.com/l4TRXB4.png) Banner with background
+
+</details>
+
+<details>
+<summary>WayneHacks 3</summary>
+
+### Colors
+
+- ![#df0046](https://placehold.co/15x15/df0046/df0046.png) `#df0046` - Rose
+- ![#353535](https://placehold.co/15x15/353535/353535.png) `#353535` - Gray
+- ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) `#FFFFFF` - White
+
+### Fonts
+
+- [Stratum](https://fonts.adobe.com/fonts/stratum) - Primary Font
+- [Blinker](https://fonts.google.com/specimen/Blinker) - Secondary Font
+
+## Graphics
+
+- ![WayneHacks Logo](public/whacks3_trans.png)
+  Primary Transparent Logo (PNG)
+- ![Banner]() Banner with background
 
 ## Setup (Backend)
 

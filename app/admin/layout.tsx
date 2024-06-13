@@ -1,5 +1,5 @@
 import Image from "next/image";
-import whacks2 from "@/public/whacks2-trans.png";
+import whacks2 from "@/public/whacks3_trans.png";
 
 export const metadata = {
   title: "WayneHacks Admin",
@@ -13,7 +13,7 @@ export default async function RootLayout({
 }) {
   return (
     <>
-      <div className="flex content-center">
+      <div className="flex content-center  drop-shadow-lg">
         <Image
           src={whacks2}
           width={120}

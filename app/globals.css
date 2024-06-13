@@ -9,6 +9,7 @@ html {
 
 /* stack multiple svg backgrounds on top so as the user scrolls down a page, they have multiple backgrounds */
 body {
+  font-size: larger;
   background-repeat: no-repeat;
   --webkit-background-size: auto;
   --moz-background-size: auto;
@@ -67,7 +68,7 @@ body {
     @apply rounded;
     @apply px-4;
     @apply py-2;
-    @apply text-black;
+    @apply text-white;
     @apply font-bold;
     @apply mb-2;
     @apply hover:bg-rose-500;

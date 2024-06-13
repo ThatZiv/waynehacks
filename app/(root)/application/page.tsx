@@ -7,7 +7,6 @@ import {
 } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
-import Messages from "../../components/messages";
 import { redirect } from "next/navigation";
 import React, { cache } from "react";
 import { type Application, statusEnum } from "@/misc/application";
@@ -173,7 +172,7 @@ function Card(props: {
   date: Date;
 }) {
   return (
-    <div className="relative flex flex-col group shadow-lg rounded-lg border border-gray-700 p-5 hover:border-foreground">
+    <div className="relative flex flex-col group shadow-md rounded-lg border transition-all border-gray-700 p-5 hover:shadow-xl">
       <span className="flex items-center space-x-3 mb-4">
         <svg
           width="24"
@@ -215,7 +214,7 @@ function Card(props: {
           >
             <polyline points="9 18 15 12 9 6" />
           </svg> */}
-          <p className="text-gray-400 text-xs">
+          <p className="text-gray-600 text-xs">
             Last updated <i>{props.date.toLocaleString()}</i>
           </p>
         </div>

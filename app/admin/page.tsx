@@ -53,7 +53,7 @@ export default async function AdminDash({
   const whacks = new SupabaseFunctions(supabase);
   const numUsers = await whacks.getTotalUsers();
   return (
-    <div className="w-full xl:w-[90%]">
+    <div className="w-full xl:w-[90%] backdrop-blur-md backdrop-filter rounded-lg drop-shadow-lg">
       <hr />
       <div className="text-center justify-center">
         <div className="">

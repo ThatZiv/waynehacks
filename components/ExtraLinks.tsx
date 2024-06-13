@@ -7,7 +7,7 @@ export default function ExtraLinks() {
   return (
     <>
       <Link href="/events.ics" target="_blank" className="w-1/2">
-        <button className="bg-yellow-300 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md w-full">
+        <button className="bg-yellow-900 inline-flex hover:bg-white hover:text-black text-white py-2 px-4 hover:px-8 transition-all rounded-md w-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -26,7 +26,7 @@ export default function ExtraLinks() {
         </button>
       </Link>
       <Link href={constants.infoPacket} target="_blank" className="w-1/2">
-        <button className="bg-indigo-300 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md w-full">
+        <button className="bg-indigo-900 inline-flex hover:bg-white hover:text-black text-white py-2 px-4 hover:px-8 transition-all rounded-md w-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -42,7 +42,7 @@ export default function ExtraLinks() {
         </button>
       </Link>
       <Link href={constants.devpost} target="_blank" className="w-1/2">
-        <button className="bg-cyan-200 inline-flex hover:bg-white text-black py-2 px-4 hover:px-8 transition-all rounded-md w-full">
+        <button className="bg-cyan-900 inline-flex hover:bg-white hover:text-black text-white py-2 px-4 hover:px-8 transition-all rounded-md w-full">
           <Image alt="devpost logo" src={DevpostLogo} width={24} height={24} />
           &nbsp; Devpost
         </button>
