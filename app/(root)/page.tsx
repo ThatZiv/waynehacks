@@ -64,9 +64,9 @@ export default async function Index() {
             four people. Prizes will be awarded to the best projects, so be
             ready!
           </p>
-          <div>
+          {/* <div>
             <Countdown />
-          </div>
+          </div> */}
           <div className="grid grid-cols-12 justify-items-center">
             <h2 className="inline-flex col-span-12 md:col-span-4">
               <svg
