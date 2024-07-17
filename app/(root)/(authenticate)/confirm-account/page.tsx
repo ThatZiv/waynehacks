@@ -27,19 +27,19 @@ function ConfirmAccount() {
   const code = searchParams.get("code");
   const email = searchParams.get("email");
   return (
-    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center items-center gap-2">
+    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       {!isLoading ? (
         <form
           action={loginFromCode}
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-black py-6"
         >
           <div className="mb-12">
             <WayneHacksLogo />
+            <h2 className="wh-subheading mt-5">Confirm your account</h2>
           </div>
-          <h2 className="wh-subheading mb-1">Confirm your account</h2>
           <label htmlFor="email">Email</label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
             type="email"
             name="email"
             defaultValue={email ?? ""}
@@ -49,7 +49,7 @@ function ConfirmAccount() {
 
           <label htmlFor="code">Confirm code</label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
             type="password"
             name="code"
             defaultValue={code ?? ""}
