@@ -16,21 +16,19 @@ export default function Forgot() {
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center items-center gap-2">
       <form
-        className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+        className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
         method="post"
         action="/auth/change-password"
       >
         <div className="mb-12">
           <WayneHacksLogo />
+          <h2 className="wh-subheading mt-5">Reset your password</h2>
         </div>
-        <h2 className="lg:text-4xl md:text-3xl text-2xl text-center">
-          Reset your password
-        </h2>
         <label className="text-md" htmlFor="email">
           Email
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
           type="email"
           name="email"
           placeholder="test@example.edu"
@@ -41,7 +39,7 @@ export default function Forgot() {
           Login code
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
           type="password"
           name="code"
           placeholder="123456"
@@ -52,7 +50,7 @@ export default function Forgot() {
           New password
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
           type="password"
           name="password"
           placeholder="••••••••"
@@ -63,7 +61,7 @@ export default function Forgot() {
           Confirm new password
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
           type="password"
           name="confirm_password"
           placeholder="••••••••"
