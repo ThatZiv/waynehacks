@@ -5,6 +5,7 @@ import { redirect, useSearchParams } from "next/navigation";
 import useCaptcha from "@/components/useCaptcha";
 import React from "react";
 import Spinner from "@/components/Spinner";
+import Back from "@/components/Back";
 export const dynamic = "force-dynamic";
 export default function Forgot() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
@@ -14,7 +15,7 @@ export default function Forgot() {
   const [pending, setPending] = React.useState<boolean>(false);
 
   return (
-    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center items-center gap-2">
+    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <form
         className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
         method="post"

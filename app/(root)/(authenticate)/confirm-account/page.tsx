@@ -27,7 +27,7 @@ function ConfirmAccount() {
   const code = searchParams.get("code");
   const email = searchParams.get("email");
   return (
-    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md justify-center items-center gap-2">
+    <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       {!isLoading ? (
         <form
           action={loginFromCode}
