@@ -31,7 +31,7 @@ function ConfirmAccount() {
       {!isLoading ? (
         <form
           action={loginFromCode}
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-black py-6"
         >
           <div className="mb-12">
             <WayneHacksLogo />

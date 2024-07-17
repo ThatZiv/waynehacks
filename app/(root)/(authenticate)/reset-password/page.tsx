@@ -17,7 +17,7 @@ export default function Forgot() {
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <form
-        className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
+        className="flex-1 flex flex-col w-full justify-center gap-2 text-black py-6"
         method="post"
         action="/auth/change-password"
       >
@@ -29,7 +29,7 @@ export default function Forgot() {
           Email
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
           type="email"
           name="email"
           placeholder="test@example.edu"
@@ -40,7 +40,7 @@ export default function Forgot() {
           Login code
         </label>
         <input
-          className="rounded-md px-4 py-2 bg-inherit border border-gray-700  mb-6"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
           type="password"
           name="code"
           placeholder="123456"
