@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     );
   return NextResponse.redirect(
     requestUrl.origin +
-      "/?message=Please check your email for resetting your password. It might take a while to arrive, so also check your spam/junk folder.",
+      "/?message=Please check your email for resetting your password. It may take a while to arrive, so also check your spam/junk folder.",
     {
       status: 301,
     }
