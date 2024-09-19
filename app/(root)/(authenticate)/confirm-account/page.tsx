@@ -58,6 +58,11 @@ function ConfirmAccount() {
           />
           <input type="hidden" name="captcha" value={token ?? ""} />
           <div className="flex flex-col w-full items-center">
+            {!token && (
+              <p className="text-sm text-gray-600">
+                Please complete the captcha below to confirm your account{" "}
+              </p>
+            )}
             {token ? <ConfirmButton /> : <HCaptcha />}
           </div>
         </form>
