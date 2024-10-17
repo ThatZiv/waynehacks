@@ -72,7 +72,7 @@ export const events: Event[] = [
   },
 ];
 
-const constants = {
+const constants: Record<string, any> = {
   /**
    * Email for labelling internally
    */
