@@ -38,7 +38,7 @@ function Footer() {
         </li>
         <li>
           <Link
-            href={`mailto:${constants.supportEmail}?subject=WayneHacks Sponsorship`}
+            href={`${constants.sponsorPacket}`}
             className="mr-4 hover:underline md:mr-6"
           >
             Sponsor Us

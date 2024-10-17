@@ -236,7 +236,7 @@ async function RegisterForm() {
     <form
       action="/application/register"
       method="post"
-      className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
+      className="flex-1 flex flex-col w-full justify-center gap-2"
     >
       <label className="text-md text-dark" htmlFor="full_name">
         Full name
@@ -325,7 +325,7 @@ async function RegisterForm() {
         required
       />
       {/* tailwind blockquote disclaimer for submitted */}
-      <blockquote className="rounded-md text-xs bg-btn-background border border-gray-700 p-5 mb-6">
+      <blockquote className="rounded-md text-xs bg-btn-background border text-foreground border-gray-700 p-5 mb-6">
         By submitting this form, you agree to the{" "}
         <Link
           className="wh-link"
