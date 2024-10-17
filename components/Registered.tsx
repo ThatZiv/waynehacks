@@ -31,7 +31,7 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
     //     <SignUp />
     //   );
     const applicants = await whacks.getApplicants();
-    if (applicants > 2) {
+    if (applicants > 0) {
       return (
         <div>
           <div className="flex items-center text-4xl mb-6">
