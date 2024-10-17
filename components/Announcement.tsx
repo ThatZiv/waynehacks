@@ -10,7 +10,7 @@ async function Announcement() {
   // console.log(announcement);
   if (!announcement) return <></>;
   return (
-    <div className="hover:opacity-30 transition-opacity cursor-not-allowed">
+    <div className="hover:opacity-30 transition-opacity select-none">
       <div
         className="flex items-center my-4 p-4 rounded-md text-white bg-black text-left"
         role="alert"

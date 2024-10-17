@@ -107,7 +107,7 @@ export const Countdown = () => {
             <div className="flex flex-col items-center text-center">
               <hr className="w-full border-gray-500 border-1 my-2" />
 
-              <div className="text-xs text-gray-500 ">
+              <div className="text-xs text-gray-300 ">
                 <span className="font-extrabold">{currentEvent}</span>
                 {` • ${getHumanReadableDate(
                   (

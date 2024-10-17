@@ -9,65 +9,46 @@ export const _ = (dateString: string) => {
  * Order matters
  */
 export const events: Event[] = [
+  // {
+  //   date: _("January 18, 2025 9:00:00"),
+  //   end: _("January 18, 2025 11:00:00"),
+  //   name: "Check-in",
+  // },
+  // {
+  //   date: _("January 18, 2025 11:00:00"),
+  //   end: _("January 18, 2025 12:00:00"),
+  //   name: "Opening Ceremony",
+  // },
   {
-    date: _("January 13, 2024 9:00:00"),
-    end: _("January 13, 2024 11:00:00"),
-    name: "Check-in",
-  },
-  {
-    date: _("January 13, 2024 11:00:00"),
-    end: _("January 13, 2024 12:00:00"),
-    name: "Opening Ceremony",
-  },
-  {
-    date: _("January 13, 2024 12:00:00"),
+    date: _("January 18, 2025 12:00:00"),
     name: "Hacking Begins",
   },
+
   {
-    date: _("January 13, 2024 12:10:00"),
-    end: _("January 13, 2024 13:00:00"),
-    name: "Team Matchmaking (Find a Team)",
-  },
-  {
-    date: _("January 13, 2024 13:00:00"),
-    end: _("January 13, 2024 14:00:00"),
-    name: "Lunch",
-  },
-  {
-    date: _("January 13, 2024 15:00:00"),
-    end: _("January 13, 2024 16:00:00"),
-    name: "Networking Event",
-  },
-  {
-    date: _("January 13, 2024 17:00:00"),
-    end: _("January 13, 2024 19:00:00"),
-    name: "Workshop Event",
-  },
-  {
-    date: _("January 13, 2024 23:00:00"),
+    date: _("January 18, 2025 23:00:00"),
     name: "Building Closes",
   },
   {
-    date: _("January 14, 2024 10:00:00"),
+    date: _("January 19, 2025 10:00:00"),
     name: "Building Opens",
   },
   {
-    date: _("January 14, 2024 11:00:00"),
-    end: _("January 14, 2024 12:00:00"),
+    date: _("January 19, 2025 11:00:00"),
+    end: _("January 19, 2025 12:00:00"),
     name: "Last Minute Help for Submissions",
   },
   {
-    date: _("January 14, 2024 12:00:00"),
+    date: _("January 19, 2025 12:00:00"),
     name: "Hacking Ends",
   },
   {
-    date: _("January 14, 2024 12:30:00"),
-    end: _("January 14, 2024 14:30:00"),
+    date: _("January 19, 2025 12:30:00"),
+    end: _("January 19, 2025 14:30:00"),
     name: "Presentations/Judging",
   },
   {
-    date: _("January 14, 2024 14:30:00"),
-    end: _("January 14, 2024 15:00:00"),
+    date: _("January 19, 2025 14:30:00"),
+    end: _("January 19, 2025 15:00:00"),
     name: "Closing Ceremony",
   },
 ];
