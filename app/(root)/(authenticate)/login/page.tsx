@@ -156,7 +156,7 @@ export default function Login() {
             )}
             {!token && (
               <p className="text-sm text-center text-gray-600">
-                Please complete the captcha below to confirm your account{" "}
+                Please complete the captcha below to continue{" "}
               </p>
             )}
             {!token && <HCaptcha />}

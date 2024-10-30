@@ -69,6 +69,11 @@ export default function Forgot() {
           required
         />
         <div className="flex flex-col w-full items-center">
+          {!token && (
+            <p className="text-sm text-center text-gray-600">
+              Please complete the captcha below to continue{" "}
+            </p>
+          )}
           {token ? (
             <button
               className="wh-btn"

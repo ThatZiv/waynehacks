@@ -18,59 +18,40 @@ export class SupabaseFunctions {
       return "-";
     }
   }
-  // TODO: get rid of unstable_cache (it's not needed anymore)
   async getApplicants() {
-    return unstable_cache(
-      async () => {
-        try {
-          console.log("fetching applicants " + new Date().toLocaleTimeString());
-          const { data: applicants, error } = await this.supabase.rpc(
-            "count_applicants"
-          );
-          if (error) throw error;
-          return applicants;
-        } catch (e) {
-          console.error(e);
-          return "-";
-        }
-      },
-      ["count_applicants"],
-      {
-        revalidate: 30 * 60,
-        tags: ["count_applicants"],
-      }
-    )();
+    try {
+      console.log("fetching applicants " + new Date().toLocaleTimeString());
+      const { data: applicants, error } = await this.supabase.rpc(
+        "count_applicants"
+      );
+      if (error) throw error;
+      return applicants;
+    } catch (e) {
+      console.error(e);
+      return "-";
+    }
   }
 
   async getConfigValue(key: string) {
-    return unstable_cache(
-      async () => {
-        try {
-          const { data: value, error } = await this.supabase
-            .from("kv")
-            .select("value")
-            .eq("key", key)
-            .limit(1)
-            .single();
-          console.log(
-            "fetching config value " +
-              key +
-              " " +
-              new Date().toLocaleTimeString()
-          );
-          if (error) throw error;
-          // if (process.env.VERCEL_ENV == "development") {
-          //     if (key == "canRegister") return true;
-          // }
-          return value.value?.data;
-        } catch (e) {
-          console.error(e);
-          return null;
-        }
-      },
-      [`config_value_${key}`],
-      { revalidate: 60 * 5, tags: [`config_value_${key}`] }
-    )();
+    try {
+      const { data: value, error } = await this.supabase
+        .from("kv")
+        .select("value")
+        .eq("key", key)
+        .limit(1)
+        .single();
+      console.log(
+        "fetching config value " + key + " " + new Date().toLocaleTimeString()
+      );
+      if (error) throw error;
+      // if (process.env.VERCEL_ENV == "development") {
+      //     if (key == "canRegister") return true;
+      // }
+      return value.value?.data;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
 }
 
