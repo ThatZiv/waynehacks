@@ -62,6 +62,7 @@ export class SupabaseFunctions {
           // if (process.env.VERCEL_ENV == "development") {
           //     if (key == "canRegister") return true;
           // }
+          console.log(value);
           return value.value?.data;
         } catch (e) {
           console.error(e);
