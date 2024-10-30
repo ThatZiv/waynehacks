@@ -51,7 +51,8 @@ export default async function Application() {
   const application = (await getApplication()).data[0] as
     | Application
     | undefined;
-
+  console.log(canRegister, application);
+  // if you can't register and you don't have an application, deny
   if (!canRegister && !application)
     redirect("/?message=Applications are currently closed.");
   return (
