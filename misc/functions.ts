@@ -43,35 +43,26 @@ export class SupabaseFunctions {
   }
 
   async getConfigValue(key: string) {
-    return unstable_cache(
-      async () => {
-        try {
-          const { data: value, error } = await this.supabase
-            .from("kv")
-            .select("value")
-            .eq("key", key)
-            .limit(1)
-            .single();
-          console.log(
-            "fetching config value " +
-              key +
-              " " +
-              new Date().toLocaleTimeString()
-          );
-          if (error) throw error;
-          // if (process.env.VERCEL_ENV == "development") {
-          //     if (key == "canRegister") return true;
-          // }
-          console.log(value);
-          return value.value?.data;
-        } catch (e) {
-          console.error(e);
-          return null;
-        }
-      },
-      [`config_value_${key}`],
-      { revalidate: 60 * 5, tags: [`config_value_${key}`] }
-    )();
+    try {
+      const { data: value, error } = await this.supabase
+        .from("kv")
+        .select("value")
+        .eq("key", key)
+        .limit(1)
+        .single();
+      console.log(
+        "fetching config value " + key + " " + new Date().toLocaleTimeString()
+      );
+      if (error) throw error;
+      // if (process.env.VERCEL_ENV == "development") {
+      //     if (key == "canRegister") return true;
+      // }
+      console.log(value);
+      return value.value?.data;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   }
 }
 
