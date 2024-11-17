@@ -9,16 +9,16 @@ export const _ = (dateString: string) => {
  * Order matters
  */
 export const events: Event[] = [
-  // {
-  //   date: _("January 18, 2025 9:00:00"),
-  //   end: _("January 18, 2025 11:00:00"),
-  //   name: "Check-in",
-  // },
-  // {
-  //   date: _("January 18, 2025 11:00:00"),
-  //   end: _("January 18, 2025 12:00:00"),
-  //   name: "Opening Ceremony",
-  // },
+  {
+    date: _("January 18, 2025 9:00:00"),
+    end: _("January 18, 2025 11:00:00"),
+    name: "Check-in",
+  },
+  {
+    date: _("January 18, 2025 11:00:00"),
+    end: _("January 18, 2025 12:00:00"),
+    name: "Opening Ceremony",
+  },
   {
     date: _("January 18, 2025 12:00:00"),
     name: "Hacking Begins",
@@ -65,11 +65,11 @@ const constants: Record<string, any> = {
   address: "5105 Anthony Wayne Dr, Detroit, MI 48202",
   addressURL: "https://maps.app.goo.gl/REau4tD9HgfXnDQH7",
   infoPacket:
-    "https://docs.google.com/document/d/1qKmBH7MM_muJbYMIXYA0UeWu_Sgb8ZFEf2xtRh9VlQA/edit?usp=sharing",
+    "https://docs.google.com/document/d/1OX8XTbJtyVpRK3ZU4dKBTWkdbpyZK0yNNKoS7I1vZj4/edit?usp=sharing",
   sponsorPacket:
     "https://docs.google.com/document/d/1xBuGjslnOK2wr4ZEi3Vpcx8O9kzx3Er3ZjfTE8b4cjA/edit?usp=sharing",
-  discord: "https://discord.gg/ET6MMTFgay",
-  devpost: "https://waynehacks-2.devpost.com/",
+  discord: "https://discord.gg/2KuZGsQMUS",
+  devpost: "https://waynehacks-3.devpost.com/",
 };
 
 export default constants;
