@@ -23,7 +23,7 @@
     "ics": "^3.7.2",
     "marked": "^9.1.5",
     "next": "^14.0.4",
-    "postcss": "8.4.24",
+    "postcss": "^8.4.49",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
