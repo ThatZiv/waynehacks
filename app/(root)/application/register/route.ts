@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     "phone_number",
     "diet",
     "student_id",
+    "shirt_size",
   ];
   const nonRequiredFields = ["diet"];
   try {

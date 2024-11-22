@@ -1,4 +1,4 @@
-type Modify<T, R> = Omit<T, keyof R> & R;
+export const shirt_sizes = ["XS", "S", "M", "L", "XL", "XXL"] as const;
 
 /**
  * 'applications' table schema
@@ -14,6 +14,7 @@ export interface Application {
   diet: string;
   student_id: string;
   email: string | "none";
+  shirt_size?: (typeof shirt_sizes)[number];
   status?: Status; // this is an relation expansion
 }
 
