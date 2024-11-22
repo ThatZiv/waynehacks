@@ -84,6 +84,23 @@ body {
     @apply text-center;
     @apply font-sans;
   }
+
+  .wh-dropdown {
+    @apply block;
+    @apply py-2.5;
+    @apply px-0;
+    @apply w-full;
+    @apply bg-transparent;
+    @apply border-0;
+    @apply border-b-2;
+    @apply appearance-none;
+    @apply text-gray-400;
+    @apply border-gray-700;
+    @apply focus:outline-none;
+    @apply focus:ring-0;
+    @apply focus:border-gray-200;
+    @apply mb-6;
+  }
 }
 
 .animate-in {

@@ -9,7 +9,7 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React, { cache } from "react";
-import { type Application, statusEnum } from "@/misc/application";
+import { type Application, shirt_sizes, statusEnum } from "@/misc/application";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import { majors } from "@/misc/majors";
 import Splitter from "@/components/Splitter";
@@ -259,11 +259,7 @@ async function RegisterForm() {
       <label className="text-md text-dark" htmlFor="university">
         College/University
       </label>
-      <select
-        name="university"
-        required
-        className="block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
-      >
+      <select name="university" required className="wh-dropdown">
         <option value="" disabled selected>
           Select your university
         </option>
@@ -281,11 +277,7 @@ async function RegisterForm() {
       <label className="text-md text-dark" htmlFor="major">
         Major
       </label>
-      <select
-        name="major"
-        required
-        className="block py-2.5 px-0 w-full bg-transparent border-0 border-b-2 appearance-none text-gray-400 border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer mb-6"
-      >
+      <select name="major" required className="wh-dropdown">
         <option value="" disabled selected>
           Select your major
         </option>
@@ -324,6 +316,19 @@ async function RegisterForm() {
         placeholder="hh3509"
         required
       />
+      <label className="text-md text-dark" htmlFor="shirt_size">
+        Shirt Size{" "}
+      </label>
+      <select name="shirt_size" className="wh-dropdown" required>
+        <option value="" disabled selected>
+          Select your shirt size
+        </option>
+        {shirt_sizes.map((size) => (
+          <option key={size} value={size} className="text-black bg-white">
+            {size}
+          </option>
+        ))}
+      </select>
       {/* tailwind blockquote disclaimer for submitted */}
       <blockquote className="rounded-md text-xs bg-btn-background border text-foreground border-gray-700 p-5 mb-6">
         By submitting this form, you agree to the{" "}
