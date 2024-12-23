@@ -70,6 +70,8 @@ const constants: Record<string, any> = {
     "https://docs.google.com/document/d/1xBuGjslnOK2wr4ZEi3Vpcx8O9kzx3Er3ZjfTE8b4cjA/edit?usp=sharing",
   discord: "https://discord.gg/2KuZGsQMUS",
   devpost: "https://waynehacks-3.devpost.com/",
+  linkedin: "https://linkedin.com/company/waynehacks",
+  instagram: "https://instagram.com/wayne.hacks",
 };
 
 export default constants;
