@@ -14,8 +14,8 @@ const configuration: FaviconOptions = {
   developerURL: "https://github.com/thatziv", // Your (or your developer's) URL. `string`
   dir: "auto", // Primary text direction for name, short_name, and description
   lang: "en-US", // Primary language for name and short_name
-  background: "#fff", // Background colour for flattened icons. `string`
-  theme_color: "#fff", // Theme color user for example in Android's task switcher. `string`
+  background: "#2b2b2b", // Background colour for flattened icons. `string`
+  theme_color: "#181818", // Theme color user for example in Android's task switcher. `string`
   appleStatusBarStyle: "black-translucent", // Style for Apple status bar: "black-translucent", "default", "black". `string`
   display: "standalone", // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
   orientation: "any", // Default orientation: "any", "natural", "portrait" or "landscape". `string`
@@ -77,7 +77,10 @@ async function main() {
     await Promise.all(
       response.images.map(
         async (image) =>
-          await fs.writeFile(path.join(dest, image.name), image.contents)
+          await fs.writeFile(
+            path.join(dest, image.name),
+            image.contents as unknown as string
+          )
       )
     );
     await Promise.all(

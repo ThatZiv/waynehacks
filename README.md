@@ -1,6 +1,6 @@
 # WayneHacks Management Platform
 
-<img width=200 height=200 src="https://www.waynehacks.com/favicon.png"/>
+<img width=200 height=200 src="https://www.waynehacks.com/icon.png"/>
 
 This is the waynehacks.com website repo.
 
