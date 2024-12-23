@@ -57,11 +57,11 @@ const constants: Record<string, any> = {
   /**
    * Email for labelling internally
    */
-  supportEmail: "waynestatescd+waynehacks@gmail.com",
+  supportEmail: "scd@wayne.edu",
   /**
    * Email for showcasing publicly
    */
-  showcaseEmail: "waynestatescd@gmail.com",
+  showcaseEmail: "scd@wayne.edu",
   address: "5105 Anthony Wayne Dr, Detroit, MI 48202",
   addressURL: "https://maps.app.goo.gl/REau4tD9HgfXnDQH7",
   infoPacket:
