@@ -103,7 +103,7 @@ npm run dev
 
 ## Graphics
 
-- ![WayneHacks Logo](public/whacks3_trans.png)
+- ![WayneHacks Logo](public/icon.png)
   Primary Transparent Logo (PNG)
 - ![Banner](https://i.imgur.com/raO795F.png) Banner with background
 - ![Banner-transparent](https://i.imgur.com/ya6yuCM.png) Transparent banner

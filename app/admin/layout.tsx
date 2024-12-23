@@ -1,5 +1,5 @@
 import Image from "next/image";
-import whacks2 from "@/public/whacks3_trans.png";
+import whacks2 from "@/public/icon.png";
 
 export const metadata = {
   title: "WayneHacks Admin",

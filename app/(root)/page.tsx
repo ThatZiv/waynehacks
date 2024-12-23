@@ -57,7 +57,7 @@ export default async function Index() {
             height={200}
             className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
             alt="Wayne Hacks 2 Logo"
-            src="/whacks3_trans.png"
+            src="/icon.png"
           />
           <p className="text-md text-center">
             WayneHacks is a 24-hour in-person Hackathon at Wayne State
