@@ -57,11 +57,11 @@ const constants: Record<string, any> = {
   /**
    * Email for labelling internally
    */
-  supportEmail: "waynestatescd+waynehacks@gmail.com",
+  supportEmail: "scd@wayne.edu",
   /**
    * Email for showcasing publicly
    */
-  showcaseEmail: "waynestatescd@gmail.com",
+  showcaseEmail: "scd@wayne.edu",
   address: "5105 Anthony Wayne Dr, Detroit, MI 48202",
   addressURL: "https://maps.app.goo.gl/REau4tD9HgfXnDQH7",
   infoPacket:
@@ -70,6 +70,8 @@ const constants: Record<string, any> = {
     "https://docs.google.com/document/d/1xBuGjslnOK2wr4ZEi3Vpcx8O9kzx3Er3ZjfTE8b4cjA/edit?usp=sharing",
   discord: "https://discord.gg/2KuZGsQMUS",
   devpost: "https://waynehacks-3.devpost.com/",
+  linkedin: "https://linkedin.com/company/waynehacks",
+  instagram: "https://instagram.com/wayne.hacks",
 };
 
 export default constants;

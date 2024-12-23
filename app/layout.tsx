@@ -25,7 +25,7 @@ export const metadata = {
     siteName: "WayneHacks",
     images: [
       {
-        url: "/whacks3_trans.png",
+        url: "/icon.png",
         width: 1000,
         height: 1000,
         alt: "WayneHacks Logo",
