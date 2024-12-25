@@ -100,7 +100,7 @@ export default async function Index() {
             </h2>
           </div>
           {/* Location */}
-          {/* <div className="w-full flex flex-col justify-center h-full">
+          <div className="w-full flex flex-col justify-center h-full">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1042.4215331729667!2d-83.07299140727143!3d42.355029612278685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824d2a41779eb09%3A0xee199848d652faba!2sSaint%20Andrew&#39;s%20Memorial%20Episcopal%20Church!5e0!3m2!1sen!2sus!4v1704741253913!5m2!1sen!2sus"
               style={{
@@ -112,7 +112,7 @@ export default async function Index() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div> */}
+          </div>
           <Splitter />
           <div className="text-lg  text-center w-full flex flex-col">
             <div className="items-center">

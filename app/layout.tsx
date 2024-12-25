@@ -96,7 +96,7 @@ export default async function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
         />
       </head>
       <body>
@@ -106,8 +106,8 @@ export default async function RootLayout({
             <Messages />
             {children}
             <Analytics />
+            <Footer />
           </React.Suspense>
-          <Footer />
         </main>
       </body>
     </html>
