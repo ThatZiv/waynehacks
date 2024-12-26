@@ -85,7 +85,7 @@ export const Countdown = () => {
         {!isComplete ? (
           <>
             <div className="flex flex-col justify-center gap-2">
-              <div className="flex flex-row gap-12 justify-between items-center md:justify-center ">
+              <div className="flex flex-row gap-8 md:gap-12 justify-between items-center md:justify-center ">
                 <div className="flex flex-col items-center">
                   <p className="text-4xl">{time.days}</p>
                   <p className="text-md">Days</p>
