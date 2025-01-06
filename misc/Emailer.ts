@@ -2,7 +2,7 @@ import { emailTemplate } from "./templates";
 import constants, { events } from "@/misc/constants";
 import assert from "assert";
 import * as nodemailer from "nodemailer";
-import { generateICS } from "@/misc/events";
+// import { generateICS } from "@/misc/events";
 import { Notifier } from "@/misc/webhook/WebhookService";
 
 interface EmailOptions {
@@ -84,7 +84,3 @@ export class EmailerService {
     }
   }
 }
-
-const Emailer = new EmailerService();
-
-export default Emailer;
