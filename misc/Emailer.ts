@@ -1,5 +1,9 @@
+import { emailTemplate } from "./templates";
+import constants, { events } from "@/misc/constants";
 import assert from "assert";
 import * as nodemailer from "nodemailer";
+import { generateICS } from "@/misc/events";
+import { Notifier } from "@/misc/webhook/WebhookService";
 
 interface EmailOptions {
   to: string;
@@ -10,7 +14,7 @@ interface EmailOptions {
 /**
  * Emailer class to send emails through smtp
  */
-export class Emailer {
+export class EmailerService {
   private transporter: nodemailer.Transporter;
   private SMTPHost?: string;
   private SMTPPort?: number;
@@ -23,7 +27,7 @@ export class Emailer {
     this.SMTPPort = parseInt(process.env.SMTP_PORT ?? "");
     this.SMTPUser = process.env.SMTP_USER;
     this.SMTPPass = process.env.SMTP_PASS;
-    this.SMTPFrom = process.env.SMTP;
+    this.SMTPFrom = process.env.SMTP_FROM;
 
     assert(this.SMTPHost, "SMTP_HOST is required");
     assert(this.SMTPPort, "SMTP_PORT is required");
@@ -41,14 +45,46 @@ export class Emailer {
         pass: this.SMTPPass,
       },
     });
-  }
 
-  async sendEmail({ to, subject, html }: EmailOptions) {
-    await this.transporter.sendMail({
-      from: this.SMTPFrom,
-      to,
-      subject,
-      html,
+    this.transporter.verify((error) => {
+      if (error) {
+        console.error("SMTP connection error: ", error);
+      } else {
+        console.log("SMTP connection ready");
+      }
     });
   }
+
+  async sendEmail({ to, subject, html }: EmailOptions): Promise<void> {
+    if (process.env.NODE_ENV === "development") {
+      console.log(`Not sending email in dev, to ${to} `);
+      throw new Error(`Email to ${to} not sent in dev`);
+    }
+    try {
+      await this.transporter.sendMail({
+        from: this.SMTPFrom,
+        to,
+        subject: `WayneHacks: ${subject}`,
+        cc: constants.supportEmail,
+        html: emailTemplate(subject, html),
+        // icalEvent: {
+        //   method: "request",
+        //   content: generateICS(events) as string,
+        // },
+      });
+      await Notifier.send(`Email sent to ${to}`, subject);
+    } catch (err) {
+      let error = err as Error;
+      console.error(`Failed to send email to ${to},`, error.message);
+      await Notifier.send(
+        `Email send failed to ${to}`,
+        `Failed to send email to ${to} due to: ${error.message}`
+      );
+      throw err;
+    }
+  }
 }
+
+const Emailer = new EmailerService();
+
+export default Emailer;

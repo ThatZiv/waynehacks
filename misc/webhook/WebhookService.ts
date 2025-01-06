@@ -15,7 +15,7 @@ export class WebhookService {
   // send a message through all webhooks
   async send(title: string, content: string, url?: string) {
     if (process.env.NODE_ENV === "development") {
-      console.log("Not sending webhook in development");
+      console.log("Not sending webhook in dev");
       return Promise.resolve();
     }
     return Promise.all(
