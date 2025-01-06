@@ -127,6 +127,16 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     try {
+      // this doesn't work for some reason (prob because stale state)
+      // if (!isModified) {
+      //   alert("No changes detected.");
+      //   return;
+      // }
+      // prompt them y or n if they want to submit
+      if (
+        !confirm(`Are you sure you want to update ${data.applications.email}?`)
+      )
+        return;
       const resp = await fetch(window.location.origin + "/admin/edit", {
         method: "POST",
         body: formData,
@@ -139,7 +149,10 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
 
       alert(json.message);
     } catch (e: any) {
-      alert(`Failed to update ${formData.get("applicant_id")}. ` + e.message);
+      alert(
+        `Failed to update ${formData.get("applicant_id")} with the error: ` +
+          e.message
+      );
       // refresh page if the changes didn't go through
       if (process.env.NEXT_PUBLIC_VERCEL_ENV !== "development")
         window.location.reload();

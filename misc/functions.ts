@@ -32,6 +32,19 @@ export class SupabaseFunctions {
     }
   }
 
+  async emailExists(email: string): Promise<boolean> {
+    try {
+      const { data, error } = await this.supabase.rpc("check_email_exists", {
+        email,
+      });
+      if (error) throw error;
+      return Boolean(data);
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  }
+
   async getConfigValue(key: string) {
     try {
       const { data: value, error } = await this.supabase

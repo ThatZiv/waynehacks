@@ -63,7 +63,6 @@ export default function Applications() {
           table: "status",
         },
         (payload) => {
-          console.log("PAYLOAD TEST");
           setPageStatus("loading");
           // replace old with new in application while ordering modified_at descending
           let updatedApplications: StatusApplication[] = [];
