@@ -1,3 +1,4 @@
+import { SupabaseFunctions } from "@/misc/functions";
 import { Notifier } from "@/misc/webhook/WebhookService";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
@@ -13,6 +14,7 @@ export async function POST(request: Request) {
   const confirmPassword = String(formData.get("confirm-password"));
   const captcha = String(formData.get("captcha"));
   const supabase = createRouteHandlerClient({ cookies });
+  const sbFunc = new SupabaseFunctions(supabase);
   try {
     if (!email || !password || !confirmPassword)
       throw new Error("Email and password are required");
@@ -21,6 +23,14 @@ export async function POST(request: Request) {
       throw new Error(
         "Please use your University email address ending in `.edu`"
       );
+
+    if (!captcha) throw new Error("Captcha is required");
+
+    if (await sbFunc.emailExists(email)) {
+      throw new Error(
+        'Email is already being used. If you forgot your password, please click "Forgot Password?" below.'
+      );
+    }
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -41,7 +51,7 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.redirect(
-    `${requestUrl.origin}/login?message=Check your email to confirm your account. It may take a while to arrive, so also check your spam/junk folder. You will not receive an email if you have already signed up.`,
+    `${requestUrl.origin}/login?message=Check your email to confirm your account. It may take a while to arrive, so also check your spam/junk folder.`,
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,
