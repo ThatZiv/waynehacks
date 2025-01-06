@@ -127,6 +127,10 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     try {
+      if (!isModified) {
+        alert("No changes detected.");
+        return;
+      }
       const resp = await fetch(window.location.origin + "/admin/edit", {
         method: "POST",
         body: formData,
