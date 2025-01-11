@@ -68,13 +68,13 @@ export default function ExtraLinks() {
         bgColor="bg-cyan-900"
       />
       <_Link
-        title="Follow us on LinkedIn"
+        title="LinkedIn"
         href={constants.linkedin}
         Icon={FaLinkedin}
         bgColor="bg-blue-900"
       />
       <_Link
-        title="Follow us on Instagram"
+        title="Instagram"
         href={constants.instagram}
         Icon={FaInstagram}
         bgColor="bg-pink-600"
