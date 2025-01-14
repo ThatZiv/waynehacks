@@ -23,14 +23,25 @@ export const events: Event[] = [
     date: _("January 18, 2025 12:00:00"),
     name: "Hacking Begins",
   },
-
+  {
+    date: _("January 18, 2025 13:00:00"),
+    name: "Lunch",
+  },
+  {
+    date: _("January 18, 2025 19:30:00"),
+    name: "Dinner",
+  },
   {
     date: _("January 18, 2025 23:00:00"),
     name: "Building Closes",
   },
   {
-    date: _("January 19, 2025 10:00:00"),
+    date: _("January 19, 2025 9:00:00"),
     name: "Building Opens",
+  },
+  {
+    date: _("January 19, 2025 9:30:00"),
+    name: "Breakfast",
   },
   {
     date: _("January 19, 2025 11:00:00"),

@@ -62,7 +62,10 @@ export class EmailerService {
     }
     try {
       await this.transporter.sendMail({
-        from: this.SMTPFrom,
+        from: {
+          address: this.SMTPFrom as string,
+          name: "WayneHacks",
+        },
         to,
         subject: `WayneHacks: ${subject}`,
         cc: constants.supportEmail,
