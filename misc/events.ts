@@ -12,7 +12,7 @@ export const generateICS = (eventData: Event[]) => {
       let s = new Date(event.date);
       let e = new Date(event.end || event.date); // if no end, assume it's the same as start
       return {
-        title: "WayneHacks 2: " + event.name,
+        title: "WayneHacks: " + event.name,
         start: [
           s.getUTCFullYear(),
           s.getUTCMonth() + 1,
