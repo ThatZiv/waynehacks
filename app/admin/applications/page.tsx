@@ -1,13 +1,5 @@
 "use client";
-import { cookies } from "next/headers";
-import {
-  createClientComponentClient,
-  createServerActionClient,
-  createServerComponentClient,
-} from "@supabase/auth-helpers-nextjs";
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-
+import { createClient } from "@/lib/supabase/client";
 import { Application, Status, StatusApplication } from "@/misc/application";
 import { useCallback, useEffect, useState, useMemo } from "react";
 import AdminCard from "@/components/AdminCard";
@@ -16,7 +8,7 @@ import Link from "next/link";
 import Spinner from "@/components/Spinner";
 
 export default function Applications() {
-  const supabase = createClientComponentClient();
+  const supabase = useMemo(() => createClient(), []);
 
   // TODO: setup live audit log
   const [auditLog, setAuditLog] = useState<string[]>([]);
