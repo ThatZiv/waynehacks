@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     );
   }
   revalidatePath("/admin");
-  revalidateTag("count_applicants"); // recalculate num applicants on home page
+  revalidateTag("count_applicants", { expire: 300 }); // recalculate num applicants on home page
 
   return NextResponse.redirect(
     `${requestUrl.origin}/application?message=Your information has been submitted`,

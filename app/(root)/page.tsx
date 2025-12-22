@@ -15,7 +15,7 @@ import DevpostLogo from "@/public/devpost.svg";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 
-export const revalidate = 30 * 60; // revalidate every 30 min
+export const revalidate = 300; // revalidate every 5 minutes
 export const dynamic = "force-static"; // force static caching
 
 // export async function generateMetadata() {

@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import Spinner from "./Spinner";
 import { SupabaseFunctions } from "@/misc/functions";
 import Link from "next/link";
-export const revalidate = 60 * 30; // cache expires every 30 mins
+export const revalidate = 1800; // revalidate every 30 mins
 
 interface RegisteredProps {
   nonInteractive?: boolean;
