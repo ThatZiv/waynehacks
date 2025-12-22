@@ -9,7 +9,7 @@
     "supabase:db-pull": "supabase db pull",
     "supabase:db-dump": "supabase db dump --data-only > supabase/seed.sql",
     "supabase:db-schema-apply": "supabase db remote commit",
-    "lint": "next lint",
+    "lint": "eslint .",
     "generate-favicons": "npx ts-node --project ./scripts/node.tsconfig.json ./scripts/generateFavicons.ts"
   },
   "dependencies": {
