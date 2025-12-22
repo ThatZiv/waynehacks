@@ -1,6 +1,6 @@
 "use server";
 import { Application, statusEnum } from "@/misc/application";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
@@ -8,7 +8,7 @@ import { Notifier } from "@/misc/webhook/WebhookService";
 
 export const cancelApplication = async (e: FormData) => {
   const applicant_id = e.get("applicant_id");
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = await createServerClient();
   const { error } = await supabase
     .from("status")
     .update({

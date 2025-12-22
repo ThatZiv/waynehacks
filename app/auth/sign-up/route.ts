@@ -1,6 +1,6 @@
 import { SupabaseFunctions } from "@/misc/functions";
 import { Notifier } from "@/misc/webhook/WebhookService";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const password = String(formData.get("password"));
   const confirmPassword = String(formData.get("confirm-password"));
   const captcha = String(formData.get("captcha"));
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = await createServerClient();
   const sbFunc = new SupabaseFunctions(supabase);
   try {
     if (!email || !password || !confirmPassword)

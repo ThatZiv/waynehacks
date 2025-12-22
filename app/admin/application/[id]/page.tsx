@@ -1,4 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import AdminCard from "@/components/AdminCard";
 import Back from "@/components/Back";
@@ -11,7 +11,7 @@ export default async function Application({
   params: { id: string };
 }) {
   const applicant_id = params.id;
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createServerClient();
 
   const { data: application, error: applicationsError } = await supabase
     .from("status")

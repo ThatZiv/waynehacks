@@ -1,10 +1,10 @@
 import { SupabaseFunctions } from "@/misc/functions";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import Spinner from "./Spinner";
 
 async function Announcement() {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createServerClient();
   const whacks = new SupabaseFunctions(supabase);
   const announcement = await whacks.getConfigValue("announcement");
   // console.log(announcement);

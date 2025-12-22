@@ -2,8 +2,7 @@ import Chart from "@/components/Chart";
 import Splitter from "@/components/Splitter";
 import { Application, StatusApplication, statusEnum } from "@/misc/application";
 import { SupabaseFunctions, capitalize } from "@/misc/functions";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createServerClient } from "@/lib/supabase";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -13,7 +12,7 @@ export default async function AdminDash({
   searchParams: { [key: string]: string[] | string | undefined };
 }) {
   "use server";
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createServerClient();
   const { data: applications, error: applicationsError } = await supabase
     .from("status")
     .select("*, applications(*)")

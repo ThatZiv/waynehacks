@@ -7,11 +7,11 @@ import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
 import { SupabaseFunctions } from "@/misc/functions";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import { Countdown } from "@/components/Countdown";
 import { Sponsors } from "@/components/Sponsors";
-import DevpostLogo from "/public/devpost.svg";
+import DevpostLogo from "@/public/devpost.svg";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 

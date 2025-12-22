@@ -1,6 +1,6 @@
 import { SupabaseFunctions } from "@/misc/functions";
 import { Notifier } from "@/misc/webhook/WebhookService";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const requestUrl = new URL(request.url);
   const formData = await request.formData();
 
-  const supabase = createRouteHandlerClient({ cookies });
+  const supabase = await createServerClient();
   const fields = [
     "full_name",
     "graduation_year",
