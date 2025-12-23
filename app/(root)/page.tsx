@@ -55,7 +55,7 @@ export default async function Index() {
             width={200}
             height={200}
             className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
-            alt="Wayne Hacks 2 Logo"
+            alt="WayneHacks Logo"
             src="/icon.png"
           />
           <p className="text-md text-center">
@@ -73,7 +73,7 @@ export default async function Index() {
               &nbsp;{" "}
               <strong>
                 <a href="/events.ics" className="hover:wh-link">
-                  January 18th, 2025
+                  Spring 2026
                 </a>
               </strong>
             </h2>
