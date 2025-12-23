@@ -13,6 +13,7 @@ import { Countdown } from "@/components/Countdown";
 import { Sponsors } from "@/components/Sponsors";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
+import AnimatedLogo from "@/components/ui/animated-logo";
 
 export const revalidate = 1800; // revalidate every 30 minutes
 export const dynamic = "force-static"; // force static caching
@@ -36,11 +37,11 @@ export default async function Index() {
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center mt-8">
-            WayneHacks is back for the{" "}
+            WayneHacks is going to be{" "}
             {/* <span className="line-through decoration-4 hover:decoration-red-200">
               in-person
             </span>{" "} */}
-            <strong className="underline">third</strong> time around.
+            <strong className="underline">biggest</strong> it&apos;s ever been.
           </p>
           <div className="inline-flex col-span-12 md:col-span-12 mb-6"></div>
           <h2 className="inline-flex col-span-12 md:col-span-12 mb-6">
@@ -51,13 +52,16 @@ export default async function Index() {
 
         <div className="flex flex-col gap-8">
           <h2 className="wh-subheading">What is WayneHacks?</h2>
-          <Image
+          {/* <Image
             width={200}
             height={200}
             className="mx-auto text-center transition-all duration-500 ease-in-out transform hover:scale-110"
             alt="WayneHacks Logo"
             src="/icon.png"
-          />
+          /> */}
+          <div className="flex justify-center items-center w-[175px] sm:w-[250px] mx-auto">
+            <AnimatedLogo />
+          </div>
           <p className="text-md text-center">
             WayneHacks is a 24-hour in-person Hackathon at Wayne State
             University. All majors and skill levels are welcome with teams up to

@@ -11,7 +11,7 @@ const blinker = Blinker({
 
 export default function WayneHacksLogo() {
   return (
-    <div className="flex gap-4 justify-center items-center text-dark flex-col -mb-16">
+    <div className="flex gap-4 justify-center items-center text-dark flex-col -mb-8">
       {/* make a span with content of "2" appear when it is hovered */}
       <h1
         className={`lg:text-8xl md:text-7xl text-5xl text-center mr-14 bg-gradient-to-r from-pink-100 to-sky-100 bg-clip-text text-transparent ${blinker.className}`}
@@ -19,7 +19,7 @@ export default function WayneHacksLogo() {
         WayneHacks
         <span
           data-heading="3"
-          className="animate-pulse hover:scale-105 text-sky-500 ml-2 absolute spacing-x-2"
+          className="animate-pulse hover:scale-105 text-sky-500 ml-2 font-extrabold absolute spacing-x-2"
         >
           4
         </span>
@@ -31,7 +31,7 @@ export default function WayneHacksLogo() {
           background="transparent"
           minSize={0.4}
           maxSize={1.2}
-          particleDensity={500}
+          particleDensity={450}
           className="w-full h-full"
           particleColor="#FFFFFF"
         />
