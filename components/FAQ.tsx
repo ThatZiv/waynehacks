@@ -1,6 +1,12 @@
 import constants from "@/misc/constants";
 import markdown from "@/misc/markdown";
 import React from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 /**
  * this is markdown supported
@@ -46,20 +52,37 @@ function FAQ() {
   return (
     <div className="flex items-center justify-center w-[100%]">
       <div className="w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-xl text-left">
-        {Object.entries(list).map(([question, answer]) => (
-          <details
-            key={question + answer}
-            className="w-full dark:bg-white bg-black dark:text-black text-white border border-neutral-800 cursor-pointer hover:border-sky-700 mb-3 shadow-xl"
-          >
-            <summary className="w-full dark:bg-white bg-dark flex justify-between px-4 py-3 after:content-['+']">
-              {question}
-            </summary>
-            <div
-              className="px-4 py-3 font-light"
-              dangerouslySetInnerHTML={{ __html: markdown.parse(answer) }}
-            ></div>
-          </details>
-        ))}
+        <Accordion
+          type="multiple"
+          className="w-full dark:bg-white bg-black dark:text-black text-white border border-neutral-800 transition-all mb-3 shadow-xl"
+        >
+          {Object.entries(list).map(([question, answer]) => (
+            // <details
+            //   key={question + answer}
+            //   className="w-full dark:bg-white bg-black dark:text-black text-white border border-neutral-800 cursor-pointer hover:border-sky-700 mb-3 shadow-xl"
+            // >
+            //   <summary className="w-full dark:bg-white bg-dark flex justify-between px-4 py-3 after:content-['+']">
+            //     {question}
+            //   </summary>
+            //   <div
+            //     className="px-4 py-3 font-light"
+            //     dangerouslySetInnerHTML={{ __html: markdown.parse(answer) }}
+            //   ></div>
+            // </details>
+
+            <AccordionItem value={question} key={question}>
+              <AccordionTrigger className="w-full text-lg dark:bg-white bg-dark flex justify-between px-4 py-4  mt-1 hover:no-underline">
+                {question}
+              </AccordionTrigger>
+              <AccordionContent>
+                <div
+                  className="px-4 py-3 font-light"
+                  dangerouslySetInnerHTML={{ __html: markdown.parse(answer) }}
+                ></div>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </div>
   );

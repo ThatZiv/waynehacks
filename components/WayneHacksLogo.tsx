@@ -11,7 +11,7 @@ const blinker = Blinker({
 
 export default function WayneHacksLogo() {
   return (
-    <div className="flex gap-4 justify-center items-center text-dark flex-col -mb-8">
+    <div className="flex gap-4 justify-center items-center text-dark flex-col -mb-8 pointer-events-none">
       {/* make a span with content of "2" appear when it is hovered */}
       <h1
         className={`lg:text-8xl md:text-7xl text-5xl text-center mr-14 bg-gradient-to-r from-pink-100 to-sky-100 bg-clip-text text-transparent ${blinker.className}`}
