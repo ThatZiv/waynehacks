@@ -63,6 +63,24 @@ const configuration: FaviconOptions = {
       description: "View or apply your application",
       url: "/application",
     },
+    {
+      name: "Event Schedule",
+      short_name: "Schedule",
+      description: "View the event schedule",
+      url: "/events.ics",
+    },
+    {
+      name: "Information Packet",
+      short_name: "Info",
+      description: "View the information packet",
+      url: "/packet",
+    },
+    {
+      name: "Sponsor WayneHacks",
+      short_name: "Sponsor",
+      description: "Become a sponsor for WayneHacks",
+      url: "/sponsor",
+    },
     // more shortcuts objects
   ],
 };
@@ -75,13 +93,15 @@ async function main() {
     console.log(response.html); // Array of strings (html elements)
     await fs.mkdir(dest, { recursive: true });
     await Promise.all(
-      response.images.map(
-        async (image) =>
-          await fs.writeFile(
-            path.join(dest, image.name),
-            image.contents as unknown as string
-          )
-      )
+      response.images
+        .filter((image) => image !== null)
+        .map(
+          async (image) =>
+            await fs.writeFile(
+              path.join(dest, image.name),
+              image.contents as unknown as string
+            )
+        )
     );
     await Promise.all(
       response.files.map(
@@ -89,9 +109,12 @@ async function main() {
           await fs.writeFile(path.join(dest, file.name), file.contents)
       )
     );
-    await fs.writeFile(path.join(dest, "/"), response.html.join("\n"));
+    await fs.writeFile(
+      path.join(dest, "/favicons.json"),
+      JSON.stringify(response.html)
+    );
   } catch (error) {
-    console.log((error as Error).message);
+    throw error;
   }
 }
 

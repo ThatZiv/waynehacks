@@ -1,0 +1,107 @@
+{
+  "name": "WayneHacks 3 Hackathon",
+  "short_name": "WayneHacks",
+  "description": "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
+  "dir": "auto",
+  "lang": "en-US",
+  "display": "standalone",
+  "orientation": "any",
+  "scope": "/",
+  "start_url": "/?homescreen=1",
+  "background_color": "#2b2b2b",
+  "theme_color": "#181818",
+  "icons": [
+    {
+      "src": "/public/android-chrome-36x36.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/public/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create an account",
+      "short_name": "Sign up",
+      "description": "Create an account",
+      "url": "/login?signup=true"
+    },
+    {
+      "name": "Login",
+      "short_name": "Sign in",
+      "description": "Login to your account",
+      "url": "/login"
+    },
+    {
+      "name": "View Application",
+      "short_name": "Application",
+      "description": "View or apply your application",
+      "url": "/application"
+    },
+    {
+      "name": "Event Schedule",
+      "short_name": "Schedule",
+      "description": "View the event schedule",
+      "url": "/events.ics"
+    },
+    {
+      "name": "Information Packet",
+      "short_name": "Info",
+      "description": "View the information packet",
+      "url": "/packet"
+    },
+    {
+      "name": "Sponsor WayneHacks",
+      "short_name": "Sponsor",
+      "description": "Become a sponsor for WayneHacks",
+      "url": "/sponsor"
+    }
+  ]
+}
