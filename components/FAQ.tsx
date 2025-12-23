@@ -49,9 +49,9 @@ function FAQ() {
         {Object.entries(list).map(([question, answer]) => (
           <details
             key={question + answer}
-            className="w-full dark:bg-black bg-white text-black dark:text-white border border-neutral-800 cursor-pointer hover:border-yellow-600 mb-3 shadow-xl"
+            className="w-full dark:bg-white bg-black dark:text-black text-white border border-neutral-800 cursor-pointer hover:border-sky-700 mb-3 shadow-xl"
           >
-            <summary className="w-full dark:bg-black bg-white flex justify-between px-4 py-3 after:content-['+']">
+            <summary className="w-full dark:bg-white bg-dark flex justify-between px-4 py-3 after:content-['+']">
               {question}
             </summary>
             <div
