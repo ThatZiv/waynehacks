@@ -12,6 +12,6 @@ export const config = {
   matcher: [
     "/admin/:path*",
     // Exclude API routes, static files, image optimizations, and .png files
-    "/((?!/|api|_next/static|_next/image|.*\\.png$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

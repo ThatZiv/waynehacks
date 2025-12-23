@@ -11,11 +11,10 @@ import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import { Countdown } from "@/components/Countdown";
 import { Sponsors } from "@/components/Sponsors";
-import DevpostLogo from "@/public/devpost.svg";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 
-export const revalidate = 300; // revalidate every 5 minutes
+export const revalidate = 1800; // revalidate every 30 minutes
 export const dynamic = "force-static"; // force static caching
 
 // export async function generateMetadata() {
