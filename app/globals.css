@@ -16,7 +16,7 @@ body {
   --o-background-size: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(circle, rgb(3, 27, 40) 0%, rgb(32, 15, 42) 100%);
+  background: radial-gradient(circle, rgb(4, 26, 37) 0%, rgb(20, 9, 27) 100%);
   background-size: cover;
 }
 
