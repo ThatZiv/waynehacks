@@ -13,22 +13,25 @@ const sponsors: Sponsor[] = [
     name: "Wayne State University - College of Engineering",
     link: "https://engineering.wayne.edu/",
     logo: "/wsu_engin.png",
+    invertLogo: true,
   },
   {
     name: "Wayne State University - Career Services",
     link: "https://careerservices.wayne.edu/",
     logo: "/wsu_career.png",
-    invertLogo: true,
+    invertLogo: false,
   },
   {
     name: "KLA",
     link: "https://www.kla.com/",
     logo: "/kla.png",
+    invertLogo: true,
   },
   {
     name: "Google Cloud",
     link: "https://cloud.google.com/",
     logo: "/gc.png",
+    invertLogo: true,
   },
 ];
 

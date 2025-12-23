@@ -67,7 +67,7 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
             <Link
               aria-disabled={!canRegister}
               href="/application"
-              className={`py-3 px-11 disabled:opacity-50 rounded-lg font-mono text-xlg font-bold text-white transition-all bg-rose-600 hover:bg-rose-400 hover:px-16`}
+              className={`py-3 px-11 disabled:opacity-50 rounded-lg font-mono text-xlg font-bold text-white transition-all bg-sky-600 hover:bg-sky-800 hover:px-16`}
             >
               Apply
             </Link>
