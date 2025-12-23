@@ -1,10 +1,10 @@
 // @deprecated - use `@/actions/getUser` instead
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import React from "react";
 export async function GET(request: Request) {
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createServerClient();
   const getUser = React.cache(async () => {
     const {
       data: { session },

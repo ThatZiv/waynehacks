@@ -1,7 +1,7 @@
 import Link from "next/link";
 import constants from "@/misc/constants";
 import Image from "next/image";
-import DevpostLogo from "/public/devpost.svg";
+import DevpostLogo from "@/public/devpost.svg";
 import {
   FaCalendar,
   FaInfoCircle,

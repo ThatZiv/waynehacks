@@ -7,15 +7,14 @@ import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
 import { SupabaseFunctions } from "@/misc/functions";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import { Countdown } from "@/components/Countdown";
 import { Sponsors } from "@/components/Sponsors";
-import DevpostLogo from "/public/devpost.svg";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 
-export const revalidate = 30 * 60; // revalidate every 30 min
+export const revalidate = 1800; // revalidate every 30 minutes
 export const dynamic = "force-static"; // force static caching
 
 // export async function generateMetadata() {

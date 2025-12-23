@@ -1,7 +1,7 @@
 import { createEmailURI } from "@/components/AdminCard";
 import { EmailerService } from "@/misc/Emailer";
 import { Notifier } from "@/misc/webhook/WebhookService";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const email = String(e.get("email"));
     const note = String(e.get("note"));
     const applicant_id = String(e.get("applicant_id"));
-    const supabase = createRouteHandlerClient({ cookies });
+    const supabase = await createServerClient();
     let checked_in = e.get("checked_in") === "on" ? true : false; // this is a checkbox
     const { data: previousStatusState, error: statusErr } = await supabase
       .from("status")

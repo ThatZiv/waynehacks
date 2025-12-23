@@ -2,7 +2,7 @@
 
 import { hcaptchaCheck } from "@/misc/functions";
 import { Notifier } from "@/misc/webhook/WebhookService";
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -12,7 +12,7 @@ export default async function loginFromCode(e: FormData) {
   const code = e.get("code");
   const token = e.get("captcha");
   try {
-    const supabase = createServerActionClient({ cookies });
+    const supabase = await createServerClient();
     if (!email || !code || !token) throw new Error("Missing required fields");
 
     if (!(await hcaptchaCheck(String(token)))) {

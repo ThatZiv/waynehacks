@@ -1,9 +1,9 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import Spinner from "./Spinner";
 import { SupabaseFunctions } from "@/misc/functions";
 import Link from "next/link";
-export const revalidate = 60 * 30; // cache expires every 30 mins
+export const revalidate = 1800; // revalidate every 30 mins
 
 interface RegisteredProps {
   nonInteractive?: boolean;
@@ -23,7 +23,7 @@ function SignUp() {
 export default async function Registered({ nonInteractive }: RegisteredProps) {
   "use server";
   try {
-    const supabase = createServerComponentClient({ cookies });
+    const supabase = await createServerClient();
     const whacks = new SupabaseFunctions(supabase);
     const canRegister = await whacks.getConfigValue("canRegister");
     // if (!canRegister)

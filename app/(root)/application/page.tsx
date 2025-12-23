@@ -1,10 +1,7 @@
 // TODO: Duplicate or move this file outside the `_examples` folder to make it a route
 
 import Back from "@/components/Back";
-import {
-  createServerActionClient,
-  createServerComponentClient,
-} from "@supabase/auth-helpers-nextjs";
+import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -28,7 +25,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 export default async function Application() {
   "use server";
-  const supabase = createServerComponentClient({ cookies });
+  const supabase = await createServerClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
