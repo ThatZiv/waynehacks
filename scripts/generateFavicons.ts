@@ -1,4 +1,5 @@
 import { FaviconOptions, favicons } from "favicons";
+import constants from "../misc/constants";
 import fs from "fs/promises";
 import path from "path";
 // taken from https://www.npmjs.com/package/favicons
@@ -6,7 +7,7 @@ const source = "public/icon.png"; // Source image(s). `string`, `buffer` or arra
 const dest = "public";
 const configuration: FaviconOptions = {
   path: "/public", // Path for overriding default icons path. `string`
-  appName: "WayneHacks 3 Hackathon", // Your application's name. `string`
+  appName: "WayneHacks 4 Hackathon", // Your application's name. `string`
   appShortName: "WayneHacks", // Your application's short_name. `string`. Optional. If not set, appName will be used
   appDescription:
     "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!", // Your application's description. `string`
@@ -20,7 +21,7 @@ const configuration: FaviconOptions = {
   display: "standalone", // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
   orientation: "any", // Default orientation: "any", "natural", "portrait" or "landscape". `string`
   scope: "/", // set of URLs that the browser considers within your app
-  start_url: "/?homescreen=1", // Start URL when launching the application from a device. `string`
+  start_url: "https://waynehacks.com/?homescreen=1", // Start URL when launching the application from a device. `string`
   preferRelatedApplications: false, // Should the browser prompt the user to install the native companion app. `boolean`
   relatedApplications: undefined, // Information about the native companion apps. This will only be used if `preferRelatedApplications` is `true`. `Array<{ id: string, url: string, platform: string }>`
   version: "1.0", // Your application's version string. `string`

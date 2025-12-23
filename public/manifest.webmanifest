@@ -1,5 +1,5 @@
 {
-  "name": "WayneHacks 3 Hackathon",
+  "name": "WayneHacks 4 Hackathon",
   "short_name": "WayneHacks",
   "description": "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
   "dir": "auto",
@@ -7,7 +7,7 @@
   "display": "standalone",
   "orientation": "any",
   "scope": "/",
-  "start_url": "/?homescreen=1",
+  "start_url": "https://waynehacks.com/?homescreen=1",
   "background_color": "#2b2b2b",
   "theme_color": "#181818",
   "icons": [
