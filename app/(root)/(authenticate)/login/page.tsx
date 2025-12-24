@@ -38,17 +38,27 @@ function Submit({
           String(params.get("next") || "")
         )}`;
         let newAction = route + newSearchParams;
+        const form = e.currentTarget.form;
         if (
           route.startsWith("/auth/sign-in") ||
           route.startsWith("/auth/sign-up")
         ) {
-          const form = e.currentTarget.form;
           if (!form?.email.value || !form?.password.value) {
             // redirect to login with same query params but add next and message=missing params
             router.push(
               window.location.pathname +
                 newSearchParams +
                 "&error=Please enter an email and password."
+            );
+            return;
+          }
+        } else if (route.startsWith("/auth/reset-password")) {
+          if (!form?.email.value) {
+            // redirect to login with same query params but add next and message=missing params
+            router.push(
+              window.location.pathname +
+                newSearchParams +
+                "&error=Please enter an email."
             );
             return;
           }
@@ -88,7 +98,7 @@ export default function Login() {
         value={{ pending, setPending, action, setAction, params }}
       >
         <form
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-black"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
           action={action}
           method="post"
         >
@@ -148,14 +158,14 @@ export default function Login() {
                 />
                 <label
                   htmlFor="checked-checkbox"
-                  className="ml-2 text-sm font-medium text-black dark:text-gray-700"
+                  className="ml-2 text-sm font-medium text-foreground"
                 >
                   Sign Up?
                 </label>
               </div>
             )}
             {!token && (
-              <p className="text-sm text-center text-gray-600">
+              <p className="text-sm text-center">
                 Please complete the captcha below to continue{" "}
               </p>
             )}
@@ -189,7 +199,7 @@ export default function Login() {
         {showForgetPassword ? "Log In" : "Forgot password?"}
       </p>
       {token && (
-        <div className="text-center text-xs text-black mt-2 w-full">
+        <div className="text-center text-xs mt-2 w-full">
           Didn&apos;t receive an email from us? Check your junk/spam folder or{" "}
           <a
             href={`mailto:${constants.supportEmail}?subject=WayneHacks Email Failure&body=I did not receive an email from you.`}

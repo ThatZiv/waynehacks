@@ -193,7 +193,7 @@ function Card(props: {
       <div className="flex flex-col grow gap-4 justify-between">
         <Splitter />
         <div
-          className="opacity-70"
+          className="opacity-90"
           dangerouslySetInnerHTML={{ __html: markdown.parse(props.subtitle) }}
         />
         <div className="flex justify-between items-center">
@@ -211,7 +211,7 @@ function Card(props: {
           >
             <polyline points="9 18 15 12 9 6" />
           </svg> */}
-          <p className="text-gray-600 text-xs">
+          <p className="text-gray-400 text-xs">
             Last updated <i>{props.date.toLocaleString()}</i>
           </p>
         </div>

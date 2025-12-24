@@ -19,7 +19,7 @@ export default function WayneHacksLogo() {
         WayneHacks
         <span
           data-heading="3"
-          className="animate-pulse hover:scale-105 text-sky-500 ml-2 font-extrabold absolute spacing-x-2"
+          className="animate-pulse hover:scale-105 text-sky-500 ml-1 font-extrabold absolute spacing-x-2"
         >
           4
         </span>
