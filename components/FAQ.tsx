@@ -54,7 +54,7 @@ function FAQ() {
       <div className="w-full max-w-lg px-10 py-8 mx-auto rounded-lg shadow-xl text-left">
         <Accordion
           type="multiple"
-          className="w-full dark:bg-white bg-black dark:text-black text-white border border-neutral-800 transition-all mb-3 shadow-xl"
+          className="w-full  bg-black  text-white border border-neutral-800 transition-all  shadow-xl"
         >
           {Object.entries(list).map(([question, answer]) => (
             // <details
@@ -71,7 +71,7 @@ function FAQ() {
             // </details>
 
             <AccordionItem value={question} key={question}>
-              <AccordionTrigger className="w-full text-lg dark:bg-white bg-dark flex justify-between px-4 py-4  mt-1 hover:no-underline">
+              <AccordionTrigger className="w-full text-lg bg-dark flex justify-between px-4 py-4 mt-1 hover:no-underline">
                 {question}
               </AccordionTrigger>
               <AccordionContent>
