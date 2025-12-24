@@ -128,7 +128,7 @@ export default function Applications() {
   return pageStatus == "loading" ? (
     <Spinner />
   ) : (
-    <div className="w-full xl:w-[90%]">
+    <div className="w-full xl:w-[90%] mb-2">
       <Back href="/admin" />
       <h1 className="text-dark text-center md:text-left text-xl mx-5 my-2">
         All applications
@@ -139,14 +139,13 @@ export default function Applications() {
       >
         Export as CSV
       </Link>
-      <span className="text-xs text-gray-600 ">
+      <span className="text-xs text-foreground">
         NOTE:{" "}
         <span className="animate-pulse">
           This page is <b>live</b>. Changes to data will be reflected in
           real-time.
         </span>
       </span>
-      <hr />
       {applications?.map((data) => (
         <AdminCard key={data.applicant_id} data={data} />
       ))}

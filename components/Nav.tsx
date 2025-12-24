@@ -31,16 +31,16 @@ function Nav() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <nav className="w-full backdrop-filter backdrop:filter bg-black flex justify-center border-b border-b-dark/10 h-16">
+    <nav className="w-full backdrop-filter backdrop:filter bg-black flex justify-center border-b border-b-slate-200/25 h-16">
       <div className="w-full max-w-4xl flex justify-between items-center p-6 text-sm text-foreground">
         <div className="flex items-center gap-1">
           <Link href="https://scd.cs.wayne.edu/" target="_blank">
-            <span className="flex items-center hover:bg-rose-700 hover:rounded-md transition-all p-3">
+            <span className="flex items-center hover:scale-110 hover:rounded-md transition-all p-3">
               <Image width={40} alt="WSU Logo" src={scdLogo} />
             </span>
           </Link>
           <Link href="https://wayne.edu/" target="_blank">
-            <span className="flex items-center hover:bg-rose-700 hover:rounded-md transition-all p-3">
+            <span className="flex items-center hover:scale-110 hover:rounded-md transition-all p-3">
               <Image width={40} alt="WSU Logo" src={wsuLogo} />
             </span>
           </Link>

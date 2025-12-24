@@ -8,9 +8,9 @@ export const dynamic = "force-dynamic";
 export default async function Application({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const applicant_id = params.id;
+  const applicant_id = (await params).id;
   const supabase = await createServerClient();
 
   const { data: application, error: applicationsError } = await supabase
@@ -29,11 +29,11 @@ export default async function Application({
   return (
     <div className="w-full xl:w-[90%] text-dark">
       <Back href="/admin/applications" />
-      <p className="text-gray-600 text-xs">
+      <p className="text-foreground text-xs">
         NOTE: this page is <b>not</b> live. Changes will <b>not</b> be reflected
         in realtime.
       </p>
-      <h1 className="text-dark text-center md:text-left text-xl my-5">
+      <h1 className="text-foreground text-center md:text-left text-xl my-5">
         {application.applications.full_name} from{" "}
         {application.applications.university}
       </h1>
