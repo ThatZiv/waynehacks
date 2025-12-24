@@ -20,7 +20,7 @@ export default async function RootLayout({
           alt="whacks logo"
           className="my-6 mx-2"
         />{" "}
-        <h2 className="wh-subheading text-black my-9">Admin Dashboard</h2>
+        <h2 className="wh-subheading text-foreground my-9">Admin Dashboard</h2>
       </div>
       {children}
     </>

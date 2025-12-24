@@ -185,7 +185,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
             ? "#854d0e"
             : "black",
       }}
-      className={`relative animate-in flex flex-col group shadow-lg rounded-lg border p-5 hover:border-foreground mb-4 text-foreground`}
+      className={`relative animate-in flex flex-col group shadow-lg rounded-lg border border-gray-500 p-5 hover:border-foreground mb-4 text-foreground mt-4`}
     >
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="applicant_id" value={data.applicant_id} />
@@ -275,7 +275,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
               {isModified ? "* " : ""}Save
             </button>
             <Link
-              className="bg-[#2d3160] text-foreground rounded-lg px-3 py-3 col-span-4 md:col-span-1 text-xs font-bold transition-all text-center hover:bg-foreground hover:text-background"
+              className="bg-[#2d3160] text-foreground rounded-lg px-3 py-4 col-span-4 md:col-span-1 text-xs font-bold transition-all text-center hover:bg-foreground hover:text-background"
               target="_blank"
               href={emailURI}
             >
@@ -335,7 +335,7 @@ export default function AdminCard({ data }: { data: StatusApplication }) {
               />
             </label>
           </div>
-          <p className="text-gray-400 text-xs mt-6">
+          <p className="text-foreground text-xs mt-6">
             {data.applicant_id} • {data.applications.university} • Last updated{" "}
             <i>
               {new Date(data.modified_at).toLocaleString("en-US", {

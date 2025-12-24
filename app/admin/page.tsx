@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function AdminDash({
   searchParams,
 }: {
-  searchParams: { [key: string]: string[] | string | undefined };
+  searchParams: Promise<{ [key: string]: string[] | string | undefined }>;
 }) {
   "use server";
   const supabase = await createServerClient();
@@ -22,7 +22,8 @@ export default async function AdminDash({
     return <div className="text-dark">Failed to load applications...</div>;
   // get metric to get from query params for graph visual
   const availableMetrics = ["university", "major", "graduation_year", "diet"];
-  const metricToGet = searchParams["metric"] || "";
+  const searchParamsResolved = await searchParams;
+  const metricToGet = searchParamsResolved["metric"] || "";
   // if metric is invalid, default to university
   const metric = (
     availableMetrics.includes(metricToGet as string)
@@ -118,7 +119,6 @@ export default async function AdminDash({
                   process.env.NEXT_PUBLIC_BASE_URL + "/admin"
                 );
                 url.searchParams.set("metric", metric as string);
-
                 return redirect(url.toString());
               }}
             >
@@ -138,7 +138,7 @@ export default async function AdminDash({
                 ))}
               </select>
               <input
-                className="p-5 bg-yellow-400 rounded-lg shadow-lg hover:bg-yellow-500 cursor-pointer m-2"
+                className="p-5 text-black bg-yellow-400 rounded-lg shadow-lg hover:bg-yellow-500 cursor-pointer m-2"
                 type="submit"
                 value="Refresh"
               />
