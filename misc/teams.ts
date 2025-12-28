@@ -1,11 +1,21 @@
-import { Application } from "./application";
+import { type Application } from "./application";
 
 export interface Team {
   id: number;
-  leader: string; // applicant_id of team leader
+  /**
+   * applicant_id (uuid) of the team leader
+   */
+  leader: string;
   team_name: string;
   created_at: string;
-  invites: string[]; // applicant_ids of invited members
+  /**
+   * Array of team members (applicant_id uuid(s))
+   */
+  members: TeamMember[];
+  /**
+   * Array of applicant_id uuid(s) who have been invited to the team
+   */
+  invites: string[];
   open_invite: boolean;
 }
 // TODO: allow only those who been accepted, no self-invites, verify ALL rls policies
@@ -20,13 +30,11 @@ export interface Team {
 // export const dynamic = "force-static"; // force static caching
 // FIXME:
 // user in team_members changes team while being leader
-export interface TeamRow {
-  team_id?: string;
-  team_name: string | null;
+export interface TeamMember {
+  /** applicant_id (uuid) of the member */
   member_id: string;
+  created_at: string;
   full_name: Application["full_name"];
   email: Application["email"];
   university: Application["university"];
-
-  created_at: string;
 }
