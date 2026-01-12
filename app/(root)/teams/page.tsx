@@ -70,7 +70,7 @@ export default async function Teams() {
             {membersNotInTeams?.length ?? 0} members looking for a group.
           </p>
         </header>
-        <div className="flex flex-wrap gap-4 ">
+        <div className="flex flex-wrap gap-4 md:justify-start md:items-start items-center justify-center">
           {membersNotInTeams.map((member) => (
             <TeamMember key={member.member_id} member={member} />
           ))}
