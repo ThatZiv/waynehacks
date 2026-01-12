@@ -12,7 +12,7 @@ export default async function joinTeam(
       throw new Error("Missing team_id or user_id");
     }
     const supabase = await createServerClient();
-    const { error } = await supabase.from("team_members").insert([
+    const { error } = await supabase.from("team_members").upsert([
       {
         id: user_id,
         team_id: team_id,
@@ -20,6 +20,7 @@ export default async function joinTeam(
       },
     ]);
     if (error) {
+      console.error("Error joining team:", JSON.stringify(error));
       switch (error.code) {
         case "23505":
           throw new Error("You are already a member of a team.");
@@ -27,10 +28,11 @@ export default async function joinTeam(
           throw new Error(
             "Cannot join team: Team either full or you weren't invited to join."
           );
+        case "42501":
+          throw new Error("You cannot join this team.");
         default:
           break;
       }
-      // console.error("Error joining team:", error.message);
       throw new Error("Failed to join team: " + error.message);
     }
   } catch (err: any) {

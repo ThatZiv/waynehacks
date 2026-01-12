@@ -41,13 +41,16 @@ export default async function Teams() {
   // console.log(data[0].teams, data[0].applications);
   //    "id, team_id, teams(*, leader_user:users!teams_leader_fkey(*)), applications(full_name, email, university, major)"
   const allMembers = teams.flatMap((team) => team.members);
-  console.log(allMembers);
+  // console.log(allTeams);
 
   const membersNotInTeams = allTeams.find(({ id }) => id === -1)?.members || [];
+  // only team members can invite others
+  const canInvite = teams.some((m) => m.leader === currentUserId);
+
   return (
     <div className="min-h-screen w-full">
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
-        <header className="flex flex-col gap-2">
+        <header className="flex flex-col gap-2 -mb-4">
           <h1 className="text-3xl font-semibold tracking-tight">
             Teams overview
           </h1>
@@ -62,17 +65,22 @@ export default async function Teams() {
           ))}
         </div>
         <Splitter />
-        <header className="flex flex-col gap-2">
+        <header className="flex flex-col gap-2 -mb-2">
           <h1 className="text-3xl font-semibold tracking-tight">
-            Looking for a team
+            Available Members
           </h1>
           <p className="text-sm text-muted-foreground">
             {membersNotInTeams?.length ?? 0} members looking for a group.
           </p>
         </header>
-        <div className="flex flex-wrap gap-4 md:justify-start md:items-start items-center justify-center">
+        <div className="flex flex-wrap gap-4 md:justify-start md:items-start items-center justify-center mb-8">
           {membersNotInTeams.map((member) => (
-            <TeamMember key={member.member_id} member={member} />
+            <TeamMember
+              key={member.member_id}
+              member={member}
+              isYou={member.member_id === currentUserId}
+              invite={canInvite}
+            />
           ))}
         </div>
       </div>

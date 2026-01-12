@@ -1,7 +1,7 @@
-import { Mail, Crown } from "lucide-react";
+import { Mail, Crown, UserRoundPlus } from "lucide-react";
 import Link from "next/link";
 
-export interface TeamMemberProps {
+interface TeamMemberProps {
   member: {
     member_id: string;
     full_name: string;
@@ -10,16 +10,19 @@ export interface TeamMemberProps {
   };
   isLeader?: boolean;
   isYou?: boolean;
+  /** If the member is currently in the team (used in unassigned) */
+  invite?: boolean;
 }
 
 export default function TeamMember({
   member,
   isLeader,
   isYou,
+  invite = false,
 }: TeamMemberProps) {
   return (
     <li
-      className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all ${
+      className={`flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all ${
         isLeader ? "bg-yellow-200" : isYou ? "bg-sky-200/80" : "bg-muted/90"
       }`}
     >
@@ -47,8 +50,14 @@ export default function TeamMember({
           </Link>
           {isLeader && (
             <span className="inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-yellow-400 text-black px-2 py-0.5 text-[11px] font-medium ">
-              <Crown className="h-3 w-3" />
+              <Crown className="h-4 w-4" />
               <span>Leader</span>
+            </span>
+          )}
+          {invite && (
+            <span className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-green-400 text-black px-2 py-0.5 text-[11px] font-medium ">
+              <span>Invite</span>
+              <UserRoundPlus className="h-3 w-3" />
             </span>
           )}
           {isYou && (

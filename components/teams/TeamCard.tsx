@@ -14,6 +14,7 @@ import joinTeam from "@/actions/teams/join";
 import leaveTeam from "@/actions/teams/leave";
 
 import TeamMember from "./TeamMember";
+import disbandTeam from "@/actions/teams/disband";
 
 type TeamCardProps = Team & {
   currentUserId?: string | null;
@@ -47,10 +48,18 @@ export default function TeamCard({
     if (!currentUserId || !isMember) return;
     await leaveTeam(id, currentUserId);
   };
+  const IamLeader = currentUserId === leader;
   return (
     <div
       key={id}
-      className="group w-full md:w-[calc(50%-0.75rem)] rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-[1px] shadow-sm transition-all hover:shadow-xl"
+      className={`group w-full md:w-[calc(50%-0.75rem)] rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-[1px] shadow-sm transition-all hover:shadow-xl
+        ${
+          IamLeader
+            ? "border-2 border-yellow-400"
+            : isMember
+            ? "border-2 border-sky-400"
+            : ""
+        }`}
     >
       <Card className=" h-full rounded-2xl border-none bg-background/10 backdrop-blur-sm">
         <CardHeader className="pb-2">
@@ -73,7 +82,7 @@ export default function TeamCard({
                 {members.length} member
                 {members.length === 1 ? "" : "s"}
               </span>
-              {isMember ? (
+              {isMember && !IamLeader ? (
                 <button
                   type="button"
                   onClick={handleLeave}
@@ -89,8 +98,17 @@ export default function TeamCard({
                 >
                   Join team
                 </button>
+              ) : IamLeader ? (
+                // disband team
+                <button
+                  type="button"
+                  onClick={disbandTeam.bind(null, id)}
+                  className="rounded-full bg-red-500/80 px-3 py-1 text-xs font-medium text-white border border-red-500/40 hover:bg-red-400"
+                >
+                  Disband Team
+                </button>
               ) : (
-                <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-medium text-red-300 border border-red-500/40">
+                <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-medium cursor-not-allowed text-red-300 border border-red-500/40">
                   Cannot Join
                 </span>
               )}
@@ -106,14 +124,19 @@ export default function TeamCard({
                       Members
                     </p> */}
           <ul className="space-y-2">
-            {members.map((member) => (
-              <TeamMember
-                key={member.member_id}
-                member={member}
-                isLeader={member.member_id === leader}
-                isYou={member.member_id === currentUserId}
-              />
-            ))}
+            {members
+              .slice()
+              .sort((a, b) =>
+                a.member_id === leader ? -1 : b.member_id === leader ? 1 : 0
+              )
+              .map((member) => (
+                <TeamMember
+                  key={member.member_id}
+                  member={member}
+                  isLeader={member.member_id === leader}
+                  isYou={member.member_id === currentUserId}
+                />
+              ))}
           </ul>
         </CardContent>
         <CardFooter className="text-muted-foreground text-xs">

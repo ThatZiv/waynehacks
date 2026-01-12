@@ -12,7 +12,7 @@ export default async function leaveTeam(
 
     const { error } = await supabase
       .from("team_members")
-      .delete()
+      .update({ team_id: null })
       .eq("id", user_id)
       .eq("team_id", team_id);
 
