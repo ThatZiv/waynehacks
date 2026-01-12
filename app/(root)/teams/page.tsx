@@ -2,7 +2,6 @@ import Link from "next/link";
 import WayneHacksLogo from "@/components/WayneHacksLogo";
 import Registered from "@/components/Registered";
 import Splitter from "@/components/Splitter";
-import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
@@ -19,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { Team } from "@/misc/teams";
 import TeamCard from "@/components/teams/TeamCard";
+import TeamMember from "@/components/teams/TeamMember";
 
 export default async function Teams() {
   const supabase = await createServerClient();
@@ -28,8 +28,8 @@ export default async function Teams() {
       team_id_param: null,
     }
   );
-  const teams: Team[] = teamsList || [];
-
+  const allTeams: Team[] = teamsList || [];
+  const teams = allTeams.filter(({ id }) => id > 0);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -43,6 +43,7 @@ export default async function Teams() {
   const allMembers = teams.flatMap((team) => team.members);
   console.log(allMembers);
 
+  const membersNotInTeams = allTeams.find(({ id }) => id === -1)?.members || [];
   return (
     <div className="min-h-screen w-full">
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
@@ -58,6 +59,20 @@ export default async function Teams() {
         <div className="flex flex-wrap gap-6">
           {teams.map((team) => (
             <TeamCard key={team.id} {...team} currentUserId={currentUserId} />
+          ))}
+        </div>
+        <Splitter />
+        <header className="flex flex-col gap-2">
+          <h1 className="text-3xl font-semibold tracking-tight">
+            Looking for a team
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            {membersNotInTeams?.length ?? 0} members looking for a group.
+          </p>
+        </header>
+        <div className="flex flex-wrap gap-4 ">
+          {membersNotInTeams.map((member) => (
+            <TeamMember key={member.member_id} member={member} />
           ))}
         </div>
       </div>

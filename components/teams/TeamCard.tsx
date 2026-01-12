@@ -8,10 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Team } from "@/misc/teams";
-import { Crown, Lock, Mail } from "lucide-react";
+import { Lock } from "lucide-react";
 import Link from "next/link";
 import joinTeam from "@/actions/teams/join";
 import leaveTeam from "@/actions/teams/leave";
+
+import TeamMember from "./TeamMember";
 
 type TeamCardProps = Team & {
   currentUserId?: string | null;
@@ -83,7 +85,7 @@ export default function TeamCard({
                 <button
                   type="button"
                   onClick={handleJoin}
-                  className="rounded-full bg-green-500/80 px-3 py-1 text-xs font-medium text-black hover:bg-green-400 border border-green-500/40"
+                  className="rounded-full bg-sky-500/90 px-3 py-1 text-xs font-medium text-black hover:bg-sky-400 border border-sky-500/40"
                 >
                   Join team
                 </button>
@@ -104,51 +106,14 @@ export default function TeamCard({
                       Members
                     </p> */}
           <ul className="space-y-2">
-            {members.map((member) => {
-              const isLeader = member.member_id === leader;
-              return (
-                <li
-                  key={member.member_id}
-                  className={`flex bg-muted/80 items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all ${
-                    isLeader ? "border border-yellow-500/50" : ""
-                  }`}
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-[10px] font-semibold text-lg text-black">
-                    {member.full_name
-                      .split(" ")
-                      .map((n: string) => n[0])
-                      .join("")
-                      .slice(0, 2)
-                      .toUpperCase()}
-                  </div>
-                  <div className="flex flex-1 items-center justify-between gap-2">
-                    <div className="flex flex-col">
-                      <span className="font-medium">{member.full_name}</span>
-                      <span className="text-sm text-muted-foreground">
-                        {member.email}
-                      </span>
-                      <span className="text-[11px] text-muted-foreground">
-                        {member.university}
-                      </span>
-                    </div>
-                    <div className="flex items-end justify-center gap-2">
-                      <Link href={`mailto:${member.email}`}>
-                        <span className="inline-flex items-center rounded-full bg-white px-2 py-1 text-[11px] font-medium text-secondary">
-                          <Mail className="h-4 w-4 text-muted-foreground" />
-                        </span>
-                      </Link>
-
-                      {isLeader && (
-                        <span className="inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-yellow-500 text-black px-2 py-0.5 text-[11px] font-medium ">
-                          <Crown className="h-3 w-3" />
-                          <span>Leader</span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
+            {members.map((member) => (
+              <TeamMember
+                key={member.member_id}
+                member={member}
+                isLeader={member.member_id === leader}
+                isYou={member.member_id === currentUserId}
+              />
+            ))}
           </ul>
         </CardContent>
         <CardFooter className="text-muted-foreground text-xs">
