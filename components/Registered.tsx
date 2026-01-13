@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import Spinner from "./Spinner";
 import { SupabaseFunctions } from "@/misc/functions";
 import Link from "next/link";
-export const revalidate = 1800; // revalidate every 30 mins
 
 interface RegisteredProps {
   nonInteractive?: boolean;
@@ -20,8 +19,9 @@ function SignUp() {
   );
 }
 
+// TODO: Cache using new ppr. Number of applicants doesn't change that often
+
 export default async function Registered({ nonInteractive }: RegisteredProps) {
-  "use server";
   try {
     const supabase = await createServerClient();
     const whacks = new SupabaseFunctions(supabase);

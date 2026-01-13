@@ -3,8 +3,6 @@ import { cookies } from "next/headers";
 import AdminCard from "@/components/AdminCard";
 import Back from "@/components/Back";
 
-export const dynamic = "force-dynamic";
-
 export default async function Application({
   params,
 }: {

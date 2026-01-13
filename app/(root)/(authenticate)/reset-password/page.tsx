@@ -6,7 +6,6 @@ import useCaptcha from "@/components/useCaptcha";
 import React from "react";
 import Spinner from "@/components/Spinner";
 import Back from "@/components/Back";
-export const dynamic = "force-dynamic";
 export default function Forgot() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   const searchParams = useSearchParams();

@@ -15,9 +15,6 @@ import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 import AnimatedLogo from "@/components/ui/animated-logo";
 
-export const revalidate = 1800; // revalidate every 30 minutes
-export const dynamic = "force-static"; // force static caching
-
 // export async function generateMetadata() {
 //   // get number people registered
 //   const supabase = createServerComponentClient({ cookies });

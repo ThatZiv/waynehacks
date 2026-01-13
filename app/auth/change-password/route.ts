@@ -3,8 +3,6 @@ import { createServerClient } from "@/lib/supabase";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-export const dynamic = "force-dynamic";
-
 // TODO: test POST handler to change password
 export async function POST(request: Request) {
   // The `/auth/callback` route is required for the server-side auth flow implemented

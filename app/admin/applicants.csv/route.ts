@@ -8,8 +8,6 @@ import {
   statusEnum,
 } from "@/misc/application";
 
-export const dynamic = "force-dynamic";
-
 export async function GET(request: Request) {
   // remove commas from csv values
   const csvFix = (str: any) => {
