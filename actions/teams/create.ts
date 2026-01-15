@@ -46,9 +46,7 @@ export default async function createTeam(
       })
       .select("id");
 
-    console.log(teamsData);
     if (error) {
-      console.error("Error creating team:", JSON.stringify(error));
       switch (error.code) {
         case "23505":
           throw new Error("You are already a member of a team.");

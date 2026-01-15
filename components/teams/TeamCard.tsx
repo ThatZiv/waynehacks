@@ -17,7 +17,9 @@ import TeamMember from "./TeamMember";
 import disbandTeam from "@/actions/teams/disband";
 
 type TeamCardProps = Team & {
-  currentUserId?: string | null;
+  currentUserId: string | null;
+  /** if they're a leader of any team */
+  isSomeLeader?: boolean;
 };
 
 export default function TeamCard({
@@ -29,14 +31,17 @@ export default function TeamCard({
   leader,
   open_invite,
   currentUserId,
+  isSomeLeader,
 }: TeamCardProps) {
+  const IamLeader = currentUserId === leader;
   const isInvited = currentUserId
     ? invites.some((uid) => uid === currentUserId)
     : false;
   const canJoin =
     (open_invite || isInvited) &&
     members.length < 4 &&
-    !members.some((m) => m.member_id === currentUserId);
+    !members.some((m) => m.member_id === currentUserId) &&
+    !IamLeader;
   const isMember = currentUserId
     ? members.some((m) => m.member_id === currentUserId)
     : false;
@@ -48,7 +53,6 @@ export default function TeamCard({
     if (!currentUserId || !isMember) return;
     await leaveTeam(id, currentUserId);
   };
-  const IamLeader = currentUserId === leader;
   return (
     <div
       key={id}
@@ -68,21 +72,9 @@ export default function TeamCard({
             <CardTitle className="text-lg text-white">
               <div className="flex items-center justify-center">
                 <span>{team_name ?? "Unnamed Team"}</span>
-                <span>
-                  {!open_invite && (
-                    <span className="ml-2 inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-secondary text-secondary-foreground px-2 py-0.5 text-[14px] font-medium ">
-                      <Lock className="h-3 w-3" />
-                      <span>Invite Only</span>
-                    </span>
-                  )}
-                </span>
               </div>
             </CardTitle>
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-white/90 px-3 py-1 text-sm font-medium text-primary">
-                {members.length} member
-                {members.length === 1 ? "" : "s"}
-              </span>
               {isMember && !IamLeader ? (
                 <button
                   type="button"
@@ -91,7 +83,7 @@ export default function TeamCard({
                 >
                   Leave team
                 </button>
-              ) : canJoin ? (
+              ) : canJoin && !isSomeLeader ? (
                 <button
                   type="button"
                   onClick={handleJoin}
@@ -140,8 +132,20 @@ export default function TeamCard({
               ))}
           </ul>
         </CardContent>
-        <CardFooter className="text-muted-foreground text-xs">
-          Created {new Date(created_at).toLocaleDateString()}
+        <CardFooter className="flex items-center justify-start gap-2">
+          {!open_invite && (
+            <span className="ml-2 inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-secondary text-secondary-foreground px-2 py-1 text-[14px] font-medium ">
+              <Lock className="h-3 w-3" />
+              <span>Invite Only</span>
+            </span>
+          )}
+          <span className="rounded-full bg-secondary px-3 py-1 text-sm font-medium text-primary">
+            {members.length} member
+            {members.length === 1 ? "" : "s"}
+          </span>
+          <span className="ml-auto text-muted-foreground text-xs">
+            Created {new Date(created_at).toLocaleDateString()}
+          </span>
         </CardFooter>
       </Card>
     </div>

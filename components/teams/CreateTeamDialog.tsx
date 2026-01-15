@@ -22,6 +22,7 @@ export default function CreateTeamDialog() {
   const teamNameRef = React.useRef<HTMLInputElement>(null);
   const openInviteRef = React.useRef<HTMLButtonElement>(null);
 
+  const [open, setOpen] = React.useState(false);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const tst = toast.loading("Creating team...");
@@ -47,16 +48,16 @@ export default function CreateTeamDialog() {
       toast.success("Team created successfully!", {
         id: tst,
       });
+      setOpen(false);
     } catch (error: any) {
       console.error("Error creating team:", error);
       toast.error(error.message || "An unknown error occurred.", {
         id: tst,
       });
     }
-    // close the dialog
   };
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <form>
         <DialogTrigger asChild>
           <Button variant="outline">
@@ -94,9 +95,11 @@ export default function CreateTeamDialog() {
             <DialogClose asChild>
               <Button variant="outline">Cancel</Button>
             </DialogClose>
-            <Button type="submit" onClick={handleSubmit}>
-              Create
-            </Button>
+            <DialogClose asChild>
+              <Button type="submit" onClick={handleSubmit}>
+                Create
+              </Button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </form>

@@ -27,7 +27,7 @@ export default async function Teams() {
   const { data: teamsList, error: membersError } = await supabase.rpc(
     "get_team_with_members",
     {
-      team_id_param: null,
+      team_id_param: null, // gets all
     }
   );
   const allTeams: Team[] = teamsList || [];
@@ -64,7 +64,12 @@ export default async function Teams() {
         <CreateTeamDialog />
         <div className="flex flex-wrap gap-6">
           {teams.map((team) => (
-            <TeamCard key={team.id} {...team} currentUserId={currentUserId} />
+            <TeamCard
+              key={team.id}
+              {...team}
+              currentUserId={currentUserId}
+              isSomeLeader={canInvite}
+            />
           ))}
         </div>
         <Splitter />
