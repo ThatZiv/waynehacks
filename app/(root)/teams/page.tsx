@@ -19,6 +19,8 @@ import {
 import { Team } from "@/misc/teams";
 import TeamCard from "@/components/teams/TeamCard";
 import TeamMember from "@/components/teams/TeamMember";
+import Back from "@/components/Back";
+import CreateTeamDialog from "@/components/teams/CreateTeamDialog";
 
 export default async function Teams() {
   const supabase = await createServerClient();
@@ -48,8 +50,9 @@ export default async function Teams() {
   const canInvite = teams.some((m) => m.leader === currentUserId);
 
   return (
-    <div className="min-h-screen w-full">
-      <div className="mx-auto flex max-w-5xl flex-col gap-8">
+    <div className="w-full">
+      <Back href="/application" />
+      <div className="mx-auto flex max-w-5xl flex-col gap-8 mt-4">
         <header className="flex flex-col gap-2 -mb-4">
           <h1 className="text-3xl font-semibold tracking-tight">
             Teams overview
@@ -58,7 +61,7 @@ export default async function Teams() {
             {allMembers?.length ?? 0} members across {teams.length} teams.
           </p>
         </header>
-
+        <CreateTeamDialog />
         <div className="flex flex-wrap gap-6">
           {teams.map((team) => (
             <TeamCard key={team.id} {...team} currentUserId={currentUserId} />

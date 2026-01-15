@@ -52,12 +52,13 @@ export default function TeamCard({
   return (
     <div
       key={id}
+      id={`team-${id}`}
       className={`group w-full md:w-[calc(50%-0.75rem)] rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-[1px] shadow-sm transition-all hover:shadow-xl
         ${
           IamLeader
-            ? "border-2 border-yellow-400"
+            ? "border-2 border-yellow-500"
             : isMember
-            ? "border-2 border-sky-400"
+            ? "border-2 border-sky-500"
             : ""
         }`}
     >
