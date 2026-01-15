@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerClient } from "@/lib/supabase";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { redirect } from "next/navigation";
 
 export default async function leaveTeam(
@@ -24,5 +25,6 @@ export default async function leaveTeam(
     console.error("Unexpected error leaving team:", error);
     redirect("/teams?error=" + encodeURIComponent(error.message));
   }
+  await Notifier.send("Team Left", `User ${user_id} left team ${team_id}`);
   redirect("/teams?message=" + encodeURIComponent("Successfully left team!"));
 }

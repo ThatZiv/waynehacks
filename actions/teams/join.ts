@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerClient } from "@/lib/supabase";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { redirect } from "next/navigation";
 
 export default async function joinTeam(
@@ -39,6 +40,7 @@ export default async function joinTeam(
     redirect("/teams?error=" + encodeURIComponent(err.message));
     return;
   }
+  await Notifier.send("Team Joined", `User ${user_id} joined team ${team_id}`);
   redirect("/teams?message=" + encodeURIComponent("Successfully joined team!"));
   // Optionally, you can revalidate a path or perform other actions here
 }

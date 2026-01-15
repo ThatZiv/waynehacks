@@ -1,6 +1,7 @@
 "use server";
 
 import { createServerClient } from "@/lib/supabase";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { redirect } from "next/navigation";
 
 export default async function inviteMember(
@@ -30,5 +31,11 @@ export default async function inviteMember(
   } catch (error: any) {
     redirect("/teams?error=" + encodeURIComponent(error.message));
   }
+  await Notifier.send(
+    remove ? "Team Invitation Revoked" : "Team Invitation Sent",
+    `User ${target_user_id} has been ${
+      remove ? "removed from" : "invited to"
+    } team ${team_id}`
+  );
   redirect("/teams?message=" + encodeURIComponent("Successfully left team!"));
 }

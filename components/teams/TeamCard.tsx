@@ -98,7 +98,7 @@ export default function TeamCard({
                   onClick={disbandTeam.bind(null, id)}
                   className="rounded-full bg-red-500/80 px-3 py-1 text-xs font-medium text-white border border-red-500/40 hover:bg-red-400"
                 >
-                  Disband Team
+                  Disband
                 </button>
               ) : (
                 <span className="rounded-full bg-red-500/20 px-3 py-1 text-xs font-medium cursor-not-allowed text-red-300 border border-red-500/40">
@@ -128,6 +128,7 @@ export default function TeamCard({
                   member={member}
                   isLeader={member.member_id === leader}
                   isYou={member.member_id === currentUserId}
+                  canKick={IamLeader && member.member_id !== currentUserId}
                 />
               ))}
           </ul>
