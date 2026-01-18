@@ -1,5 +1,6 @@
 "use client";
 
+import inviteMember from "@/actions/teams/invite";
 import removeMember from "@/actions/teams/remove";
 import { Mail, Crown, UserRoundPlus, UserRoundX } from "lucide-react";
 import Link from "next/link";
@@ -14,18 +15,17 @@ interface TeamMemberProps {
   };
   isLeader?: boolean;
   isYou?: boolean;
-  /** If the member is currently in the team (used in unassigned) */
-  invite?: boolean;
   /** If the current user can kick this member */
   canKick?: boolean;
+  teamId?: number;
 }
 
 export default function TeamMember({
   member,
   isLeader,
   isYou,
-  invite = false,
   canKick = false,
+  teamId,
 }: TeamMemberProps) {
   const handleKick = async () => {
     const tst = toast.loading("Removing member...");
@@ -37,6 +37,20 @@ export default function TeamMember({
       toast.success("Member removed successfully!", { id: tst });
     } catch (error) {
       toast.error("Failed to remove member.", { id: tst });
+    }
+  };
+
+  // TODO: handleInvite
+  const handleInvite = async () => {
+    const tst = toast.loading("Inviting member...");
+    try {
+      const result = await inviteMember(member.member_id);
+      if (!result.ok) {
+        throw new Error(result.error);
+      }
+      toast.success("Member invited successfully!", { id: tst });
+    } catch (error: any) {
+      toast.error(error.message, { id: tst });
     }
   };
   return (
@@ -57,7 +71,7 @@ export default function TeamMember({
         <div className="flex flex-col">
           <span
             title={member.full_name}
-            className="block max-w-[160px] truncate"
+            className="block max-w-[160px] truncate text-primary"
           >
             {member.full_name}
           </span>
@@ -99,11 +113,19 @@ export default function TeamMember({
               <span>Leader</span>
             </span>
           )}
-          {invite && (
-            <span className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-green-400 text-black px-2 py-0.5 text-[11px] font-medium ">
-              <span>Invite</span>
-              <UserRoundPlus className="h-3 w-3" />
-            </span>
+          {!teamId && !isYou && (
+            <button
+              type="button"
+              title="Invite"
+              className="inline-flex items-center rounded-full bg-green-400 px-2 py-1 text-[11px] font-medium text-black transition-colors hover:bg-green-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600/40"
+              onClick={handleInvite}
+            >
+              <UserRoundPlus className="h-4 w-4" />
+              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity,margin] duration-200 group-hover/actions:ml-1 group-hover/actions:max-w-[5rem] group-hover/actions:opacity-100 group-focus-within/actions:ml-1 group-focus-within/actions:max-w-[5rem] group-focus-within/actions:opacity-100">
+                Invite
+              </span>
+              <span className="sr-only">Invite {member.full_name}</span>
+            </button>
           )}
           {isYou && (
             <span className="inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-sky-400 text-black px-2 py-0.5 text-[11px] font-medium">

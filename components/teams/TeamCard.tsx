@@ -8,19 +8,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Team } from "@/misc/teams";
-import { Lock } from "lucide-react";
+import { Lock, Mail, X } from "lucide-react";
 import Link from "next/link";
 import joinTeam from "@/actions/teams/join";
 import leaveTeam from "@/actions/teams/leave";
+import inviteMember from "@/actions/teams/invite";
 
 import TeamMember from "./TeamMember";
 import disbandTeam from "@/actions/teams/disband";
-
-type TeamCardProps = Team & {
-  currentUserId: string | null;
-  /** if they're a leader of any team */
-  isSomeLeader?: boolean;
-};
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { useTeamsContext } from "./TeamsContext";
 
 export default function TeamCard({
   id,
@@ -30,9 +28,8 @@ export default function TeamCard({
   created_at,
   leader,
   open_invite,
-  currentUserId,
-  isSomeLeader,
-}: TeamCardProps) {
+}: Team) {
+  const { currentUserId, isSomeLeader, memberInfoById } = useTeamsContext();
   const IamLeader = currentUserId === leader;
   const isInvited = currentUserId
     ? invites.some((uid) => uid === currentUserId)
@@ -53,6 +50,20 @@ export default function TeamCard({
     if (!currentUserId || !isMember) return;
     await leaveTeam(id, currentUserId);
   };
+
+  const handleRevokeInvite = async (inviteeId: string) => {
+    if (!IamLeader) return;
+    const tst = toast.loading("Revoking invite...");
+    try {
+      const result = await inviteMember(inviteeId, true);
+      if (!result.ok) {
+        throw new Error(result.error);
+      }
+      toast.success("Invite revoked.", { id: tst });
+    } catch (error: any) {
+      toast.error(error?.message ?? "Failed to revoke invite.", { id: tst });
+    }
+  };
   return (
     <div
       key={id}
@@ -62,8 +73,8 @@ export default function TeamCard({
           IamLeader
             ? "border-2 border-yellow-500"
             : isMember
-            ? "border-2 border-sky-500"
-            : ""
+              ? "border-2 border-sky-500"
+              : ""
         }`}
     >
       <Card className=" h-full rounded-2xl border-none bg-background/10 backdrop-blur-sm">
@@ -120,7 +131,7 @@ export default function TeamCard({
             {members
               .slice()
               .sort((a, b) =>
-                a.member_id === leader ? -1 : b.member_id === leader ? 1 : 0
+                a.member_id === leader ? -1 : b.member_id === leader ? 1 : 0,
               )
               .map((member) => (
                 <TeamMember
@@ -129,9 +140,61 @@ export default function TeamCard({
                   isLeader={member.member_id === leader}
                   isYou={member.member_id === currentUserId}
                   canKick={IamLeader && member.member_id !== currentUserId}
+                  teamId={id}
                 />
               ))}
           </ul>
+
+          {IamLeader && invites.length > 0 && (
+            <div className="pt-2">
+              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Pending Invites
+              </div>
+              <ul className="flex flex-wrap gap-2">
+                {invites.map((inviteeId) => {
+                  const invitee = memberInfoById?.[inviteeId];
+                  const label = invitee?.full_name
+                    ? invitee.full_name
+                    : `${inviteeId.slice(0, 8)}…${inviteeId.slice(-4)}`;
+                  const title = invitee?.email
+                    ? `${invitee.full_name} <${invitee.email}>`
+                    : inviteeId;
+
+                  return (
+                    <li
+                      key={inviteeId}
+                      className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
+                      title={title}
+                    >
+                      <span className={invitee?.full_name ? "" : "font-mono"}>
+                        {label}
+                      </span>
+                      {invitee?.email && (
+                        <Link
+                          href={`mailto:${invitee.email}`}
+                          className="inline-flex items-center justify-center rounded-full bg-white/10 p-1 hover:bg-white/15"
+                          title={`Email ${invitee.full_name}`}
+                        >
+                          <Mail className="h-3 w-3" />
+                          <span className="sr-only">
+                            Email {invitee.full_name}
+                          </span>
+                        </Link>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => handleRevokeInvite(inviteeId)}
+                        className="inline-flex items-center justify-center rounded-full bg-red-500/20 p-1 text-red-800 hover:bg-red-500/30"
+                        title="Revoke invite"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
         </CardContent>
         <CardFooter className="flex items-center justify-start gap-2">
           {!open_invite && (
