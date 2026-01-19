@@ -59,9 +59,9 @@ export default function CreateTeamDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <form>
-        <DialogTrigger asChild>
-          <Button variant="outline">
-            <div className="flex items-center justify-center">
+        <DialogTrigger className="w-full" asChild>
+          <Button>
+            <div className="wh-btn flex items-center justify-center">
               <span>Create Team</span>
               <CirclePlus className="ml-2 h-5 w-5" />
             </div>{" "}

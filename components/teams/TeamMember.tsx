@@ -4,7 +4,9 @@ import inviteMember from "@/actions/teams/invite";
 import removeMember from "@/actions/teams/remove";
 import { Mail, Crown, UserRoundPlus, UserRoundX } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 import { toast } from "sonner";
+import { useTeamsContext } from "./TeamsContext";
 
 interface TeamMemberProps {
   member: {
@@ -27,9 +29,14 @@ export default function TeamMember({
   canKick = false,
   teamId,
 }: TeamMemberProps) {
+  const { currentUserId, isSomeLeader } = useTeamsContext();
+
   const handleKick = async () => {
     const tst = toast.loading("Removing member...");
     try {
+      if (isYou || !currentUserId || !isSomeLeader) {
+        throw new Error("You cannot invite this member.");
+      }
       const result = await removeMember(member.member_id);
       if (!result.ok) {
         throw new Error(result.error);
@@ -40,10 +47,12 @@ export default function TeamMember({
     }
   };
 
-  // TODO: handleInvite
   const handleInvite = async () => {
     const tst = toast.loading("Inviting member...");
     try {
+      if (isYou || !currentUserId || !isSomeLeader) {
+        throw new Error("You cannot invite this member.");
+      }
       const result = await inviteMember(member.member_id);
       if (!result.ok) {
         throw new Error(result.error);
@@ -56,7 +65,7 @@ export default function TeamMember({
   return (
     <li
       className={`flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all ${
-        isLeader ? "bg-yellow-200" : isYou ? "bg-sky-200/80" : "bg-muted/90"
+        isLeader ? "bg-yellow-200" : isYou ? "bg-sky-100" : "bg-muted/90"
       }`}
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-[10px] font-semibold text-lg text-black">
@@ -68,17 +77,14 @@ export default function TeamMember({
           .toUpperCase()}
       </div>
       <div className="flex flex-1 items-center justify-between gap-2">
-        <div className="flex flex-col">
+        <div className="flex flex-col text-gray-800">
           <span
             title={member.full_name}
             className="block max-w-[160px] truncate text-primary"
           >
             {member.full_name}
           </span>
-          <span className="text-sm text-muted-foreground">{member.email}</span>
-          <span className="text-[11px] text-muted-foreground">
-            {member.university}
-          </span>
+          <span className="text-[11px]">{member.university}</span>
         </div>
         <div className="group/actions flex items-end justify-center gap-2">
           {canKick && (
@@ -113,7 +119,7 @@ export default function TeamMember({
               <span>Leader</span>
             </span>
           )}
-          {!teamId && !isYou && (
+          {!teamId && !isYou && isSomeLeader && (
             <button
               type="button"
               title="Invite"
