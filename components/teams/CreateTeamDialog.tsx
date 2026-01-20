@@ -50,7 +50,6 @@ export default function CreateTeamDialog() {
       });
       setOpen(false);
     } catch (error: any) {
-      console.error("Error creating team:", error);
       toast.error(error.message || "An unknown error occurred.", {
         id: tst,
       });
@@ -59,9 +58,12 @@ export default function CreateTeamDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <form>
-        <DialogTrigger className="w-full" asChild>
+        <DialogTrigger
+          className="bg-transparent hover:bg-transparent focus-visible:ring-0 "
+          asChild
+        >
           <Button>
-            <div className="wh-btn flex items-center justify-center">
+            <div className="wh-btn  flex items-center justify-center">
               <span>Create Team</span>
               <CirclePlus className="ml-2 h-5 w-5" />
             </div>{" "}
@@ -80,16 +82,19 @@ export default function CreateTeamDialog() {
               <Label htmlFor="name-1">Team Name</Label>
               <Input id="name-1" ref={teamNameRef} name="name" />
             </div>
-            <div className="flex items-start space-x-2">
+            <div className="flex items-start justify-items-end space-x-2">
               <Label htmlFor="open-invite-1">Open Invite?</Label>
               <Checkbox
                 id="open-invite-1"
                 name="open-invite"
                 ref={openInviteRef}
                 defaultChecked={false}
-                className="bg-secondary"
+                className="bg-secondary data-[state=checked]:bg-[var(--wh-bg)]"
               />
             </div>
+            <span className="text-sm text-muted-foreground -mt-3">
+              Allows anyone to join your team without an invite.
+            </span>
           </div>
           <DialogFooter>
             <DialogClose asChild>

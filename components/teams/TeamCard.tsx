@@ -20,6 +20,8 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useTeamsContext } from "./TeamsContext";
 
+// TODO: make server actions ActionResult complaint for toasts (not redirects)
+
 export default function TeamCard({
   id,
   team_name,
@@ -49,6 +51,18 @@ export default function TeamCard({
   const handleLeave = async () => {
     if (!currentUserId || !isMember) return;
     await leaveTeam(id, currentUserId);
+  };
+
+  const handleDisband = async () => {
+    if (!IamLeader) return;
+    if (
+      prompt(
+        "Are you sure you want to disband this team? This action cannot be undone. Type 'yes' to confirm.",
+      ) !== "yes"
+    ) {
+      return;
+    }
+    await disbandTeam(id);
   };
 
   const handleRevokeInvite = async (inviteeId: string) => {
@@ -106,7 +120,7 @@ export default function TeamCard({
                 // disband team
                 <button
                   type="button"
-                  onClick={disbandTeam.bind(null, id)}
+                  onClick={handleDisband}
                   className="rounded-full bg-red-500/80 px-3 py-1 text-xs font-medium text-white border border-red-500/40 hover:bg-red-400"
                 >
                   Disband
