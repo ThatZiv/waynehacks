@@ -148,6 +148,12 @@ export default async function Application() {
               application.status?.status !== statusEnum.REJECTED && (
                 // TODO: add a confirmation
                 <div className="flex justify-center">
+                  <Link
+                    href="/teams"
+                    className="wh-btn w-1/3 text-white text-center mr-4 flex items-center justify-center"
+                  >
+                    Join a team
+                  </Link>
                   <form
                     action={cancelApplication}
                     className="wh-btn w-1/3  bg-red-600 hover:bg-red-700 text-dark hover:animate-pulse text-center"

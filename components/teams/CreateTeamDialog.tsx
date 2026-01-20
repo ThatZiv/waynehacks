@@ -17,6 +17,7 @@ import { Checkbox } from "../ui/checkbox";
 import React from "react";
 import createTeam from "@/actions/teams/create";
 import { toast } from "sonner";
+import Splitter from "../Splitter";
 
 export default function CreateTeamDialog() {
   const teamNameRef = React.useRef<HTMLInputElement>(null);
@@ -76,6 +77,7 @@ export default function CreateTeamDialog() {
               Create a new team for Wayne Hacks. You can invite members after
               creating the team.
             </DialogDescription>
+            <Splitter />
           </DialogHeader>
           <div className="grid gap-4">
             <div className="grid gap-3">

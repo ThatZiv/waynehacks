@@ -128,6 +128,11 @@ body {
     @apply transition-all;
   }
 
+  .wh-btn:hover {
+    @apply bg-[var(--wh-bg)];
+    @apply brightness-110;
+  }
+
   .wh-subheading {
     @apply text-2xl;
     @apply lg:text-4xl;
