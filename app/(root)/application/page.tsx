@@ -48,7 +48,6 @@ export default async function Application() {
   const application = (await getApplication()).data[0] as
     | Application
     | undefined;
-  console.log(application);
   // if you can't register and you don't have an application, deny
   if (!canRegister && !application)
     redirect("/?message=Applications are currently closed.");
@@ -233,18 +232,19 @@ function Card(props: {
 
 async function RegisterForm() {
   const getUniversities = cache(async () => {
+    const pageSize = 500;
     let offset = 0;
     let allData: any[] = [];
     while (true) {
       const data = (await fetch(
-        `http://universities.hipolabs.com/search?country=United%20States&limit=350&offset=${offset}`,
+        `http://universities.hipolabs.com/search?country=United%20States&limit=${pageSize}&offset=${offset}`,
         { cache: "force-cache" },
       )
         .then((res) => res.json())
         .catch(() => [])) as any[];
       if (data.length === 0) break;
       allData = allData.concat(data);
-      offset += 1000;
+      offset += pageSize;
     }
 
     allData.sort((a, b) => a.name.localeCompare(b.name));
@@ -280,13 +280,18 @@ async function RegisterForm() {
         College/University
       </label>
       {universities.length > 0 ? (
-        <select name="university" required className="wh-dropdown">
-          <option value="" disabled selected>
+        <select
+          name="university"
+          required
+          className="wh-dropdown"
+          defaultValue=""
+        >
+          <option value="" disabled>
             Select your university
           </option>
-          {universities.map((uni: any) => (
+          {universities.map((uni: any, index: number) => (
             <option
-              key={uni.name}
+              key={uni.name + index}
               value={uni.name}
               className="text-black bg-white"
             >
@@ -305,8 +310,8 @@ async function RegisterForm() {
       <label className="text-md text-dark" htmlFor="major">
         Major
       </label>
-      <select name="major" required className="wh-dropdown">
-        <option value="" disabled selected>
+      <select name="major" required className="wh-dropdown" defaultValue="">
+        <option value="" disabled>
           Select your major
         </option>
         {majors.map((major: string) => (
@@ -347,8 +352,13 @@ async function RegisterForm() {
       <label className="text-md text-dark" htmlFor="shirt_size">
         Shirt Size{" "}
       </label>
-      <select name="shirt_size" className="wh-dropdown" required>
-        <option value="" disabled selected>
+      <select
+        name="shirt_size"
+        className="wh-dropdown"
+        required
+        defaultValue=""
+      >
+        <option value="" disabled>
           Select your shirt size
         </option>
         {shirt_sizes.map((size) => (
