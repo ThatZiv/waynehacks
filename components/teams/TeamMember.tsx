@@ -7,6 +7,7 @@ import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 import { useTeamsContext } from "./TeamsContext";
+import Image from "next/image";
 
 interface TeamMemberProps {
   member: {
@@ -30,6 +31,9 @@ export default function TeamMember({
   teamId,
 }: TeamMemberProps) {
   const { currentUserId, isSomeLeader } = useTeamsContext();
+  const emailDomain = member.email.includes("@")
+    ? member.email.split("@")[1]
+    : "";
 
   const handleKick = async () => {
     const tst = toast.loading("Removing member...");
@@ -62,6 +66,7 @@ export default function TeamMember({
       toast.error(error.message, { id: tst });
     }
   };
+
   return (
     <li
       className={`flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all ${
@@ -69,12 +74,20 @@ export default function TeamMember({
       }`}
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-[10px] font-semibold text-lg text-black">
-        {member.full_name
+        {/* {member.full_name
           .split(" ")
           .map((n: string) => n[0])
           .join("")
           .slice(0, 2)
-          .toUpperCase()}
+          .toUpperCase()} */}
+        <Image
+          src={`https://img.logo.dev/${encodeURIComponent(emailDomain)}?size=50&token=${process.env.NEXT_PUBLIC_LOGO_DEV_KEY}`}
+          alt={"University Logo"}
+          className="rounded-lg"
+          unoptimized
+          width={50}
+          height={50}
+        />
       </div>
       <div className="flex flex-1 items-center justify-between gap-2">
         <div className="flex flex-col text-gray-800">
