@@ -40,7 +40,7 @@ export default async function Application() {
   });
   if (!user)
     redirect(
-      "/login?message=You must be logged in to apply.&next=/application"
+      "/login?message=You must be logged in to apply.&next=/application",
     );
   const whacks = new SupabaseFunctions(supabase);
   const canRegister = await whacks.getConfigValue("canRegister");
@@ -48,6 +48,7 @@ export default async function Application() {
   const application = (await getApplication()).data[0] as
     | Application
     | undefined;
+  console.log(application);
   // if you can't register and you don't have an application, deny
   if (!canRegister && !application)
     redirect("/?message=Applications are currently closed.");
@@ -131,6 +132,16 @@ export default async function Application() {
                       for more important details regarding the event.
                     </li>
                   </ol>
+                  <div className="mt-4">
+                    Consider finding a team!
+                    <Link
+                      href="/teams"
+                      className="wh-link ml-1"
+                      target="_blank"
+                    >
+                      Browse teams here.
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -222,11 +233,23 @@ function Card(props: {
 
 async function RegisterForm() {
   const getUniversities = cache(async () => {
-    const data = (await fetch(
-      `http://universities.hipolabs.com/search?country=united%20states`,
-      { cache: "force-cache" }
-    ).then((res) => res.json())) as any[];
-    return data.sort((a, b) => a.name.localeCompare(b.name));
+    let offset = 0;
+    let allData: any[] = [];
+    while (true) {
+      const data = (await fetch(
+        `http://universities.hipolabs.com/search?country=United%20States&limit=350&offset=${offset}`,
+        { cache: "force-cache" },
+      )
+        .then((res) => res.json())
+        .catch(() => [])) as any[];
+      if (data.length === 0) break;
+      allData = allData.concat(data);
+      offset += 1000;
+    }
+
+    allData.sort((a, b) => a.name.localeCompare(b.name));
+    allData.push({ name: "Other", domains: ["other"] });
+    return allData;
   });
   const universities = await getUniversities();
   return (
@@ -256,21 +279,29 @@ async function RegisterForm() {
       <label className="text-md text-dark" htmlFor="university">
         College/University
       </label>
-      <select name="university" required className="wh-dropdown">
-        <option value="" disabled selected>
-          Select your university
-        </option>
-        {universities.map((uni: any) => (
-          <option
-            key={uni.name}
-            value={uni.name}
-            className="text-black bg-white"
-          >
-            {uni.name} ({uni?.domains.join(", ")})
+      {universities.length > 0 ? (
+        <select name="university" required className="wh-dropdown">
+          <option value="" disabled selected>
+            Select your university
           </option>
-        ))}
-      </select>
-
+          {universities.map((uni: any) => (
+            <option
+              key={uni.name}
+              value={uni.name}
+              className="text-black bg-white"
+            >
+              {uni.name} ({uni?.domains.join(", ")})
+            </option>
+          ))}
+        </select>
+      ) : (
+        <input
+          name="university"
+          className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
+          placeholder="Your University"
+          required
+        />
+      )}
       <label className="text-md text-dark" htmlFor="major">
         Major
       </label>
