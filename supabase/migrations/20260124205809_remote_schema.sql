@@ -464,8 +464,8 @@ on "public"."teams"
 as permissive
 for update
 to authenticated
-using ((( SELECT auth.uid() AS uid) = leader))
-with check ((( SELECT auth.uid() AS uid) = leader));
+using (auth.uid() = leader)
+with check (auth.uid() = leader);
 
 
 CREATE TRIGGER add_leader_to_team_members AFTER INSERT ON public.teams FOR EACH ROW EXECUTE FUNCTION team_insert_add_leader();
