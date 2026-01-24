@@ -24,6 +24,7 @@ import CreateTeamDialog from "@/components/teams/CreateTeamDialog";
 import { TeamsProvider } from "@/components/teams/TeamsContext";
 import { redirect } from "next/navigation";
 import { statusEnum } from "@/misc/application";
+import TeamsConsentDialog from "@/components/teams/TeamsConsentDialog";
 
 export default async function Teams() {
   const supabase = await createServerClient();
@@ -86,6 +87,7 @@ export default async function Teams() {
     >
       <div className="w-full">
         <Back href="/application" />
+        <TeamsConsentDialog />
         <div className="mx-auto flex max-w-5xl flex-col gap-8 mt-4">
           <header className="flex flex-col gap-2 -mb-4">
             <h1 className="text-3xl font-semibold tracking-tight">

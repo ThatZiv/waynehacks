@@ -112,7 +112,7 @@ export default function TeamCard({
                 <button
                   type="button"
                   onClick={handleJoin}
-                  className="rounded-full bg-sky-500/90 px-3 py-1 text-xs font-medium text-black hover:bg-sky-400 border border-sky-500/40"
+                  className="rounded-full bg-sky-500/90 px-3 py-1 text-xs font-medium text-white hover:bg-sky-400 border border-sky-500/40"
                 >
                   Join team
                 </button>
