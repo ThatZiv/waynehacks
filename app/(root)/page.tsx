@@ -37,7 +37,7 @@ export default async function Index() {
           <WayneHacksLogo />
           <h1 className="sr-only">WayneHacks</h1>
           <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center mt-8">
-            WayneHacks is going to be{" "}
+            WayneHacks is going to be the{" "}
             {/* <span className="line-through decoration-4 hover:decoration-red-200">
               in-person
             </span>{" "} */}
