@@ -65,12 +65,7 @@ export default function TeamsConsentDialog() {
             </Button>
           </DialogClose>
           <DialogClose asChild>
-            <Button
-              variant="outline"
-              onClick={() => {
-                handleConsent();
-              }}
-            >
+            <Button variant="outline" onClick={handleConsent}>
               I Understand
             </Button>
           </DialogClose>

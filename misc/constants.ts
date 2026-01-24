@@ -10,61 +10,61 @@ export const _ = (dateString: string) => {
  */
 export const events: Event[] = [
   {
-    date: _("January 18, 2025 9:00:00"),
-    end: _("January 18, 2025 11:00:00"),
-    name: "Check-in",
+    date: _("March 28, 2026 9:00:00"),
+    end: _("March 28, 2026 11:00:00"),
+    name: "Check-in (tentative)",
   },
   {
-    date: _("January 18, 2025 11:00:00"),
-    end: _("January 18, 2025 12:00:00"),
+    date: _("March 28, 2026 11:00:00"),
+    end: _("March 28, 2026 12:00:00"),
     name: "Opening Ceremony",
   },
   {
-    date: _("January 18, 2025 12:00:00"),
+    date: _("March 28, 2026 12:00:00"),
     name: "Hacking Begins",
   },
   {
-    date: _("January 18, 2025 13:00:00"),
+    date: _("March 28, 2026 13:00:00"),
     name: "Lunch",
   },
   {
-    date: _("January 18, 2025 19:30:00"),
+    date: _("March 28, 2026 19:30:00"),
     name: "Dinner",
   },
   {
-    date: _("January 18, 2025 23:00:00"),
+    date: _("March 28, 2026 23:00:00"),
     name: "Building Closes",
   },
   {
-    date: _("January 19, 2025 9:00:00"),
+    date: _("March 29, 2026 9:00:00"),
     name: "Building Opens",
   },
   {
-    date: _("January 19, 2025 9:30:00"),
+    date: _("March 29, 2026 9:30:00"),
     name: "Breakfast",
   },
   {
-    date: _("January 19, 2025 11:00:00"),
-    end: _("January 19, 2025 12:00:00"),
+    date: _("March 29, 2026 11:00:00"),
+    end: _("March 29, 2026 12:00:00"),
     name: "Last Minute Help for Submissions",
   },
   {
-    date: _("January 19, 2025 12:00:00"),
+    date: _("March 29, 2026 12:00:00"),
     name: "Hacking Ends",
   },
   {
-    date: _("January 19, 2025 12:30:00"),
-    end: _("January 19, 2025 14:30:00"),
+    date: _("March 29, 2026 12:30:00"),
+    end: _("March 29, 2026 14:30:00"),
     name: "Presentations/Judging",
   },
   {
-    date: _("January 19, 2025 14:30:00"),
-    end: _("January 19, 2025 15:00:00"),
+    date: _("March 29, 2026 14:30:00"),
+    end: _("March 29, 2026 15:00:00"),
     name: "Closing Ceremony",
   },
 ];
 
-const constants: Record<string, any> = {
+const constants = {
   /**
    * Email for labelling internally
    */
@@ -76,9 +76,9 @@ const constants: Record<string, any> = {
   address: "5105 Anthony Wayne Dr, Detroit, MI 48202",
   addressURL: "https://maps.app.goo.gl/REau4tD9HgfXnDQH7",
   infoPacket:
-    "https://docs.google.com/document/d/1OX8XTbJtyVpRK3ZU4dKBTWkdbpyZK0yNNKoS7I1vZj4/edit?usp=sharing",
+    "https://docs.google.com/document/d/1nniHacxkRLR_SuGKbCdRN_t6-SuyTAIgjxluYDXx06Y/",
   sponsorPacket:
-    "https://docs.google.com/document/d/1xBuGjslnOK2wr4ZEi3Vpcx8O9kzx3Er3ZjfTE8b4cjA/edit?usp=sharing",
+    "https://docs.google.com/document/d/13tEdmoJyzcw6o2Blcg4Cag6X1ZDPPs47D000QhmRSAI/",
   discord: "https://discord.gg/2KuZGsQMUS",
   devpost: "https://waynehacks-3.devpost.com/",
   linkedin: "https://linkedin.com/company/waynehacks",
