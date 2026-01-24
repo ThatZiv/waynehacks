@@ -9,6 +9,13 @@ import { toast } from "sonner";
 import { useTeamsContext } from "./TeamsContext";
 import Image from "next/image";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Button } from "../ui/button";
+
 interface TeamMemberProps {
   member: {
     member_id: string;
@@ -39,7 +46,7 @@ export default function TeamMember({
     const tst = toast.loading("Removing member...");
     try {
       if (isYou || !currentUserId || !isSomeLeader) {
-        throw new Error("You cannot invite this member.");
+        throw new Error("You cannot remove this member.");
       }
       const result = await removeMember(member.member_id);
       if (!result.ok) {
@@ -80,6 +87,7 @@ export default function TeamMember({
           .join("")
           .slice(0, 2)
           .toUpperCase()} */}
+
         <Image
           src={`https://img.logo.dev/${encodeURIComponent(emailDomain)}?size=50&token=${process.env.NEXT_PUBLIC_LOGO_DEV_KEY}`}
           alt={"University Logo"}
@@ -89,6 +97,7 @@ export default function TeamMember({
           height={50}
         />
       </div>
+
       <div className="flex flex-1 items-center justify-between gap-2">
         <div className="flex flex-col text-gray-800">
           <span
@@ -99,33 +108,46 @@ export default function TeamMember({
           </span>
           <span className="text-[11px]">{member.university}</span>
         </div>
-        <div className="group/actions flex items-end justify-center gap-2">
+        <div className="flex items-end justify-center gap-2">
           {canKick && (
-            <button
-              type="button"
-              title="Kick"
-              className="inline-flex items-center rounded-full bg-red-400 px-2 py-1 text-[11px] font-medium text-black transition-colors hover:bg-red-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600/40"
-              onClick={handleKick}
-            >
-              <UserRoundX className="h-4 w-4" />
-              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity,margin] duration-200 group-hover/actions:ml-1 group-hover/actions:max-w-[5rem] group-hover/actions:opacity-100 group-focus-within/actions:ml-1 group-focus-within/actions:max-w-[5rem] group-focus-within/actions:opacity-100">
-                Kick
-              </span>
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  className="h-8 w-8 rounded-full"
+                  onClick={handleKick}
+                  aria-label={`Kick ${member.full_name}`}
+                >
+                  <UserRoundX className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Kick</TooltipContent>
+            </Tooltip>
           )}
+
           {!isYou && (
-            <Link
-              href={`mailto:${member.email}`}
-              title="Email"
-              className="inline-flex items-center rounded-full bg-white px-2 py-1 text-[11px] font-medium text-secondary transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500/30"
-            >
-              <Mail className="h-4 w-4 text-muted-foreground" />
-              <span className="max-w-0 text-black overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity,margin] duration-200 group-hover/actions:ml-1 group-hover/actions:max-w-[5rem] group-hover/actions:opacity-100 group-focus-within/actions:ml-1 group-focus-within/actions:max-w-[5rem] group-focus-within/actions:opacity-100">
-                Email
-              </span>
-              <span className="sr-only">Email {member.full_name}</span>
-            </Link>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="icon"
+                  className="h-8 w-8 rounded-full bg-white hover:bg-white/90"
+                >
+                  <Link
+                    href={`mailto:${member.email}`}
+                    aria-label={`Email ${member.full_name}`}
+                  >
+                    <Mail className="h-4 w-4 text-muted-foreground" />
+                  </Link>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Email</TooltipContent>
+            </Tooltip>
           )}
+
           {isLeader && (
             <span className="inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-yellow-400 text-black px-2 py-0.5 text-[11px] font-medium ">
               <Crown className="h-4 w-4" />
@@ -133,18 +155,20 @@ export default function TeamMember({
             </span>
           )}
           {!teamId && !isYou && isSomeLeader && (
-            <button
-              type="button"
-              title="Invite"
-              className="inline-flex items-center rounded-full bg-green-400 px-2 py-1 text-[11px] font-medium text-black transition-colors hover:bg-green-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600/40"
-              onClick={handleInvite}
-            >
-              <UserRoundPlus className="h-4 w-4" />
-              <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-[max-width,opacity,margin] duration-200 group-hover/actions:ml-1 group-hover/actions:max-w-[5rem] group-hover/actions:opacity-100 group-focus-within/actions:ml-1 group-focus-within/actions:max-w-[5rem] group-focus-within/actions:opacity-100">
-                Invite
-              </span>
-              <span className="sr-only">Invite {member.full_name}</span>
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  size="icon"
+                  className="h-8 w-8 rounded-full bg-green-400 text-black hover:bg-green-500"
+                  onClick={handleInvite}
+                  aria-label={`Invite ${member.full_name}`}
+                >
+                  <UserRoundPlus className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Invite</TooltipContent>
+            </Tooltip>
           )}
           {isYou && (
             <span className="inline-flex cursor-not-allowed items-center gap-1 rounded-full bg-sky-400 text-black px-2 py-0.5 text-[11px] font-medium">

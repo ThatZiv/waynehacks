@@ -14,6 +14,13 @@ import joinTeam from "@/actions/teams/join";
 import leaveTeam from "@/actions/teams/leave";
 import inviteMember from "@/actions/teams/invite";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+
 import TeamMember from "./TeamMember";
 import disbandTeam from "@/actions/teams/disband";
 import { toast } from "sonner";
@@ -184,25 +191,40 @@ export default function TeamCard({
                         {label}
                       </span>
                       {invitee?.email && (
-                        <Link
-                          href={`mailto:${invitee.email}`}
-                          className="inline-flex items-center justify-center rounded-full bg-white/10 p-1 hover:bg-white/15"
-                          title={`Email ${invitee.full_name}`}
-                        >
-                          <Mail className="h-3 w-3" />
-                          <span className="sr-only">
-                            Email {invitee.full_name}
-                          </span>
-                        </Link>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button
+                              asChild
+                              variant="ghost"
+                              size="icon"
+                              className="h-6 w-6 rounded-full bg-white/10 hover:bg-white/15"
+                            >
+                              <Link
+                                href={`mailto:${invitee.email}`}
+                                aria-label={`Email ${invitee.full_name}`}
+                              >
+                                <Mail className="h-3 w-3" />
+                              </Link>
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>Email</TooltipContent>
+                        </Tooltip>
                       )}
-                      <button
-                        type="button"
-                        onClick={() => handleRevokeInvite(inviteeId)}
-                        className="inline-flex items-center justify-center rounded-full bg-red-500/20 p-1 text-red-800 hover:bg-red-500/30"
-                        title="Revoke invite"
-                      >
-                        <X className="h-3 w-3" />
-                      </button>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="h-6 w-6 rounded-full bg-red-500/20 text-red-800 hover:bg-red-500/30"
+                            onClick={() => handleRevokeInvite(inviteeId)}
+                            aria-label={`Revoke invite for ${label}`}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>Revoke invite</TooltipContent>
+                      </Tooltip>
                     </li>
                   );
                 })}

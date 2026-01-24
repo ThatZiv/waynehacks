@@ -7,11 +7,12 @@ import Footer from "@/components/Footer";
 import Messages from "../components/messages";
 import React from "react";
 import Spinner from "@/components/Spinner";
+import Providers from "./providers";
 
 export const metadata = {
   title: "WayneHacks",
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
   ),
   description:
     "WayneHacks is a 24-hour in-person Hackathon at Wayne State University. All majors and skill levels are welcome with teams up to four people. Prizes will be awarded to the best projects, so be ready!",
@@ -100,15 +101,17 @@ export default async function RootLayout({
         />
       </head>
       <body>
-        <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
-          <React.Suspense fallback={<GenericFallback />}>
-            <Nav />
-            <Messages />
-            {children}
-            <Analytics />
-            <Footer />
-          </React.Suspense>
-        </main>
+        <Providers>
+          <main className="min-h-screen dark:bg-opacity-0 flex flex-col items-center">
+            <React.Suspense fallback={<GenericFallback />}>
+              <Nav />
+              <Messages />
+              {children}
+              <Analytics />
+              <Footer />
+            </React.Suspense>
+          </main>
+        </Providers>
       </body>
     </html>
   );
