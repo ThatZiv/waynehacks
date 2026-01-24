@@ -22,9 +22,35 @@ import TeamMember from "@/components/teams/TeamMember";
 import Back from "@/components/Back";
 import CreateTeamDialog from "@/components/teams/CreateTeamDialog";
 import { TeamsProvider } from "@/components/teams/TeamsContext";
+import { redirect } from "next/navigation";
+import { statusEnum } from "@/misc/application";
 
 export default async function Teams() {
   const supabase = await createServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return redirect(
+      "/login?next=/teams&message=You must be logged in to view teams",
+    );
+  }
+  const currentUserId = user?.id ?? null;
+  const { data: statusData, error: statusError } = await supabase
+    .from("status")
+    .select("status")
+    .eq("applicant_id", currentUserId)
+    .single();
+  if (statusError || !statusData) {
+    return redirect(
+      "/application?message=You must complete your application before viewing teams",
+    );
+  }
+  if ([statusEnum.REJECTED, statusEnum.CANCELLED].includes(statusData.status)) {
+    return redirect(
+      "/application?message=You have an invalid application. Please re-apply to join a team.",
+    );
+  }
   const { data: teamsList, error: membersError } = await supabase.rpc(
     "get_team_with_members",
     {
@@ -33,11 +59,6 @@ export default async function Teams() {
   );
   const allTeams: Team[] = teamsList || [];
   const teams = allTeams.filter(({ id }) => id > 0);
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const currentUserId = user?.id ?? null;
 
   // const { data: teams, error } = await supabase
   //   .from("team_with_members")
