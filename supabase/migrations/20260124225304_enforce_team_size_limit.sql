@@ -8,7 +8,6 @@ SECURITY DEFINER
 AS $function$
 DECLARE
   team_count integer;
-  team_exists boolean;
 BEGIN
   -- Only check when joining a team (team_id is not null)
   IF NEW.team_id IS NULL THEN
@@ -17,11 +16,11 @@ BEGIN
 
   -- Lock the team row for update to prevent concurrent modifications
   -- This ensures atomicity and prevents race conditions
-  -- Also validates that the team exists
-  SELECT EXISTS(SELECT 1 FROM public.teams WHERE id = NEW.team_id FOR UPDATE)
-  INTO team_exists;
+  -- Use a separate SELECT to explicitly acquire the row lock
+  PERFORM 1 FROM public.teams WHERE id = NEW.team_id FOR UPDATE;
   
-  IF NOT team_exists THEN
+  -- Now check if the team exists
+  IF NOT EXISTS (SELECT 1 FROM public.teams WHERE id = NEW.team_id) THEN
     RAISE EXCEPTION 'Team does not exist.';
   END IF;
 
