@@ -8,6 +8,7 @@ SECURITY DEFINER
 AS $function$
 DECLARE
   team_count integer;
+  team_exists boolean;
 BEGIN
   -- Only check when joining a team (team_id is not null)
   IF NEW.team_id IS NULL THEN
@@ -17,21 +18,20 @@ BEGIN
   -- Lock the team row for update to prevent concurrent modifications
   -- This ensures atomicity and prevents race conditions
   -- Also validates that the team exists
-  IF NOT EXISTS (
-    SELECT 1 FROM public.teams 
-    WHERE id = NEW.team_id 
-    FOR UPDATE
-  ) THEN
+  SELECT EXISTS(SELECT 1 FROM public.teams WHERE id = NEW.team_id FOR UPDATE)
+  INTO team_exists;
+  
+  IF NOT team_exists THEN
     RAISE EXCEPTION 'Team does not exist.';
   END IF;
 
   -- Count current team members
   -- For UPDATE: only exclude the user if they're already in this same team
-  IF TG_OP = 'UPDATE' AND OLD.team_id = NEW.team_id THEN
+  IF TG_OP = 'UPDATE' AND OLD.team_id IS NOT DISTINCT FROM NEW.team_id THEN
     -- User is staying in the same team, exclude them from count
     SELECT COUNT(*) INTO team_count
     FROM public.team_members
-    WHERE team_id = NEW.team_id AND id != NEW.id;
+    WHERE team_id = NEW.team_id AND id IS DISTINCT FROM NEW.id;
   ELSE
     -- User is joining a new team (INSERT or UPDATE from different team)
     SELECT COUNT(*) INTO team_count
