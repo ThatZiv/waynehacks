@@ -16,16 +16,24 @@ BEGIN
 
   -- Lock the team row for update to prevent concurrent modifications
   -- This ensures atomicity and prevents race conditions
-  PERFORM 1 FROM public.teams 
-  WHERE id = NEW.team_id 
-  FOR UPDATE;
+  -- Also validates that the team exists
+  IF NOT EXISTS (
+    SELECT 1 FROM public.teams 
+    WHERE id = NEW.team_id 
+    FOR UPDATE
+  ) THEN
+    RAISE EXCEPTION 'Team does not exist.';
+  END IF;
 
-  -- Count current team members (excluding the current user if updating)
-  IF TG_OP = 'UPDATE' THEN
+  -- Count current team members
+  -- For UPDATE: only exclude the user if they're already in this same team
+  IF TG_OP = 'UPDATE' AND OLD.team_id = NEW.team_id THEN
+    -- User is staying in the same team, exclude them from count
     SELECT COUNT(*) INTO team_count
     FROM public.team_members
     WHERE team_id = NEW.team_id AND id != NEW.id;
   ELSE
+    -- User is joining a new team (INSERT or UPDATE from different team)
     SELECT COUNT(*) INTO team_count
     FROM public.team_members
     WHERE team_id = NEW.team_id;
