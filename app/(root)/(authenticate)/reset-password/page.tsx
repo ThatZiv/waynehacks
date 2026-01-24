@@ -10,8 +10,8 @@ export const dynamic = "force-dynamic";
 export default function Forgot() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   const searchParams = useSearchParams();
-  const code = searchParams.get("code");
-  const email = searchParams.get("email");
+  const code = searchParams?.get("code");
+  const email = searchParams?.get("email");
   const [pending, setPending] = React.useState<boolean>(false);
 
   return (

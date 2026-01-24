@@ -35,7 +35,7 @@ function Submit({
       onClick={async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         let newSearchParams = `?next=${encodeURIComponent(
-          String(params.get("next") || "")
+          String(params.get("next") || ""),
         )}`;
         let newAction = route + newSearchParams;
         const form = e.currentTarget.form;
@@ -48,7 +48,7 @@ function Submit({
             router.push(
               window.location.pathname +
                 newSearchParams +
-                "&error=Please enter an email and password."
+                "&error=Please enter an email and password.",
             );
             return;
           }
@@ -58,7 +58,7 @@ function Submit({
             router.push(
               window.location.pathname +
                 newSearchParams +
-                "&error=Please enter an email."
+                "&error=Please enter an email.",
             );
             return;
           }
@@ -79,12 +79,12 @@ export default function Login() {
   const params = useSearchParams();
   const [pending, setPending] = React.useState<boolean>(false);
   const [action, setAction] = React.useState<string>(
-    `/auth/sign-in?next=${encodeURIComponent(String(params.get("next") || ""))}`
+    `/auth/sign-in?next=${encodeURIComponent(String(params?.get("next") || ""))}`,
   );
   const [showForgetPassword, setForgetPassword] =
     React.useState<boolean>(false);
   const [isSignup, setSignup] = React.useState<boolean>(
-    params.get("signup") === "true"
+    params?.get("signup") === "true",
   );
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   const title = React.useMemo(() => {
@@ -95,7 +95,7 @@ export default function Login() {
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <Back />
       <FormContext.Provider
-        value={{ pending, setPending, action, setAction, params }}
+        value={{ pending, setPending, action, setAction, params: params! }}
       >
         <form
           className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
