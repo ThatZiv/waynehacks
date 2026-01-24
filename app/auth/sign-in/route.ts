@@ -1,4 +1,5 @@
 import { createServerClient } from "@/lib/supabase";
+import { sanitizeRedirect } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
@@ -40,7 +41,7 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.redirect(requestUrl.origin + (next || ""), {
+  return NextResponse.redirect(requestUrl.origin + sanitizeRedirect(next), {
     // a 301 status is required to redirect from a POST to a GET route
     status: 301,
   });
