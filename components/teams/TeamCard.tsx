@@ -89,7 +89,7 @@ export default function TeamCard({
     <div
       key={id}
       id={`team-${id}`}
-      className={`group w-full md:w-[calc(50%-0.75rem)] rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-[1px] shadow-sm transition-all hover:shadow-xl
+      className={`group w-full min-w-0 rounded-2xl bg-gradient-to-br from-primary/10 via-background to-background p-[1px] shadow-sm transition-all hover:shadow-xl
         ${
           IamLeader
             ? "border-2 border-yellow-500"
@@ -98,15 +98,15 @@ export default function TeamCard({
               : ""
         }`}
     >
-      <Card className=" h-full rounded-2xl border-none bg-background/10 backdrop-blur-sm">
+      <Card className="h-full rounded-2xl border-none bg-background/10 backdrop-blur-sm">
         <CardHeader className="pb-2">
-          <div className="flex items-center justify-between gap-3">
-            <CardTitle className="text-lg text-white">
-              <div className="flex items-center justify-center">
-                <span>{team_name ?? "Unnamed Team"}</span>
+          <div className="flex items-center justify-between gap-3 min-w-0">
+            <CardTitle className="text-lg text-white min-w-0">
+              <div className="flex items-center justify-center min-w-0">
+                <span className="truncate">{team_name ?? "Unnamed Team"}</span>
               </div>
             </CardTitle>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 shrink-0">
               {isMember && !IamLeader ? (
                 <button
                   type="button"
@@ -187,7 +187,11 @@ export default function TeamCard({
                       className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground"
                       title={title}
                     >
-                      <span className={invitee?.full_name ? "" : "font-mono"}>
+                      <span
+                        className={`inline-block max-w-[10rem] truncate ${
+                          invitee?.full_name ? "" : "font-mono"
+                        }`}
+                      >
                         {label}
                       </span>
                       {invitee?.email && (

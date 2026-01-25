@@ -2,6 +2,7 @@
 
 import { fail, ok, type ActionResult } from "@/lib/action";
 import { createServerClient } from "@/lib/supabase";
+import { Notifier } from "@/misc/webhook/WebhookService";
 import { revalidatePath } from "next/cache";
 
 const DEFAULT_ERROR_MESSAGE =
@@ -18,7 +19,7 @@ const DEFAULT_ERROR_MESSAGE =
  */
 export default async function createTeam(
   team_name: string,
-  open_invite: boolean = true
+  open_invite: boolean = true,
 ): Promise<ActionResult> {
   let teamId = null;
   const supabase = await createServerClient();
@@ -134,6 +135,10 @@ export default async function createTeam(
   } catch (err: any) {
     return fail(err.message || DEFAULT_ERROR_MESSAGE);
   }
+  await Notifier.send(
+    "Team Created",
+    `Team ${teamId} "${team_name}" has been created.`,
+  );
   revalidatePath("/teams");
   return ok("Team created successfully");
 }
