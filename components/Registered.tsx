@@ -48,7 +48,7 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
           />
         </svg>
         <div className="">
-          {applicants >= 0 && (
+          {typeof applicants === "number" && applicants >= 0 && (
             <>
               <span className="animate-pulse">
                 <strong>{applicants}</strong>
