@@ -11,12 +11,12 @@ export const emailTemplate = (subject: string, content: string) => `
 </head>
 <body>
  <div>
-    <img src="https://i.imgur.com/ZFQDy2F.png" alt="WayneHacks banner" style="width: 100%; height: auto;" />
+    <img src="https://i.imgur.com/fldgBvz.png" alt="WayneHacks banner" style="width: 100%; height: auto;" />
    	<h1>${subject}</h1>
     <div>${content}</div>
     <hr>
     <p>Best,</p>
-    <img src="https://i.imgur.com/wIYr25r.png" alt="WayneHacks logo" width="150" height="auto" />
+    <img src="https://i.imgur.com/KSJjLDF.jpeg" alt="WayneHacks logo" width="150" height="auto" />
     <p>WayneHacks Team</p>
     
     <a href="${constants.linkedin}"><img width="50" height="auto" alt="LinkedIn" src="https://cdn.jsdelivr.net/gh/dmhendricks/signature-social-icons/icons/round-flat-filled/50px/linkedin.png"></a>
