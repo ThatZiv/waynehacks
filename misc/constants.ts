@@ -79,8 +79,8 @@ const constants = {
     "https://docs.google.com/document/d/1nniHacxkRLR_SuGKbCdRN_t6-SuyTAIgjxluYDXx06Y/",
   sponsorPacket:
     "https://docs.google.com/document/d/13tEdmoJyzcw6o2Blcg4Cag6X1ZDPPs47D000QhmRSAI/",
-  discord: "https://discord.gg/2KuZGsQMUS",
-  devpost: "https://waynehacks-3.devpost.com/",
+  discord: "https://discord.gg/nhPYsD7Ew5",
+  devpost: "https://waynehacks-4.devpost.com/",
   linkedin: "https://linkedin.com/company/waynehacks",
   instagram: "https://instagram.com/wayne.hacks",
 };
