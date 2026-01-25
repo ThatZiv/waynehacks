@@ -31,7 +31,7 @@ function ConfirmAccount() {
       {!isLoading ? (
         <form
           action={loginFromCode}
-          className="flex-1 flex flex-col w-full justify-center gap-2 text-black py-6"
+          className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground py-6"
         >
           <div className="mb-12">
             <WayneHacksLogo />
@@ -59,7 +59,7 @@ function ConfirmAccount() {
           <input type="hidden" name="captcha" value={token ?? ""} />
           <div className="flex flex-col w-full items-center">
             {!token && (
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted-foreground mb-2">
                 Please complete the captcha below to continue{" "}
               </p>
             )}
