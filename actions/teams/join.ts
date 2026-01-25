@@ -39,8 +39,8 @@ export default async function joinTeam(
       throw new Error("Failed to join team: " + error.message);
     }
     await Notifier.send(
-      "Team Joined",
-      `User ${user_id} joined team ${team_id}`,
+      team_id ? "Team Joined" : "Looking for Team",
+      `User ${user_id} ${team_id ? "joined team " + team_id : "is looking for a team"}`,
     );
   } catch (err: any) {
     redirect("/teams?error=" + encodeURIComponent(err.message));
