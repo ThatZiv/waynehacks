@@ -83,7 +83,6 @@ export class EmailerService {
         `Email send failed to ${to}`,
         `Failed to send email to ${to} due to: ${error.message}`,
       );
-      throw err;
     }
   }
 }
