@@ -16,7 +16,7 @@ export const emailTemplate = (subject: string, content: string) => `
     <div>${content}</div>
     <hr>
     <p>Best,</p>
-    <img src="https://i.imgur.com/KSJjLDF.png" alt="WayneHacks logo" width="150" height="auto" />
+    <img src="https://i.imgur.com/pAiyQPp.png" alt="WayneHacks logo" width="150" height="auto" />
     <p>WayneHacks Team</p>
     
     <a href="${constants.linkedin}"><img width="50" height="auto" alt="LinkedIn" src="https://cdn.jsdelivr.net/gh/dmhendricks/signature-social-icons/icons/round-flat-filled/50px/linkedin.png"></a>
