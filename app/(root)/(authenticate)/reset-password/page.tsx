@@ -17,7 +17,7 @@ export default function Forgot() {
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       <form
-        className="flex-1 flex flex-col w-full justify-center gap-2 text-black py-6"
+        className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground py-6"
         method="post"
         action="/auth/change-password"
       >
@@ -70,7 +70,7 @@ export default function Forgot() {
         />
         <div className="flex flex-col w-full items-center">
           {!token && (
-            <p className="text-sm text-center text-gray-600">
+            <p className="text-sm text-center text-muted-foreground mb-2">
               Please complete the captcha below to continue{" "}
             </p>
           )}
