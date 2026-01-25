@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 
 export default async function leaveTeam(
   team_id: number,
-  user_id: string
+  user_id: string,
 ): Promise<void> {
   try {
     const supabase = await createServerClient();
@@ -21,10 +21,10 @@ export default async function leaveTeam(
       console.error("Error leaving team:", error.message);
       throw new Error("Failed to leave team: " + error.message);
     }
+    await Notifier.send("Team Left", `User ${user_id} left team ${team_id}`);
   } catch (error: any) {
     console.error("Unexpected error leaving team:", error);
     redirect("/teams?error=" + encodeURIComponent(error.message));
   }
-  await Notifier.send("Team Left", `User ${user_id} left team ${team_id}`);
   redirect("/teams?message=" + encodeURIComponent("Successfully left team!"));
 }

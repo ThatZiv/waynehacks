@@ -48,17 +48,15 @@ export default async function Registered({ nonInteractive }: RegisteredProps) {
           />
         </svg>
         <div className="">
-          {applicants ? (
+          {typeof applicants === "number" && applicants >= 0 && (
             <>
               <span className="animate-pulse">
                 <strong>{applicants}</strong>
               </span>
               <br />
+              <p className="text-sm mb-1">applied</p>
             </>
-          ) : (
-            <Spinner />
           )}
-          <p className="text-sm mb-1">applied</p>
         </div>
       </div>
       {!nonInteractive && (

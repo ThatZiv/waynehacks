@@ -18,13 +18,13 @@ export class WebhookService {
       console.log("Not sending webhook in dev");
       return Promise.resolve();
     }
-    return Promise.all(
-      this.webhooks.map((webhook) => webhook.send(title, content, url))
+    return Promise.allSettled(
+      this.webhooks.map((webhook) => webhook.send(title, content, url)),
     );
   }
 }
 
 export const Notifier = new WebhookService(
   new DiscordWebhook(),
-  new TeamsWebhook()
+  new TeamsWebhook(),
 );

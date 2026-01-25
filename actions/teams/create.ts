@@ -132,13 +132,13 @@ export default async function createTeam(
     //   await supabase.from("teams").delete().eq("id", teamsData?.[0].id);
     //   throw new Error("Failed to create team: " + teamMemberError.message);
     // }
+    await Notifier.send(
+      "Team Created",
+      `Team ${teamId} "${team_name}" has been created.`,
+    );
   } catch (err: any) {
     return fail(err.message || DEFAULT_ERROR_MESSAGE);
   }
-  await Notifier.send(
-    "Team Created",
-    `Team ${teamId} "${team_name}" has been created.`,
-  );
   revalidatePath("/teams");
   return ok("Team created successfully");
 }
