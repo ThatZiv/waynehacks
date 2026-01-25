@@ -1,5 +1,5 @@
 import { createEmailURI } from "@/components/AdminCard";
-import { Emailer } from "@/misc/Emailer";
+import { EmailerService } from "@/misc/Emailer";
 import { Notifier } from "@/misc/webhook/WebhookService";
 import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
@@ -70,6 +70,7 @@ export async function POST(request: Request) {
       "applicant_id",
     )}`;
 
+    const Emailer = new EmailerService();
     if (IsCheckInUpdate) {
       await Emailer.send({
         to: String(email),

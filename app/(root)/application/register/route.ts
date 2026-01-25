@@ -4,7 +4,7 @@ import { createServerClient } from "@/lib/supabase";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { Emailer } from "@/misc/Emailer";
+import { EmailerService } from "@/misc/Emailer";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +57,7 @@ export async function POST(request: Request) {
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
     try {
+      const Emailer = new EmailerService();
       await Notifier.send(
         `New application`,
         toDiscord,

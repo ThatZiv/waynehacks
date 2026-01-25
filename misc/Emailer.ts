@@ -87,5 +87,3 @@ export class EmailerService {
     }
   }
 }
-
-export const Emailer = new EmailerService();
