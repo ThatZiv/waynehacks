@@ -5,13 +5,14 @@ import { Notifier } from "@/misc/webhook/WebhookService";
 import { redirect } from "next/navigation";
 
 export default async function joinTeam(
-  team_id: number,
+  team_id: number | null,
   user_id: string,
   // TODO: get uid from session instead
+  // TODO: make ActionResult compliant
 ): Promise<void> {
   try {
-    if (!team_id || !user_id) {
-      throw new Error("Missing team_id or user_id");
+    if (!user_id) {
+      throw new Error("Missing user_id");
     }
     const supabase = await createServerClient();
     const { error } = await supabase.from("team_members").upsert([
@@ -44,6 +45,7 @@ export default async function joinTeam(
   } catch (err: any) {
     redirect("/teams?error=" + encodeURIComponent(err.message));
   }
+  if (!team_id) redirect("/teams");
   redirect("/teams?message=" + encodeURIComponent("Successfully joined team!"));
   // Optionally, you can revalidate a path or perform other actions here
 }

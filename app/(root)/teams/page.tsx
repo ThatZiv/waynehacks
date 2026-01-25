@@ -25,6 +25,8 @@ import { TeamsProvider } from "@/components/teams/TeamsContext";
 import { redirect } from "next/navigation";
 import { statusEnum } from "@/misc/application";
 import TeamsConsentDialog from "@/components/teams/TeamsConsentDialog";
+import { Button } from "@/components/ui/button";
+import joinTeam from "@/actions/teams/join";
 
 export default async function Teams() {
   const supabase = await createServerClient();
@@ -36,7 +38,7 @@ export default async function Teams() {
       "/login?next=/teams&message=You must be logged in to view teams",
     );
   }
-  const currentUserId = user?.id ?? null;
+  const currentUserId = user.id;
   const { data: statusData, error: statusError } = await supabase
     .from("status")
     .select("status")
@@ -74,13 +76,25 @@ export default async function Teams() {
     [...allMembers, ...membersNotInTeams].map((m) => [m.member_id, m]),
   );
   // only team members can invite others
-  const canInvite = teams.some((m) => m.leader === currentUserId);
+  const isLeader = teams.some((m) => m.leader === currentUserId);
+
+  const isLookingForTeam = allTeams
+    .find(({ id }) => id === -1)
+    ?.members.some((m) => m.member_id === currentUserId);
+  const isInTeam = allTeams
+    .filter(({ id }) => id > 0)
+    .some((team) => team.members.some((m) => m.member_id === currentUserId));
+
+  async function handleLookForTeam() {
+    "use server";
+    await joinTeam(null, currentUserId);
+  }
 
   return (
     <TeamsProvider
       value={{
         currentUserId,
-        isSomeLeader: canInvite,
+        isSomeLeader: isLeader,
         memberInfoById,
         members: allMembers,
       }}
@@ -120,6 +134,13 @@ export default async function Teams() {
                 isYou={member.member_id === currentUserId}
               />
             ))}
+            {!isInTeam && !isLookingForTeam && (
+              <form action={handleLookForTeam}>
+                <Button type="submit" variant="outline">
+                  Look for Team
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>
