@@ -1,5 +1,4 @@
 import { Spotlight } from "@/components/ui/spotlight-new";
-
 export default async function RootLayout({
   children,
 }: {
@@ -9,7 +8,6 @@ export default async function RootLayout({
     // #e5888c
     <span>
       <Spotlight />
-
       <span className="drop-shadow-lg">{children}</span>
     </span>
   );

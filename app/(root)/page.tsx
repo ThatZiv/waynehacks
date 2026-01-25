@@ -68,16 +68,15 @@ export default async function Index() {
             four people. Prizes will be awarded to the best projects, so be
             ready!
           </p>
-          {/* <div>
-            <Countdown />
-          </div> */}
+          <Countdown />
           <div className="grid grid-cols-12 justify-items-center">
             <h2 className="inline-flex col-span-12 md:col-span-4">
               <FaCalendar className="w-5 h-5 mt-[1.5px]" />
               &nbsp;{" "}
               <strong>
                 <a href="/events.ics" className="hover:wh-link">
-                  Spring 2026
+                  March 28 - 29, 2026{" "}
+                  <span className="text-sm italic">(tentative)</span>
                 </a>
               </strong>
             </h2>

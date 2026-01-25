@@ -1,0 +1,128 @@
+import Link from "next/link";
+import WayneHacksLogo from "@/components/WayneHacksLogo";
+import Registered from "@/components/Registered";
+import Splitter from "@/components/Splitter";
+import Announcement from "@/components/Announcement";
+import constants from "@/misc/constants";
+import Image from "next/image";
+import { SupabaseFunctions } from "@/misc/functions";
+import { createServerClient } from "@/lib/supabase";
+import { Crown, Mail } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Team } from "@/misc/teams";
+import TeamCard from "@/components/teams/TeamCard";
+import TeamMember from "@/components/teams/TeamMember";
+import Back from "@/components/Back";
+import CreateTeamDialog from "@/components/teams/CreateTeamDialog";
+import { TeamsProvider } from "@/components/teams/TeamsContext";
+import { redirect } from "next/navigation";
+import { statusEnum } from "@/misc/application";
+import TeamsConsentDialog from "@/components/teams/TeamsConsentDialog";
+
+export default async function Teams() {
+  const supabase = await createServerClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    return redirect(
+      "/login?next=/teams&message=You must be logged in to view teams",
+    );
+  }
+  const currentUserId = user?.id ?? null;
+  const { data: statusData, error: statusError } = await supabase
+    .from("status")
+    .select("status")
+    .eq("applicant_id", currentUserId)
+    .single();
+  if (statusError || !statusData) {
+    return redirect(
+      "/application?message=You must complete your application before viewing teams",
+    );
+  }
+  if ([statusEnum.REJECTED, statusEnum.CANCELLED].includes(statusData.status)) {
+    return redirect(
+      "/application?message=You have an invalid application. Please re-apply to join a team.",
+    );
+  }
+  const { data: teamsList, error: membersError } = await supabase.rpc(
+    "get_team_with_members",
+    {
+      team_id_param: null, // gets all
+    },
+  );
+  const allTeams: Team[] = teamsList || [];
+  const teams = allTeams.filter(({ id }) => id > 0);
+
+  // const { data: teams, error } = await supabase
+  //   .from("team_with_members")
+  //   .select("id, team_name, applications(full_name, email, university, major)");
+  // console.log(data[0].teams, data[0].applications);
+  //    "id, team_id, teams(*, leader_user:users!teams_leader_fkey(*)), applications(full_name, email, university, major)"
+  const allMembers = teams.flatMap((team) => team.members);
+  // console.log(allTeams);
+
+  const membersNotInTeams = allTeams.find(({ id }) => id === -1)?.members || [];
+  const memberInfoById = Object.fromEntries(
+    [...allMembers, ...membersNotInTeams].map((m) => [m.member_id, m]),
+  );
+  // only team members can invite others
+  const canInvite = teams.some((m) => m.leader === currentUserId);
+
+  return (
+    <TeamsProvider
+      value={{
+        currentUserId,
+        isSomeLeader: canInvite,
+        memberInfoById,
+        members: allMembers,
+      }}
+    >
+      <div className="w-full">
+        <Back href="/application" />
+        <TeamsConsentDialog />
+        <div className="mx-auto flex max-w-5xl flex-col gap-8 mt-4">
+          <header className="flex flex-col gap-2 -mb-4">
+            <h1 className="text-3xl font-semibold tracking-tight">
+              Teams overview
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {allMembers?.length ?? 0} members across {teams.length} teams.
+            </p>
+          </header>
+          <CreateTeamDialog />
+          <div className="flex flex-wrap gap-6">
+            {teams.map((team) => (
+              <TeamCard key={team.id} {...team} />
+            ))}
+          </div>
+          <Splitter />
+          <header className="flex flex-col gap-2 -mb-2">
+            <h1 className="text-3xl font-semibold tracking-tight">
+              Available Members
+            </h1>
+            <p className="text-sm text-muted-foreground">
+              {membersNotInTeams?.length ?? 0} members looking for a group.
+            </p>
+          </header>
+          <div className="flex flex-wrap gap-4 md:justify-start md:items-start items-center justify-center mb-8">
+            {membersNotInTeams.map((member) => (
+              <TeamMember
+                key={member.member_id}
+                member={member}
+                isYou={member.member_id === currentUserId}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </TeamsProvider>
+  );
+}

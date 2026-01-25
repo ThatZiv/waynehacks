@@ -24,8 +24,8 @@ function ConfirmButton() {
 function ConfirmAccount() {
   const { HCaptcha, isLoading, token, setToken } = useCaptcha();
   const searchParams = useSearchParams();
-  const code = searchParams.get("code");
-  const email = searchParams.get("email");
+  const code = searchParams?.get("code");
+  const email = searchParams?.get("email");
   return (
     <div className="flex-1 animate-in flex flex-col w-full px-8 sm:max-w-md md:max-w-xl justify-center gap-2">
       {!isLoading ? (

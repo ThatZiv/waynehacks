@@ -26,10 +26,10 @@ export default function Messages() {
   }
 
   const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-  const errorDesc = searchParams.get("error_description"); // bc supabase sends urls in hash because of "security"
+  const error = searchParams?.get("error");
+  const errorDesc = searchParams?.get("error_description"); // bc supabase sends urls in hash because of "security"
 
-  const message = searchParams.get("message");
+  const message = searchParams?.get("message");
   if (!error && !errorDesc && !message) return;
 
   return (

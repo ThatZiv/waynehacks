@@ -24,6 +24,11 @@ function Footer() {
           </Link>
         </li>
         <li>
+          <Link href="/teams" className="mr-4 hover:underline md:mr-6">
+            Teams
+          </Link>
+        </li>
+        <li>
           <Link href={"/packet"} className="mr-4 hover:underline md:mr-6">
             Information Packet
           </Link>
