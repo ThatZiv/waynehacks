@@ -55,7 +55,7 @@ export class EmailerService {
     });
   }
 
-  async sendEmail({ to, subject, html }: EmailOptions): Promise<void> {
+  async send({ to, subject, html }: EmailOptions): Promise<void> {
     if (process.env.NODE_ENV === "development") {
       console.log(`Not sending email in dev, to ${to} `);
       throw new Error(`Email to ${to} not sent in dev`);
@@ -81,7 +81,7 @@ export class EmailerService {
       console.error(`Failed to send email to ${to},`, error.message);
       await Notifier.send(
         `Email send failed to ${to}`,
-        `Failed to send email to ${to} due to: ${error.message}`
+        `Failed to send email to ${to} due to: ${error.message}`,
       );
       throw err;
     }

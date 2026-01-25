@@ -4,6 +4,7 @@ import { createServerClient } from "@/lib/supabase";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { EmailerService } from "@/misc/Emailer";
 
 export const dynamic = "force-dynamic";
 
@@ -56,11 +57,23 @@ export async function POST(request: Request) {
     //   .insert({ applicant_id: user?.id, ...form });
     // The implementation above is currently a supabase function that runs after an insertion in 'applications' table
     try {
+      const Emailer = new EmailerService();
       await Notifier.send(
         `New application`,
         toDiscord,
-        `${requestUrl.origin}/admin/application/${user?.id}`
+        `${requestUrl.origin}/admin/application/${user?.id}`,
       );
+      await Emailer.send({
+        to: String(user?.email),
+        subject: "We've received your application.",
+        html: `
+              <p>Thanks for applying to WayneHacks! Your application has been received.</p>
+              <p>We're reviewing applications and will reach out with next steps.</p>
+              <p>View your application <a href="${
+                requestUrl.origin
+              }/application">here</a></p>
+            `,
+      });
     } catch (e) {
       console.error(e); // the user doesnt need to see these errors, but we do...
     }
@@ -70,7 +83,7 @@ export async function POST(request: Request) {
       `${requestUrl.origin}/application?error=${err}`,
       {
         status: 301,
-      }
+      },
     );
   }
   revalidatePath("/admin");
@@ -81,6 +94,6 @@ export async function POST(request: Request) {
     {
       // a 301 status is required to redirect from a POST to a GET route
       status: 301,
-    }
+    },
   );
 }
