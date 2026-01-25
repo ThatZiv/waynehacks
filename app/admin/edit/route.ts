@@ -1,10 +1,8 @@
 import { createEmailURI } from "@/components/AdminCard";
-import { EmailerService } from "@/misc/Emailer";
+import { Emailer } from "@/misc/Emailer";
 import { Notifier } from "@/misc/webhook/WebhookService";
 import { createServerClient } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
 // this route has been modified to be used directly from a client (admin panel)
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url);
@@ -50,15 +48,15 @@ export async function POST(request: Request) {
       await Notifier.send(
         `Checked in status changed by ${user?.email}`,
         `${email} checked in status is now: **${checked_in ? "✔" : "❌"}**`,
-        requestUrl.origin + "/admin/application/" + applicant_id
+        requestUrl.origin + "/admin/application/" + applicant_id,
       );
     } else {
       await Notifier.send(
         `Application update by ${user?.email}`,
         `${email} status is now **${e.get("status")}** \n\`${e.get(
-          "note"
+          "note",
         )}\` \nChecked In: ${checked_in ? "✔" : "❌"}`,
-        requestUrl.origin + "/admin/application/" + applicant_id
+        requestUrl.origin + "/admin/application/" + applicant_id,
       );
     }
     // revalidatePath("/admin/applications"); // this is live/dynamic now
@@ -69,12 +67,11 @@ export async function POST(request: Request) {
     //   full_name: String(e.get("full_name")),
     // })
     let successMessage = `Successfully updated application for: ${e.get(
-      "applicant_id"
+      "applicant_id",
     )}`;
 
-    const Emailer = new EmailerService();
     if (IsCheckInUpdate) {
-      await Emailer.sendEmail({
+      await Emailer.send({
         to: String(email),
         subject: checked_in
           ? "You have been checked in"
@@ -90,7 +87,7 @@ export async function POST(request: Request) {
       `,
       });
     } else {
-      await Emailer.sendEmail({
+      await Emailer.send({
         to: String(email),
         subject: "Application Update",
         html: `
@@ -124,7 +121,7 @@ export async function POST(request: Request) {
         headers: {
           "content-type": "application/json",
         },
-      }
+      },
     );
   } catch (err: any) {
     // return NextResponse.redirect(
@@ -143,7 +140,7 @@ export async function POST(request: Request) {
         headers: {
           "content-type": "application/json",
         },
-      }
+      },
     );
   }
 }
