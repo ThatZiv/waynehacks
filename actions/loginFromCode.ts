@@ -25,14 +25,14 @@ export default async function loginFromCode(e: FormData) {
       options: { captchaToken: String(token) },
     });
     if (error) throw error;
+    await Notifier.send(
+      `User confirmed`,
+      `||${String(email)}|| has confirmed their account.`,
+    );
   } catch (e: any) {
     return redirect("/confirm-account?error=" + e.message);
   } finally {
     revalidatePath("/confirm-account");
   }
-  await Notifier.send(
-    `User confirmed`,
-    `||${String(email)}|| has confirmed their account.`
-  );
   return redirect("/?message=Account confirmed");
 }
