@@ -10,56 +10,56 @@ export const _ = (dateString: string) => {
  */
 export const events: Event[] = [
   {
-    date: _("March 28, 2026 9:00:00"),
-    end: _("March 28, 2026 11:00:00"),
+    date: _("April 11, 2026 9:00:00"),
+    end: _("April 11, 2026 11:00:00"),
     name: "Check-in (tentative)",
   },
   {
-    date: _("March 28, 2026 11:00:00"),
-    end: _("March 28, 2026 12:00:00"),
+    date: _("April 11, 2026 11:00:00"),
+    end: _("April 11, 2026 12:00:00"),
     name: "Opening Ceremony",
   },
   {
-    date: _("March 28, 2026 12:00:00"),
+    date: _("April 11, 2026 12:00:00"),
     name: "Hacking Begins",
   },
   {
-    date: _("March 28, 2026 13:00:00"),
+    date: _("April 11, 2026 13:00:00"),
     name: "Lunch",
   },
   {
-    date: _("March 28, 2026 19:30:00"),
+    date: _("April 11, 2026 19:30:00"),
     name: "Dinner",
   },
   {
-    date: _("March 28, 2026 23:00:00"),
+    date: _("April 11, 2026 23:00:00"),
     name: "Building Closes",
   },
   {
-    date: _("March 29, 2026 9:00:00"),
+    date: _("April 12, 2026 9:00:00"),
     name: "Building Opens",
   },
   {
-    date: _("March 29, 2026 9:30:00"),
+    date: _("April 12, 2026 9:30:00"),
     name: "Breakfast",
   },
   {
-    date: _("March 29, 2026 11:00:00"),
-    end: _("March 29, 2026 12:00:00"),
+    date: _("April 12, 2026 11:00:00"),
+    end: _("April 12, 2026 12:00:00"),
     name: "Last Minute Help for Submissions",
   },
   {
-    date: _("March 29, 2026 12:00:00"),
+    date: _("April 12, 2026 12:00:00"),
     name: "Hacking Ends",
   },
   {
-    date: _("March 29, 2026 12:30:00"),
-    end: _("March 29, 2026 14:30:00"),
+    date: _("April 12, 2026 12:30:00"),
+    end: _("April 12, 2026 14:30:00"),
     name: "Presentations/Judging",
   },
   {
-    date: _("March 29, 2026 14:30:00"),
-    end: _("March 29, 2026 15:00:00"),
+    date: _("April 12, 2026 14:30:00"),
+    end: _("April 12, 2026 15:00:00"),
     name: "Closing Ceremony",
   },
 ];

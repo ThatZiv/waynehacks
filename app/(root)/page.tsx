@@ -75,7 +75,7 @@ export default async function Index() {
               &nbsp;{" "}
               <strong>
                 <a href="/events.ics" className="hover:wh-link">
-                  March 28 - 29, 2026{" "}
+                  April 11 - 12, 2026{" "}
                   <span className="text-sm italic">(tentative)</span>
                 </a>
               </strong>
