@@ -73,8 +73,8 @@ const constants = {
    * Email for showcasing publicly
    */
   showcaseEmail: "scd@wayne.edu",
-  address: "5105 Anthony Wayne Dr, Detroit, MI 48202",
-  addressURL: "https://maps.app.goo.gl/REau4tD9HgfXnDQH7",
+  address: "440 Burroughs St, Detroit, MI 48202",
+  addressURL: "https://maps.app.goo.gl/dp4XmUPqqX42riNRA",
   infoPacket:
     "https://docs.google.com/document/d/1nniHacxkRLR_SuGKbCdRN_t6-SuyTAIgjxluYDXx06Y/",
   sponsorPacket:
