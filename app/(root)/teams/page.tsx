@@ -111,7 +111,9 @@ export default async function Teams() {
               {allMembers?.length ?? 0} members across {teams.length} teams.
             </p>
           </header>
-          <CreateTeamDialog />
+          <div className="flex flex-col items-start -ml-4">
+            <CreateTeamDialog />
+          </div>
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {teams.map((team) => (
               <TeamCard key={team.id} {...team} />
