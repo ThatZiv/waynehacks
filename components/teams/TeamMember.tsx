@@ -77,7 +77,7 @@ export default function TeamMember({
   return (
     <li
       className={`flex items-center gap-3 rounded-lg px-4 py-2 text-sm transition-all ${
-        isLeader ? "bg-yellow-200" : isYou ? "bg-sky-100" : "bg-muted/90"
+        isLeader ? "bg-yellow-200" : isYou ? "bg-sky-100" : "bg-gray-100"
       }`}
     >
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/20 text-[10px] font-semibold text-lg text-black">
@@ -102,7 +102,7 @@ export default function TeamMember({
         <div className="flex flex-col text-gray-800">
           <span
             title={member.full_name}
-            className="block max-w-[160px] truncate text-primary"
+            className="block max-w-[160px] truncate text-black"
           >
             {member.full_name}
           </span>

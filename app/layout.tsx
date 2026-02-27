@@ -74,7 +74,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${stratum.className} ${robotoMono.variable} font-sans`}
+      className={`dark ${stratum.className} ${robotoMono.variable} font-sans`}
     >
       <head>
         <link
