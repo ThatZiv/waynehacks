@@ -383,10 +383,15 @@ async function RegisterForm() {
         >
           WayneHacks Hackathon Rules
         </Link>
-        . By submitting, you also acknowledge that WayneHacks will{" "}
-        <strong>not</strong> be responsible for providing any sort of
-        reimbursement, parking, food, and sleeping accommodations due to
-        limitations beyond our control.
+        . You also agree to the{" "}
+        <Link
+          className="wh-link"
+          target="_blank"
+          href="https://static.mlh.io/docs/mlh-code-of-conduct.pdf"
+        >
+          MLH Code of Conduct
+        </Link>{" "}
+        .
         <br />
         <br />
         Please consider viewing our{" "}
