@@ -131,7 +131,7 @@ npx supabase start
 
 - ![#FAFAFA](https://placehold.co/15x15/FAFAFA/FAFAFA.png) `#FAFAFA` - Off White
 - ![#0EA5E9](https://placehold.co/15x15/0EA5E9/0EA5E9.png) `#0EA5E9` - Light Blue - Primary Accent
-- ![##041A25](https://placehold.co/15x15/041A25/041A25.png) `#041A25` - Dark Blue - background gradient 1
+- ![#041A25](https://placehold.co/15x15/041A25/041A25.png) `#041A25` - Dark Blue - background gradient 1
 - ![#14091B](https://placehold.co/15x15/14091B/14091B.png) `#14091B` - Dark Purple - background gradient 2
 
 ### Fonts

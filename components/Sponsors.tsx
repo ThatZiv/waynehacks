@@ -16,21 +16,14 @@ const sponsors: Sponsor[] = [
     invertLogo: true,
   },
   {
-    name: "Wayne State University - Career Services",
-    link: "https://careerservices.wayne.edu/",
-    logo: "/wsu_career.png",
-    invertLogo: false,
+    name: "Detroit Hacker House",
+    link: "https://detroithackerhouse.org/",
+    logo: "/dhh.png",
   },
   {
-    name: "KLA",
-    link: "https://www.kla.com/",
-    logo: "/kla.png",
-    invertLogo: true,
-  },
-  {
-    name: "Google Cloud",
-    link: "https://cloud.google.com/",
-    logo: "/gc.png",
+    name: "TechTown Detroit",
+    link: "https://techtowndetroit.org/",
+    logo: "/techtown.png",
     invertLogo: true,
   },
 ];
@@ -39,8 +32,8 @@ export const Sponsors = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <p className="text-center mt-2">
-        WayneHacks would not have been possible without the help of our sponsors
-        over the years.
+        WayneHacks 4 would not have been possible without the help of our
+        sponsors.
       </p>
       <div className="flex flex-wrap justify-center gap-8 mt-5">
         {sponsors.map((sponsor) => {
