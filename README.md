@@ -59,6 +59,20 @@ npm i
 npm run dev
 ```
 
+## Setup (Backend)
+
+1. Follow the instructions for [self-hosting](https://supabase.com/docs/guides/self-hosting/docker) Supabase to setup the local dev environment.
+
+2. Follow the migration [guide](https://supabase.com/docs/guides/cli/local-development).
+
+3. Create a `.env` file in the project's root. Reach out to @ThatZiv for the contents of this file.
+
+4. Run the following command to start the backend server:
+
+```sh
+npx supabase start
+```
+
 ## Branding
 
 <details>
@@ -108,19 +122,34 @@ npm run dev
 - ![Banner](https://i.imgur.com/raO795F.png) Banner with background
 - ![Banner-transparent](https://i.imgur.com/ya6yuCM.png) Transparent banner
 
-## Setup (Backend)
+</details>
 
-1. Follow the instructions for [self-hosting](https://supabase.com/docs/guides/self-hosting/docker) Supabase to setup the local dev environment.
+<details>
+<summary>WayneHacks 4</summary>
 
-2. Follow the migration [guide](https://supabase.com/docs/guides/cli/local-development).
+### Colors
 
-3. Create a `.env` file in the project's root. Reach out to @ThatZiv for the contents of this file.
+- ![#FAFAFA](https://placehold.co/15x15/FAFAFA/FAFAFA.png) `#FAFAFA` - Off White
+- ![#0EA5E9](https://placehold.co/15x15/0EA5E9/0EA5E9.png) `#0EA5E9` - Light Blue - Primary Accent
+- ![#041A25](https://placehold.co/15x15/041A25/041A25.png) `#041A25` - Dark Blue - background gradient 1
+- ![#14091B](https://placehold.co/15x15/14091B/14091B.png) `#14091B` - Dark Purple - background gradient 2
 
-4. Run the following command to start the backend server:
+### Fonts
 
-```sh
-npx supabase start
-```
+- [Stratum](https://fonts.adobe.com/fonts/stratum) - Primary Font
+- [Open Sans](https://fonts.google.com/specimen/Open+Sans) - Body Font
+- [Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) - Monospace / Code Font
+
+### Graphics
+
+- ![WayneHacks Logo](public/icon.png)
+  Primary Transparent Logo (PNG)
+- ![Banner](https://i.imgur.com/fldgBvz.png) Banner with background
+- ![Banner-transparent](https://i.imgur.com/2uPsF8M.png) Banner transparent
+- ![ImgurLogo](https://i.imgur.com/pAiyQPp.png) Imgur Logo (for hosting graphics)
+-
+
+</details>
 
 ## Contributing
 

@@ -28,16 +28,8 @@ export const events: Event[] = [
     name: "Lunch",
   },
   {
-    date: _("April 11, 2026 19:30:00"),
+    date: _("April 11, 2026 20:30:00"),
     name: "Dinner",
-  },
-  {
-    date: _("April 11, 2026 23:00:00"),
-    name: "Building Closes",
-  },
-  {
-    date: _("April 12, 2026 9:00:00"),
-    name: "Building Opens",
   },
   {
     date: _("April 12, 2026 9:30:00"),
