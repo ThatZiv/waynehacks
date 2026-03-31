@@ -44,7 +44,7 @@ export default function TeamsConsentDialog() {
       >
         <DialogHeader>
           <DialogTitle className="text-xl">Teams Feature Consent</DialogTitle>
-          <DialogDescription className="text-secondary">
+          <DialogDescription>
             By using the Teams feature, you consent to sharing information from
             your application with others on this platform. This includes: your
             full name, email address, and university. Please ensure you are
