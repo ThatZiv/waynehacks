@@ -21,7 +21,13 @@ export default async function AdminDash({
   if (applicationsError)
     return <div className="text-dark">Failed to load applications...</div>;
   // get metric to get from query params for graph visual
-  const availableMetrics = ["university", "major", "graduation_year", "diet"];
+  const availableMetrics = [
+    "university",
+    "major",
+    "graduation_year",
+    "diet",
+    "shirt_size",
+  ];
   const searchParamsResolved = await searchParams;
   const metricToGet = searchParamsResolved["metric"] || "";
   // if metric is invalid, default to university
@@ -48,7 +54,7 @@ export default async function AdminDash({
       acc[curr] ? (acc[curr] += 1) : (acc[curr] = 1);
       return acc;
     },
-    {}
+    {},
   );
   const whacks = new SupabaseFunctions(supabase);
   const numUsers = await whacks.getTotalUsers();
@@ -67,7 +73,7 @@ export default async function AdminDash({
               <Link href="/admin/applications">
                 {
                   applications?.filter(
-                    (data) => data.status == statusEnum.APPLIED
+                    (data) => data.status == statusEnum.APPLIED,
                   ).length
                 }{" "}
                 applications need action
@@ -116,7 +122,7 @@ export default async function AdminDash({
                 "use server";
                 const metric = e.get("metric");
                 const url = new URL(
-                  process.env.NEXT_PUBLIC_BASE_URL + "/admin"
+                  process.env.NEXT_PUBLIC_BASE_URL + "/admin",
                 );
                 url.searchParams.set("metric", metric as string);
                 return redirect(url.toString());
