@@ -1,8 +1,80 @@
 import { Event } from "./events";
 
-// this function will force the date to be in EST
+// TODO: this doesnt work...use my prev _ method
+const easternFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "America/New_York",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h23",
+});
+
+const extractEasternParts = (timestamp: number) => {
+  const parts = easternFormatter.formatToParts(new Date(timestamp));
+  const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
+  return {
+    year: Number(map.year),
+    month: Number(map.month),
+    day: Number(map.day),
+    hour: Number(map.hour),
+    minute: Number(map.minute),
+    second: Number(map.second),
+  };
+};
+
+const easternWallTimeToUtc = (
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number,
+  second: number,
+) => {
+  let guess = Date.UTC(year, month - 1, day, hour, minute, second);
+  const targetWall = Date.UTC(year, month - 1, day, hour, minute, second);
+
+  for (let i = 0; i < 3; i++) {
+    const actual = extractEasternParts(guess);
+    const actualWall = Date.UTC(
+      actual.year,
+      actual.month - 1,
+      actual.day,
+      actual.hour,
+      actual.minute,
+      actual.second,
+    );
+    const delta = targetWall - actualWall;
+    if (delta === 0) return guess;
+    guess += delta;
+  }
+
+  return guess;
+};
+
+// Parses a datetime string as Eastern Time (handles EST/EDT by date)
 export const _ = (dateString: string) => {
-  return new Date(dateString + " EST").getTime();
+  const hasExplicitZone =
+    /(?:\b(?:UTC|GMT|EST|EDT)\b|Z|[+-]\d{2}:?\d{2})/i.test(dateString);
+
+  if (hasExplicitZone) {
+    return new Date(dateString).getTime();
+  }
+
+  const parsed = new Date(dateString);
+  if (Number.isNaN(parsed.getTime())) return Number.NaN;
+
+  return easternWallTimeToUtc(
+    parsed.getFullYear(),
+    parsed.getMonth() + 1,
+    parsed.getDate(),
+    parsed.getHours(),
+    parsed.getMinutes(),
+    parsed.getSeconds(),
+  );
 };
 
 /**

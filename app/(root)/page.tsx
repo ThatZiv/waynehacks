@@ -6,14 +6,12 @@ import FAQ from "@/components/FAQ";
 import Announcement from "@/components/Announcement";
 import constants from "@/misc/constants";
 import Image from "next/image";
-import { SupabaseFunctions } from "@/misc/functions";
-import { createServerClient } from "@/lib/supabase";
-import { cookies } from "next/headers";
-import { Countdown } from "@/components/Countdown";
+import CountdownServer from "@/components/CountdownServer";
 import { Sponsors } from "@/components/Sponsors";
 import ExtraLinks from "@/components/ExtraLinks";
 import { FaCalendar, FaDollarSign, FaMapMarkerAlt } from "react-icons/fa";
 import AnimatedLogo from "@/components/ui/animated-logo";
+import { Suspense } from "react";
 
 export const revalidate = 1800; // revalidate every 30 minutes
 export const dynamic = "force-static"; // force static caching
@@ -29,7 +27,7 @@ export const dynamic = "force-static"; // force static caching
 //   };
 // }
 
-export default async function Index() {
+export default function Index() {
   return (
     <div className="w-full flex flex-col items-center">
       <div className="animate-in flex flex-col gap-14 opacity-0 max-w-4xl px-3 py-16 lg:py-24 text-dark">
@@ -68,7 +66,11 @@ export default async function Index() {
             four people. Prizes will be awarded to the best projects, so be
             ready!
           </p>
-          <Countdown />
+          <Suspense
+            fallback={<div className="h-[120px] w-full" aria-hidden="true" />}
+          >
+            <CountdownServer />
+          </Suspense>
           <div className="grid grid-cols-12 justify-items-center">
             <h2 className="inline-flex col-span-12 md:col-span-4">
               <FaCalendar className="w-5 h-5 mt-[1.5px]" />
