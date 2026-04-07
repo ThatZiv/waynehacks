@@ -27,6 +27,10 @@ export const generateICS = (eventData: Event[]) => {
           e.getUTCHours(),
           e.getUTCMinutes(),
         ],
+        startInputType: "utc",
+        startOutputType: "utc",
+        endInputType: "utc",
+        endOutputType: "utc",
         description: event.name,
         location: constants.address,
         url: process.env.NEXT_PUBLIC_BASE_URL,
@@ -39,7 +43,7 @@ export const generateICS = (eventData: Event[]) => {
           },
         ],
       };
-    })
+    }),
   );
 
   if (error) {

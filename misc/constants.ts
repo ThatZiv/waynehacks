@@ -2,7 +2,7 @@ import { Event } from "./events";
 
 // this function will force the date to be in EST
 export const _ = (dateString: string) => {
-  return new Date(dateString + " EST").getTime();
+  return new Date(`${dateString} GMT-0400`).getTime();
 };
 
 /**
@@ -12,7 +12,7 @@ export const events: Event[] = [
   {
     date: _("April 11, 2026 9:00:00"),
     end: _("April 11, 2026 11:00:00"),
-    name: "Check-in (tentative)",
+    name: "Check-in",
   },
   {
     date: _("April 11, 2026 11:00:00"),
