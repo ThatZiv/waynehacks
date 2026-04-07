@@ -1,18 +1,17 @@
 "use client";
 
-import { events } from "@/misc/constants";
 import { Event } from "@/misc/events";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 const defaultEvent = "Loading...";
 
-export const Countdown = () => {
-  const eventData = useMemo<Event[]>(
-    // TODO: make this dynamic OR put in our real schedule here
-    () => events,
-    []
-  );
+interface CountdownProps {
+  events: Event[];
+}
+
+export const Countdown = ({ events }: CountdownProps) => {
+  const eventData = useMemo<Event[]>(() => events, [events]);
 
   const getHumanReadableDate = useCallback((date: string | number | Date) => {
     // format should be like: Sunday, September 19, 2021, 12:00 PM
@@ -40,7 +39,7 @@ export const Countdown = () => {
       const now = new Date().getTime();
       const upcomingEvents = eventData.filter((event) => event.date > now);
       const ongoingEvent = eventData.find(
-        (event) => event.date <= now && (event.end ? event.end >= now : false)
+        (event) => event.date <= now && (event.end ? event.end >= now : false),
       );
       if (upcomingEvents.length > 0) {
         if (ongoingEvent && ongoingEvent.name !== occurringEvent) {
@@ -52,7 +51,7 @@ export const Countdown = () => {
         const distance = nextEvent.date - now;
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
         );
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -114,7 +113,7 @@ export const Countdown = () => {
                     eventData.find((event) => event.name === currentEvent) || {
                       date: new Date().getTime(),
                     }
-                  ).date || ""
+                  ).date || "",
                 )}`}
                 {occurringEvent !== defaultEvent && (
                   <>
@@ -126,11 +125,11 @@ export const Countdown = () => {
                     {` until ${getHumanReadableDate(
                       (
                         eventData.find(
-                          (event) => event.name === occurringEvent
+                          (event) => event.name === occurringEvent,
                         ) || {
                           end: new Date().getTime(),
                         }
-                      ).end || ""
+                      ).end || "",
                     )}`}
                   </>
                 )}
