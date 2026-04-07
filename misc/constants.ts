@@ -27,6 +27,24 @@ export const events: Event[] = [
     date: _("April 11, 2026 13:00:00"),
     name: "Lunch",
   },
+  // 3 PM - 4 PM: Event
+  // 5 PM - 6 PM: Event
+  // 7 PM - 8 PM: Speaker Event: Building with AI without Slop
+  {
+    date: _("April 11, 2026 15:00:00"),
+    end: _("April 11, 2026 16:00:00"),
+    name: "Event",
+  },
+  {
+    date: _("April 11, 2026 17:00:00"),
+    end: _("April 11, 2026 18:00:00"),
+    name: "Event",
+  },
+  {
+    date: _("April 11, 2026 19:00:00"),
+    end: _("April 11, 2026 20:00:00"),
+    name: "Speaker Event: Building with AI without Slop",
+  },
   {
     date: _("April 11, 2026 20:30:00"),
     name: "Dinner",
