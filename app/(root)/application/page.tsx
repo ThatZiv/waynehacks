@@ -74,7 +74,9 @@ export default async function Application() {
                 />
               </div>
               {application.status?.status === statusEnum.CANCELLED &&
-                canRegister && <RegisterForm />}
+                canRegister && (
+                  <RegisterForm userEmail={user.email ?? undefined} />
+                )}
               <p className="text-xs text-center">
                 If you believe there is anything wrong or have questions
                 regarding your application, feel free to{" "}
@@ -171,7 +173,7 @@ export default async function Application() {
               )}
           </>
         ) : (
-          <RegisterForm />
+          <RegisterForm userEmail={user.email} />
         )}
       </div>
     </div>
@@ -236,7 +238,10 @@ function Card(props: {
   );
 }
 
-async function RegisterForm() {
+interface RegisterFormProps {
+  userEmail?: string;
+}
+async function RegisterForm(props: RegisterFormProps) {
   const getUniversities = cache(async () => {
     const pageSize = 500;
     let offset = 0;
@@ -258,6 +263,24 @@ async function RegisterForm() {
     return allData;
   });
   const universities = await getUniversities();
+  const normalizedUserEmailDomainRaw = props.userEmail?.toLowerCase().trim();
+  const normalizedUserEmailDomain = normalizedUserEmailDomainRaw?.includes("@")
+    ? normalizedUserEmailDomainRaw.split("@").pop()
+    : normalizedUserEmailDomainRaw;
+  const matchedUniversity = normalizedUserEmailDomain
+    ? universities.find((uni: any) =>
+        (uni?.domains || []).some((domain: string) => {
+          const normalizedDomain = domain.toLowerCase().trim();
+          return (
+            normalizedUserEmailDomain === normalizedDomain ||
+            normalizedUserEmailDomain.endsWith(`.${normalizedDomain}`) ||
+            normalizedDomain.endsWith(`.${normalizedUserEmailDomain}`)
+          );
+        }),
+      )
+    : undefined;
+  const defaultUniversity = matchedUniversity?.name ?? "";
+
   return (
     <form
       action="/application/register"
@@ -290,7 +313,7 @@ async function RegisterForm() {
           name="university"
           required
           className="wh-dropdown"
-          defaultValue=""
+          defaultValue={defaultUniversity}
         >
           <option value="" disabled>
             Select your university
