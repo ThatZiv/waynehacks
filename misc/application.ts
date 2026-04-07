@@ -16,6 +16,7 @@ export interface Application {
   email: string | "none";
   shirt_size?: (typeof shirt_sizes)[number];
   status?: Status; // this is an relation expansion
+  notes?: string;
 }
 
 /**

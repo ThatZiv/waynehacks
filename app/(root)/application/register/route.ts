@@ -22,8 +22,9 @@ export async function POST(request: Request) {
     "diet",
     "student_id",
     "shirt_size",
+    "notes",
   ];
-  const nonRequiredFields = ["diet"];
+  const nonRequiredFields = ["diet", "notes"];
   try {
     const form = {} as any;
     let toDiscord = "";

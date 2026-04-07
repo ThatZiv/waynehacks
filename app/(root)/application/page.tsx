@@ -373,6 +373,16 @@ async function RegisterForm() {
           </option>
         ))}
       </select>
+      <label className="text-md text-dark" htmlFor="notes">
+        Additional Notes
+      </label>
+      <textarea
+        name="notes"
+        className="rounded-md px-4 py-2 bg-inherit border border-gray-700 mb-6"
+        maxLength={360}
+        placeholder="Any additional information you'd like us to know? (eg. pronouns, accessibility needs, extracredit for a class, etc.)"
+        rows={3}
+      />
       {/* tailwind blockquote disclaimer for submitted */}
       <blockquote className="rounded-md text-xs bg-btn-background border text-foreground border-gray-700 p-5 mb-6">
         By submitting this form, you agree to the{" "}
