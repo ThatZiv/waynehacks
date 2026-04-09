@@ -17,7 +17,7 @@ const sponsors: Sponsor[] = [
   },
   {
     name: "Detroit Hacker House",
-    link: "https://detroithackerhouse.org/",
+    link: "https://detroithackerhouse.com/",
     logo: "/dhh.png",
   },
   {
