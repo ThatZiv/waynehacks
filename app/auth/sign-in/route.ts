@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
   if (error) {
     return NextResponse.redirect(
-      `${requestUrl.origin}/login?error=Failed to authenticate`,
+      `${requestUrl.origin}/login?error=Incorrect email or password`,
       {
         // a 301 status is required to redirect from a POST to a GET route
         status: 301,
